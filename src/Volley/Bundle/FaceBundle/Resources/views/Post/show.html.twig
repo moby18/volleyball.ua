@@ -1,0 +1,98 @@
+{% extends 'VolleyFaceBundle::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Post</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ entity.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ entity.slug }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ entity.text }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ entity.state }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ entity.published|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ entity.content }}</td>
+            </tr>
+            <tr>
+                <th>Createdby</th>
+                <td>{{ entity.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>Modifiedby</th>
+                <td>{{ entity.modifiedBy }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ entity.source }}</td>
+            </tr>
+            <tr>
+                <th>Ordering</th>
+                <td>{{ entity.ordering }}</td>
+            </tr>
+            <tr>
+                <th>Metakey</th>
+                <td>{{ entity.metakey }}</td>
+            </tr>
+            <tr>
+                <th>Metadescr</th>
+                <td>{{ entity.metadescr }}</td>
+            </tr>
+            <tr>
+                <th>Hits</th>
+                <td>{{ entity.hits }}</td>
+            </tr>
+            <tr>
+                <th>Metadata</th>
+                <td>{{ entity.metadata }}</td>
+            </tr>
+            <tr>
+                <th>Featured</th>
+                <td>{{ entity.featured }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ entity.language }}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('post') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('post_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

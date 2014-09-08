@@ -1,0 +1,30 @@
+player:
+    pattern:  /
+    defaults: { _controller: "VolleyFaceBundle:Player:index" }
+
+player_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "VolleyFaceBundle:Player:show" }
+
+player_new:
+    pattern:  /new
+    defaults: { _controller: "VolleyFaceBundle:Player:new" }
+
+player_create:
+    pattern:  /create
+    defaults: { _controller: "VolleyFaceBundle:Player:create" }
+    requirements: { _method: post }
+
+player_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "VolleyFaceBundle:Player:edit" }
+
+player_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "VolleyFaceBundle:Player:update" }
+    requirements: { _method: post|put }
+
+player_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VolleyFaceBundle:Player:delete" }
+    requirements: { _method: post|delete }

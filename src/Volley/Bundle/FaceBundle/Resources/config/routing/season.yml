@@ -1,0 +1,30 @@
+season:
+    pattern:  /
+    defaults: { _controller: "VolleyFaceBundle:Season:index" }
+
+season_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "VolleyFaceBundle:Season:show" }
+
+season_new:
+    pattern:  /new
+    defaults: { _controller: "VolleyFaceBundle:Season:new" }
+
+season_create:
+    pattern:  /create
+    defaults: { _controller: "VolleyFaceBundle:Season:create" }
+    requirements: { _method: post }
+
+season_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "VolleyFaceBundle:Season:edit" }
+
+season_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "VolleyFaceBundle:Season:update" }
+    requirements: { _method: post|put }
+
+season_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VolleyFaceBundle:Season:delete" }
+    requirements: { _method: post|delete }

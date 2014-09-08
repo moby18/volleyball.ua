@@ -1,0 +1,49 @@
+{% extends 'VolleyFaceBundle::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Tournament list</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Ordering</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('tournament_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.status }}</td>
+                    <td>{{ entity.description }}</td>
+                    <td>{{ entity.ordering }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('tournament_show', { 'id': entity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('tournament_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('tournament_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}

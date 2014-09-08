@@ -1,0 +1,358 @@
+{% extends 'VolleyFaceBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="section tours">
+
+        <div class="container">
+
+            <div class="row" id="tours">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="circle">
+                        <h2><i class="fa fa-check-circle"></i> Тур 1</h2>
+                        <p>27-28 червня</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="circle">
+                        <h2><i class="fa fa-check-circle"></i> Тур 2</h2>
+                        <p>12-13 липня</p>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <div class="circle">
+                        <h2><i class="fa fa-check-circle"></i>Фінал</h2>
+                        <p>16-17 серпня</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <hr>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    {#<div class="container">#}
+
+        {#<div class="row well">#}
+            {#<div class="col-lg-8 col-md-8">#}
+                {#<h4>Запрошуємо взяти участь у другому турі Відкритого чемпіонату Черкаської області з пляжного волейболу, який буде проводитися 12-13 липня на пляжі "Живчик" </h4>#}
+                {#&#123;&#35;<p>For more templates and more page options that you can integrate into this website template, visit Start Bootstrap!</p>&#35;&#125;#}
+            {#</div>#}
+            {#<div class="col-lg-4 col-md-4">#}
+                {#<a class="btn btn-lg btn-primary pull-right" href="{{ path('volley_face_zayavka') }}">Заповнити заявку</a>#}
+            {#</div>#}
+        {#</div>#}
+        {#<!-- /.row -->#}
+
+    {#</div>#}
+    {#<!-- /.container -->#}
+
+    <div class="section">
+
+        <div class="container">
+
+            {% for news_item in news %}
+            <div class="row">
+
+            {% if loop.index is odd %}
+                <div class="col-md-7">
+                    <a href="{#{{ path('volley_face_post') }}#}">
+                        <img class="img-responsive" src="{{ news_item.getWebPath }}">
+                    </a>
+                </div>
+                <div class="col-md-5">
+                    <h3>{{ news_item.title }}</h3>
+                    {#<h4>Subheading</h4>#}
+                    <p>
+                    {% autoescape %}
+                        {{ news_item.content|raw }}
+                    {% endautoescape %}
+                    </p>
+                    {%  if news_item.text != "" %}
+                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': news_item.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="col-md-5">
+                    <h3>{{ news_item.title }}</h3>
+                    {#<h4>Subheading</h4>#}
+                    <p>
+                    {% autoescape %}
+                        {{ news_item.content|raw }}
+                    {% endautoescape %}
+                    </p>
+                    {%  if news_item.text != "" %}
+                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': news_item.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
+                    {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <a href="{#{{ path('volley_face_post') }}#}">
+                        <img class="img-responsive" src="{{ news_item.getWebPath }}">
+                    </a>
+                </div>
+            {% endif %}
+
+            </div>
+
+            {% if not loop.last %}
+                <hr>
+            {% endif %}
+
+            {% endfor %}
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+    <div class="section man medals">
+
+        <div class="container">
+
+            <h1 class="main_title text-center"> Переможці фінального туру у чоловічому турнірі 2014 року</h1>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/final_tour_2014_men_2.jpg">
+                    <h3 class="text-center">2 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Роман Романенко</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Максим Булатецький</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/final_tour_2014_men_1.jpg">
+                    <h3 class="text-center">1 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Антон Артемчук</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Андрій Левченко</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/final_tour_2014_men_3.jpg">
+                    <h3 class="text-center">3 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Янар Хаджиханов</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Яков Янішевський</div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    <div class="section woman medals">
+
+        <div class="container">
+
+            <h1 class="main_title text-center"> Переможці фінального туру у жіночому турнірі 2014 року </h1>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/woman_1_sm.jpg">
+                    <h3 class="text-center">2 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Аня Ніколаєва</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Леся Наумейко</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/woman_2_sm.jpg">
+                    <h3 class="text-center">1 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Яна Каган</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Іра Ходосовська</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <img class="medals" src="/uploads/images/final_tour_2014_woman_3.jpg">
+                    <h3 class="text-center">3 місце</h3>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">1</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Катерина Поліщук</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">2</div></div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">Аліна Загребелько</div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+    {#<div class="section man medals">#}
+
+        {#<div class="container">#}
+
+            {#<h1 class="main_title text-center"> Переможці 1-го туру у чоловічому турнірі </h1>#}
+
+            {#<hr/>#}
+
+            {#<div class="row">#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/men_2_sm.jpg">#}
+                    {#<h3 class="text-center">2 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Роман Середа</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Євген Мурований</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/men_1_sm.jpg">#}
+                    {#<h3 class="text-center">1 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Антон Артемчук</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Андрій Левченко</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/men_3_sm.jpg">#}
+                    {#<h3 class="text-center">3 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Роман Романенко</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Максим Булатецький</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+            {#<!-- /.row -->#}
+
+        {#</div>#}
+        {#<!-- /.container -->#}
+
+    {#</div>#}
+    {#<!-- /.section -->#}
+
+    {#<div class="section woman medals">#}
+
+        {#<div class="container">#}
+
+            {#<h1 class="main_title text-center"> Переможці 1-го туру у жіночому турнірі </h1>#}
+
+            {#<hr>#}
+
+            {#<div class="row">#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/woman_2_sm.jpg">#}
+                    {#<h3 class="text-center">2 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Яна Каган</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-silver">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Іра Ходосовська</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/woman_1_sm.jpg">#}
+                    {#<h3 class="text-center">1 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Аня Ніколаєва</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-gold">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Леся Наумейко</div>#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="col-lg-4 col-md-4">#}
+                    {#<img class="medals" src="/uploads/images/woman_3_sm.jpg">#}
+                    {#<h3 class="text-center">3 місце</h3>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">1</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Даша Аль-Ашкар</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                        {#<div class="col col-lg-2 col-md-2 col-sm-2"><div class="circle circle-bronze">2</div></div>#}
+                        {#<div class="col col-lg-10 col-md-10 col-sm-10">Альона Харченко</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+            {#<!-- /.row -->#}
+
+        {#</div>#}
+        {#<!-- /.container -->#}
+
+    {#</div>#}
+    {#<!-- /.section -->#}
+
+    {#<div class="section-colored">#}
+
+        {#<div class="container">#}
+
+            {#<div class="row">#}
+                {#<div class="col-lg-6 col-md-6 col-sm-6">#}
+                    {#<h2>Місце проведення змагань:</h2>#}
+                    {#<ul>#}
+                        {#<li>Місто Черкаси, вулиця Героїв Дніпра 49</li>#}
+                        {#<li>пляж "Живчик", 18000</li>#}
+                    {#</ul>#}
+                {#</div>#}
+                {#<div class="col-lg-6 col-md-6 col-sm-6">#}
+                    {#<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D1%8B%2C%20%D0%A7%D0%B5%D1%80%D0%BA%D0%B0%D1%81%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0%20%D0%93%D0%B5%D1%80%D0%BE%D1%8A%D0%B2%20%D0%94%D0%BD%D1%96%D0%BF%D1%80%D0%B0%2049&key=AIzaSyBfh-bCkQbSJG_0TgppcpYAwd97UXhDhcw"></iframe>#}
+                {#</div>#}
+            {#</div>#}
+            {#<!-- /.row -->#}
+
+        {#</div>#}
+        {#<!-- /.container -->#}
+
+    {#</div>#}
+    <!-- /.section-colored -->
+
+
+{% endblock %}

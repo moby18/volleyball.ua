@@ -1,0 +1,30 @@
+admin_round:
+    pattern:  /
+    defaults: { _controller: "VolleyFaceBundle:Round:index" }
+
+admin_round_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "VolleyFaceBundle:Round:show" }
+
+admin_round_new:
+    pattern:  /new
+    defaults: { _controller: "VolleyFaceBundle:Round:new" }
+
+admin_round_create:
+    pattern:  /create
+    defaults: { _controller: "VolleyFaceBundle:Round:create" }
+    requirements: { _method: post }
+
+admin_round_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "VolleyFaceBundle:Round:edit" }
+
+admin_round_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "VolleyFaceBundle:Round:update" }
+    requirements: { _method: post|put }
+
+admin_round_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VolleyFaceBundle:Round:delete" }
+    requirements: { _method: post|delete }

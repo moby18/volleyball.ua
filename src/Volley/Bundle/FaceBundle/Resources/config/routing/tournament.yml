@@ -1,0 +1,30 @@
+tournament:
+    pattern:  /
+    defaults: { _controller: "VolleyFaceBundle:Tournament:index" }
+
+tournament_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "VolleyFaceBundle:Tournament:show" }
+
+tournament_new:
+    pattern:  /new
+    defaults: { _controller: "VolleyFaceBundle:Tournament:new" }
+
+tournament_create:
+    pattern:  /create
+    defaults: { _controller: "VolleyFaceBundle:Tournament:create" }
+    requirements: { _method: post }
+
+tournament_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "VolleyFaceBundle:Tournament:edit" }
+
+tournament_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "VolleyFaceBundle:Tournament:update" }
+    requirements: { _method: post|put }
+
+tournament_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "VolleyFaceBundle:Tournament:delete" }
+    requirements: { _method: post|delete }

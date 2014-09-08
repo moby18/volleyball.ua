@@ -1,0 +1,18 @@
+{% extends 'VolleyFaceBundle::admin.html.twig' %}
+
+{% block body -%}
+    <h1 class="page-header">Player edit</h1>
+
+<div class="table-responsive">
+    {{ form(edit_form) }}
+    </div>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('player') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
