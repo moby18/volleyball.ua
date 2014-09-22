@@ -63,3 +63,8 @@ VolleyFaceBundle_admin_round:
     resource: "@VolleyFaceBundle/Resources/config/routing/round.yml"
     prefix:   /admin/round
 
+VolleyFaceBundle_admin_slide:
+    resource: "@VolleyFaceBundle/Controller/SlideController.php"
+    prefix:   /admin
+    type:     annotation
+

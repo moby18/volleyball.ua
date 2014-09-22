@@ -13,7 +13,6 @@ class DefaultController extends Controller
 
         // news
         $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
-        xdebug_break();
         return $this->render('VolleyFaceBundle:Default:index.html.twig', array(
             'news' => $news
         ));
