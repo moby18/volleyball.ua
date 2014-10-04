@@ -4,7 +4,9 @@
   "description": "Symfony2 project for volleyball.ua",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp-install": "~0.2.0"
+    "gulp-install": "~0.2.0",
+    "uglify-js": "^2.4.15",
+    "uglifycss": "0.0.9"
   },
   "devDependencies": {
     "connect": "^3.1.0",

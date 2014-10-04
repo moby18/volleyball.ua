@@ -17,6 +17,10 @@
         <meta name="keywords" content="{{ meta_keywords }}" />
         <meta name="description" content="{{ meta_description }}" />
         <meta name="author" content="volleyball.ua@gmail.com">
+        <link href="{{ asset('bundles/volleyface/images/favicon.ico') }}" rel="shortcut icon">
+        <!-- Fonts -->
+        <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
         {% block facebook_meta %}
             <meta property="og:site_name" content="ВОЛЕЙБОЛ.УА" />
@@ -43,33 +47,27 @@
 
     <title>{{ title }}</title>
 
+    <!-- Bootstrap Core CSS -->
+    {% block styles %}
+        {% stylesheets '@volley_css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        <!--[if lt IE 9]>
+        {% stylesheets '@volley_css_ie' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <![endif]-->
+    {% endblock %}
+
     {% block head_scripts %}
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="{{ asset('bundles/volleyface/font-awesome/js/html5shiv.js') }}"></script>
-        <script src="{{ asset('bundles/volleyface/font-awesome/js/respond.min.js') }}"></script>
+        {% javascripts '@volley_header_js' %}
+            <script  type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
         <![endif]-->
     {% endblock %}
-
-    <link href="{{ asset('bundles/volleyface/images/favicon.png') }}" rel="shortcut icon">
-
-    <!-- Bootstrap Core CSS -->
-    {% block styles %}
-        <link href="{{ asset('bundles/volleyface/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('bundles/volleyface/css/modern-business.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bundles/volleyface/css/styles.css') }}" rel="stylesheet">
-
-        <!--[if lt IE 9]>
-        <link href="{{ asset('bundles/volleyface/css/ie.css') }}" rel="stylesheet" type="text/css" />
-        <![endif]-->
-    {% endblock %}
-
-
-    <!-- Fonts -->
-    <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
-    <link href="{{ asset('bundles/volleyface/images/favicon.ico') }}" rel="shortcut icon">
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -100,17 +98,6 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {#<li class="dropdown">#}
-                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown">1 тур <b class="caret"></b></a>#}
-                    {#<ul class="dropdown-menu">#}
-                        {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 1}) }}">Чоловіки</a>#}
-                        {#</li>#}
-                        {#<li><a href="#">Жінки</a>#}
-                        {#</li>#}
-                        {#<li><a href="#">Ветерани</a>#}
-                        {#</li>#}
-                    {#</ul>#}
-                {#</li>#}
                 <li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 2}) }}">2 тур</a>
                 </li>
                 <li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>
@@ -223,9 +210,9 @@
 <!-- /.container -->
 
 {% block scripts %}
-<script src="{{ asset('bundles/volleyface/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('bundles/volleyface/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('bundles/volleyface/js/modern-business.js') }}"></script>
+    {% javascripts '@volley_footer_js' %}
+        <script  type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}
 
 </body>
