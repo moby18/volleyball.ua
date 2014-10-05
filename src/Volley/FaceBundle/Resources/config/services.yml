@@ -1,0 +1,7 @@
+parameters:
+#    volley_face.example.class: Volley\FaceBundle\Example
+
+services:
+#    volley_face.example:
+#        class: %volley_face.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

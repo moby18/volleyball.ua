@@ -1,3 +1,8 @@
+volley_stat:
+    resource: "@VolleyStatBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 volley_user:
     resource: "@VolleyUserBundle/Resources/config/routing.yml"
     prefix:   /

@@ -16,7 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Volley\Bundle\FaceBundle\VolleyFaceBundle(),
+            new Volley\FaceBundle\VolleyFaceBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
@@ -24,9 +24,10 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
-            new Volley\Bundle\UserBundle\VolleyUserBundle(),
+            new Volley\UserBundle\VolleyUserBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Volley\StatBundle\VolleyStatBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

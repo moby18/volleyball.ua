@@ -3,7 +3,7 @@
 services:
     # KernelRequest listener
     extension.listener:
-        class: Volley\Bundle\FaceBundle\Listener\DoctrineExtensionListener
+        class: Volley\FaceBundle\Listener\DoctrineExtensionListener
         calls:
             - [ setContainer, [ @service_container ] ]
         tags:
