@@ -10,12 +10,14 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+        // slides
+        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findAll();
         // news
         $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
-        return $this->render('VolleyFaceBundle:Default:index.html.twig', array(
+        return $this->render('VolleyFaceBundle:Default:index.html.twig', [
+            'slides' => $slides,
             'news' => $news
-        ));
+        ]);
     }
 
     public function tournamentAction($season_id, $tournament_id)

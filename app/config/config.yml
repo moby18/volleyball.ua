@@ -87,8 +87,8 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/js/html5shiv.js
                 - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/js/respond.min.js
-#            filters:
-#                - ?uglifyjs
+            filters:
+                - ?uglifyjs
         volley_footer_js:
             inputs:
                 - @jquery
