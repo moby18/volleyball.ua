@@ -62,9 +62,10 @@ class Season
     protected $tours;
 
     /**
-     * @ORM\OneToMany(targetEntity="Rounds", mappedBy="season")
+     * @ORM\OneToMany(targetEntity="Round", mappedBy="season")
      */
     protected $rounds;
+    
 
     function __construct()
     {
@@ -232,5 +233,38 @@ class Season
     function __toString()
     {
         return $this->getTournament()->getName().$this->getName();
+    }
+
+    /**
+     * Add rounds
+     *
+     * @param \Volley\StatBundle\Entity\Round $rounds
+     * @return Season
+     */
+    public function addRound(\Volley\StatBundle\Entity\Round $rounds)
+    {
+        $this->rounds[] = $rounds;
+
+        return $this;
+    }
+
+    /**
+     * Remove rounds
+     *
+     * @param \Volley\StatBundle\Entity\Round $rounds
+     */
+    public function removeRound(\Volley\StatBundle\Entity\Round $rounds)
+    {
+        $this->rounds->removeElement($rounds);
+    }
+
+    /**
+     * Get rounds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRounds()
+    {
+        return $this->rounds;
     }
 }

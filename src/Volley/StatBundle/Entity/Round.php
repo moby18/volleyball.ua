@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Round
  *
- * @ORM\Table()
+ * @ORM\Table(name="stat_round")
  * @ORM\Entity
  */
 class Round
@@ -131,5 +131,68 @@ class Round
     public function getType()
     {
         return $this->type;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tours = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set season
+     *
+     * @param \Volley\StatBundle\Entity\Season $season
+     * @return Round
+     */
+    public function setSeason(\Volley\StatBundle\Entity\Season $season = null)
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+    /**
+     * Get season
+     *
+     * @return \Volley\StatBundle\Entity\Season 
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * Add tours
+     *
+     * @param \Volley\StatBundle\Entity\Tour $tours
+     * @return Round
+     */
+    public function addTour(\Volley\StatBundle\Entity\Tour $tours)
+    {
+        $this->tours[] = $tours;
+
+        return $this;
+    }
+
+    /**
+     * Remove tours
+     *
+     * @param \Volley\StatBundle\Entity\Tour $tours
+     */
+    public function removeTour(\Volley\StatBundle\Entity\Tour $tours)
+    {
+        $this->tours->removeElement($tours);
+    }
+
+    /**
+     * Get tours
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTours()
+    {
+        return $this->tours;
     }
 }

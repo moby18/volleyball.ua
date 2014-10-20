@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * GameSet
  *
- * @ORM\Table()
+ * @ORM\Table(name="stat_set")
  * @ORM\Entity
  */
 class GameSet
@@ -48,6 +48,12 @@ class GameSet
      * @ORM\Column(name="duration", type="smallint")
      */
     private $duration;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="sets")
+     * @ORM\JoinColumn(name="gameId", referencedColumnName="id")
+     */
+    protected $game;
 
 
     /**
@@ -150,5 +156,28 @@ class GameSet
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * Set game
+     *
+     * @param \Volley\StatBundle\Entity\Game $game
+     * @return GameSet
+     */
+    public function setGame(\Volley\StatBundle\Entity\Game $game = null)
+    {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \Volley\StatBundle\Entity\Game 
+     */
+    public function getGame()
+    {
+        return $this->game;
     }
 }

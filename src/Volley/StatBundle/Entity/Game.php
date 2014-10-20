@@ -106,6 +106,11 @@ class Game
     protected $tour;
 
     /**
+     * @ORM\OneToMany(targetEntity="GameSet", mappedBy="game")
+     */
+    protected $sets;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -435,5 +440,46 @@ class Game
     public function getTour()
     {
         return $this->tour;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add sets
+     *
+     * @param \Volley\StatBundle\Entity\GameSet $sets
+     * @return Game
+     */
+    public function addSet(\Volley\StatBundle\Entity\GameSet $sets)
+    {
+        $this->sets[] = $sets;
+        $sets->setGame($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove sets
+     *
+     * @param \Volley\StatBundle\Entity\GameSet $sets
+     */
+    public function removeSet(\Volley\StatBundle\Entity\GameSet $sets)
+    {
+        $this->sets->removeElement($sets);
+    }
+
+    /**
+     * Get sets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSets()
+    {
+        return $this->sets;
     }
 }
