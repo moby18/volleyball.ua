@@ -26,7 +26,6 @@ volley_face_zayavka:
     pattern:  /zayavka
     defaults: { _controller: VolleyFaceBundle:Default:zayavka }
 
-
 volley_face_admin:
     resource: "@VolleyFaceBundle/Resources/config/routing/admin.yml"
     prefix:   /admin

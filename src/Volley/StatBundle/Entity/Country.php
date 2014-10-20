@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Country
@@ -133,4 +134,11 @@ class Country
     {
         return $this->tournaments;
     }
+
+    function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }

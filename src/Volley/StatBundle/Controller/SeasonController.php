@@ -21,7 +21,7 @@ class SeasonController extends Controller
     /**
      * Lists all Season entities.
      *
-     * @Route("/", name="season")
+     * @Route("/", name="stat_season")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class SeasonController extends Controller
     /**
      * Creates a new Season entity.
      *
-     * @Route("/", name="season_create")
+     * @Route("/", name="stat_season_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Season:new.html.twig")
      */
@@ -53,7 +53,7 @@ class SeasonController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('season_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_season_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class SeasonController extends Controller
     private function createCreateForm(Season $entity)
     {
         $form = $this->createForm(new SeasonType(), $entity, array(
-            'action' => $this->generateUrl('season_create'),
+            'action' => $this->generateUrl('stat_season_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class SeasonController extends Controller
     /**
      * Displays a form to create a new Season entity.
      *
-     * @Route("/new", name="season_new")
+     * @Route("/new", name="stat_season_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class SeasonController extends Controller
     /**
      * Finds and displays a Season entity.
      *
-     * @Route("/{id}", name="season_show")
+     * @Route("/{id}", name="stat_season_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class SeasonController extends Controller
     /**
      * Displays a form to edit an existing Season entity.
      *
-     * @Route("/{id}/edit", name="season_edit")
+     * @Route("/{id}/edit", name="stat_season_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class SeasonController extends Controller
     private function createEditForm(Season $entity)
     {
         $form = $this->createForm(new SeasonType(), $entity, array(
-            'action' => $this->generateUrl('season_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_season_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class SeasonController extends Controller
     /**
      * Edits an existing Season entity.
      *
-     * @Route("/{id}", name="season_update")
+     * @Route("/{id}", name="stat_season_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Season:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class SeasonController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('season_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_season_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class SeasonController extends Controller
     /**
      * Deletes a Season entity.
      *
-     * @Route("/{id}", name="season_delete")
+     * @Route("/{id}", name="stat_season_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class SeasonController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('season'));
+        return $this->redirect($this->generateUrl('stat_season'));
     }
 
     /**
@@ -238,7 +238,7 @@ class SeasonController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('season_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_season_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

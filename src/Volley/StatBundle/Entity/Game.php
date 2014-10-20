@@ -43,7 +43,7 @@ class Game
     private $duration;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volley\FaceBundle\Entity\Team")
+     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Team")
      * @ORM\JoinColumn(name="homeTeamId", referencedColumnName="id", nullable=true)
      */
     private $homeTeam;
@@ -54,7 +54,7 @@ class Game
     private $homeTeamEmpty;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volley\FaceBundle\Entity\Team")
+     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Team")
      * @ORM\JoinColumn(name="awayTeamId", referencedColumnName="id", nullable=true)
      */
     private $awayTeam;
@@ -371,10 +371,10 @@ class Game
     /**
      * Set homeTeam
      *
-     * @param \Volley\FaceBundle\Entity\Team $homeTeam
+     * @param \Volley\StatBundle\Entity\Team $homeTeam
      * @return Game
      */
-    public function setHomeTeam(\Volley\FaceBundle\Entity\Team $homeTeam = null)
+    public function setHomeTeam(\Volley\StatBundle\Entity\Team $homeTeam = null)
     {
         $this->homeTeam = $homeTeam;
 
@@ -384,7 +384,7 @@ class Game
     /**
      * Get homeTeam
      *
-     * @return \Volley\FaceBundle\Entity\Team 
+     * @return \Volley\StatBundle\Entity\Team 
      */
     public function getHomeTeam()
     {
@@ -394,10 +394,10 @@ class Game
     /**
      * Set awayTeam
      *
-     * @param \Volley\FaceBundle\Entity\Team $awayTeam
+     * @param \Volley\StatBundle\Entity\Team $awayTeam
      * @return Game
      */
-    public function setAwayTeam(\Volley\FaceBundle\Entity\Team $awayTeam = null)
+    public function setAwayTeam(\Volley\StatBundle\Entity\Team $awayTeam = null)
     {
         $this->awayTeam = $awayTeam;
 
@@ -407,7 +407,7 @@ class Game
     /**
      * Get awayTeam
      *
-     * @return \Volley\FaceBundle\Entity\Team 
+     * @return \Volley\StatBundle\Entity\Team 
      */
     public function getAwayTeam()
     {

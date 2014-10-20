@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Season
@@ -59,6 +60,11 @@ class Season
      * @ORM\OneToMany(targetEntity="Tour", mappedBy="season")
      */
     protected $tours;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Rounds", mappedBy="season")
+     */
+    protected $rounds;
 
     function __construct()
     {
@@ -221,5 +227,10 @@ class Season
     public function getTours()
     {
         return $this->tours;
+    }
+
+    function __toString()
+    {
+        return $this->getTournament()->getName().$this->getName();
     }
 }

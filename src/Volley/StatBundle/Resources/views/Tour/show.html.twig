@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 
 {% block body -%}
     <h1>Tour</h1>
@@ -22,12 +22,12 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('tour') }}">
+        <a href="{{ path('stat_tour') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('tour_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('stat_tour_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

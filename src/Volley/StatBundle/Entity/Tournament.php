@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tournament
@@ -162,4 +163,11 @@ class Tournament
     {
         return $this->seasons;
     }
+
+    function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }

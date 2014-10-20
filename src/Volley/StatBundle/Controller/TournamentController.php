@@ -21,7 +21,7 @@ class TournamentController extends Controller
     /**
      * Lists all Tournament entities.
      *
-     * @Route("/", name="tournament")
+     * @Route("/", name="stat_tournament")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class TournamentController extends Controller
     /**
      * Creates a new Tournament entity.
      *
-     * @Route("/", name="tournament_create")
+     * @Route("/", name="stat_tournament_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Tournament:new.html.twig")
      */
@@ -53,7 +53,7 @@ class TournamentController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tournament_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_tournament_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class TournamentController extends Controller
     private function createCreateForm(Tournament $entity)
     {
         $form = $this->createForm(new TournamentType(), $entity, array(
-            'action' => $this->generateUrl('tournament_create'),
+            'action' => $this->generateUrl('stat_tournament_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class TournamentController extends Controller
     /**
      * Displays a form to create a new Tournament entity.
      *
-     * @Route("/new", name="tournament_new")
+     * @Route("/new", name="stat_tournament_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class TournamentController extends Controller
     /**
      * Finds and displays a Tournament entity.
      *
-     * @Route("/{id}", name="tournament_show")
+     * @Route("/{id}", name="stat_tournament_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class TournamentController extends Controller
     /**
      * Displays a form to edit an existing Tournament entity.
      *
-     * @Route("/{id}/edit", name="tournament_edit")
+     * @Route("/{id}/edit", name="stat_tournament_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class TournamentController extends Controller
     private function createEditForm(Tournament $entity)
     {
         $form = $this->createForm(new TournamentType(), $entity, array(
-            'action' => $this->generateUrl('tournament_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_tournament_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class TournamentController extends Controller
     /**
      * Edits an existing Tournament entity.
      *
-     * @Route("/{id}", name="tournament_update")
+     * @Route("/{id}", name="stat_tournament_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Tournament:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class TournamentController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tournament_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_tournament_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class TournamentController extends Controller
     /**
      * Deletes a Tournament entity.
      *
-     * @Route("/{id}", name="tournament_delete")
+     * @Route("/{id}", name="stat_tournament_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -238,7 +238,7 @@ class TournamentController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tournament_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_tournament_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

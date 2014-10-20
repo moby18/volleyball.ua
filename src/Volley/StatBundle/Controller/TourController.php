@@ -21,7 +21,7 @@ class TourController extends Controller
     /**
      * Lists all Tour entities.
      *
-     * @Route("/", name="tour")
+     * @Route("/", name="stat_tour")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class TourController extends Controller
     /**
      * Creates a new Tour entity.
      *
-     * @Route("/", name="tour_create")
+     * @Route("/", name="stat_tour_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Tour:new.html.twig")
      */
@@ -53,7 +53,7 @@ class TourController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tour_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_tour_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class TourController extends Controller
     private function createCreateForm(Tour $entity)
     {
         $form = $this->createForm(new TourType(), $entity, array(
-            'action' => $this->generateUrl('tour_create'),
+            'action' => $this->generateUrl('stat_tour_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class TourController extends Controller
     /**
      * Displays a form to create a new Tour entity.
      *
-     * @Route("/new", name="tour_new")
+     * @Route("/new", name="stat_tour_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class TourController extends Controller
     /**
      * Finds and displays a Tour entity.
      *
-     * @Route("/{id}", name="tour_show")
+     * @Route("/{id}", name="stat_tour_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class TourController extends Controller
     /**
      * Displays a form to edit an existing Tour entity.
      *
-     * @Route("/{id}/edit", name="tour_edit")
+     * @Route("/{id}/edit", name="stat_tour_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class TourController extends Controller
     private function createEditForm(Tour $entity)
     {
         $form = $this->createForm(new TourType(), $entity, array(
-            'action' => $this->generateUrl('tour_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_tour_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class TourController extends Controller
     /**
      * Edits an existing Tour entity.
      *
-     * @Route("/{id}", name="tour_update")
+     * @Route("/{id}", name="stat_tour_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Tour:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class TourController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('tour_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_tour_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class TourController extends Controller
     /**
      * Deletes a Tour entity.
      *
-     * @Route("/{id}", name="tour_delete")
+     * @Route("/{id}", name="stat_tour_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class TourController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('tour'));
+        return $this->redirect($this->generateUrl('stat_tour'));
     }
 
     /**
@@ -238,7 +238,7 @@ class TourController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('tour_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_tour_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

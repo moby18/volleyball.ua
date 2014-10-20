@@ -21,7 +21,7 @@ class TeamController extends Controller
     /**
      * Lists all Team entities.
      *
-     * @Route("/", name="team")
+     * @Route("/", name="stat_team")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class TeamController extends Controller
     /**
      * Creates a new Team entity.
      *
-     * @Route("/", name="team_create")
+     * @Route("/", name="stat_team_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Team:new.html.twig")
      */
@@ -53,7 +53,7 @@ class TeamController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_team_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class TeamController extends Controller
     private function createCreateForm(Team $entity)
     {
         $form = $this->createForm(new TeamType(), $entity, array(
-            'action' => $this->generateUrl('team_create'),
+            'action' => $this->generateUrl('stat_team_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class TeamController extends Controller
     /**
      * Displays a form to create a new Team entity.
      *
-     * @Route("/new", name="team_new")
+     * @Route("/new", name="stat_team_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class TeamController extends Controller
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/{id}", name="team_show")
+     * @Route("/{id}", name="stat_team_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class TeamController extends Controller
     /**
      * Displays a form to edit an existing Team entity.
      *
-     * @Route("/{id}/edit", name="team_edit")
+     * @Route("/{id}/edit", name="stat_team_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class TeamController extends Controller
     private function createEditForm(Team $entity)
     {
         $form = $this->createForm(new TeamType(), $entity, array(
-            'action' => $this->generateUrl('team_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_team_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class TeamController extends Controller
     /**
      * Edits an existing Team entity.
      *
-     * @Route("/{id}", name="team_update")
+     * @Route("/{id}", name="stat_team_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Team:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class TeamController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('team_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_team_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class TeamController extends Controller
     /**
      * Deletes a Team entity.
      *
-     * @Route("/{id}", name="team_delete")
+     * @Route("/{id}", name="stat_team_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class TeamController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('team'));
+        return $this->redirect($this->generateUrl('stat_team'));
     }
 
     /**
@@ -238,7 +238,7 @@ class TeamController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('team_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_team_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

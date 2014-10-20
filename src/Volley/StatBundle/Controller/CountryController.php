@@ -21,7 +21,7 @@ class CountryController extends Controller
     /**
      * Lists all Country entities.
      *
-     * @Route("/", name="country")
+     * @Route("/", name="stat_country")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class CountryController extends Controller
     /**
      * Creates a new Country entity.
      *
-     * @Route("/", name="country_create")
+     * @Route("/", name="stat_country_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Country:new.html.twig")
      */
@@ -53,7 +53,7 @@ class CountryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('country_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_country_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class CountryController extends Controller
     private function createCreateForm(Country $entity)
     {
         $form = $this->createForm(new CountryType(), $entity, array(
-            'action' => $this->generateUrl('country_create'),
+            'action' => $this->generateUrl('stat_country_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class CountryController extends Controller
     /**
      * Displays a form to create a new Country entity.
      *
-     * @Route("/new", name="country_new")
+     * @Route("/new", name="stat_country_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class CountryController extends Controller
     /**
      * Finds and displays a Country entity.
      *
-     * @Route("/{id}", name="country_show")
+     * @Route("/{id}", name="stat_country_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class CountryController extends Controller
     /**
      * Displays a form to edit an existing Country entity.
      *
-     * @Route("/{id}/edit", name="country_edit")
+     * @Route("/{id}/edit", name="stat_country_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class CountryController extends Controller
     private function createEditForm(Country $entity)
     {
         $form = $this->createForm(new CountryType(), $entity, array(
-            'action' => $this->generateUrl('country_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_country_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class CountryController extends Controller
     /**
      * Edits an existing Country entity.
      *
-     * @Route("/{id}", name="country_update")
+     * @Route("/{id}", name="stat_country_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Country:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class CountryController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('country_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_country_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class CountryController extends Controller
     /**
      * Deletes a Country entity.
      *
-     * @Route("/{id}", name="country_delete")
+     * @Route("/{id}", name="stat_country_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -238,7 +238,7 @@ class CountryController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('country_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_country_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

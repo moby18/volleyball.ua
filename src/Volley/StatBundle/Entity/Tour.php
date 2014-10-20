@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Tour
@@ -40,6 +41,12 @@ class Tour
      * @ORM\JoinColumn(name="seasonId", referencedColumnName="id")
      */
     protected $season;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Round", inversedBy="tours")
+     * @ORM\JoinColumn(name="roundId", referencedColumnName="id")
+     */
+    protected $round;
 
     /**
      * @ORM\OneToMany(targetEntity="Game", mappedBy="tour")
@@ -162,4 +169,11 @@ class Tour
     {
         return $this->games;
     }
+
+    function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }

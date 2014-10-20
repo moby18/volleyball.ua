@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 
 {% block body -%}
     <h1>Tour list</h1>
@@ -15,16 +15,16 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('tour_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('stat_tour_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.ordering }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('tour_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('stat_tour_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('tour_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('stat_tour_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -35,7 +35,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('tour_new') }}">
+            <a href="{{ path('stat_tour_new') }}">
                 Create a new entry
             </a>
         </li>

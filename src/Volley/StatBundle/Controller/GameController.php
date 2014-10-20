@@ -21,7 +21,7 @@ class GameController extends Controller
     /**
      * Lists all Game entities.
      *
-     * @Route("/", name="game")
+     * @Route("/", name="stat_game")
      * @Method("GET")
      * @Template()
      */
@@ -38,7 +38,7 @@ class GameController extends Controller
     /**
      * Creates a new Game entity.
      *
-     * @Route("/", name="game_create")
+     * @Route("/", name="stat_game_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Game:new.html.twig")
      */
@@ -53,7 +53,7 @@ class GameController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('game_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_game_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class GameController extends Controller
     private function createCreateForm(Game $entity)
     {
         $form = $this->createForm(new GameType(), $entity, array(
-            'action' => $this->generateUrl('game_create'),
+            'action' => $this->generateUrl('stat_game_create'),
             'method' => 'POST',
         ));
 
@@ -84,7 +84,7 @@ class GameController extends Controller
     /**
      * Displays a form to create a new Game entity.
      *
-     * @Route("/new", name="game_new")
+     * @Route("/new", name="stat_game_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +102,7 @@ class GameController extends Controller
     /**
      * Finds and displays a Game entity.
      *
-     * @Route("/{id}", name="game_show")
+     * @Route("/{id}", name="stat_game_show")
      * @Method("GET")
      * @Template()
      */
@@ -127,7 +127,7 @@ class GameController extends Controller
     /**
      * Displays a form to edit an existing Game entity.
      *
-     * @Route("/{id}/edit", name="game_edit")
+     * @Route("/{id}/edit", name="stat_game_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +161,7 @@ class GameController extends Controller
     private function createEditForm(Game $entity)
     {
         $form = $this->createForm(new GameType(), $entity, array(
-            'action' => $this->generateUrl('game_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_game_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +172,7 @@ class GameController extends Controller
     /**
      * Edits an existing Game entity.
      *
-     * @Route("/{id}", name="game_update")
+     * @Route("/{id}", name="stat_game_update")
      * @Method("PUT")
      * @Template("VolleyStatBundle:Game:edit.html.twig")
      */
@@ -193,7 +193,7 @@ class GameController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('game_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_game_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +205,7 @@ class GameController extends Controller
     /**
      * Deletes a Game entity.
      *
-     * @Route("/{id}", name="game_delete")
+     * @Route("/{id}", name="stat_game_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +225,7 @@ class GameController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('game'));
+        return $this->redirect($this->generateUrl('stat_game'));
     }
 
     /**
@@ -238,7 +238,7 @@ class GameController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('game_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_game_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
