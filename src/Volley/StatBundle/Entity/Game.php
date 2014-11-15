@@ -106,7 +106,13 @@ class Game
     protected $tour;
 
     /**
-     * @ORM\OneToMany(targetEntity="GameSet", mappedBy="game")
+     * @ORM\ManyToOne(targetEntity="Season", inversedBy="games")
+     * @ORM\JoinColumn(name="seasonId", referencedColumnName="id")
+     */
+    protected $season;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GameSet", mappedBy="game", cascade={"persist"}, orphanRemoval=true)
      */
     protected $sets;
 
@@ -118,29 +124,6 @@ class Game
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set ordering
-     *
-     * @param integer $ordering
-     * @return Game
-     */
-    public function setOrdering($ordering)
-    {
-        $this->ordering = $ordering;
-
-        return $this;
-    }
-
-    /**
-     * Get ordering
-     *
-     * @return integer 
-     */
-    public function getOrdering()
-    {
-        return $this->ordering;
     }
 
     /**
@@ -428,6 +411,7 @@ class Game
     public function setTour(\Volley\StatBundle\Entity\Tour $tour = null)
     {
         $this->tour = $tour;
+        $this->season = $tour->getSeason();
 
         return $this;
     }
@@ -481,5 +465,22 @@ class Game
     public function getSets()
     {
         return $this->sets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param mixed $season
+     */
+    public function setSeason($season)
+    {
+        if ($season)
+            $this->season = $season;
     }
 }

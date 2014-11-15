@@ -1,30 +1,7 @@
-volley_face_homepage:
-    pattern:  /
-    defaults: { _controller: VolleyFaceBundle:Default:index }
-
-volley_face_tournament:
-    pattern:  /season/{season_id}/tournament/{tournament_id}
-    defaults: { _controller: VolleyFaceBundle:Default:tournament }
-
-volley_face_team:
-    pattern:  /team/{team_id}
-    defaults: { _controller: VolleyFaceBundle:Default:team }
-
-volley_face_player:
-    pattern:  /player/{player_id}
-    defaults: { _controller: VolleyFaceBundle:Default:player }
-
-volley_face_post:
-    pattern:  /post/{post_id}
-    defaults: { _controller: VolleyFaceBundle:Default:post }
-
-volley_face_blog:
-    pattern:  /blog/{category_id}
-    defaults: { _controller: VolleyFaceBundle:Default:blog }
-
-volley_face_zayavka:
-    pattern:  /zayavka
-    defaults: { _controller: VolleyFaceBundle:Default:zayavka }
+volley_face_default:
+    resource: "Volley\FaceBundle\Controller\DefaultController"
+    type: annotation
+    prefix:   /
 
 volley_face_admin:
     resource: "@VolleyFaceBundle/Resources/config/routing/admin.yml"

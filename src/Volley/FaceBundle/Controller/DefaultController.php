@@ -4,9 +4,51 @@ namespace Volley\FaceBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/tournamentTable", name="volley_face_tournament_table")
+     * @Template()
+     */
+    public function tournamentTableAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // season
+        $seasonID = 1;
+        $season = $em->getRepository('VolleyFaceBundle:Season')->find($seasonID);
+
+        // tournamrnt
+        $tournamentID = 1;
+        $tournament = $em->getRepository('VolleyFaceBundle:Tournament')->find($tournamentID);
+
+        // rounds
+        //$rounds = $tournament->getRounds();
+
+        
+
+
+        // games
+//        foreach ($rounds as $round) {
+//            $games = $round->getGames();
+//            foreach ($games as $game) {
+//            }
+//        }
+
+        return $this->render('VolleyFaceBundle:Default:tournamentTable.html.twig', array(
+            'season' => $season,
+            'tournament' => $tournament,
+            'rounds' => $rounds,
+        ));
+    }
+
+    /**
+     * @Route("/", name="volley_face_homepage")
+     * @Template()
+     */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -20,6 +62,10 @@ class DefaultController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/season/{season_id}/tournament/{tournament_id}", name="volley_face_tournament")
+     * @Template()
+     */
     public function tournamentAction($season_id, $tournament_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -49,6 +95,10 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/team/{team_id}", name="volley_face_team")
+     * @Template()
+     */
     public function teamAction($team_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -67,6 +117,10 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/player/{player_id}", name="volley_face_player")
+     * @Template()
+     */
     public function playerAction($player_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -80,6 +134,10 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/post/{post_id}", name="volley_face_post")
+     * @Template()
+     */
     public function postAction($post_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -92,6 +150,10 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/blog/{category_id}", name="volley_face_blog")
+     * @Template()
+     */
     public function blogAction($category_id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -104,6 +166,10 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * @Route("/zayavka", name="volley_face_zayavka")
+     * @Template()
+     */
     public function zayavkaAction()
     {
 

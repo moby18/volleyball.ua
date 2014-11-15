@@ -38,20 +38,20 @@ class GameSet
     /**
      * @var integer
      *
-     * @ORM\Column(name="number", type="smallint")
+     * @ORM\Column(name="number", type="smallint", nullable=true)
      */
     private $number;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="duration", type="smallint")
+     * @ORM\Column(name="duration", type="smallint", nullable=true)
      */
     private $duration;
 
     /**
      * @ORM\ManyToOne(targetEntity="Game", inversedBy="sets")
-     * @ORM\JoinColumn(name="gameId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="gameId", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $game;
 

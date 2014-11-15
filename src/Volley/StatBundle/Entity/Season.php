@@ -65,11 +65,17 @@ class Season
      * @ORM\OneToMany(targetEntity="Round", mappedBy="season")
      */
     protected $rounds;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="season")
+     */
+    protected $games;
     
 
     function __construct()
     {
         $this->tours = new ArrayCollection();
+        $this->games = new ArrayCollection();
     }
 
     /**
@@ -266,5 +272,21 @@ class Season
     public function getRounds()
     {
         return $this->rounds;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGames()
+    {
+        return $this->games;
+    }
+
+    /**
+     * @param mixed $games
+     */
+    public function setGames($games)
+    {
+        $this->games = $games;
     }
 }

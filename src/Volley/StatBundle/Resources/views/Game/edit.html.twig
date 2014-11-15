@@ -1,7 +1,7 @@
 {% extends '::admin.html.twig' %}
 
 
-{% block javascripts %}
+{% block scripts %}
     {{ parent() }}
     <script type="text/javascript">
         var $collectionHolder;
@@ -68,18 +68,18 @@
 {% block body -%}
     <h1>Game edit</h1>
 
-    {{ form_start(form_edit) }}
+    {{ form_start(edit) }}
 
     <div class="form-group">
         <label>Sets</label>
-        <ul class="tags list-group" data-prototype="{{ form_widget(form_edit.sets.vars.prototype)|e }}">
-            {% for set in form_edit.sets %}
+        <ul class="tags list-group" data-prototype="{{ form_widget(edit.sets.vars.prototype)|e }}">
+            {% for set in edit.sets %}
                 <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome) }} - {{ form_row(set.scoreSetAway) }}</li>
             {% endfor %}
         </ul>
     </div>
 
-    {{ form_end(form_edit) }}
+    {{ form_end(edit) }}
 
         <ul class="record_actions">
     <li>

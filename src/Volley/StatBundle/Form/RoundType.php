@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GameType extends AbstractType
+class RoundType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,21 +15,10 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number')
             ->add('name')
-            ->add('duration')
-            ->add('homeTeamEmpty')
-            ->add('awayTeamEmpty')
-            ->add('score')
-            ->add('scoreSetHome')
-            ->add('scoreSetAway')
-            ->add('played')
-            ->add('date')
-            ->add('homeTeam')
-            ->add('awayTeam')
-            ->add('tour')
-//            ->add('season')
-            ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('ordering')
+            ->add('type')
+            ->add('season')
         ;
     }
     
@@ -39,7 +28,7 @@ class GameType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Volley\StatBundle\Entity\Game'
+            'data_class' => 'Volley\StatBundle\Entity\Round'
         ));
     }
 
@@ -48,6 +37,6 @@ class GameType extends AbstractType
      */
     public function getName()
     {
-        return 'volley_statbundle_game';
+        return 'volley_statbundle_round';
     }
 }

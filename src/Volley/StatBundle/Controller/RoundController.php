@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Volley\StatBundle\Entity\Game;
-use Volley\StatBundle\Form\GameType;
+use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Form\RoundType;
 
 /**
- * Game controller.
+ * Round controller.
  *
- * @Route("/game")
+ * @Route("/round")
  */
-class GameController extends Controller
+class RoundController extends Controller
 {
 
     /**
-     * Lists all Game entities.
+     * Lists all Round entities.
      *
-     * @Route("/", name="stat_game")
+     * @Route("/", name="stat_round")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Game')->findAll();
+        $entities = $em->getRepository('VolleyStatBundle:Round')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Game entity.
+     * Creates a new Round entity.
      *
-     * @Route("/", name="stat_game_create")
+     * @Route("/", name="stat_round_create")
      * @Method("POST")
-     * @Template("VolleyStatBundle:Game:new.html.twig")
+     * @Template("VolleyStatBundle:Round:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Game();
+        $entity = new Round();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class GameController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stat_game_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('round_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class GameController extends Controller
     }
 
     /**
-     * Creates a form to create a Game entity.
+     * Creates a form to create a Round entity.
      *
-     * @param Game $entity The entity
+     * @param Round $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Game $entity)
+    private function createCreateForm(Round $entity)
     {
-        $form = $this->createForm(new GameType(), $entity, array(
-            'action' => $this->generateUrl('stat_game_create'),
+        $form = $this->createForm(new RoundType(), $entity, array(
+            'action' => $this->generateUrl('round_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class GameController extends Controller
     }
 
     /**
-     * Displays a form to create a new Game entity.
+     * Displays a form to create a new Round entity.
      *
-     * @Route("/new", name="stat_game_new")
+     * @Route("/new", name="stat_round_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Game();
+        $entity = new Round();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class GameController extends Controller
     }
 
     /**
-     * Finds and displays a Game entity.
+     * Finds and displays a Round entity.
      *
-     * @Route("/{id}", name="stat_game_show")
+     * @Route("/{id}", name="stat_round_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VolleyStatBundle:Game')->find($id);
+        $entity = $em->getRepository('VolleyStatBundle:Round')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Game entity.');
+            throw $this->createNotFoundException('Unable to find Round entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class GameController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Game entity.
+     * Displays a form to edit an existing Round entity.
      *
-     * @Route("/{id}/edit", name="stat_game_edit")
+     * @Route("/{id}/edit", name="stat_round_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VolleyStatBundle:Game')->find($id);
+        $entity = $em->getRepository('VolleyStatBundle:Round')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Game entity.');
+            throw $this->createNotFoundException('Unable to find Round entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -146,22 +146,22 @@ class GameController extends Controller
 
         return array(
             'entity'      => $entity,
-            'edit'   => $editForm->createView(),
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Game entity.
+    * Creates a form to edit a Round entity.
     *
-    * @param Game $entity The entity
+    * @param Round $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Game $entity)
+    private function createEditForm(Round $entity)
     {
-        $form = $this->createForm(new GameType(), $entity, array(
-            'action' => $this->generateUrl('stat_game_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new RoundType(), $entity, array(
+            'action' => $this->generateUrl('round_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class GameController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Game entity.
+     * Edits an existing Round entity.
      *
-     * @Route("/{id}", name="stat_game_update")
+     * @Route("/{id}", name="stat_round_update")
      * @Method("PUT")
-     * @Template("VolleyStatBundle:Game:edit.html.twig")
+     * @Template("VolleyStatBundle:Round:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('VolleyStatBundle:Game')->find($id);
+        $entity = $em->getRepository('VolleyStatBundle:Round')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Game entity.');
+            throw $this->createNotFoundException('Unable to find Round entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class GameController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stat_game_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('round_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class GameController extends Controller
         );
     }
     /**
-     * Deletes a Game entity.
+     * Deletes a Round entity.
      *
-     * @Route("/{id}", name="stat_game_delete")
+     * @Route("/{id}", name="stat_round_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class GameController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('VolleyStatBundle:Game')->find($id);
+            $entity = $em->getRepository('VolleyStatBundle:Round')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Game entity.');
+                throw $this->createNotFoundException('Unable to find Round entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('stat_game'));
+        return $this->redirect($this->generateUrl('round'));
     }
 
     /**
-     * Creates a form to delete a Game entity by id.
+     * Creates a form to delete a Round entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class GameController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('stat_game_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('round_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
