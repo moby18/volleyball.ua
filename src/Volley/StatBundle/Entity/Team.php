@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Team
@@ -34,6 +35,16 @@ class Team
      * @ORM\Column(name="description", type="string", length=255)
      */
     private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Season",  mappedBy="teams")
+     **/
+    protected $seasons;
+
+    function __construct()
+    {
+        $this->seasons = new ArrayCollection();
+    }
 
 
     /**
@@ -90,6 +101,40 @@ class Team
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add seasons
+     *
+     * @param \Volley\StatBundle\Entity\Season $seasons
+     * @return Team
+     */
+    public function addSeason(\Volley\StatBundle\Entity\Season $seasons)
+    {
+        $seasons->addTeam($this); // synchronously updating inverse side
+        $this->seasons[] = $seasons;
+
+        return $this;
+    }
+
+    /**
+     * Remove seasons
+     *
+     * @param \Volley\StatBundle\Entity\Season $seasons
+     */
+    public function removeSeason(\Volley\StatBundle\Entity\Season $seasons)
+    {
+        $this->seasons->removeElement($seasons);
+    }
+
+    /**
+     * Get seasons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSeasons()
+    {
+        return $this->seasons;
     }
 
     function __toString()

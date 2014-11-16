@@ -19,16 +19,15 @@ class DefaultController extends Controller
 
         // season
         $seasonID = 1;
-        $season = $em->getRepository('VolleyFaceBundle:Season')->find($seasonID);
+        $season = $em->getRepository('VolleyStatBundle:Season')->find($seasonID);
 
         // tournamrnt
         $tournamentID = 1;
-        $tournament = $em->getRepository('VolleyFaceBundle:Tournament')->find($tournamentID);
+        $tournament = $em->getRepository('VolleyStatBundle:Tournament')->find($tournamentID);
 
         // rounds
-        //$rounds = $tournament->getRounds();
+        $rounds = $tournament->getRounds();
 
-        
 
 
         // games

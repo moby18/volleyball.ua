@@ -70,12 +70,19 @@ class Season
      * @ORM\OneToMany(targetEntity="Game", mappedBy="season")
      */
     protected $games;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="seasons")
+     * @ORM\JoinTable(name="stat_seasons_teams")
+     **/
+    protected  $teams;
     
 
     function __construct()
     {
         $this->tours = new ArrayCollection();
         $this->games = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
     /**
@@ -272,6 +279,40 @@ class Season
     public function getRounds()
     {
         return $this->rounds;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     * @return Season
+     */
+    public function addTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $teams->addSeason($this);
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 
     /**

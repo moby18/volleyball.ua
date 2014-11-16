@@ -20,6 +20,13 @@ class SeasonType extends AbstractType
             ->add('toYear')
             ->add('status')
             ->add('tournament')
+            ->add('teams')
+//            ->add('teams', 'entity', array(
+//                'class' => 'Volley\StatBundle\Entity\Team',
+//                'property' => 'name',
+//                'multiple' => true,
+//                'expanded' => false
+//            ))
         ;
     }
     
