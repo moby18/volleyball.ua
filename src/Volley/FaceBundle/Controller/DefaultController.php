@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Volley\StatBundle\Entity\Season;
+use Volley\StatBundle\Entity\Game;
 
 class DefaultController extends Controller
 {
@@ -17,7 +19,9 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        // season
+        /**
+         * @var Season $season
+         */
         $seasonID = 1;
         $season = $em->getRepository('VolleyStatBundle:Season')->find($seasonID);
 
@@ -26,21 +30,76 @@ class DefaultController extends Controller
         $tournament = $em->getRepository('VolleyStatBundle:Tournament')->find($tournamentID);
 
         // rounds
-        $rounds = $tournament->getRounds();
+//        $rounds = $tournament->getRounds();
 
+        $teams = $season->getTeams();
 
+        $games = $season->getGames();
 
-        // games
-//        foreach ($rounds as $round) {
-//            $games = $round->getGames();
-//            foreach ($games as $game) {
-//            }
-//        }
+        $table = [];
+        foreach ($teams as $team) {
+            $table[$team->getID()] = ['team' => $team, 'points' => 0, 'games' => 0, 'win' => 0, 'loss' => 0, 'win_sets' => 0, 'loss_sets' => 0, 'win_points' => 0, 'loss_points' => 0];
+        }
+
+        /**
+         * @var Game $game
+         */
+        foreach ($games as $game) {
+
+            if ($game->getHomeTeam()) {
+                $homeTeamId = $game->getHomeTeam()->getId();
+                $table[$homeTeamId]['games'] += 1;
+            }
+            else
+                $homeTeamId = 0;
+            if ($game->getAwayTeam()) {
+                $awayTeamId = $game->getAwayTeam()->getId();
+                $table[$awayTeamId]['games'] += 1;
+            }
+            else
+                $awayTeamId = 0;
+
+            $homeTeamSets = $game->getScoreSetHome();
+            $awayTeamSets = $game->getScoreSetAway();
+
+            if ($homeTeamSets > $awayTeamSets) {
+                if ($homeTeamId) $table[$homeTeamId]['win'] += 1;
+                if ($homeTeamId) $table[$homeTeamId]['win_sets'] += $homeTeamSets;
+                if ($awayTeamId) $table[$awayTeamId]['loss'] += 1;
+                if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $awayTeamSets;
+                if ($homeTeamSets - $awayTeamSets >= 2) {
+                    if ($homeTeamId) $table[$homeTeamId]['points'] += 3;
+                    if ($awayTeamId) $table[$awayTeamId]['points'] += 0;
+                } else {
+                    if ($homeTeamId) $table[$homeTeamId]['points'] += 2;
+                    if ($awayTeamId) $table[$awayTeamId]['points'] += 1;
+                }
+            } else {
+                if ($homeTeamId) $table[$homeTeamId]['loss'] += 1;
+                if ($homeTeamId) $table[$homeTeamId]['loss_sets'] += $homeTeamSets;
+                if ($awayTeamId) $table[$awayTeamId]['win'] += 1;
+                if ($awayTeamId) $table[$awayTeamId]['win_sets'] += $awayTeamSets;
+                if ($awayTeamSets - $homeTeamSets >= 2) {
+                    if ($homeTeamId) $table[$homeTeamId]['points'] += 0;
+                    if ($awayTeamId) $table[$awayTeamId]['points'] += 3;
+                } else {
+                    if ($homeTeamId) $table[$homeTeamId]['points'] += 1;
+                    if ($awayTeamId) $table[$awayTeamId]['points'] += 2;
+                }
+            }
+        }
+
+        usort($table, function ($a, $b) {
+            return strcmp($a['points'], $b['points']);
+        });
+
+//        var_dump(count($teams));
+//        exit;
 
         return $this->render('VolleyFaceBundle:Default:tournamentTable.html.twig', array(
             'season' => $season,
             'tournament' => $tournament,
-            'rounds' => $rounds,
+            'table' => $table
         ));
     }
 
@@ -172,8 +231,7 @@ class DefaultController extends Controller
     public function zayavkaAction()
     {
 
-        return $this->render('VolleyFaceBundle:Default:zayavka.html.twig', array(
-        ));
+        return $this->render('VolleyFaceBundle:Default:zayavka.html.twig', array());
     }
 
 }
