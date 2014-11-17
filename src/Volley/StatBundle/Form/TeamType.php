@@ -18,6 +18,11 @@ class TeamType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('seasons')
+            ->add('image', 'file', array(
+                    'data_class' => null,
+                    'required' => false
+                )
+            )
         ;
     }
     
