@@ -23,7 +23,7 @@ class PostType extends AbstractType
                     'data-theme' => 'advanced' // simple, advanced, bbcode
                 ), 'required'=>false))
             ->add('state')
-            ->add('created')
+//            ->add('created')
             ->add('published')
 //            ->add('content')
             ->add('content', 'textarea', array(

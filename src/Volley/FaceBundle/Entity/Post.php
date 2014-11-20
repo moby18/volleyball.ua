@@ -64,9 +64,16 @@ class Post
     private $category;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @Doctrine\ORM\Mapping\Column(type="datetime")
      */
     private $created;
+
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @Doctrine\ORM\Mapping\Column(type="datetime")
+     */
+    private $updated;
 
     /**
      * @Doctrine\ORM\Mapping\Column(type="date")
@@ -656,6 +663,22 @@ class Post
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @param mixed $updated
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
     }
 
     /**
