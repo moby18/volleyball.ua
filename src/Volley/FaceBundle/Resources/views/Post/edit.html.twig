@@ -3,14 +3,68 @@
 {% block body -%}
     <h1>Post edit</h1>
 
-    {{ form(edit_form) }}
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('post') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#main" aria-controls="main" role="tab" data-toggle="tab">Main</a>
+            </li>
+            <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="main">
+                <br>
+                {{ form_row(edit_form.category) }}
+                {{ form_row(edit_form.title) }}
+                {{ form_row(edit_form.file) }}
+                {{ form_row(edit_form.content) }}
+                {{ form_row(edit_form.text) }}
+                {{ form_row(edit_form.state) }}
+                {{ form_row(edit_form.published) }}
+                {{ form_row(edit_form.source) }}
+                {{ form_row(edit_form.featured) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="meta">
+                <br>
+                {{ form_row(edit_form.metakey) }}
+                {{ form_row(edit_form.metadescr) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="rest">
+                {{ form_row(edit_form.ordering) }}
+                {{ form_row(edit_form.hits) }}
+                {{ form_row(edit_form.language) }}
+                {{ form_row(edit_form.createdBy) }}
+                {{ form_row(edit_form.modifiedBy) }}
+
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(edit_form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('post') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    {% javascripts '@jquery' '@datetimepicker_js' '@VolleyFaceBundle/Resources/public/js/post.js' filter='' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    {% stylesheets '@datetimepicker_css' filter='' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}

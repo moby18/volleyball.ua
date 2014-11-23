@@ -1,0 +1,22 @@
+{% block extends %}
+{{ "{% extends '::base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+<div class="row">
+    <ol class="breadcrumb">
+      <li><a href="{{ "{{ path('" ~ route_name_prefix ~  "') }}" }}">{{ entity }}s list</a></li>
+      <li class="active"><small>edit:</small> "{{ entity}}" </li>
+    </ol>
+</div>
+<div class="row">
+
+    {{ '{{ form(edit_form) }}' }}
+
+    {% set hide_edit, hide_delete = true, false %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+    
+</div>    
+{{ "{% endblock %}" }}
+{% endblock body %}

@@ -1,0 +1,13 @@
+
+                <div class="btn-group">
+
+                {%- for action in record_actions %}
+                       {% if action == 'edit' %} 
+                            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}" class='btn btn-xs btn-warning'><i class='fa fa-edit'></i> {{ action }}</a>
+                       {%- elseif action == 'show' %}
+                            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_delete', { 'id': entity.id }) }}" }}" class='btn btn-xs btn-danger'><i class='fa fa-trash-o'></i> delete</a>
+                       {% endif %}
+                        
+                {%- endfor %}
+
+                </div>

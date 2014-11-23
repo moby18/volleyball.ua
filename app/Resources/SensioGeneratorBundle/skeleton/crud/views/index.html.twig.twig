@@ -1,0 +1,67 @@
+{% block extends %}
+{{ "{% extends '::base.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <div class="row">
+        <ol class="breadcrumb">
+          <li class="active">{{ entity }}s list</li>
+        </ol>
+    </div>
+    {#<h1>{{ entity }} list</h1>#}
+<div class="row">
+    <table class="table table-striped table-hover table-small">
+        <thead>
+            <tr>
+            {%- for field, metadata in fields %}
+                
+                <th {% if loop.first  %} class="th-admin-nn" {% endif %} >{{ field|capitalize }}</th>
+
+            {%- endfor %}
+
+                <th class="th-admin-action" >Actions <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}" class='btn btn-xs btn-success'><i class='fa fa-plus-circle'></i> Add</a></th>
+            </tr>
+        </thead>
+        <tbody>
+        {{ '{% for entity in entities %}' }}
+            <tr>
+
+        {%- for field, metadata in fields %}
+            {%- if loop.first and ('show' in actions) %}
+
+                <td><a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': entity.id }) }}" }}">{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</a></td>
+
+            {%- elseif metadata.type in ['date', 'datetime'] %}
+
+                <td>{{ '{% if entity.' ~ field|replace({'_': ''}) ~ ' %}{{ entity.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
+
+            {%- else %}
+
+                <td>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+            {%- endif %}
+
+            {%- if loop.last %}
+
+                <td class="th-admin-action">
+                    {%- include "crud/views/others/actions.html.twig.twig" %}
+                </td>
+
+            {%- endif %}
+        {%- endfor %}
+
+            </tr>
+        {{ '{% endfor %}' }}
+        </tbody>
+    </table>
+</div>
+    {% if 'new' in actions %}
+    <div class="row">
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_new') }}" }}" class='btn btn-success'>
+            <i class='fa fa-plus-circle'></i> Create a new entry
+        </a>
+    </div> 
+    {% endif %}
+{{ "{% endblock %}" }}
+{% endblock body %}

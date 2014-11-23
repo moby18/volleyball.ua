@@ -24,3 +24,9 @@ $(function() {
 $('body').scrollspy({
     target: '.navbar-fixed-top'
 })
+
+// Tabs
+$('#myTab a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+})

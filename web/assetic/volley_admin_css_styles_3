@@ -1,8 +1,0 @@
-.navbar-brand {
-    background-image: url(/uploads/images/logo_volleyball.png);
-    height: 56px;
-    width: 200px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left;
-}

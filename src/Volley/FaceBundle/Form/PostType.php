@@ -17,6 +17,7 @@ class PostType extends AbstractType
         $builder
             ->add('title')
 //            ->add('slug')
+            ->add('content', 'textarea', array())
             ->add('text', 'textarea', array(
                 'attr' => array(
                     'class' => 'tinymce',
@@ -24,13 +25,9 @@ class PostType extends AbstractType
                 ), 'required'=>false))
             ->add('state')
 //            ->add('created')
-            ->add('published')
+            ->add('published', 'datetime', ['widget' => 'single_text',
+                'format' => 'YYYY-MM-dd hh:mm:ss'])
 //            ->add('content')
-            ->add('content', 'textarea', array(
-                'attr' => array(
-                    'class' => 'tinymce',
-                    'data-theme' => 'advanced' // simple, advanced, bbcode
-                ), 'required'=>false))
             ->add('createdBy')
             ->add('modifiedBy')
             ->add('source')
@@ -38,7 +35,7 @@ class PostType extends AbstractType
             ->add('metakey')
             ->add('metadescr')
             ->add('hits')
-            ->add('metadata')
+//            ->add('metadata')
             ->add('featured')
             ->add('language')
             ->add('category')

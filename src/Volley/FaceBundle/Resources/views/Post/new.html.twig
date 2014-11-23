@@ -3,7 +3,47 @@
 {% block body -%}
     <h1>Post creation</h1>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#main" aria-controls="main" role="tab" data-toggle="tab">Main</a>
+            </li>
+            <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="main">
+                <br>
+                {{ form_row(form.category) }}
+                {{ form_row(form.title) }}
+                {{ form_row(form.file) }}
+                {{ form_row(form.content) }}
+                {{ form_row(form.text) }}
+                {{ form_row(form.state) }}
+                {{ form_row(form.published) }}
+                {{ form_row(form.source) }}
+                {{ form_row(form.featured) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="meta">
+                <br>
+                {{ form_row(form.metakey) }}
+                {{ form_row(form.metadescr) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="rest">
+                {{ form_row(form.ordering) }}
+                {{ form_row(form.hits) }}
+                {{ form_row(form.language) }}
+                {{ form_row(form.createdBy) }}
+                {{ form_row(form.modifiedBy) }}
+
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
 
         <ul class="record_actions">
     <li>
@@ -12,4 +52,18 @@
         </a>
     </li>
 </ul>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    {% javascripts '@jquery' '@datetimepicker_js' '@VolleyFaceBundle/Resources/public/js/post.js' filter='' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    {% stylesheets '@datetimepicker_css' filter='' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 {% endblock %}

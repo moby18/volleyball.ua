@@ -45,10 +45,16 @@ assetic:
         jquery:
             inputs:
                 - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
+        datetimepicker_js:
+            inputs:
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/jquery.datetimepicker.js
+        datetimepicker_css:
+            inputs:
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/jquery.datetimepicker.css
         bootstrap_css:
             inputs:
 #                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css
         bootstrap_js:
             inputs:
                 - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
@@ -66,34 +72,34 @@ assetic:
         volley_css:
             inputs:
                 - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/css/modern-business.css
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/css/styles.css
-#                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/modern-business.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/styles.css
+#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
             filters:
                 - ?uglifycss
         volley_css_ie:
             inputs:
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/css/ie.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/ie.css
             filters:
                 - ?uglifycss
         volley_admin_css:
             inputs:
                 - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/css/dashboard.css
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/css/admin/styles.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/dashboard.css
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/admin/styles.css
             filters:
                 - ?uglifycss
         volley_header_js:
             inputs:
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/js/html5shiv.js
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/js/respond.min.js
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/html5shiv.js
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/respond.min.js
             filters:
                 - ?uglifyjs
         volley_footer_js:
             inputs:
                 - @jquery
                 - @bootstrap_js
-                - %kernel.root_dir%/../src/Volley/Bundle/FaceBundle/Resources/public/js/modern-business.js
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/modern-business.js
 
 # Doctrine Configuration
 doctrine:

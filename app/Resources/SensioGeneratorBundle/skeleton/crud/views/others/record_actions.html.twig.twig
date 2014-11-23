@@ -1,0 +1,13 @@
+<div class="btn-group">
+{% if ('edit' in actions) and (not hide_edit) %}
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': entity.id }) }}" }}" class="btn btn-warning">
+           <i class="fa fa-edit"></i> Edit
+        </a>
+    
+{% endif %}
+</div>  
+<div class="pull-right">
+{% if ('delete' in actions) and (not hide_delete) %}
+   {{ '{{ form(delete_form) }}' }}
+{% endif %}
+</div>
