@@ -1,0 +1,28 @@
+{% extends '::layout.html.twig' %}
+
+{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}
+{% set title = post.title %}
+
+{% block content %}
+
+    <div class="section">
+
+        <div class="container">
+
+            <h1>{{ post.title }}</h1>
+
+            <p>
+                {% autoescape %}
+                    {{ post.text|raw }}
+                {% endautoescape %}
+            </p>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

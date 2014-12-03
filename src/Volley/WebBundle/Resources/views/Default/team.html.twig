@@ -1,0 +1,87 @@
+{% extends '::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="section" id="team">
+        <div class="container">
+            <div class="row">
+                <h1>Команда {{ team.name }}</h1>
+            </div>
+            <div class="row">
+                <div class="col col-lg-4 col-md-4 col-sm-4">
+                    <img class="photo" src="{{ team.getWebPath }}" alt="Команда з пляжного волейболу ">
+                </div>
+                <div class="col col-lg-8 col-md-8 col-sm-8">
+                    <a href="{{ path('volley_face_player', {'player_id': players[0].id}) }}">
+                    <div class="row player_names">
+                        <div class="col col-lg-2 col-md-2 col-sm-2">
+                            <div class="team_player_number">
+                                1
+                            </div>
+                        </div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">
+                            <div class="team_player_name">
+                                {{ players[0].lastName }} {{ players[0].firstName }} {{ players[0].middleName }}
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <a href="{{ path('volley_face_player', {'player_id': players[1].id}) }}">
+                    <div class="row player_names">
+                        <div class="col col-lg-2 col-md-2 col-sm-2">
+                            <div class="team_player_number">
+                                2
+                            </div>
+                        </div>
+                        <div class="col col-lg-10 col-md-10 col-sm-10">
+                            <div class="team_player_name">
+                                {{ players[1].lastName }} {{ players[1].firstName }} {{ players[1].middleName }}
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                    <hr/>
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-3 col-sm-3">
+                            <div class="team_label">
+                                Очки
+                            </div>
+                        </div>
+                        <div class="col col-lg-9 col-md-9 col-sm-9">
+                            <div class="team_value">
+                                {{ team.rating is not null ? team.rating : " - " }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-3 col-sm-3">
+                            <div class="team_label">
+                                Рейтинг
+                            </div>
+                        </div>
+                        <div class="col col-lg-9 col-md-9 col-sm-9">
+                            <div class="team_value">
+                                {{ team.rank is not null ? team.rank : " - " }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-lg-3 col-md-3 col-sm-3">
+                            <div class="team_label">
+                                Місце
+                            </div>
+                        </div>
+                        <div class="col col-lg-9 col-md-9 col-sm-9">
+                            <div class="team_value">
+                                {{ team.place is not null ? team.place : " - " }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
