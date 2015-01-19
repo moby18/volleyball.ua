@@ -95,11 +95,15 @@ assetic:
                 - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/respond.min.js
             filters:
                 - ?uglifyjs
+        volley_carousel_js:
+            inputs:
+                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/carousel.js
         volley_footer_js:
             inputs:
                 - @jquery
                 - @bootstrap_js
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/modern-business.js
+#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/modern-business.js
+                - @volley_carousel_js
 
 # Doctrine Configuration
 doctrine:

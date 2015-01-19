@@ -1,3 +1,4 @@
 volley_web_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: VolleyWebBundle:Default:index }
+    resource: "Volley\WebBundle\Controller\DefaultController"
+    type: annotation
+    prefix:   /

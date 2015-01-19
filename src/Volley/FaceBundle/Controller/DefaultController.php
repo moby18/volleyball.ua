@@ -104,7 +104,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/", name="volley_face_homepage")
+     * @Route("/old-home", name="volley_face_homepage")
      * @Template()
      */
     public function indexAction(Request $request)

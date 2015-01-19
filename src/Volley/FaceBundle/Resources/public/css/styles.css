@@ -14,20 +14,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Front Content */
 /* Slider */
-#myCarousel {
-    padding: 0;
-    height: 400px;
-}
+/*#myCarousel {*/
+    /*padding: 0;*/
+    /*height: 400px;*/
+/*}*/
 
-.carousel-control .icon-next,
-.carousel-control .icon-prev {
-    width: 30px;
-    height: 30px;
-    margin-top: -70px;
-    font-size: 100px;
-    font-family: Arial;
-    top:200px;
-}
+/*.carousel-control .icon-next,*/
+/*.carousel-control .icon-prev {*/
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*margin-top: -70px;*/
+    /*font-size: 100px;*/
+    /*font-family: Arial;*/
+    /*top:200px;*/
+/*}*/
 
 /* News */
 .news.sections .container {
@@ -239,4 +239,37 @@ footer .footer-below {
 
 #player .row.player_data:hover {
     border-right: 5px solid black;
+}
+
+/* My New Carousel */
+#myCarousel .carousel-caption {
+    left:0;
+    right:0;
+    bottom:0;
+    text-align:left;
+    padding:10px;
+    background:rgba(0,0,0,0.6);
+    text-shadow:none;
+}
+
+#myCarousel .list-group {
+    position:absolute;
+    top:0;
+    right:0;
+}
+#myCarousel .list-group-item {
+    border-radius:0px;
+    cursor:pointer;
+}
+#myCarousel .list-group .active {
+    background-color:#eee;
+}
+
+@media (min-width: 992px) {
+    #myCarousel {padding-right:33.3333%;}
+    #myCarousel .carousel-controls {display:none;}
+}
+@media (max-width: 991px) {
+    .carousel-caption p,
+    #myCarousel .list-group {display:none;}
 }
