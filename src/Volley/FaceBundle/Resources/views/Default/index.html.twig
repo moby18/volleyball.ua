@@ -13,7 +13,7 @@
         <div class="carousel-inner">
             {% for slide in slides %}
                 <div class="item {{ loop.first ? "active" : "" }}">
-                    <div class="fill" style="background-image:url('/uploads/slides/{{ slide.id }}.{{ slide.image }}');"></div>
+                <div class="fill" style="background-image:url({{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }});"></div>
                     <div class="carousel-caption">
                         <h1>{{ slide.title }}</h1>
                     </div>

@@ -14,7 +14,7 @@
 
     {% block styles %}
         {% stylesheets '@volley_admin_css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
+        <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
     {% endblock %}
 
@@ -51,9 +51,11 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="{{ path("slide") }}">Sliders</a></li>
-                <li><a href="{{ path("player") }}">Players</a></li>
                 <li><a href="{{ path("category") }}">Categories</a></li>
                 <li><a href="{{ path("post") }}">Posts</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="{{ path("player") }}">Players</a></li>
                 <li><a href="{{ path("season") }}">Seasons</a></li>
                 <li><a href="{{ path("tournament") }}">Tournaments</a></li>
                 <li><a href="{{ path("team") }}">Teams</a></li>
@@ -75,14 +77,14 @@
             {% block body %}
             {% endblock %}
 
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 {% block scripts %}
     {% javascripts '@bootstrap_js' %}
-        <script  type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 

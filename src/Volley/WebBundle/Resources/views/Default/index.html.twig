@@ -10,7 +10,8 @@
 
                 {% for slide in slides %}
                     <div class="item {{ loop.first ? "active" : "" }}">
-                        <img src="/uploads/slides/{{ slide.id }}.{{ slide.image }}">
+                        <img src="{{ ('uploads/slides/' ~ slide.id ~ '.' ~ slide.image) | imagine_filter('carousel')  }}">
+                        {#{{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }}#}
 
                         <div class="carousel-caption">
                             {#<h4><a href="#">{{ slide.title }}</a></h4>#}
@@ -28,7 +29,7 @@
 
             <ul class="list-group col-sm-4">
                 {% for slide in slides %}
-                <li data-target="#myCarousel" data-slide-to="{{ loop.index }}" class="list-group-item {{ loop.first ? "active" : "" }}"><h4>{{ slide.title }}</h4></li>
+                <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}" class="list-group-item {{ loop.first ? "active" : "" }}"><h4>{{ slide.title }}</h4></li>
                 {% endfor %}
             </ul>
 
