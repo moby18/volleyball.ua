@@ -221,4 +221,4 @@ liip_imagine:
         carousel:
             quality: 100
             filters:
-                thumbnail: { size: [760, 330], mode: outbound }
+                thumbnail: { size: [760, 350], mode: outbound }
