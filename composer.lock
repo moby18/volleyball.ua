@@ -4,8 +4,57 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "469b0840590982b601d7fe6cb18e0ee8",
+    "hash": "f808550fba0cb1e19f6da1c1b1472fef",
     "packages": [
+        {
+            "name": "astina/social-links-bundle",
+            "version": "2.1.0",
+            "target-dir": "Astina/Bundle/SocialLinksBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/astina/AstinaSocialLinksBundle.git",
+                "reference": "b878b7c0a1b0ff2915b1a953351055099444856a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/astina/AstinaSocialLinksBundle/zipball/b878b7c0a1b0ff2915b1a953351055099444856a",
+                "reference": "b878b7c0a1b0ff2915b1a953351055099444856a",
+                "shasum": ""
+            },
+            "require": {
+                "sensio/framework-extra-bundle": ">=2.3",
+                "social-links/social-links": "~1.3.0",
+                "symfony/symfony": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "Astina\\Bundle\\SocialLinksBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Astina AG",
+                    "email": "admin@astina.ch"
+                }
+            ],
+            "description": "Symfony bundle that is using SocialLinks to generate share links for social networks.",
+            "homepage": "http://astina.ch",
+            "keywords": [
+                "astina",
+                "links",
+                "share",
+                "social"
+            ],
+            "time": "2014-11-17 10:14:57"
+        },
         {
             "name": "behat/transliterator",
             "version": "v1.0.1",
@@ -2089,6 +2138,48 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2015-02-11 07:21:23"
+        },
+        {
+            "name": "social-links/social-links",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/oscarotero/social-links.git",
+                "reference": "ff2ec63a055d2c96df8f925671ac90d5c56c9513"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/oscarotero/social-links/zipball/ff2ec63a055d2c96df8f925671ac90d5c56c9513",
+                "reference": "ff2ec63a055d2c96df8f925671ac90d5c56c9513",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SocialLinks": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oscar Otero",
+                    "email": "oom@oscarotero.com",
+                    "homepage": "http://oscarotero.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP library to generate share buttons",
+            "homepage": "https://github.com/oscarotero/social-links",
+            "keywords": [
+                "image"
+            ],
+            "time": "2014-10-24 15:50:25"
         },
         {
             "name": "stfalcon/tinymce-bundle",

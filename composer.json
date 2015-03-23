@@ -33,7 +33,8 @@
         "genemu/form-bundle": "~2.2.2",
         "frameworks/jquery": "2.1.1",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "liip/imagine-bundle": "~1.2"
+        "liip/imagine-bundle": "~1.2",
+        "astina/social-links-bundle": "~2.1"
     },
     "scripts": {
         "post-install-cmd": [

@@ -29,7 +29,8 @@ class AppKernel extends Kernel
             new Volley\StatBundle\VolleyStatBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Volley\WebBundle\VolleyWebBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle()
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
