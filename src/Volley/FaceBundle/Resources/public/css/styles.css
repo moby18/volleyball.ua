@@ -10,6 +10,11 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
+    margin-left: 0 !important;
+}
+
+.navbar-right {
+    margin-right: 0 !important;
 }
 
 /* Front Content */
@@ -45,7 +50,7 @@ footer .footer-col {
 
 footer .footer-below {
     padding: 25px 0;
-    background-color: #233140;
+    background-color: #262626;
 }
 
 .btn-social {
@@ -243,13 +248,43 @@ footer .footer-below {
     position:absolute;
     top:0;
     right:0;
+    height: 350px;
+    padding-right: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #eeeeee;
+    background-color: #fbe90a;
 }
-#myCarousel .list-group-item {
+#myCarousel .list-group .list-group-item {
     border-radius:0px;
     cursor:pointer;
+    border: 0;
+    height: 70px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #eeeeee;
+    box-sizing: border-box;
+    padding: 0px;
+    margin-right: 5px;
 }
+
+#myCarousel .list-group .list-group-item div {
+    margin-right: 5px;
+    padding: 10px 15px;
+    background-color: white;
+}
+
+#myCarousel .list-group .list-group-item h4 {
+    height: 29px;
+}
+
 #myCarousel .list-group .active {
     background-color:#eee;
+    color: #267dc1;
+    background-color: #267dc1;
+    margin-right: 0;
+}
+
+#myCarousel .list-group .list-group-item.active div {
+    background-color: #eee;
 }
 
 @media (min-width: 992px) {
@@ -263,16 +298,6 @@ footer .footer-below {
 
 #myCarousel .carousel-inner {
     height: 350px;
-}
-
-#myCarousel .list-group .list-group-item {
-    border: 0;
-    height: 70px;
-}
-
-#myCarousel .list-group {
-    height: 350px;
-    padding-right: 0;
 }
 
 .section-carousel {
