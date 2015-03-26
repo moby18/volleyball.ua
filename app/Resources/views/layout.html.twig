@@ -1,11 +1,11 @@
-{% set title = title|default('Відкритий чемпіонат Черкаської області з пляжного волейболу') ~ " - Волейбол в Черкасах" %}
+{% set title = title|default('Волейбол в Україні') ~ " - ВОЛЕЙБОЛ.УА" %}
 {% set host = app.request.getSchemeAndHttpHost() %}
 {% set route = app.request.attributes.get('_route') %}
 {% if route is not empty %}{% set full_url = url(route, app.request.attributes.get('_route_params')) %}{% endif %}
 {% set page_image = page_image|default(app.request.getSchemeAndHttpHost() ~ asset('bundles/volleyface/images/fb_sharing_image.jpg')) %}
 {% set type = type|default('website') %}
-{% set meta_keywords = meta_keywords|default('україна, черкаси, пляжний волейбол, волейбол, асоціація пляжного волейболу, черкаська область, київ, 2014, турнір, 1 тур, 2 тур, 3 тур, кваліфікація, основна сітка змагань') %}
-{% set meta_description = meta_description|default('Відкритий чемпіонат Черкаської області з пляжного волейболу. Щорічні змагання що проводяться Асоціацією пляжного волейболу в Черкаській області. Вебсайт створений проектом ВОЛЕЙБОЛ.УА.') %}
+{% set meta_keywords = meta_keywords|default('україна, украина, волейбол, федерація волейболу, пляжний волейбол, асоціація пляжного волейболу, аматорський волейбол') %}
+{% set meta_description = meta_description|default('Все о украинском и мировом волейболе: новости, история, соревнования, команды, игроки, функционеры. Мы расcкажем вам о профессиональном и аматорском волейболе, о звездах и начинающий. Правила игры, разновидности волейбола, техника, тактика, пляжный волейбол. Обзоры, аналитика, календарь, результаты, таблицы, статистика. Фото и видео. Волейбольный форум. Наша совместная с вами цель  - по новому качественно представить волейбол, сделать его еще более популярным и доступным.') %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,7 +151,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        ВОЛЕЙБОЛ.УА &copy; 2014 - Відкритий Чемпіонат Черкаської області з пляжного волейболу
+                        ВОЛЕЙБОЛ.УА &copy; 2015 - Волейбол в Україні
                     </div>
                 </div>
             </div>

@@ -22,11 +22,22 @@ h1, h2, h3, h4, h5, h6 {
 /* Slider */
 
 /* News */
-.news.sections .container {
+.sections .container {
     padding: 0 15px;
 }
-.news_item {
+.news.row {
+    width: 760px;
+    margin: 0;
+}
+.news-item {
+    padding: 0;
+}
+.news-item:nth-child(odd) {
+    padding-right: 25px;
+}
 
+.news-item .news-info {
+    color: #cccccc;
 }
 
 /* Footer */

@@ -63,24 +63,18 @@
 
 {% block content %}
 
-    <div class="sections news">
+    <div class="sections">
 
         <div class="container">
 
-            <div class="row">
+            <div class="row news">
                 {% for item in news %}
-                    <div class="news_item col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        {% if item.text != "" %}
-                            <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><img class="img-responsive"
-                                                                                               src="{{ item.getWebPath }}"></a>
-                        {% else %}
+                    <div class="news-item col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}">
                             <img class="img-responsive" src="{{ item.getWebPath }}">
-                        {% endif %}
-                        {% if item.text != "" %}
-                            <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
-                        {% else %}
-                            <h3>{{ item.title }}</h3>
-                        {% endif %}
+                        </a>
+                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
+                        <span class="news-info">{{ item.created|date('d/m/Y H:i') ~ ' | ' ~ item.createdBy }}</span>
                         {% autoescape %}
                         {{ item.content|raw }}
                         {% endautoescape %}
