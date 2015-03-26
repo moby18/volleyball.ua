@@ -75,7 +75,7 @@
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-52737103-1', 'auto');
+        ga('create', 'UA-61237467-1', 'auto');
         ga('send', 'pageview');
     </script>
 </head>
@@ -92,20 +92,20 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-            <a class="navbar-brand" href="{{ path('volley_face_homepage') }}"></a>
+            <a class="navbar-brand" href="{{ path('volley_web_homepage') }}"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 2}) }}">2 тур</a>
-                </li>
-                <li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>
-                </li>
-                <li><a href="{{ path("volley_face_blog",{'category_id': 2}) }}">Відео</a>
-                </li>
-            </ul>
-        </div>
+        {#<div class="collapse navbar-collapse navbar-ex1-collapse">#}
+            {#<ul class="nav navbar-nav navbar-right">#}
+                {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 2}) }}">2 тур</a>#}
+                {#</li>#}
+                {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>#}
+                {#</li>#}
+                {#<li><a href="{{ path("volley_face_blog",{'category_id': 2}) }}">Відео</a>#}
+                {#</li>#}
+            {#</ul>#}
+        {#</div>#}
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
@@ -119,34 +119,6 @@
 
 
     <footer class="text-center">
-        {#<div class="footer-above">#}
-            {#<div class="container">#}
-                {#<div class="row">#}
-                    {#<div class="footer-col col-md-4">#}
-                        {#<h3>Адреса</h3>#}
-                        {#<p>Місто Черкаси, вулиця Героїв Дніпра 49#}
-                            {#<br>пляж "Живчик", 18000 </p>#}
-                    {#</div>#}
-                    {#<div class="footer-col col-md-4">#}
-                        {#<h3>Соціальні сторінки</h3>#}
-                        {#<ul class="list-inline">#}
-                            {#<li><a target="_blank" href="http://vk.com/volleyballinua" class="btn-social btn-outline"><i class="fa fa-fw fa-vk"></i></a>#}
-                            {#</li>#}
-                            {#<li><a target="_blank" href="https://www.facebook.com/volleyball.in.ua" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>#}
-                            {#</li>#}
-                            {#&#123;&#35;<li><a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>&#35;&#125;#}
-                            {#&#123;&#35;</li>&#35;&#125;#}
-                            {#<li><a target="_blank" href="https://twitter.com/volleyballinua" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>#}
-                            {#</li>#}
-                        {#</ul>#}
-                    {#</div>#}
-                    {#<div class="footer-col col-md-4">#}
-                        {#<h3>Про нас</h3>#}
-                        {#<p>Проект Асоціації пляжного волейболу у Черкаській області разом з ВОЛЕЙБОЛ.УА висвітлюватиме події пляжного волейболу регіону.</p>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
         <div class="footer-below">
             <div class="container">
                 <div class="row">
