@@ -9,15 +9,22 @@
 
         <div class="container">
 
-            <h1>{{ post.title }}</h1>
+            <div class="pull-left" style="width: 760px;">
+                <h1>{{ post.title }}</h1>
+                <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
+                    <img class="img-responsive" src="{{ post.getWebPath }}">
+                </a>
+                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span
 
-            <p>
-                {% autoescape %}
+                <p>
+                    {% autoescape %}
+                    {{ post.content|raw }}
                     {{ post.text|raw }}
-                {% endautoescape %}
-            </p>
+                    {% endautoescape %}
+                </p>
 
-            {% include '@VolleyWeb/Social/uptolike.html.twig' %}
+                {% include '@VolleyFace/Social/uptolike.html.twig' %}
+            </div>
 
         </div>
         <!-- /.container -->
