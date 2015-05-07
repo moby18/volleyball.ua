@@ -36,8 +36,19 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 25px;
 }
 
-.news-item .news-info {
+.news-item .news-info,
+.post .news-info {
     color: #cccccc;
+}
+
+/* Post */
+.post {
+    padding: 0;
+}
+
+.post .news-info {
+    padding: 5px 0;
+    display: block;
 }
 
 /* Footer */

@@ -5,17 +5,19 @@
 
 {% block content %}
 
-    <div class="section">
+    <div class="section post">
 
         <div class="container">
 
             <div class="pull-left" style="width: 760px;">
-                <h1>{{ post.title }}</h1>
+                <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
+                    <h1>{{ post.title }}</h1>
+                </a>
                 <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
                     <img class="img-responsive" src="{{ post.getWebPath }}">
                 </a>
-                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span
 
+                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span
                 <p>
                     {% autoescape %}
                     {{ post.content|raw }}
