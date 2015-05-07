@@ -23,13 +23,14 @@ class AppKernel extends Kernel
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Volley\UserBundle\VolleyUserBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Volley\StatBundle\VolleyStatBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Volley\WebBundle\VolleyWebBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

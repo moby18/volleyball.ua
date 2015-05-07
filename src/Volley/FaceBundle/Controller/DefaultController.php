@@ -104,7 +104,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/old-home", name="volley_face_homepage")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/", name="volley_web_homepage")
      * @Template()
      */
     public function indexAction(Request $request)
@@ -114,7 +116,7 @@ class DefaultController extends Controller
         $slides = $em->getRepository('VolleyFaceBundle:Slide')->findAll();
         // news
         $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
-        return $this->render('VolleyFaceBundle:Default:index.html.twig', [
+        return $this->render('VolleyWebBundle:Default:index.html.twig', [
             'slides' => $slides,
             'news' => $news
         ]);
@@ -132,19 +134,12 @@ class DefaultController extends Controller
         $seasonID = $season_id;
         $season = $em->getRepository('VolleyFaceBundle:Season')->find($seasonID);
 
-        // tournamrnt
+        // tournament
         $tournamentID = $tournament_id;
         $tournament = $em->getRepository('VolleyFaceBundle:Tournament')->find($tournamentID);
 
         // rounds
         $rounds = $tournament->getRounds();
-
-        // games
-//        foreach ($rounds as $round) {
-//            $games = $round->getGames();
-//            foreach ($games as $game) {
-//            }
-//        }
 
         return $this->render('VolleyFaceBundle:Default:tournament.html.twig', array(
             'season' => $season,

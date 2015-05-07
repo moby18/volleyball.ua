@@ -30,6 +30,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
+        # resources: ['bootstrap_3_horizontal_layout.html.twig']
 
 # Assetic Configuration
 assetic:
@@ -208,3 +211,14 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             softdeleteable: true
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+    filter_sets:
+        cache: ~
+        carousel:
+            quality: 100
+            filters:
+                thumbnail: { size: [760, 350], mode: outbound }

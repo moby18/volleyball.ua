@@ -10,37 +10,54 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
+    margin-left: 0 !important;
+}
+
+.navbar-right {
+    margin-right: 0 !important;
 }
 
 /* Front Content */
-/* Slider */
-/*#myCarousel {*/
-    /*padding: 0;*/
-    /*height: 400px;*/
-/*}*/
 
-/*.carousel-control .icon-next,*/
-/*.carousel-control .icon-prev {*/
-    /*width: 30px;*/
-    /*height: 30px;*/
-    /*margin-top: -70px;*/
-    /*font-size: 100px;*/
-    /*font-family: Arial;*/
-    /*top:200px;*/
-/*}*/
+/* Slider */
 
 /* News */
-.news.sections .container {
-    padding: 15px 0;
+.sections .container {
+    padding: 0 15px;
 }
-.news_item {
+.news.row {
+    width: 760px;
+    margin: 0;
+}
+.news-item {
+    padding: 0;
+}
+.news-item:nth-child(odd) {
+    padding-right: 25px;
+}
 
+.news-item .news-info,
+.post .news-info {
+    color: #cccccc;
+}
+
+/* Post */
+.post {
+    padding: 0;
+}
+
+.post .news-info {
+    padding: 5px 0;
+    display: block;
 }
 
 /* Footer */
 footer {
     color: #fff;
     margin-bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 60px;
 }
 
 footer h3 {
@@ -58,7 +75,7 @@ footer .footer-col {
 
 footer .footer-below {
     padding: 25px 0;
-    background-color: #233140;
+    background-color: #262626;
 }
 
 .btn-social {
@@ -256,13 +273,43 @@ footer .footer-below {
     position:absolute;
     top:0;
     right:0;
+    height: 350px;
+    padding-right: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #eeeeee;
+    background-color: #fbe90a;
 }
-#myCarousel .list-group-item {
+#myCarousel .list-group .list-group-item {
     border-radius:0px;
     cursor:pointer;
+    border: 0;
+    height: 70px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #eeeeee;
+    box-sizing: border-box;
+    padding: 0px;
+    margin-right: 5px;
 }
+
+#myCarousel .list-group .list-group-item div {
+    margin-right: 5px;
+    padding: 10px 15px;
+    background-color: white;
+}
+
+#myCarousel .list-group .list-group-item h4 {
+    height: 29px;
+}
+
 #myCarousel .list-group .active {
     background-color:#eee;
+    color: #267dc1;
+    background-color: #267dc1;
+    margin-right: 0;
+}
+
+#myCarousel .list-group .list-group-item.active div {
+    background-color: #eee;
 }
 
 @media (min-width: 992px) {
@@ -272,4 +319,13 @@ footer .footer-below {
 @media (max-width: 991px) {
     .carousel-caption p,
     #myCarousel .list-group {display:none;}
+}
+
+#myCarousel .carousel-inner {
+    height: 350px;
+}
+
+.section-carousel {
+    padding: 0;
+    background-color: #262626;
 }

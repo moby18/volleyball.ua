@@ -3,6 +3,8 @@
 /web/assetic
 /web/js/
 /web/css/
+/web/media
+/web/images
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -26,3 +28,5 @@ xcuserstate
 xcuserdata
 
 node_modules
+# bower dir
+/src/Volley/FaceBundle/Resources/public/bower_components

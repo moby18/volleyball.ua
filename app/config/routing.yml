@@ -1,3 +1,6 @@
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
 volley_web:
     resource: "@VolleyWebBundle/Resources/config/routing.yml"
     prefix:   /
