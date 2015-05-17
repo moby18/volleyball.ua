@@ -111,11 +111,13 @@
     <!-- /.container -->
 </nav>
 
-{% block carousel %}
-{% endblock %}
+    {% block carousel %}
+    {% endblock %}
 
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
+
+
 
 
     <footer class="footer text-center">
@@ -129,6 +131,7 @@
             </div>
         </div>
     </footer>
+
 <!-- /.container -->
 
 {% block scripts %}
@@ -136,8 +139,6 @@
         <script  type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
-
-<div style="clear: both;"></div>
 
 </body>
 </html>
