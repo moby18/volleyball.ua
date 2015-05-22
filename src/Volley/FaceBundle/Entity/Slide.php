@@ -77,6 +77,13 @@ class Slide
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image_name", type="string", length=255)
+     */
+    private $image_name;
+
+    /**
      * @Assert\File(maxSize="6000000")
      */
     private $file;
@@ -102,14 +109,14 @@ class Slide
     {
         return null === $this->image
             ? null
-            : $this->getUploadRootDir().'/'.$this->image;
+            : $this->getUploadRootDir().'/'.$this->image_name;
     }
 
     public function getWebPath()
     {
         return null === $this->image
             ? null
-            : $this->getUploadDir().'/'.$this->image;
+            : $this->getUploadDir().'/'.$this->image_name;
     }
 
     protected function getUploadRootDir()
@@ -142,6 +149,13 @@ class Slide
             $this->temp = $this->getAbsolutePath();
         } else {
             $this->image = 'initial';
+            $this->image_name = 'initial';
+        }
+
+        if (null !== $this->getFile()) {
+            $this->image = $this->getFile()->guessExtension();
+            $date = new \DateTime();
+            $this->image_name = $date->getTimestamp() . uniqid() . '.' . $this->getFile()->guessExtension();
         }
     }
 
@@ -151,9 +165,11 @@ class Slide
      */
     public function preUpload()
     {
-        if (null !== $this->getFile()) {
-            $this->image = $this->getFile()->guessExtension();
-        }
+//        if (null !== $this->getFile()) {
+//            $this->image = $this->getFile()->guessExtension();
+//            $date = new \DateTime();
+//            $this->image_name = $date->getTimestamp().uniqid().'.'.$this->getFile()->guessExtension();
+//        }
     }
 
     /**
@@ -179,7 +195,7 @@ class Slide
         // which the UploadedFile move() method does
         $this->getFile()->move(
             $this->getUploadRootDir(),
-            $this->id.'.'.$this->getFile()->guessExtension()
+            $this->image_name
         );
 
         $this->setFile(null);
@@ -349,5 +365,21 @@ class Slide
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->image_name;
+    }
+
+    /**
+     * @param string $image_name
+     */
+    public function setImageName($image_name)
+    {
+        $this->image_name = $image_name;
     }
 }
