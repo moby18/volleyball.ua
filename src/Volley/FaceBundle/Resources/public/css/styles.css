@@ -410,7 +410,14 @@ footer .footer-below {
 }
 
 #myCarousel .list-group .list-group-item h4 {
-    height: 29px;
+    height: 49px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 #myCarousel .list-group .active {

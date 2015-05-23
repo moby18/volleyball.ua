@@ -2,7 +2,7 @@ RewriteEngine on
 
 RewriteCond %{HTTP_HOST} ^volleyball.ua$ [NC,OR]
 
-RewriteCond %{HTTP_HOST} ^http://volleyball.ua/$ 
+RewriteCond %{HTTP_HOST} ^http://volleyball.ua/$
 
 RewriteCond %{REQUEST_URI} !web/
 
