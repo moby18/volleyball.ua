@@ -78,7 +78,7 @@ class Post
     /**
      * @var /DateTime
      *
-     * @Doctrine\ORM\Mapping\Column(type="datetime", nullable=true)
+     * @Doctrine\ORM\Mapping\Column(type="datetime")
      */
     private $published;
 
