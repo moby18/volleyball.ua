@@ -26,8 +26,8 @@ class PostType extends AbstractType
             ->add('state')
 //            ->add('created')
             ->add('published', 'datetime', [
-//                'widget' => 'single_text',
-                'widget' => 'choice',
+                'widget' => 'single_text',
+//                'widget' => 'choice',
 //                'format' => 'YYYY-MM-dd hh:mm:ss',
                 'required' => true])
 //            ->add('content')
