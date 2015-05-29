@@ -80,6 +80,9 @@
                         {{ item.content|raw }}
                         {% endautoescape %}
                     </div>
+                    {% if (loop.index is even) %}
+                        <div class="clearfix"></div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <!-- /.row -->
