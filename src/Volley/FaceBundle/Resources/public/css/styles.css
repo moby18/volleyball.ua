@@ -145,13 +145,25 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 .news-item {
-    padding: 0;
+    padding: 10px 0;
 }
 .news-item:nth-child(even),
 .news-item:nth-child(odd) {
     padding-right: 25px;
 }
+.news-item:nth-child(even):after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+* html .news-item:nth-child(even)             { zoom: 1; } /* IE6 */
+*:first-child+html .news-item:nth-child(even) { zoom: 1; } /* IE7 */
 
+.news-item h3 {
+    margin: 5px 0;
+}
 .news-item .news-info,
 .post .news-info {
     color: #cccccc;
