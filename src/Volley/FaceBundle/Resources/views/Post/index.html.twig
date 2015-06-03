@@ -3,73 +3,70 @@
 {% block body -%}
     <h1>Post list</h1>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
                 {#<th>Slug</th>#}
                 {#<th>Text</th>#}
                 <th>State</th>
-                <th>Created</th>
-                <th>Published</th>
+                {#<th>Created</th>#}
+                {#<th>Published</th>#}
                 {#<th>Content</th>#}
                 <th>Createdby</th>
                 <th>Modifiedby</th>
-                <th>Source</th>
+                {#<th>Source</th>#}
                 <th>Ordering</th>
                 {#<th>Metakey</th>#}
                 {#<th>Metadescr</th>#}
-                <th>Hits</th>
+                {#<th>Hits</th>#}
                 {#<th>Metadata</th>#}
                 <th>Featured</th>
-                <th>Language</th>
+                {#<th>Language</th>#}
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('post_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.title }}</td>
-                {#<td>{{ entity.slug }}</td>#}
-                {#<td>{{ entity.text }}</td>#}
-                <td>{{ entity.state }}</td>
-                <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
-                {#<td>{{ entity.content }}</td>#}
-                <td>{{ entity.createdBy }}</td>
-                <td>{{ entity.modifiedBy }}</td>
-                <td>{{ entity.source }}</td>
-                <td>{{ entity.ordering }}</td>
-                {#<td>{{ entity.metakey }}</td>#}
-                {#<td>{{ entity.metadescr }}</td>#}
-                <td>{{ entity.hits }}</td>
-                {#<td>{{ entity.metadata }}</td>#}
-                <td>{{ entity.featured }}</td>
-                <td>{{ entity.language }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('post_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('post_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('post_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.title }}</td>
+                    {#<td>{{ entity.slug }}</td>#}
+                    {#<td>{{ entity.text }}</td>#}
+                    <td>{{ entity.state }}</td>
+                    {#<td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                    {#<td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                    {#<td>{{ entity.content }}</td>#}
+                    <td>{{ entity.createdBy }}</td>
+                    <td>{{ entity.modifiedBy }}</td>
+                    {#<td>{{ entity.source }}</td>#}
+                    <td>{{ entity.ordering }}</td>
+                    {#<td>{{ entity.metakey }}</td>#}
+                    {#<td>{{ entity.metadescr }}</td>#}
+                    {#<td>{{ entity.hits }}</td>#}
+                    {#<td>{{ entity.metadata }}</td>#}
+                    <td>{{ entity.featured }}</td>
+                    {#<td>{{ entity.language }}</td>#}
+                    <td>
+                        <div class="btn-group" role="group" aria-label="">
+                            <a href="{{ path('post_show', { 'id': entity.id }) }}" type="button"
+                               class="btn btn-default">show</a>
+                            <a href="{{ path('post_edit', { 'id': entity.id }) }}" type="button"
+                               class="btn btn-default">edit</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-        <ul>
-        <li>
-            <a href="{{ path('post_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+    
+    <div>
+        <a type="button"
+           class="btn btn-success" href="{{ path('post_new') }}">
+            Create a new entry
+        </a>
+    </div>
+{% endblock %}

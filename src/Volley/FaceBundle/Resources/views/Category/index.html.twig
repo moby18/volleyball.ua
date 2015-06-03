@@ -20,14 +20,12 @@
                     <td>{{ entity.name }}</td>
                     <td>{{ entity.parent }}</td>
                     <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('category_show', { 'id': entity.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('category_edit', { 'id': entity.id }) }}">edit</a>
-                            </li>
-                        </ul>
+                        <div class="btn-group" role="group" aria-label="">
+                            <a href="{{ path('category_show', { 'id': entity.id }) }}" type="button"
+                               class="btn btn-default">show</a>
+                            <a href="{{ path('category_edit', { 'id': entity.id }) }}" type="button"
+                               class="btn btn-default">edit</a>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
@@ -35,11 +33,10 @@
         </table>
     </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('category_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+    <div>
+        <a type="button"
+           class="btn btn-success" href="{{ path('category_new') }}">
+            Create a new entry
+        </a>
+    </div>
 {% endblock %}
