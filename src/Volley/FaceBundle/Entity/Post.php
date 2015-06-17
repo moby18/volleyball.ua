@@ -210,7 +210,7 @@ class Post
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/posts';
+        return '/uploads/posts';
     }
 
     private $temp;

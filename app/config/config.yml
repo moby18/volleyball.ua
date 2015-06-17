@@ -220,3 +220,8 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [760, 350], mode: outbound }
+
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: blueimp # or any uploader you use in the frontend

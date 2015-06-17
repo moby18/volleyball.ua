@@ -1,6 +1,10 @@
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
 
+oneup_uploader:
+    resource: .
+    type: uploader
+
 volley_web:
     resource: "@VolleyWebBundle/Resources/config/routing.yml"
     prefix:   /
