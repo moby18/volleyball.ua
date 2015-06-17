@@ -11,20 +11,14 @@
 
                     {% for slide in slides %}
                         <div class="item {{ loop.first ? "active" : "" }}">
-                            <img src="{{ ('uploads/slides/' ~ slide.id ~ '.' ~ slide.image) | imagine_filter('carousel') }}">
+                            <img src="{{ '/uploads/slides/' ~ slide.imageName }}">
+                            {#<img src="{{ ('uploads/slides/' ~ slide.imageName) | imagine_filter('carousel') }}">#}
                             {#{{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }}#}
 
                             <div class="carousel-caption">
                                 <h4><a href="#">{{ slide.title }}</a></h4>
 
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                    tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum
-                                    dolor
-                                    sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                                    labore
-                                    et dolore magna aliquyam erat.
-                                </p>
+                                <p></p>
                             </div>
                         </div><!-- End Item -->
                     {% endfor %}
@@ -79,6 +73,9 @@
                         {{ item.content|raw }}
                         {% endautoescape %}
                     </div>
+                    {% if (loop.index is even) %}
+                        <div class="clearfix"></div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <!-- /.row -->

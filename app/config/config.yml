@@ -75,7 +75,6 @@ assetic:
         volley_css:
             inputs:
                 - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/modern-business.css
                 - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/styles.css
 #                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
             filters:
@@ -105,7 +104,6 @@ assetic:
             inputs:
                 - @jquery
                 - @bootstrap_js
-#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/modern-business.js
                 - @volley_carousel_js
 
 # Doctrine Configuration
@@ -222,3 +220,8 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [760, 350], mode: outbound }
+
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: blueimp # or any uploader you use in the frontend

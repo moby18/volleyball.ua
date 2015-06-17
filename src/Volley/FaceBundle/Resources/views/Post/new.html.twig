@@ -45,13 +45,10 @@
 
     {{ form_end(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('post') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('post') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -64,6 +61,6 @@
 {% block styles %}
     {{ parent() }}
     {% stylesheets '@datetimepicker_css' filter='' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}

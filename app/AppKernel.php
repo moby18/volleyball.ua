@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Volley\FaceBundle\VolleyFaceBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Craue\FormFlowBundle\CraueFormFlowBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
@@ -30,7 +29,8 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Volley\WebBundle\VolleyWebBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle()
+            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

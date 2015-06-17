@@ -1,3 +1,118 @@
+/*
+Custom CSS for...
+'Modern Business' HTML Theme by Start Bootstrap
+
+All Start Bootstrap themes are licensed under Apache 2.0.
+For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap.com!
+*/
+
+/* Global Styles */
+body {
+    padding-top: 57px;
+    /* body padding for fixed top nav */
+}
+
+.img-home-portfolio,
+.img-customer,
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+.tab-pane {
+    margin-top: 15px;
+}
+
+/* Page Sections */
+.section,
+.section-colored {
+    padding: 50px 0;
+}
+
+.section-colored {
+    background-color: #e1e1e1;
+    /* change this to change the background color of a colored section */
+}
+
+.sidebar {
+    margin-top: 40px;
+}
+
+.sidebar ul {
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+/* Half Page Height Carousel Customization */
+.carousel {
+    height: 50%;
+}
+
+.item,
+.active,
+.carousel-inner {
+    height: 100%;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Social Icons Styles */
+.list-social-icons {
+    margin-bottom: 45px;
+}
+
+.tooltip-social a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.facebook-link a:hover {
+    color: #3b5998;
+}
+
+.linkedin-link a:hover {
+    color: #007fb1;
+}
+
+.twitter-link a:hover {
+    color: #39a9e0;
+}
+
+.google-plus-link a:hover {
+    color: #d14836;
+}
+
+/* Service Page Styles */
+.service-icon {
+    font-size: 50px;
+}
+
+/* 404 Page Styles */
+.error-404 {
+    font-size: 8em;
+}
+
+/* Pricing Page Styles */
+.price {
+    font-size: 4em;
+}
+
+.price-cents {
+    vertical-align: super;
+    font-size: 50%;
+}
+
+.price-month {
+    font-size: 35%;
+    font-style: italic;
+}
+
+
 h1, h2, h3, h4, h5, h6 {
     line-height: 130%;
 }
@@ -30,12 +145,25 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 .news-item {
-    padding: 0;
+    padding: 10px 0;
 }
+.news-item:nth-child(even),
 .news-item:nth-child(odd) {
     padding-right: 25px;
 }
+.news-item:nth-child(even):after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+* html .news-item:nth-child(even)             { zoom: 1; } /* IE6 */
+*:first-child+html .news-item:nth-child(even) { zoom: 1; } /* IE7 */
 
+.news-item h3 {
+    margin: 5px 0;
+}
 .news-item .news-info,
 .post .news-info {
     color: #cccccc;
@@ -54,10 +182,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Footer */
 footer {
     color: #fff;
-    margin-bottom: 0;
-    position: absolute;
-    width: 100%;
-    height: 60px;
 }
 
 footer h3 {
@@ -74,7 +198,7 @@ footer .footer-col {
 }
 
 footer .footer-below {
-    padding: 25px 0;
+    padding: 20px 0;
     background-color: #262626;
 }
 
@@ -298,7 +422,14 @@ footer .footer-below {
 }
 
 #myCarousel .list-group .list-group-item h4 {
-    height: 29px;
+    height: 49px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 #myCarousel .list-group .active {
@@ -328,4 +459,24 @@ footer .footer-below {
 .section-carousel {
     padding: 0;
     background-color: #262626;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+    display: block;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
