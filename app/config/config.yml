@@ -2,11 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine_extensions.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
-    translator: ~
+    translator:      { fallback: "%locale%" }
+#    translator: ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -38,7 +39,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ VolleyFaceBundle ]
+    bundles:        [ VolleyFaceBundle,FOSUserBundle]
     filters:
         uglifycss:
             bin: %uglifycss_path%

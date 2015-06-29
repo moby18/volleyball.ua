@@ -1,0 +1,5 @@
+# User
+user:
+  admin:
+    email: Email
+    password: Пароль

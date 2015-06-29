@@ -260,10 +260,6 @@ footer .footer-below {
     color: #000000;
 }
 
-/*#tours > div:last-child > .circle {*/
-    /*color: lightslategray;*/
-/*}*/
-
 /* Home Images */
 .medals {
     width: 100%;
@@ -419,7 +415,7 @@ footer .footer-below {
     margin-right: 5px;
     padding: 10px 15px;
     background-color: white;
-    height: 97px;
+    height: 116px;
 }
 
 #myCarousel .list-group .list-group-item h4 {
@@ -455,6 +451,11 @@ footer .footer-below {
 
 #myCarousel .carousel-inner {
     height: 350px;
+}
+
+#myCarousel .carousel-inner a {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .section-carousel {
