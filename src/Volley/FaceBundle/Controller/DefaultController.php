@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -111,9 +112,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findAll();
+        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,3);
         // news
         $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
         return $this->render('VolleyWebBundle:Default:index.html.twig', [
