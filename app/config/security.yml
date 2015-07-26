@@ -25,6 +25,16 @@ security:
             logout:
                 path:   /logout
                 target: /
+            remember_me:
+                key:      "%secret%"
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                name: volleyballua
+                # by default, the feature is enabled by checking a
+                # checkbox in the login form (see below), uncomment the
+                # following line to always enable it.
+                always_remember_me: true
+                #remember_me_parameter: _remember_me
 
     access_control:
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
