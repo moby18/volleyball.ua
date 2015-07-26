@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

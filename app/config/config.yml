@@ -226,3 +226,16 @@ oneup_uploader:
     mappings:
         gallery:
             frontend: blueimp # or any uploader you use in the frontend
+
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: default
+    connect:
+        confirmation: true
+        account_connector: volley_user_provider
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           %facebook_client_id%
+            client_secret:       %facebook_client_secret%
+            scope:               "email, public_profile"
