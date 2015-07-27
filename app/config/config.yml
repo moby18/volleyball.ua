@@ -239,3 +239,5 @@ hwi_oauth:
             client_id:           %facebook_client_id%
             client_secret:       %facebook_client_secret%
             scope:               "email, public_profile"
+            options:
+                display: popup #dialog is optimized for popup window

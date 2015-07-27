@@ -6,6 +6,8 @@ services:
 
     volley_user_provider:
         class: Volley\WebBundle\Security\User\VolleyUserProvider
+        arguments:
+            - @doctrine.orm.entity_manager
 
     hwi_oauth.user.provider.entity:
         class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
