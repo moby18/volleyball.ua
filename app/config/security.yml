@@ -9,16 +9,17 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-            volleyball_user_provider:
-                entity:
-                    class: VolleyWebBundle:User
+            volley_user_provider:
+                entity: { class: VolleyWebBundle:User, property: email }
+            oath_provider:
+                id: volley_oauth_provider
 
     firewalls:
         default:
             anonymous: ~
             http_basic: ~
-            provider: volleyball_user_provider
             form_login:
+                provider: volley_user_provider
                 login_path: /login
                 check_path: /login_check
                 csrf_provider: security.csrf.token_manager
@@ -43,7 +44,7 @@ security:
                 use_forward: false
                 failure_path: /login
                 oauth_user_provider:
-                    service: volley_user_provider
+                    service: volley_oauth_provider
 
     access_control:
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

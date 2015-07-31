@@ -232,7 +232,7 @@ hwi_oauth:
     firewall_name: default
     connect:
         confirmation: true
-        account_connector: volley_user_provider
+        account_connector: volley_oauth_provider
     resource_owners:
         facebook:
             type:                facebook

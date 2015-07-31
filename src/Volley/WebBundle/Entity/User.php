@@ -35,9 +35,62 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $password;
 
     /**
+     * @var string $plainPassword
+     */
+    protected $plainPassword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", nullable=true)
+     */
+    protected $salt;
+
+    /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(name="first_name", type="string", length=255)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(name="last_name", type="string", length=255)
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fb_token", type="string", nullable=true)
+     */
+    protected $fb_token;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fb_id", type="string", nullable=true)
+     */
+    protected $fb_id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="g_token", type="string", nullable=true)
+     */
+    protected $g_token;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="g_id", type="string", nullable=true)
+     */
+    protected $g_id;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", nullable=true)
+     */
+    protected $type;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -171,6 +224,198 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function isEnabled()
     {
         return $this->isActive;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFbToken()
+    {
+        return $this->fb_token;
+    }
+
+    /**
+     * @param string $fb_token
+     */
+    public function setFbToken($fb_token)
+    {
+        $this->fb_token = $fb_token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFbId()
+    {
+        return $this->fb_id;
+    }
+
+    /**
+     * @param string $fb_id
+     */
+    public function setFbId($fb_id)
+    {
+        $this->fb_id = $fb_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGToken()
+    {
+        return $this->g_token;
+    }
+
+    /**
+     * @param string $g_token
+     */
+    public function setGToken($g_token)
+    {
+        $this->g_token = $g_token;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGId()
+    {
+        return $this->g_id;
+    }
+
+    /**
+     * @param string $g_id
+     */
+    public function setGId($g_id)
+    {
+        $this->g_id = $g_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param mixed $isActive
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @param mixed $lastLogin
+     */
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmationToken()
+    {
+        return $this->confirmationToken;
+    }
+
+    /**
+     * @param mixed $confirmationToken
+     */
+    public function setConfirmationToken($confirmationToken)
+    {
+        $this->confirmationToken = $confirmationToken;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordRequestedAt()
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    /**
+     * @param mixed $passwordRequestedAt
+     */
+    public function setPasswordRequestedAt($passwordRequestedAt)
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
     }
 
     public function isEqualTo(UserInterface $user)

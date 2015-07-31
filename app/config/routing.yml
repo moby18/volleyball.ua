@@ -30,8 +30,14 @@ hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix:   /login
 
+oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix: /login
+
+facebook_check:
+    pattern: /login/check-facebook
 facebook_login:
-    path: /login/check-facebook
+    pattern: /connect/facebook
 
 #fos_user_security:
 #    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

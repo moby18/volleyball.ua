@@ -4,8 +4,8 @@ services:
         tags:
             - { name: twig.extension }
 
-    volley_user_provider:
-        class: Volley\WebBundle\Security\User\VolleyUserProvider
+    volley_oauth_provider:
+        class: Volley\WebBundle\Security\User\VolleyOAuthProvider
         arguments:
             - @doctrine.orm.entity_manager
 

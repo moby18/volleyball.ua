@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Volley\WebBundle\Entity\User;
 
-class VolleyUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
+class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
     /** @var  EntityManager $em */
     protected $em;
@@ -33,7 +33,8 @@ class VolleyUserProvider implements UserProviderInterface, OAuthAwareUserProvide
     {
         $em = $this->em;
         $type = $response->getResourceOwner()->getName();
-        $user = $em->getRepository('AppBundle:User')->findOneBy(['email' => $response->getEmail()]);
+        /** @var User $user */
+        $user = $em->getRepository('VolleyWebBundle:User')->findOneBy(['email' => $response->getEmail()]);
         if ($user === null) {
             $user = new User();
             $user->setEmail($response->getEmail())
