@@ -239,5 +239,6 @@ hwi_oauth:
             client_id:           %facebook_client_id%
             client_secret:       %facebook_client_secret%
             scope:               "email, public_profile"
+            infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
             options:
                 display: popup #dialog is optimized for popup window
