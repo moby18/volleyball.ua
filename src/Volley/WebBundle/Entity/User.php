@@ -25,12 +25,12 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, unique=true)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $password;
 
@@ -52,12 +52,12 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
 
@@ -133,6 +133,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     public function setUsername($username) {
         $this->username = $username;
+        return $this;
     }
 
     public function getUsername()
@@ -142,6 +143,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     public function setEmail($email) {
         $this->email = $email;
+        return $this;
     }
 
     public function getEmail() {
@@ -158,6 +160,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
+        return $this;
     }
 
     public function getPassword()
@@ -183,6 +186,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setRoles($roles)
     {
         $this->roles = $roles;
+        return $this;
     }
 
     /**
@@ -240,6 +244,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+        return $this;
     }
 
     /**
@@ -256,6 +261,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+        return $this;
     }
 
     /**
@@ -272,6 +278,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+        return $this;
     }
 
     /**
@@ -288,6 +295,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setFbToken($fb_token)
     {
         $this->fb_token = $fb_token;
+        return $this;
     }
 
     /**
@@ -304,6 +312,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setFbId($fb_id)
     {
         $this->fb_id = $fb_id;
+        return $this;
     }
 
     /**
@@ -320,6 +329,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setGToken($g_token)
     {
         $this->g_token = $g_token;
+        return $this;
     }
 
     /**
@@ -336,6 +346,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setGId($g_id)
     {
         $this->g_id = $g_id;
+        return $this;
     }
 
     /**
@@ -352,6 +363,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
@@ -368,6 +380,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+        return $this;
     }
 
     /**
@@ -384,6 +397,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setLastLogin($lastLogin)
     {
         $this->lastLogin = $lastLogin;
+        return $this;
     }
 
     /**
@@ -400,6 +414,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setConfirmationToken($confirmationToken)
     {
         $this->confirmationToken = $confirmationToken;
+        return $this;
     }
 
     /**
@@ -416,6 +431,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function setPasswordRequestedAt($passwordRequestedAt)
     {
         $this->passwordRequestedAt = $passwordRequestedAt;
+        return $this;
     }
 
     public function isEqualTo(UserInterface $user)

@@ -39,6 +39,16 @@ facebook_check:
 facebook_login:
     pattern: /connect/facebook
 
+google_check:
+    pattern: /login/check-google
+google_login:
+    pattern: /connect/google
+
+vkontakte_check:
+    pattern: /login/check-vkontakte
+vkontakte_login:
+    pattern: /connect/vkontakte
+
 #fos_user_security:
 #    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 #

@@ -38,8 +38,9 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
         if ($user === null) {
             $user = new User();
             $user->setEmail($response->getEmail())
-                ->setFirstName($response->getUsername())
-                ->setLastName($response->getRealName())
+                ->setFirstName(explode(' ',$response->getRealName())[0])
+                ->setLastName(explode(' ',$response->getRealName())[1])
+                ->setUsername($response->getRealName())
                 ->setType($type);
             $em->persist($user);
         }

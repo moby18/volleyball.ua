@@ -234,6 +234,11 @@ hwi_oauth:
         confirmation: true
         account_connector: volley_oauth_provider
     resource_owners:
+        google:
+            type:                google
+            client_id:           %g_id%
+            client_secret:       %g_secret%
+            scope:               "email profile"
         facebook:
             type:                facebook
             client_id:           %facebook_client_id%
@@ -242,3 +247,8 @@ hwi_oauth:
             infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
             options:
                 display: popup #dialog is optimized for popup window
+        vkontakte:
+            type:                vkontakte
+            client_id:           %vk_id%
+            client_secret:       %vk_secret%
+            scope:               "email"
