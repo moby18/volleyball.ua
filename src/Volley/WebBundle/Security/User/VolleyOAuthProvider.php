@@ -37,10 +37,15 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
         $user = $em->getRepository('VolleyWebBundle:User')->findOneBy(['email' => $response->getEmail()]);
         if ($user === null) {
             $user = new User();
-            $user->setEmail($response->getEmail())
-                ->setFirstName(explode(' ',$response->getRealName())[0])
-                ->setLastName(explode(' ',$response->getRealName())[1])
-                ->setUsername($response->getRealName())
+            $user->setEmail($response->getEmail());
+                if ($type === 'vkontakte') {
+                    $user->setFirstName(explode(' ',$response->getRealName())[1])
+                        ->setLastName(explode(' ',$response->getRealName())[0]);
+                } else {
+                    $user->setFirstName(explode(' ',$response->getRealName())[0])
+                        ->setLastName(explode(' ',$response->getRealName())[1]);
+                }
+            $user->setUsername($response->getRealName())
                 ->setType($type);
             $em->persist($user);
         }
@@ -49,14 +54,27 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
                 ->setFbId($response->getUsername())
                 ->setType($type)
                 ->setGId(null)
-                ->setGToken(null);
+                ->setGToken(null)
+                ->setVkId(null)
+                ->setVkToken(null);
         }
         if ($type === 'google') {
             $user->setGToken($response->getAccessToken())
                 ->setGId($response->getUsername())
                 ->setType($type)
                 ->setFbId(null)
-                ->setFbToken(null);
+                ->setFbToken(null)
+                ->setVkId(null)
+                ->setVkToken(null);
+        }
+        if ($type === 'vkontakte') {
+            $user->setVkToken($response->getAccessToken())
+                ->setVkId($response->getUsername())
+                ->setType($type)
+                ->setFbId(null)
+                ->setFbToken(null)
+                ->setGId(null)
+                ->setGToken(null);
         }
         $em->flush();
         return $user;
@@ -112,7 +130,7 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
 
     public function supportsClass($class)
     {
-        return $class === 'Volley\WebBundle\Security\User\VolleyUserProvider';
+        return $class === 'Volley\WebBundle\Security\User\VolleyOAuthProvider';
     }
 
     /**

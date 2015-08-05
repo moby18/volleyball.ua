@@ -88,6 +88,18 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
+     * @ORM\Column(name="vk_token", type="string", nullable=true)
+     */
+    protected $vk_token;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vk_id", type="string", nullable=true)
+     */
+    protected $vk_id;
+    /**
+     * @var string
+     *
      * @ORM\Column(name="type", type="string", nullable=true)
      */
     protected $type;
@@ -131,6 +143,10 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return $this->id;
     }
 
+    /**
+     * @param $username
+     * @return $this
+     */
     public function setUsername($username) {
         $this->username = $username;
         return $this;
@@ -141,6 +157,10 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return $this->username;
     }
 
+    /**
+     * @param $email
+     * @return $this
+     */
     public function setEmail($email) {
         $this->email = $email;
         return $this;
@@ -157,6 +177,10 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return null;
     }
 
+    /**
+     * @param $password
+     * @return $this
+     */
     public function setPassword($password)
     {
         $this->password = $password;
@@ -240,6 +264,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $plainPassword
+     * @return User
      */
     public function setPlainPassword($plainPassword)
     {
@@ -257,6 +282,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $firstName
+     * @return User
      */
     public function setFirstName($firstName)
     {
@@ -274,6 +300,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $lastName
+     * @return User
      */
     public function setLastName($lastName)
     {
@@ -291,6 +318,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $fb_token
+     * @return User
      */
     public function setFbToken($fb_token)
     {
@@ -308,6 +336,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $fb_id
+     * @return User
      */
     public function setFbId($fb_id)
     {
@@ -325,6 +354,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $g_token
+     * @return User
      */
     public function setGToken($g_token)
     {
@@ -342,10 +372,47 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $g_id
+     * @return User
      */
     public function setGId($g_id)
     {
         $this->g_id = $g_id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVkToken()
+    {
+        return $this->vk_token;
+    }
+
+    /**
+     * @param string $vk_token
+     * @return User
+     */
+    public function setVkToken($vk_token)
+    {
+        $this->vk_token = $vk_token;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVkId()
+    {
+        return $this->vk_id;
+    }
+
+    /**
+     * @param string $vk_id
+     * @return User
+     */
+    public function setVkId($vk_id)
+    {
+        $this->vk_id = $vk_id;
         return $this;
     }
 
@@ -359,6 +426,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param string $type
+     * @return User
      */
     public function setType($type)
     {
@@ -376,6 +444,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $isActive
+     * @return User
      */
     public function setIsActive($isActive)
     {
@@ -393,6 +462,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $lastLogin
+     * @return User
      */
     public function setLastLogin($lastLogin)
     {
@@ -410,6 +480,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $confirmationToken
+     * @return User
      */
     public function setConfirmationToken($confirmationToken)
     {
@@ -427,6 +498,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 
     /**
      * @param mixed $passwordRequestedAt
+     * @return User
      */
     public function setPasswordRequestedAt($passwordRequestedAt)
     {
