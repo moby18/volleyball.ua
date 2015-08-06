@@ -21,5 +21,9 @@ parameters:
     uglifycss_path: %kernel.root_dir%/../node_modules/.bin/uglifycss
     uglifyjs_path: %kernel.root_dir%/../node_modules/.bin/uglifyjs
 
-    facebook_client_id: 766303636824943
+    facebook_client_id: ~
     facebook_client_secret: ~
+    g_id: ~
+    g_secret: ~
+    vk_id: ~
+    vk_secret: ~

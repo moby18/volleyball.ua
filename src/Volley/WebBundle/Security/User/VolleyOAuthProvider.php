@@ -39,8 +39,8 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
             $user = new User();
             $user->setEmail($response->getEmail());
                 if ($type === 'vkontakte') {
-                    $user->setFirstName(explode(' ',$response->getRealName())[1])
-                        ->setLastName(explode(' ',$response->getRealName())[0]);
+                    $user->setFirstName($response->getFirstName())
+                        ->setLastName($response->getRealName());
                 } else {
                     $user->setFirstName(explode(' ',$response->getRealName())[0])
                         ->setLastName(explode(' ',$response->getRealName())[1]);
