@@ -10,7 +10,8 @@ security:
 
     providers:
             volley_user_provider:
-                entity: { class: VolleyWebBundle:User, property: email }
+                entity:
+                    class: VolleyWebBundle:User
             oath_provider:
                 id: volley_oauth_provider
 
@@ -18,11 +19,11 @@ security:
         default:
             anonymous: ~
             http_basic: ~
+            provider: volley_user_provider
             form_login:
-                provider: volley_user_provider
                 login_path: /login
                 check_path: /login_check
-                csrf_provider: security.csrf.token_manager
+#                csrf_provider: security.csrf.token_manager
             logout:
                 path:   /logout
                 target: /
