@@ -11,9 +11,8 @@
 
                     {% for slide in slides %}
                         <div class="item {{ loop.first ? "active" : "" }}">
-                            <img src="{{ '/uploads/slides/' ~ slide.imageName }}">
-                            {#<img src="{{ ('uploads/slides/' ~ slide.imageName) | imagine_filter('carousel') }}">#}
-                            {#{{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }}#}
+                            {#<img src="{{ '/uploads/slides/' ~ slide.imageName }}">#}
+                            <img src="{{ ('uploads/slides/' ~ slide.imageName) | imagine_filter('carousel') }}">
 
                             <div class="carousel-caption">
                                 <h4><a href="#">{{ slide.title }}</a></h4>
