@@ -2,7 +2,7 @@
 
 {% block carousel %}
 
-    <div class="section section-carousel">
+    <div class="section section-main">
         <div class="container">
 
             <div class="row">
@@ -98,13 +98,11 @@
                                     <span class="clearfix"></span>
                                 </div>
                                 <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
-                                {#{% autoescape %}#}
-                                {#{{ item.content|raw }}#}
-                                {#{% endautoescape %}#}
+                                {% autoescape %}
+                                {{ item.content|raw }}
+                                {% endautoescape %}
+                                {#<hr class="underline"/>#}
                             </div>
-                            {% if (loop.index is even) %}
-                                <div class="clearfix"></div>
-                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
