@@ -115,7 +115,7 @@ class DefaultController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,3);
+        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,5);
         // news
         $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
         return $this->render('VolleyWebBundle:Default:index.html.twig', [

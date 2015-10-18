@@ -137,19 +137,9 @@ h1, h2, h3, h4, h5, h6 {
 /* Slider */
 
 /* News */
-.sections .container {
-    padding: 0 15px;
-}
-.news.row {
-    width: 760px;
-    margin: 0;
-}
-.news-item {
-    padding: 10px 0;
-}
 .news-item:nth-child(even),
 .news-item:nth-child(odd) {
-    padding-right: 25px;
+    /*padding-right: 25px;*/
 }
 .news-item:nth-child(even):after {
     visibility: hidden;
@@ -461,6 +451,43 @@ footer .footer-below {
 .section-carousel {
     padding: 0;
     background-color: #262626;
+}
+
+/* Main news */
+.thumb-container .row,
+.thumb-container .thumb
+{
+    margin: 0;
+    padding: 0;
+}
+.item {
+    /*height: 342px;*/
+    position: relative;
+}
+.item.thumb {
+    /*margin: 15px 0;*/
+}
+.item a,container
+.item-descr a h4{
+    color: #ffffff;
+}
+.item .item-descr {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: left;
+    padding: 10px;
+    background: rgba(0,0,0,0.6);
+    text-shadow: none;
+}
+.item.thumb .item-descr h4 {
+    font-size: 14px;
+}
+.item img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 /* Sticky footer styles

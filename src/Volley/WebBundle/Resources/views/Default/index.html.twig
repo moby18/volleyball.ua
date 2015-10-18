@@ -4,52 +4,75 @@
 
     <div class="section section-carousel">
         <div class="container">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    {% for slide in slides %}
-                        <div class="item {{ loop.first ? "active" : "" }}">
-                            <a href="#">
-                            <img src="{{ '/uploads/slides/' ~ slide.imageName }}">
-                            {#<img src="{{ ('uploads/slides/' ~ slide.imageName) | imagine_filter('carousel') }}">#}
-                            {#{{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }}#}
-
-                            <div class="carousel-caption">
-                                <h4>{{ slide.title }}</h4>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="item">
+                        <a href="#">
+                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[0].imageName) | imagine_filter('main_pic') }}">
+                            <div class="item-descr">
+                                <h4>{{ slides[0].title }}</h4>
                                 <p></p>
                             </div>
-                            </a>
-                        </div>
-                        <!-- End Item -->
-                    {% endfor %}
+                        </a>
+                    </div>
                 </div>
-                <!-- End Carousel Inner -->
-
-
-                <ul class="list-group col-sm-4">
-                    {% for slide in slides %}
-                        <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}"
-                            class="list-group-item {{ loop.first ? "active" : "" }}">
-                            <div>
-                                <h4>{{ slide.title }}</h4>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12 thumb-container">
+                            <div class="row">
+                                <div class="col-lg-6 thumb">
+                                    <div class="item">
+                                        <a href="#">
+                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[1].imageName) | imagine_filter('main_thumb') }}">
+                                            <div class="item-descr">
+                                                <h4>{{ slides[1].title }}</h4>
+                                                <p></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 thumb">
+                                    <div class="item">
+                                        <a href="#">
+                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[2].imageName) | imagine_filter('main_thumb') }}">
+                                            <div class="item-descr">
+                                                <h4>{{ slides[2].title }}</h4>
+                                                <p></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <!-- Controls -->
-                <div class="carousel-controls">
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                            <div class="row">
+                                <div class="col-lg-6 thumb">
+                                    <div class="item">
+                                        <a href="#">
+                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[3].imageName) | imagine_filter('main_thumb') }}">
+                                            <div class="item-descr">
+                                                <h4>{{ slides[3].title }}</h4>
+                                                <p></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 thumb">
+                                    <div class="item">
+                                        <a href="#">
+                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[4].imageName) | imagine_filter('main_thumb') }}">
+                                            <div class="item-descr">
+                                                <h4>{{ slides[4].title }}</h4>
+                                                <p></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-            <!-- End Carousel -->
+
         </div>
     </div>
 
@@ -61,28 +84,32 @@
 
         <div class="container">
 
-            <div class="row news">
-                {% for item in news %}
-                    <div class="news-item col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}">
-                            <img class="img-responsive" src="{{ item.getWebPath }}">
-                        </a>
-                        <div class="news-info">
-                            <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}}</span>
-                            <span class="news-author">{{ item.createdBy }}</span>
-                            <span class="clearfix"></span>
-                        </div>
-                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
-                        {#{% autoescape %}#}
-                        {#{{ item.content|raw }}#}
-                        {#{% endautoescape %}#}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        {% for item in news %}
+                            <div class="news-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <a href="{{ path('volley_face_post',{'post_id': item.id}) }}">
+                                    <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('main_pic') }}">
+                                </a>
+                                <div class="news-info">
+                                    <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}}</span>
+                                    <span class="news-author">{{ item.createdBy }}</span>
+                                    <span class="clearfix"></span>
+                                </div>
+                                <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
+                                {#{% autoescape %}#}
+                                {#{{ item.content|raw }}#}
+                                {#{% endautoescape %}#}
+                            </div>
+                            {% if (loop.index is even) %}
+                                <div class="clearfix"></div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% if (loop.index is even) %}
-                        <div class="clearfix"></div>
-                    {% endif %}
-                {% endfor %}
+                </div>
+
             </div>
-            <!-- /.row -->
 
             <hr>
 

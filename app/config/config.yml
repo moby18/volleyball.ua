@@ -217,10 +217,14 @@ liip_imagine:
           web_path: ~
     filter_sets:
         cache: ~
-        carousel:
+        main_pic:
             quality: 100
             filters:
-                thumbnail: { size: [760, 350], mode: outbound }
+                thumbnail: { size: [555, 350], mode: outbound }
+        main_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [278, 175], mode: outbound }
 
 oneup_uploader:
     mappings:
