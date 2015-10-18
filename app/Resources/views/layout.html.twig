@@ -49,15 +49,9 @@
 
     <!-- Bootstrap Core CSS -->
     {% block styles %}
-        {% stylesheets '@volley_css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-
-
+        <link href='{{ asset('css/style.css') }}' rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
-        {% stylesheets '@volley_css_ie' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <link href='{{ asset('css/style_ie.css') }}' rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
@@ -66,9 +60,7 @@
     {% block head_scripts %}
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        {% javascripts '@volley_header_js' %}
-            <script  type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        <script src="{{ asset('js/script_ie.js') }}" type="text/javascript"></script>
         <![endif]-->
     {% endblock %}
 
@@ -138,9 +130,7 @@
 <!-- /.container -->
 
 {% block scripts %}
-    {% javascripts '@volley_footer_js' %}
-        <script  type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script  type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 {% endblock %}
 
 </body>

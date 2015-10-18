@@ -461,11 +461,10 @@ footer .footer-below {
     padding: 0;
 }
 .item {
-    /*height: 342px;*/
     position: relative;
 }
-.item.thumb {
-    /*margin: 15px 0;*/
+.thumb .item-descr h4 {
+    font-size: 13px;
 }
 .item a,container
 .item-descr a h4{

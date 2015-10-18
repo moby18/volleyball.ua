@@ -80,11 +80,6 @@ assetic:
 #                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
             filters:
                 - ?uglifycss
-        volley_css_ie:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/ie.css
-            filters:
-                - ?uglifycss
         volley_admin_css:
             inputs:
                 - @bootstrap_css
@@ -92,20 +87,6 @@ assetic:
                 - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/admin/styles.css
             filters:
                 - ?uglifycss
-        volley_header_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/html5shiv.js
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/respond.min.js
-            filters:
-                - ?uglifyjs
-        volley_carousel_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/carousel.js
-        volley_footer_js:
-            inputs:
-                - @jquery
-                - @bootstrap_js
-                - @volley_carousel_js
 
 # Doctrine Configuration
 doctrine:
