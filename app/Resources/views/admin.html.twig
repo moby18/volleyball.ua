@@ -13,9 +13,8 @@
     <title>{{ title|default('Manage') }}</title>
 
     {% block styles %}
-        {% stylesheets '@volley_admin_css' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"/>
+        <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}" type="text/css"/>
     {% endblock %}
 
     {{ tinymce_init() }}
@@ -83,9 +82,7 @@
 </div>
 
 {% block scripts %}
-    {% javascripts '@bootstrap_js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script  type="text/javascript" src="{{ asset('js/script_admin.js') }}"></script>
 {% endblock %}
 
 </body>

@@ -145,9 +145,14 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     color: #363636;
     margin-bottom: 25px;
+    color: #888888;
+    transition: color 0.5s ease;
 }
 .news-item h3 {
     transition: all 0.5s ease;
+}
+.news-item:hover {
+    color: #363636;
 }
 .news-item:hover h3 {
     color: #267dc1;

@@ -60,14 +60,10 @@
 
 {% block scripts %}
     {{ parent() }}
-    {% javascripts '@jquery' '@datetimepicker_js' '@VolleyFaceBundle/Resources/public/js/post.js' filter='' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/jquery.datetimepicker.js') }}"></script>
 {% endblock %}
 
 {% block styles %}
     {{ parent() }}
-    {% stylesheets '@datetimepicker_css' filter='' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
 {% endblock %}
