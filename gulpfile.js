@@ -4,6 +4,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
+var clean = require('gulp-clean');
+var shell = require('gulp-shell')
 
 gulp.task('style', function () {
     var source = [
@@ -63,8 +65,9 @@ gulp.task('script', function () {
 
 gulp.task('script_admin', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/tooltip.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/*.js',
+        //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/tooltip.js',
+        //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/*.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/js/slide.js'
     ];
@@ -91,12 +94,28 @@ gulp.task('script_ie', function () {
         .pipe(gulp.dest('web/js/'));
 });
 
-gulp.task('default', ['style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie']);
+gulp.task('fonts', function () {
+    return gulp.src([
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/fonts/*'
+    ])
+        .pipe(gulp.dest('web/fonts/'))
+});
 
-gulp.task('watch', function () {
-    gulp.start('default');
-    //gulp.start(/*'sass',*/ 'scripts.app', 'scripts.vendor', 'styles'/*, 'libraries'*/);
-    //gulp.watch('src/css/**/*.css', ['styles']);
+gulp.task('assets_install', shell.task([
+    'app/console assets:install'
+]));
+
+gulp.task('clean', function () {
+    return gulp.src(['web/css/*', 'web/js/*', 'web/images/*', 'web/fonts/*', 'web/bundles/*'])
+        .pipe(clean());
+});
+
+gulp.task('default', ['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie', ]);
+
+gulp.task('watch', ['clean'], function () {
+    gulp.start('default','assets_install');
+
+    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['default']);
     gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['default']);
-    //gulp.watch('src/js/**/*.js', ['scripts.app']);
+    //gulp.watch('src/Volley/FaceBundle/Resources/public/**/*', ['assets_install']);
 });
