@@ -5,7 +5,7 @@ var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
-var shell = require('gulp-shell')
+var shell = require('gulp-shell');
 
 gulp.task('style', function () {
     var source = [
@@ -69,7 +69,8 @@ gulp.task('script_admin', function () {
         //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/*.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/slide.js'
+        'src/Volley/FaceBundle/Resources/public/js/slide.js',
+        'src/Volley/FaceBundle/Resources/public/js/post.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
