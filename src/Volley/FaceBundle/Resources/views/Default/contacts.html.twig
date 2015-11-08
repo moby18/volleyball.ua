@@ -1,7 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {% set page_image = app.request.getSchemeAndHttpHost() ~ ' ' %}
-{% set title = 'Контакты' %}
+{% set title = 'Contact Us'|trans %}
 
 {% block content %}
 
@@ -11,10 +11,10 @@
 
             <div class="pull-left" style="width: 760px;">
                 <a href="{{ path('volley_face_contacts') }}">
-                    <h1>{{ 'Контакты' }}</h1>
+                    <h1>{% trans %}Contact Us{% endtrans %}</h1>
                 </a>
                 <p>
-                    Lflflf
+                    Email: <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>
                 </p>
 
                 {% include '@VolleyFace/Social/uptolike.html.twig' %}

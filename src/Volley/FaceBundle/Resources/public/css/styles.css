@@ -269,6 +269,16 @@ footer .footer-below {
     background-color: #262626;
 }
 
+footer .social-icons a {
+    padding: 10px;
+    color: #ffffff;
+    transition: color 0.5s ease;
+}
+
+footer .social-icons a:hover {
+    color: #428bca;
+}
+
 .btn-social {
     display: inline-block;
     width: 50px;

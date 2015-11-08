@@ -1,4 +1,4 @@
-{% set title = title|default('Волейбол в Україні') ~ " - ВОЛЕЙБОЛ.УА" %}
+{% set title = title|default('Волейбол в Україні') ~ " - volleyball.ua" %}
 {% set host = app.request.getSchemeAndHttpHost() %}
 {% set route = app.request.attributes.get('_route') %}
 {% if route is not empty %}{% set full_url = url(route, app.request.attributes.get('_route_params')) %}{% endif %}
@@ -23,7 +23,7 @@
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
         {% block facebook_meta %}
-            <meta property="og:site_name" content="ВОЛЕЙБОЛ.УА" />
+            <meta property="og:site_name" content="Волейбол в Україні - volleyball.ua" />
             <meta property="og:title" content="{{ title }}" />
             <meta property="og:url" content="{{ full_url }}" />
             {#<meta property="og:image" content="{{ host ~ page_image|apply_filter('facebook_thumb') }}" />#}
@@ -32,7 +32,7 @@
         {% endblock %}
 
         {% block twitter_meta %}
-            <meta name="twitter:site" content="ВОЛЕЙБОЛ.УА" />
+            <meta name="twitter:site" content="Волейбол в Україні - volleyball.ua" />
             <meta name="twitter:card" content="summary" />
             <meta name="twitter:title" content="{{ title }}" />
             <meta name="twitter:url" content="{{ full_url }}" />
@@ -85,7 +85,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-            <a class="navbar-brand" href="{{ path('volley_web_homepage') }}"></a>
+            <a class="navbar-brand" href="{{ path('volley_web_homepage') }}" title="Волейбол в Україні - volleyball.ua"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -95,8 +95,8 @@
                 {#</li>#}
                 {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>#}
                 {#</li>#}
-                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">Новости</a></li>
-                <li><a href="{{ path("volley_face_contacts") }}">Контакты</a></li>
+                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">{% trans %}News{% endtrans %}</a></li>
+                <li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -104,8 +104,8 @@
     <!-- /.container -->
 </nav>
 
-    {% block carousel %}
-    {% endblock %}
+    {#{% block carousel %}#}
+    {#{% endblock %}#}
 
     {% block content %}
     {% endblock %}
@@ -113,12 +113,30 @@
 
 
 
-    <footer class="footer text-center">
+    <footer class="footer">
         <div class="footer-below">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        ВОЛЕЙБОЛ.УА &copy; 2015 - Волейбол в Україні
+                    <div class="col-lg-4 col-md-6">
+                        volleyball.ua &copy; 2015 - Волейбол в Україні
+                    </div>
+                    <div class="col-lg-4 col-md-0">
+                    </div>
+                    <div class="col-lg-4 col-md-6 text-right">
+                        <div class="social-icons pull-right">
+                            <a href="https://www.facebook.com/volleyball.in.ua" target="_blank" class="social-icon icon-facebook" title="Facebook">
+                                <i class="fa fa-facebook-official"></i>
+                            </a>
+                            <a href="https://vk.com/volleyballinua" target="_blank" class="social-icon icon-vk" title="VK">
+                                <i class="fa fa-vk"></i>
+                            </a>
+                            <a href="https://twitter.com/volleyballinua" target="_blank" class="social-icon icon-twitter" title="Twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            {#<a href="https://plus.google.com/+VolleyballUa" target="_blank" class="social-icon icon-google-plus" title="Google Plus">#}
+                                {#<i class="fa fa-google-plus"></i>#}
+                            {#</a>#}
+                        </div>
                     </div>
                 </div>
             </div>
