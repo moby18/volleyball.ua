@@ -37,7 +37,7 @@ class Post
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"title","id"},updatable=true)
+     * @Gedmo\Slug(fields={"id","title"}, updatable=true)
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
@@ -89,10 +89,9 @@ class Post
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
+     **/
     private $createdBy;
 
     /**
@@ -430,7 +429,7 @@ class Post
     /**
      * Set createdBy
      *
-     * @param string $createdBy
+     * @param User $createdBy
      * @return Post
      */
     public function setCreatedBy($createdBy)
@@ -443,7 +442,7 @@ class Post
     /**
      * Get createdBy
      *
-     * @return string 
+     * @return User
      */
     public function getCreatedBy()
     {

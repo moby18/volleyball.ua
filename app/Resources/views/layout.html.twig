@@ -89,16 +89,16 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        {#<div class="collapse navbar-collapse navbar-ex1-collapse">#}
-            {#<ul class="nav navbar-nav navbar-right">#}
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
                 {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 2}) }}">2 тур</a>#}
                 {#</li>#}
                 {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>#}
                 {#</li>#}
-                {#<li><a href="{{ path("volley_face_blog",{'category_id': 2}) }}">Відео</a>#}
-                {#</li>#}
-            {#</ul>#}
-        {#</div>#}
+                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">Новости</a>
+                </li>
+            </ul>
+        </div>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->

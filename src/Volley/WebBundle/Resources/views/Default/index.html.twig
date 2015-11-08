@@ -7,65 +7,25 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="item">
-                        <a href="#">
-                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[0].imageName) | imagine_filter('main_pic') }}">
-                            <div class="item-descr">
-                                <h4>{{ slides[0].title }}</h4>
-                                <p></p>
-                            </div>
-                        </a>
-                    </div>
+                    {% include 'VolleyWebBundle:Default/includes:thumb.html.twig' with {'slide': slides[0], thumbnail: 'main_pic'} %}
                 </div>
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-12 thumb-container">
                             <div class="row">
                                 <div class="col-lg-6 thumb">
-                                    <div class="item">
-                                        <a href="#">
-                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[1].imageName) | imagine_filter('main_thumb') }}">
-                                            <div class="item-descr">
-                                                <h4>{{ slides[1].title }}</h4>
-                                                <p></p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {% include 'VolleyWebBundle:Default/includes:thumb.html.twig' with {'slide': slides[1], thumbnail: 'main_thumb'} %}
                                 </div>
                                 <div class="col-lg-6 thumb">
-                                    <div class="item">
-                                        <a href="#">
-                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[2].imageName) | imagine_filter('main_thumb') }}">
-                                            <div class="item-descr">
-                                                <h4>{{ slides[2].title }}</h4>
-                                                <p></p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {% include 'VolleyWebBundle:Default/includes:thumb.html.twig' with {'slide': slides[2], thumbnail: 'main_thumb'} %}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 thumb">
-                                    <div class="item">
-                                        <a href="#">
-                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[3].imageName) | imagine_filter('main_thumb') }}">
-                                            <div class="item-descr">
-                                                <h4>{{ slides[3].title }}</h4>
-                                                <p></p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {% include 'VolleyWebBundle:Default/includes:thumb.html.twig' with {'slide': slides[3], thumbnail: 'main_thumb'} %}
                                 </div>
                                 <div class="col-lg-6 thumb">
-                                    <div class="item">
-                                        <a href="#">
-                                            <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slides[4].imageName) | imagine_filter('main_thumb') }}">
-                                            <div class="item-descr">
-                                                <h4>{{ slides[4].title }}</h4>
-                                                <p></p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    {% include 'VolleyWebBundle:Default/includes:thumb.html.twig' with {'slide': slides[4], thumbnail: 'main_thumb'} %}
                                 </div>
                             </div>
                         </div>
@@ -88,28 +48,12 @@
                 <div class="col-lg-6">
                     <div class="row">
                         {% for item in news %}
-                            <div class="news-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <a href="{{ path('volley_face_post',{'post_id': item.id}) }}">
-                                    <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('main_pic') }}">
-                                </a>
-                                <div class="news-info">
-                                    <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}}</span>
-                                    <span class="news-author">{{ item.createdBy }}</span>
-                                    <span class="clearfix"></span>
-                                </div>
-                                <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
-                                {% autoescape %}
-                                {{ item.content|raw }}
-                                {% endautoescape %}
-                                {#<hr class="underline"/>#}
-                            </div>
+                            {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
                         {% endfor %}
                     </div>
                 </div>
 
             </div>
-
-            <hr>
 
         </div>
         <!-- /.container -->

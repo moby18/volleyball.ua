@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class DefaultController extends Controller
 {
@@ -190,45 +191,34 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post/{post_id}", name="volley_face_post")
+     * @Route("/blog/{category_slug}/post/{post_slug}", name="volley_face_post")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}})
      * @Template()
      */
-    public function postAction($post_id)
+    public function postAction($category, $post)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        // post
-        $post = $em->getRepository('VolleyFaceBundle:Post')->find($post_id);
-
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
+            'category' => $category,
             'post' => $post
         ));
     }
 
     /**
-     * @Route("/blog/{category_id}", name="volley_face_blog")
+     * @Route("/blog/{category_slug}", name="volley_face_blog")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */
-    public function blogAction($category_id)
+    public function blogAction($category)
     {
         $em = $this->getDoctrine()->getManager();
 
         // post
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category_id), array('id' => 'DESC'));
+        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category->getId()), array('id' => 'DESC'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
+            'category' => $category,
             'posts' => $posts
         ));
     }
-
-    /**
-     * @Route("/zayavka", name="volley_face_zayavka")
-     * @Template()
-     */
-    public function zayavkaAction()
-    {
-
-        return $this->render('VolleyFaceBundle:Default:zayavka.html.twig', array());
-    }
-
 }

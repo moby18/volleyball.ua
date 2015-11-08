@@ -10,7 +10,7 @@
         <div class="container">
 
             <div class="pull-left" style="width: 760px;">
-                <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
+                <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
                     <h1>{{ post.title }}</h1>
                 </a>
                 {#<a href="{{ path('volley_face_post',{'post_id': post.id}) }}">#}

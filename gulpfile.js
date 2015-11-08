@@ -13,12 +13,12 @@ gulp.task('style', function () {
         'src/Volley/FaceBundle/Resources/public/css/styles.css'
     ];
     gulp.src(source)
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(concat('style.css'))
-        .pipe(minifyCss({
-            keepSpecialComments: 0
-        }))
-        .pipe(sourcemaps.write("."))
+        //.pipe(minifyCss({
+        //    keepSpecialComments: 0
+        //}))
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
 
