@@ -221,4 +221,13 @@ class DefaultController extends Controller
             'posts' => $posts
         ));
     }
+
+    /**
+     * @Route("/contacts", name="volley_face_contacts")
+     * @Template()
+     */
+    public function contactsAction()
+    {
+        return $this->render('VolleyFaceBundle:Default:contacts.html.twig', []);
+    }
 }

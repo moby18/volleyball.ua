@@ -1,0 +1,31 @@
+{% extends '::layout.html.twig' %}
+
+{% set page_image = app.request.getSchemeAndHttpHost() ~ ' ' %}
+{% set title = 'Контакты' %}
+
+{% block content %}
+
+    <div class="section post">
+
+        <div class="container">
+
+            <div class="pull-left" style="width: 760px;">
+                <a href="{{ path('volley_face_contacts') }}">
+                    <h1>{{ 'Контакты' }}</h1>
+                </a>
+                <p>
+                    Lflflf
+                </p>
+
+                {% include '@VolleyFace/Social/uptolike.html.twig' %}
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}
