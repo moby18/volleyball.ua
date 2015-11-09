@@ -111,7 +111,9 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-gulp.task('default', ['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie', ]);
+gulp.task('default', ['clean'], function() {
+    gulp.start('fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie');
+});
 
 gulp.task('watch', ['clean'], function () {
     gulp.start('default','assets_install');
