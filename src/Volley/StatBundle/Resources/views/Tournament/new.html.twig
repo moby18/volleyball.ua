@@ -5,11 +5,8 @@
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('stat_tournament') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_tournament') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
 {% endblock %}
