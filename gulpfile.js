@@ -107,12 +107,12 @@ gulp.task('assets_install', shell.task([
 ]));
 
 gulp.task('clean', function () {
-    return gulp.src(['web/css/*', 'web/js/*', 'web/images/*', 'web/fonts/*', 'web/bundles/*'])
+    return gulp.src(['web/css/*', 'web/js/*', 'web/images/*', 'web/fonts/*'/*, 'web/bundles/*'*/])
         .pipe(clean());
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie');
+    gulp.start(['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie']);
 });
 
 gulp.task('watch', ['clean'], function () {
