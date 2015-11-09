@@ -11,7 +11,7 @@ $moxieManagerConfig['general.temp_dir'] = '';
 $moxieManagerConfig['general.allow_override'] = 'hidden_tools,disabled_tools';
 
 // Filesystem
-$moxieManagerConfig['filesystem.rootpath'] = $_SERVER["DOCUMENT_ROOT"]."/web/uploads";  ///webroot/uploads';
+$moxieManagerConfig['filesystem.rootpath'] = $_SERVER["DOCUMENT_ROOT"]."/uploads";  ///webroot/uploads';
 $moxieManagerConfig['filesystem.include_directory_pattern'] = '';
 $moxieManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';
 $moxieManagerConfig['filesystem.include_file_pattern'] = '';

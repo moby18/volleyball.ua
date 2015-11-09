@@ -17,12 +17,16 @@ class PostType extends AbstractType
         $builder
             ->add('title')
 //            ->add('slug')
-            ->add('content', 'textarea', array())
-            ->add('text', 'textarea', array(
+            ->add('content', 'textarea', [
+                'label' => 'Short content'
+            ])
+            ->add('text', 'textarea', [
+                'label' => 'Full text',
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced' // simple, advanced, bbcode
-                ), 'required'=>false))
+                ), 'required'=>false
+            ])
             ->add('state')
 //            ->add('created')
             ->add('published', 'datetime', [
@@ -42,7 +46,9 @@ class PostType extends AbstractType
             ->add('featured')
             ->add('language')
             ->add('category')
-            ->add('file')
+            ->add('file', null, [
+                'label' => 'Post Image (width>=555px and height>=350px)'
+            ])
         ;
     }
     
