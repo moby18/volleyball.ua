@@ -81,6 +81,18 @@ gulp.task('script_admin', function () {
         .pipe(gulp.dest('web/js/'));
 });
 
+gulp.task('script_install', function () {
+    var source = [
+        'src/Volley/FaceBundle/Resources/public/js/custom/**/*.js'
+    ];
+    gulp.src(source)
+        //.pipe(sourcemaps.init())
+        //.pipe(babel())
+        //.pipe(uglify())
+        //.pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('web/js/custom/'));
+});
+
 gulp.task('script_ie', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/js/html5shiv.js',

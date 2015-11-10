@@ -13,3 +13,14 @@
         {{ form(delete_form) }}
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/jquery.datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/slide.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
+{% endblock %}
