@@ -16,19 +16,19 @@ class GameType extends AbstractType
     {
         $builder
             ->add('number')
-            ->add('name')
+            ->add('season')
+            ->add('tour')
+            ->add('homeTeam')
+            ->add('awayTeam')
+//            ->add('name')
             ->add('duration')
             ->add('homeTeamEmpty')
             ->add('awayTeamEmpty')
-            ->add('score')
+            ->add('score','hidden',[])
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
             ->add('date')
-            ->add('homeTeam')
-            ->add('awayTeam')
-            ->add('tour')
-            ->add('season')
             ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }

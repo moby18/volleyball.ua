@@ -483,4 +483,9 @@ class Game
         if ($season)
             $this->season = $season;
     }
+
+    public function __clone() {
+        $this->id = null;
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 }

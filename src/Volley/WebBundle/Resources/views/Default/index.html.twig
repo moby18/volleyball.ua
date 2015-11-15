@@ -56,10 +56,11 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-lg-6">
-                            {{ render(controller('VolleyStatBundle:Tournament:table')) }}
+                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':1, 'tournamentId': 1})) }}
+                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':2, 'tournamentId': 2})) }}
                         </div>
                         <div class="col-lg-6">
-                            asdfas
+
                         </div>
                     </div>
                 </div>

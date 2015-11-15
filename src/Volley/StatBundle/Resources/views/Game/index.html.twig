@@ -43,6 +43,8 @@
                         <div class="btn-group pull-right" role="group" aria-label="">
                             {#<a href="{{ path('stat_game_show', { 'id': entity.id }) }}" type="button"#}
                             {#class="btn btn-default">show</a>#}
+                            <a href="{{ path('stat_game_dubl', { 'id': entity.id }) }}" type="button" onclick="return confirm('Are you sure you want dublicate entity?')"
+                               class="btn btn-default">dublicate</a>
                             <a href="{{ path('stat_game_edit', { 'id': entity.id }) }}" type="button"
                                class="btn btn-default">edit</a>
                         </div>
@@ -51,5 +53,11 @@
             {% endfor %}
             </tbody>
         </table>
+    </div>
+    <div class="pull-right">
+        <a type="button"
+           class="btn btn-success" href="{{ path('stat_game_new') }}">
+            Create a new entry
+        </a>
     </div>
 {% endblock %}

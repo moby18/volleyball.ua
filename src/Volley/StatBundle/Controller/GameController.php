@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Game controller.
@@ -50,6 +51,13 @@ class GameController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if (empty($entity->getScore()) && $entity->getPlayed()) {
+                $score_sets = [];
+                foreach ($entity->getSets() as $set) {
+                    $score_sets[] = $set->getScoreSetHome().':'.$set->getScoreSetAway();
+                }
+                $entity->setScore($entity->getScoreSetHome().'-'.$entity->getScoreSetAway().' ('.implode(';', $score_sets).')');
+            }
             $em->persist($entity);
             $em->flush();
 
@@ -97,6 +105,25 @@ class GameController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Displays a form to create a new Game entity.
+     *
+     * @Route("/dublicate/{id}", name="stat_game_dubl")
+     * @Method("GET")
+     * @ParamConverter("game", class="VolleyStatBundle:Game")
+     * @Template()
+     */
+    public function dublAction($game)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $clone = clone $game;
+        $em->detach($clone);
+        $em->persist($clone);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('stat_game_edit', ['id'=> $clone->getId()]));
     }
 
     /**
@@ -193,7 +220,7 @@ class GameController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stat_game_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_game', array('id' => $id)));
         }
 
         return array(

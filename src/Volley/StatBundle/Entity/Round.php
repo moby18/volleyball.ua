@@ -201,6 +201,6 @@ class Round
         $season = $this->getSeason();
         $tournament = $season->getTournament();
         $country = $tournament->getCountry();
-        return $country->getName().$tournament->getName().$season->getName().$this->getName();
+        return $country->getName().$tournament->getName().$season->getName().' - '.$this->getName();
     }
 }
