@@ -72,9 +72,9 @@
 
     <div class="form-group">
         <label>Sets</label>
-        <ul class="tags list-group" data-prototype="{{ form_widget(edit.sets.vars.prototype)|e }}">
+        <ul class="tags list-group list-inline" data-prototype="{{ form_widget(edit.sets.vars.prototype)|e }}">
             {% for set in edit.sets %}
-                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome) }} - {{ form_row(set.scoreSetAway) }}</li>
+                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome, {'label': false}) }} - {{ form_row(set.scoreSetAway, {'label': false}) }}</li>
             {% endfor %}
         </ul>
     </div>

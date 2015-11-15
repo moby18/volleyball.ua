@@ -28,7 +28,7 @@ class GameType extends AbstractType
             ->add('homeTeam')
             ->add('awayTeam')
             ->add('tour')
-//            ->add('season')
+            ->add('season')
             ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }

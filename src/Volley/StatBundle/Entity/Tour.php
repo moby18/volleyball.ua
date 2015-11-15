@@ -138,6 +138,22 @@ class Tour
     }
 
     /**
+     * @return mixed
+     */
+    public function getRound()
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param mixed $round
+     */
+    public function setRound($round)
+    {
+        $this->round = $round;
+    }
+
+    /**
      * Add games
      *
      * @param \Volley\StatBundle\Entity\Game $games
