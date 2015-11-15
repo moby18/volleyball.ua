@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -229,5 +230,19 @@ class DefaultController extends Controller
     public function contactsAction()
     {
         return $this->render('VolleyFaceBundle:Default:contacts.html.twig', []);
+    }
+
+    /**
+     * * Deletes a Tournament entity.
+     *
+     * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
+     * @Method("GET")
+     * @param int $season_id
+     * @param int $tournament_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($season_id, $tournament_id)
+    {
+        return $this->render('VolleyFaceBundle:Stat:tournament.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($season_id, $tournament_id));
     }
 }

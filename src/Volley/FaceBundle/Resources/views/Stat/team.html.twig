@@ -1,0 +1,21 @@
+{% extends 'VolleyFaceBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="section" id="team">
+        <div class="container">
+            <div class="row">
+                <h1>Команда {{ team.name }}</h1>
+            </div>
+            <div class="row">
+                <div class="col col-lg-12 col-md-12 col-sm-12">
+                    <img class="photo" src="{{ team.getWebPath }}" alt="Команда з пляжного волейболу " width="100%" height="auto">
+                </div>
+                <div class="col col-lg-12 col-md-12 col-sm-12">
+                    {{ team.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

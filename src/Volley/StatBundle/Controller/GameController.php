@@ -218,6 +218,13 @@ class GameController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($entity->getPlayed()) {
+                $score_sets = [];
+                foreach ($entity->getSets() as $set) {
+                    $score_sets[] = $set->getScoreSetHome().':'.$set->getScoreSetAway();
+                }
+                $entity->setScore($entity->getScoreSetHome().'-'.$entity->getScoreSetAway().' ('.implode(';', $score_sets).')');
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('stat_game', array('id' => $id)));
