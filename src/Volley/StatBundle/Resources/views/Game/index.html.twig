@@ -14,12 +14,10 @@
             <thead>
             <tr>
                 <th>Id</th>
+                <th>Tour</th>
                 <th>Number</th>
-                <th>Name</th>
-                <th>Duration</th>
-                <th>Hometeamempty</th>
-                <th>Awayteamempty</th>
-                <th>Score</th>
+                <th>Hometeam</th>
+                <th>Awayteam</th>
                 <th>Scoresethome</th>
                 <th>Scoresetaway</th>
                 <th>Played</th>
@@ -29,14 +27,14 @@
             </thead>
             <tbody>
             {% for entity in entities %}
+                {% set winnerTeamA = (entity.scoreSetHome > entity.scoreSetAway) %}
+                {% set winnerTeamB = (entity.scoreSetHome < entity.scoreSetAway) %}
                 <tr>
                     <td><a href="{{ path('stat_game_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                     <td>{{ entity.number }}</td>
-                    <td>{{ entity.name }}</td>
-                    <td>{{ entity.duration }}</td>
-                    <td>{{ entity.homeTeamEmpty }}</td>
-                    <td>{{ entity.awayTeamEmpty }}</td>
-                    <td>{{ entity.score }}</td>
+                    <td>{{ entity.tour }}</td>
+                    <td>{{ winnerTeamA ? "<strong>" : "" }}{{ entity.homeTeam }}{{ winnerTeamA ? "</strong>" : "" }}</td>
+                    <td>{{ winnerTeamB ? "<strong>" : "" }}{{ entity.awayTeam }}{{ winnerTeamB ? "<strong>" : "" }}</td>
                     <td>{{ entity.scoreSetHome }}</td>
                     <td>{{ entity.scoreSetAway }}</td>
                     <td>{{ entity.played }}</td>
