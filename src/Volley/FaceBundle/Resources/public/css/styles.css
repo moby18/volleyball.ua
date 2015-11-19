@@ -513,6 +513,11 @@ footer .social-icons a:hover {
     height: auto;
 }
 
+/* Boxes */
+.box {
+    padding-top: 15px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
