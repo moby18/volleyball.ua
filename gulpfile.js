@@ -52,14 +52,16 @@ gulp.task('style_ie', function () {
 
 gulp.task('script', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+        'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
+        //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/dropdown.js',
     ];
     gulp.src(source)
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('script.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write("."))
+        //.pipe(uglify())
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/js/'));
 });
 
