@@ -136,6 +136,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0 !important;
 }
 
+.navbar-right {
+
+}
+
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
     color: #ffffff;
     transition: color 0.5s ease;

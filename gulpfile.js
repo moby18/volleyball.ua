@@ -55,6 +55,7 @@ gulp.task('script', function () {
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/dropdown.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/menu.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -71,8 +72,8 @@ gulp.task('script_admin', function () {
         //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/*.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/slide.js',
-        'src/Volley/FaceBundle/Resources/public/js/post.js'
+        'src/Volley/FaceBundle/Resources/public/js/custom/slide.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/post.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -126,11 +127,11 @@ gulp.task('clean', function () {
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start(['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie', 'script_install']);
+    gulp.start(['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie'/*, 'script_install'*/]);
 });
 
 gulp.task('watch', ['clean'], function () {
-    gulp.start('default','assets_install');
+    gulp.start('default'/*,'assets_install'*/);
 
     gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['default']);
     gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['default']);
