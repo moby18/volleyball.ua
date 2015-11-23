@@ -10,6 +10,7 @@ var shell = require('gulp-shell');
 gulp.task('style', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
+        'src/Volley/FaceBundle/Resources/public/css/animations.css',
         'src/Volley/FaceBundle/Resources/public/css/styles.css'
     ];
     gulp.src(source)
@@ -133,7 +134,7 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', ['clean'], function () {
     gulp.start('default'/*,'assets_install'*/);
 
-    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['default']);
-    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['default']);
+    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['style', 'style_admin', 'style_ie']);
+    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['script', 'script_admin', 'script_ie']);
     //gulp.watch('src/Volley/FaceBundle/Resources/public/**/*', ['assets_install']);
 });

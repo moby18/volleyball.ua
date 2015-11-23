@@ -1,10 +1,13 @@
 $(document).ready(function () {
-        $(".navbar .nav.navbar-nav.navbar-right").find('li.dropdown')
-            .mouseover(function () {
-                $(this).addClass('open');
-            })
-            .mouseout(function () {
-                $(this).removeClass('open');
-            });
+        var hovered = 0;
+        $(".navbar .nav.navbar-nav.navbar-right li.dropdown")
+            .hover(function () {
+                    "use strict";
+                    $(this).addClass('open');
+                },
+                function () {
+                    "use strict";
+                    $(this).removeClass('open');
+                });
     }
 );

@@ -75,7 +75,7 @@
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top animated-dropdown ttb-dropdown" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -95,6 +95,8 @@
                 {#</li>#}
                 {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>#}
                 {#</li>#}
+                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">{% trans %}News{% endtrans %}</a></li>
+                <li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Contact Us<span class="angle"></span></a>
                     <ul class="dropdown-menu pull-right" role="menu">
@@ -110,8 +112,6 @@
                         <li><a href="contact10.html">Contact - Version 10</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">{% trans %}News{% endtrans %}</a></li>
-                <li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -136,19 +136,48 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0 !important;
 }
 
-.navbar-right {
-
+.navbar li li a {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+.navbar-nav li li a {
+    font-size: 14px;
+    background-color: transparent;
 }
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
     color: #ffffff;
-    transition: color 0.5s ease;
     font-size: 16px;
-    padding-top: 20px;
+    padding-top: 21px;
 }
 
-.navbar-inverse .navbar-nav>li>a:hover {
-    color: #428bca;
+.navbar-inverse .navbar-nav li>a {
+    transition: color 0.5s ease;
+}
+
+.navbar-inverse .navbar-nav li>a:hover {
+    color: #428bca !important;
+}
+
+.collapse.navbar-collapse,
+.navbar-inverse .navbar-nav{
+    background-color: #222;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: transparent;
+}
+
+/* Top To Bottom animation */
+.ttb-dropdown .dropdown .dropdown-menu {
+    z-index: -1;
+    padding: 0;
+    border-radius: 0;
+}
+.ttb-dropdown .dropdown.open > .dropdown-menu {
+    animation-name: topToBottom;
+    -webkit-animation-name: topToBottom;
 }
 
 /* Front Content */
