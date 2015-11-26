@@ -104,11 +104,11 @@ gulp.task('script_ie', function () {
         'src/Volley/FaceBundle/Resources/public/js/respond.min.js'
     ];
     gulp.src(source)
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('script_ie.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write("."))
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/js/'));
 });
 
