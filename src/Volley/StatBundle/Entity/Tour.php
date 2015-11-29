@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Tour
  *
  * @ORM\Table(name="stat_tour")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TourRepository")
  */
 class Tour
 {

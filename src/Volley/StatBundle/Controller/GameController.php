@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -10,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Volley\StatBundle\Form\Model\GameFilter;
+use Volley\StatBundle\Form\GameFilterType;
 
 /**
  * Game controller.
@@ -21,19 +24,32 @@ class GameController extends Controller
 
     /**
      * Lists all Game entities.
+     * @param Request $request
+     * @return array
      *
      * @Route("/", name="stat_game")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('VolleyStatBundle:Game')->findAll();
 
+        $gameFilter = new GameFilter();
+        $filterForm = $this
+            ->createForm(new GameFilterType($request), $gameFilter, [
+                'action' => $this->generateUrl('stat_game'),
+                'method' => 'GET',
+            ])
+            ->add('filter', 'submit', array('label' => 'Filter'));
+        $filterForm->handleRequest($request);
+//        $filterForm->isValid();
+
         return array(
             'entities' => $entities,
+            'filter' => $filterForm->createView()
         );
     }
     /**

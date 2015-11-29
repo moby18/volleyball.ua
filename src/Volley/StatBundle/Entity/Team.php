@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Team
  *
  * @ORM\Table(name="stat_team")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TeamRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Team

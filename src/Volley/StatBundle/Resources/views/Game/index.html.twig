@@ -9,6 +9,17 @@
         </a>
     </div>
 
+
+    <form class="form-inline filter" action="{{ path('stat_game') }}" method="GET">
+        <div class="form-group">
+            {{ form_start(filter) }}
+            {{ form_widget(filter) }}
+            {{ form_end(filter) }}
+            {#<button type="submit" class="btn">Filter</button>#}
+        </div>
+
+    </form>
+
     <div class="table-responsive">
         <table class="table table-striped table-hover .table-condensed">
             <thead>

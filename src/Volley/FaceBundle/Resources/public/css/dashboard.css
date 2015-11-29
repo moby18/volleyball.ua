@@ -102,3 +102,17 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/* Filter */
+
+
+.form-inline.filter .form-group .form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+  padding: 5px;
+}
+
+.form-inline.filter .form-group .form-horizontal .form-group select {
+  width: 150px;
+
+}
