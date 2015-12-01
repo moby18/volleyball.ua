@@ -44,8 +44,6 @@ class GameController extends Controller
             ->add('filter', 'submit', array('label' => 'Filter'));
         $filterForm->handleRequest($request);
 
-        $data = $this->get('volley_stat.game.manager')->getFilterData($gameFilter);
-
         $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
 
         return array(

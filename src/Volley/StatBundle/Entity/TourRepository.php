@@ -20,6 +20,6 @@ class TourRepository extends EntityRepository
         return $this->createQueryBuilder('t')
             ->andWhere('t.round in ('.implode(',',$ids).')')
             ->orderBy('t.id','ASC')
-            ->getQuery()->getArrayResult();
+            ->getQuery()->getResult();
     }
 }

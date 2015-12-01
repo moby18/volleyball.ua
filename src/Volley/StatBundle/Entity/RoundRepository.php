@@ -20,6 +20,6 @@ class RoundRepository extends EntityRepository
         return $this->createQueryBuilder('r')
             ->andWhere('r.season in ('.implode(',',$ids).')')
             ->orderBy('r.id','ASC')
-            ->getQuery()->getArrayResult();
+            ->getQuery()->getResult();
     }
 }

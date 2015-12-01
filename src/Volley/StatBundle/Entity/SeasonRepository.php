@@ -20,6 +20,6 @@ class SeasonRepository extends EntityRepository
         return $this->createQueryBuilder('s')
             ->andWhere('s.tournament in ('.implode(',',$ids).')')
             ->orderBy('s.id','ASC')
-            ->getQuery()->getArrayResult();
+            ->getQuery()->getResult();
     }
 }

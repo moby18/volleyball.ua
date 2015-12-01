@@ -146,6 +146,25 @@ class GameFilterType extends AbstractType
                 'query_builder' => function (TeamRepository $repository) use ($request) {
                     $query = $repository->createQueryBuilder('t')
                         ->add('orderBy', 't.id ASC');
+                    if (array_key_exists('season', $request) && $request['season']) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->andWhere('season = ?1')
+                            ->setParameter(1, $request['season']);
+                    } elseif (array_key_exists('tournament',$request) && $request['tournament']) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournamet')
+                            ->andWhere('tournament.id = ?2')
+                            ->setParameter(2, $request['tournament']);
+                    } elseif (array_key_exists('country',$request) && $request['country']) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournamet')
+                            ->leftJoin('tournament.country', 'country',Join::WITH, 'country.id = tournament.country')
+                            ->andWhere('country.id = ?3')
+                            ->setParameter(3, $request['country']);
+                    }
                     return $query;
                 }
             ]);
