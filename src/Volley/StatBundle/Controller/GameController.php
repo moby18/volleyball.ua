@@ -34,8 +34,9 @@ class GameController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $session = $this->get('session');
 
-        $gameFilter = new GameFilter();
+        $gameFilter = ($session->has('gameFilter')? $session->get('gameFilter') : new GameFilter());
         $filterForm = $this
             ->createForm(new GameFilterType($request), $gameFilter, [
                 'action' => $this->generateUrl('stat_game'),
@@ -44,7 +45,13 @@ class GameController extends Controller
             ->add('filter', 'submit', array('label' => 'Filter'));
         $filterForm->handleRequest($request);
 
-        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+        $session->set('gameFilter', $gameFilter);
+
+//        if ($filterForm->isSubmitted()) {
+            $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+//        } else {
+//            $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter(new GameFilter());
+//        }
 
         return array(
             'entities' => $entities,
