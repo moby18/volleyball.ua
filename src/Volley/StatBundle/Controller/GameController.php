@@ -35,8 +35,6 @@ class GameController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Game')->findAll();
-
         $gameFilter = new GameFilter();
         $filterForm = $this
             ->createForm(new GameFilterType($request), $gameFilter, [
@@ -45,7 +43,10 @@ class GameController extends Controller
             ])
             ->add('filter', 'submit', array('label' => 'Filter'));
         $filterForm->handleRequest($request);
-//        $filterForm->isValid();
+
+        $data = $this->get('volley_stat.game.manager')->getFilterData($gameFilter);
+
+        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
 
         return array(
             'entities' => $entities,
