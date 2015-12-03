@@ -2,6 +2,8 @@
 
 {% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}
 {% set title = post.title %}
+{% set meta_keywords = post.metakey %}
+{% set meta_description = post.metadescr %}
 
 {% block content %}
 
