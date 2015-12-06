@@ -104,11 +104,11 @@ gulp.task('script_ie', function () {
         'src/Volley/FaceBundle/Resources/public/js/respond.min.js'
     ];
     gulp.src(source)
-        .pipe(sourcemaps.init())
+        //.pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('script_ie.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write("."))
+        //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/js/'));
 });
 
@@ -130,6 +130,10 @@ gulp.task('clean', function () {
 
 gulp.task('default', ['clean'], function() {
     gulp.start(['fonts', 'style', 'style_admin', 'style_ie', 'script', 'script_admin', 'script_ie', 'script_install']);
+});
+
+gulp.task('front', [], function() {
+    gulp.start(['fonts', 'style', 'script', 'script_install']);
 });
 
 gulp.task('watch', ['clean'], function () {
