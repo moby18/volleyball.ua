@@ -10,7 +10,7 @@
     </div>
 
 
-    <form class="form-inline filter" action="{{ path('stat_game') }}" method="GET">
+    <form class="form-inline filter" action="{{ path('stat_game_filter') }}" method="POST">
         <div class="form-group">
             {{ form_start(filter) }}
             {{ form_widget(filter) }}

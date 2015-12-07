@@ -40,7 +40,7 @@ class GameFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $request = $this->request->query->get('filter',[]);
+        $request = $this->request->request->get('filter',[]);
         $builder
             ->add('country', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Country',
@@ -154,13 +154,13 @@ class GameFilterType extends AbstractType
                     } elseif (array_key_exists('tournament',$request) && $request['tournament']) {
                         $query
                             ->leftJoin('t.seasons', 'season')
-                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournamet')
+                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournament')
                             ->andWhere('tournament.id = ?2')
                             ->setParameter(2, $request['tournament']);
                     } elseif (array_key_exists('country',$request) && $request['country']) {
                         $query
                             ->leftJoin('t.seasons', 'season')
-                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournamet')
+                            ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournament')
                             ->leftJoin('tournament.country', 'country',Join::WITH, 'country.id = tournament.country')
                             ->andWhere('country.id = ?3')
                             ->setParameter(3, $request['country']);

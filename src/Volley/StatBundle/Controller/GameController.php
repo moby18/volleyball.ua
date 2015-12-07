@@ -24,40 +24,68 @@ class GameController extends Controller
 
     /**
      * Lists all Game entities.
-     * @param Request $request
      * @return array
      *
      * @Route("/", name="stat_game")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
 
-        $gameFilter = ($session->has('gameFilter')? $session->get('gameFilter') : new GameFilter());
+        $request = $session->get('request', new Request());
+        $gameFilter = new GameFilter();
         $filterForm = $this
             ->createForm(new GameFilterType($request), $gameFilter, [
-                'action' => $this->generateUrl('stat_game'),
-                'method' => 'GET',
+                'action' => $this->generateUrl('stat_game_filter'),
+                'method' => 'POST',
             ])
             ->add('filter', 'submit', array('label' => 'Filter'));
         $filterForm->handleRequest($request);
 
-        $session->set('gameFilter', $gameFilter);
-
-//        if ($filterForm->isSubmitted()) {
-            $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
-//        } else {
-//            $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter(new GameFilter());
-//        }
+        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
 
         return array(
             'entities' => $entities,
             'filter' => $filterForm->createView()
         );
     }
+
+    /**
+     * Lists all Game entities.
+     * @param Request $request
+     * @return array
+     *
+     * @Route("/", name="stat_game_filter")
+     * @Method("POST")
+     * @Template("VolleyStatBundle:Game:index.html.twig")
+     */
+    public function filterAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->get('session');
+
+        $gameFilter = new GameFilter();
+        $filterForm = $this
+            ->createForm(new GameFilterType($request), $gameFilter, [
+                'action' => $this->generateUrl('stat_game_filter'),
+                'method' => 'POST',
+            ])
+            ->add('filter', 'submit', array('label' => 'Filter'));
+        $filterForm->handleRequest($request);
+
+        $session->set('request', $request);
+
+        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+
+        return array(
+            'entities' => $entities,
+            'filter' => $filterForm->createView()
+        );
+    }
+
     /**
      * Creates a new Game entity.
      *
@@ -76,9 +104,9 @@ class GameController extends Controller
             if (empty($entity->getScore()) && $entity->getPlayed()) {
                 $score_sets = [];
                 foreach ($entity->getSets() as $set) {
-                    $score_sets[] = $set->getScoreSetHome().':'.$set->getScoreSetAway();
+                    $score_sets[] = $set->getScoreSetHome() . ':' . $set->getScoreSetAway();
                 }
-                $entity->setScore($entity->getScoreSetHome().'-'.$entity->getScoreSetAway().' ('.implode(';', $score_sets).')');
+                $entity->setScore($entity->getScoreSetHome() . '-' . $entity->getScoreSetAway() . ' (' . implode(';', $score_sets) . ')');
             }
             $em->persist($entity);
             $em->flush();
@@ -88,7 +116,7 @@ class GameController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -121,11 +149,11 @@ class GameController extends Controller
     public function newAction()
     {
         $entity = new Game();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -145,7 +173,7 @@ class GameController extends Controller
         $em->persist($clone);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('stat_game_edit', ['id'=> $clone->getId()]));
+        return $this->redirect($this->generateUrl('stat_game_edit', ['id' => $clone->getId()]));
     }
 
     /**
@@ -168,7 +196,7 @@ class GameController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -194,19 +222,19 @@ class GameController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Game entity.
-    *
-    * @param Game $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Game entity.
+     *
+     * @param Game $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Game $entity)
     {
         $form = $this->createForm(new GameType(), $entity, array(
@@ -218,6 +246,7 @@ class GameController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Game entity.
      *
@@ -243,9 +272,9 @@ class GameController extends Controller
             if ($entity->getPlayed()) {
                 $score_sets = [];
                 foreach ($entity->getSets() as $set) {
-                    $score_sets[] = $set->getScoreSetHome().':'.$set->getScoreSetAway();
+                    $score_sets[] = $set->getScoreSetHome() . ':' . $set->getScoreSetAway();
                 }
-                $entity->setScore($entity->getScoreSetHome().'-'.$entity->getScoreSetAway().' ('.implode(';', $score_sets).')');
+                $entity->setScore($entity->getScoreSetHome() . '-' . $entity->getScoreSetAway() . ' (' . implode(';', $score_sets) . ')');
             }
             $em->flush();
 
@@ -253,11 +282,12 @@ class GameController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Game entity.
      *
@@ -297,7 +327,6 @@ class GameController extends Controller
             ->setAction($this->generateUrl('stat_game_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
