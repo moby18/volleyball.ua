@@ -42,6 +42,13 @@ class CategoryController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+
+            $repo = $this->getDoctrine()->getEntityManager()->getRepository('VolleyFaceBundle:Category');
+            // verification and recovery of tree
+            $repo->verify();
+            // can return TRUE if tree is valid, or array of errors found on tree
+            $repo->recover();
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));

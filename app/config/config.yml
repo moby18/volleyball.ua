@@ -149,6 +149,7 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             softdeleteable: true
+            tree: true
 
 liip_imagine:
     resolvers:
