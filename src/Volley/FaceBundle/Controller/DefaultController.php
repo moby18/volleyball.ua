@@ -192,7 +192,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/blog/{category_slug}/{post_slug}", name="volley_face_post")
+     * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}})
      * @Template()
@@ -206,7 +206,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post/{category_slug}", name="volley_face_blog")
+     * @Route("/{category_slug}", name="volley_face_blog")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */

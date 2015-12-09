@@ -180,6 +180,18 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-animation-name: topToBottom;
 }
 
+.navbar-nav .sub-dropdown .dropdown-menu {
+    right: auto;
+    left: 100%;
+    top: 0;
+    /*border-top: none;*/
+}
+
+.navbar-nav ul i {
+    float: right;
+    margin: 3px 0 0;
+}
+
 /* Front Content */
 
 /* Slider */

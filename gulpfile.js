@@ -10,6 +10,7 @@ var shell = require('gulp-shell');
 gulp.task('style', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
         'src/Volley/FaceBundle/Resources/public/css/animations.css',
         'src/Volley/FaceBundle/Resources/public/css/styles.css'
     ];
@@ -114,7 +115,8 @@ gulp.task('script_ie', function () {
 
 gulp.task('fonts', function () {
     return gulp.src([
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/fonts/*'
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/fonts/*',
+        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/fonts/*'
     ])
         .pipe(gulp.dest('web/fonts/'))
 });
