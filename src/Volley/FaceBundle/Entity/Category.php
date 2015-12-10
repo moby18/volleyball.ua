@@ -230,6 +230,70 @@ class Category
     }
 
     /**
+     * @return mixed
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * @param mixed $lft
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * @param mixed $rgt
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * @param mixed $root
+     */
+    public function setRoot($root)
+    {
+        $this->root = $root;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param mixed $children
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
+    }
+
+    /**
      * Add posts
      *
      * @param \Volley\FaceBundle\Entity\Post $posts

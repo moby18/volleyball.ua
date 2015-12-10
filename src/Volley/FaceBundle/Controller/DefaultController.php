@@ -119,7 +119,8 @@ class DefaultController extends Controller
         // slides
         $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,5);
         // news
-        $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent'=> null]);
+        $news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
         return $this->render('VolleyWebBundle:Default:index.html.twig', [
             'slides' => $slides,
             'news' => $news
@@ -242,7 +243,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // post
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category->getId()), array('id' => 'DESC'));
+        $posts = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category);
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,

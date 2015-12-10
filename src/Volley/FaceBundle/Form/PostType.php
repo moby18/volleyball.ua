@@ -50,7 +50,7 @@ class PostType extends AbstractType
                 'class' => 'Volley\FaceBundle\Entity\Category',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
-                        ->select('c.id, c.name')
+//                        ->select('c.id, c.name')
                         ->orderBy('c.lft', 'ASC');
                 }
             ])
