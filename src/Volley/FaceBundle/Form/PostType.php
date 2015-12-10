@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -45,7 +46,14 @@ class PostType extends AbstractType
 //            ->add('metadata')
             ->add('featured')
             ->add('language')
-            ->add('category')
+            ->add('category','entity', [
+                'class' => 'Volley\FaceBundle\Entity\Category',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->select('c.id, c.name')
+                        ->orderBy('c.lft', 'ASC');
+                }
+            ])
             ->add('file', null, [
                 'label' => 'Post Image (width>=555px and height>=350px)'
             ])

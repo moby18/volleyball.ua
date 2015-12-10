@@ -214,6 +214,22 @@ class Category
     }
 
     /**
+     * @return mixed
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * @param mixed $lvl
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+    }
+
+    /**
      * Add posts
      *
      * @param \Volley\FaceBundle\Entity\Post $posts

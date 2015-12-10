@@ -23,7 +23,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyFaceBundle:Category')->findAll();
+        $entities = $em->getRepository('VolleyFaceBundle:Category')->findBy([],['lft'=>'ASC']);
 
         return $this->render('VolleyFaceBundle:Category:index.html.twig', array(
             'entities' => $entities,
