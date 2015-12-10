@@ -192,38 +192,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
-     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
-     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}})
-     * @Template()
-     */
-    public function postAction($category, $post)
-    {
-        return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
-            'category' => $category,
-            'post' => $post
-        ));
-    }
-
-    /**
-     * @Route("/{category_slug}", name="volley_face_blog")
-     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
-     * @Template()
-     */
-    public function blogAction($category)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        // post
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category->getId()), array('id' => 'DESC'));
-
-        return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
-            'category' => $category,
-            'posts' => $posts
-        ));
-    }
-
-    /**
      * @Route("/contacts", name="volley_face_contacts")
      * @Template()
      */
@@ -244,5 +212,41 @@ class DefaultController extends Controller
     public function tableAction($season_id, $tournament_id)
     {
         return $this->render('VolleyFaceBundle:Stat:tournament.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($season_id, $tournament_id));
+    }
+
+    /**
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}})
+     * @Template()
+     */
+    public function postAction($category, $post)
+    {
+        return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
+            'category' => $category,
+            'post' => $post
+        ));
+    }
+
+    /**
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @Route("/{category_slug}", name="volley_face_blog")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @Template()
+     */
+    public function blogAction($category)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // post
+        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category->getId()), array('id' => 'DESC'));
+
+        return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
+            'category' => $category,
+            'posts' => $posts
+        ));
     }
 }
