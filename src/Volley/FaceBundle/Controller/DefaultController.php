@@ -220,7 +220,7 @@ class DefaultController extends Controller
      *
      * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
-     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}})
+     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}, "repository_method" = "findWithOptions", "map_method_signature" = true})
      * @Template()
      */
     public function postAction($category, $post)

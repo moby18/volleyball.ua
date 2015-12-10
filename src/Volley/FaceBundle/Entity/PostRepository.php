@@ -25,10 +25,26 @@ class PostRepository extends EntityRepository
             ->andWhere('category.lft >= :lft AND category.rgt <= :rgt')
             ->setParameter('lft',$category->getLft())
             ->setParameter('rgt',$category->getRgt())
+            ->andWhere('p.state > 0')
+            ->andWhere('p.published <= :date')
+            ->setParameter('date','now()')
             ->setMaxResults($count)
             ->setFirstResult($offset)
             ->orderBy('p.published', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findWithOptions($slug)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->andWhere('p.slug = :slug')
+            ->setParameter('slug',$slug)
+            ->andWhere('p.state > 0')
+            ->andWhere('p.published <= :date')
+            ->setParameter('date','now()')
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }
