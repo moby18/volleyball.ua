@@ -91,27 +91,48 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 2}) }}">2 тур</a>#}
-                {#</li>#}
-                {#<li><a href="{{ path("volley_face_tournament",{'season_id': 1, 'tournament_id': 3}) }}">Фінальний тур</a>#}
-                {#</li>#}
-                <li><a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}">{% trans %}News{% endtrans %}</a></li>
+                <li class="dropdown">
+                    <a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">{% trans %}News{% endtrans %}</a>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li class="dropdown sub-dropdown">
+                            <a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Волейбол України<i class="fa fa-angle-right"></i></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown sub-dropdown">
+                            <a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Європейські Кубки<i class="fa fa-angle-right"></i></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга Чемпіонів</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Вкубок Виклику</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown sub-dropdown">
+                            <a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Національні Ліги<i class="fa fa-angle-right"></i></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown sub-dropdown">
+                            <a href="{{ path("volley_face_blog",{'category_slug': 'international-sompetitions'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Міжнародні змагання<i class="fa fa-angle-right"></i></a>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські Ігри</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>
+                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
-                {#<li class="dropdown">#}
-                    {#<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Contact Us<span class="angle"></span></a>#}
-                    {#<ul class="dropdown-menu pull-right" role="menu">#}
-                        {#<li><a href="contact.html">Contact - Version 1</a></li>#}
-                        {#<li><a href="contact2.html">Contact - Version 2</a></li>#}
-                        {#<li><a href="contact3.html">Contact - Version 3</a></li>#}
-                        {#<li><a href="contact4.html">Contact - Version 4</a></li>#}
-                        {#<li><a href="contact5.html">Contact - Version 5</a></li>#}
-                        {#<li><a href="contact6.html">Contact - Version 6</a></li>#}
-                        {#<li><a href="contact7.html">Contact - Version 7</a></li>#}
-                        {#<li><a href="contact8.html">Contact - Version 8</a></li>#}
-                        {#<li><a href="contact9.html">Contact - Version 9</a></li>#}
-                        {#<li><a href="contact10.html">Contact - Version 10</a></li>#}
-                    {#</ul>#}
-                {#</li>#}
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -129,6 +150,44 @@
 
 
     <footer class="footer">
+        <section class="bottom-links">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}">Волейбол України</a></h4></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}">Європейські Кубки</a></h4></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга Чемпіонів</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Вкубок Виклику</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}">Національні Ліги</a></h4></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></h4></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></li>
+                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div class="footer-below">
             <div class="container">
                 <div class="row">
@@ -140,7 +199,7 @@
                     <div class="col-lg-4 col-md-6 text-right">
                         <div class="social-icons pull-right">
                             <a href="https://www.facebook.com/volleyballua" target="_blank" class="social-icon icon-facebook" title="Facebook">
-                                <i class="fa fa-facebook-official"></i>
+                                <i class="fa fa-facebook"></i>
                             </a>
                             <a href="https://vk.com/volleyballua" target="_blank" class="social-icon icon-vk" title="VK">
                                 <i class="fa fa-vk"></i>

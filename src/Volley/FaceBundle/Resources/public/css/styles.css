@@ -180,6 +180,18 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-animation-name: topToBottom;
 }
 
+.navbar-nav .sub-dropdown .dropdown-menu {
+    right: auto;
+    left: 100%;
+    top: 0;
+    /*border-top: none;*/
+}
+
+.navbar-nav ul i {
+    float: right;
+    margin: 3px 0 0;
+}
+
 /* Front Content */
 
 /* Slider */
@@ -269,6 +281,12 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration:0.5s;
 }
 
+/* Tournament Table */
+.tournament-short h2 {
+    font-size: 16px;
+    /*font-weight: 600;*/
+}
+
 /* Post */
 .post {
     padding: 0;
@@ -299,7 +317,7 @@ footer .footer-col {
 
 footer .footer-below {
     padding: 20px 0;
-    background-color: #262626;
+    background-color: #222;
 }
 
 footer .social-icons a {
@@ -310,6 +328,32 @@ footer .social-icons a {
 
 footer .social-icons a:hover {
     color: #428bca;
+}
+
+footer .bottom-links {
+    background-color: #262626;
+}
+
+footer .bottom-links .row {
+    padding: 15px 0;
+}
+
+footer .bottom-links ul {
+    list-style: none;
+}
+
+footer .bottom-links ul li a,
+footer .bottom-links ul li h4 {
+    color: #ffffff;
+    font-size: 14px;
+}
+footer .bottom-links ul li h4 {
+    font-weight: 600;
+}
+
+
+footer .bottom-links ul li:hover a {
+    text-decoration: underline;
 }
 
 .btn-social {

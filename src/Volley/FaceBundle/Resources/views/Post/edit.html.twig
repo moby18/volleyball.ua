@@ -22,6 +22,7 @@
                 {{ form_row(edit_form.category) }}
                 {{ form_row(edit_form.title) }}
                 {{ form_row(edit_form.file) }}
+                <a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>
                 {{ form_row(edit_form.content) }}
                 {{ form_row(edit_form.text) }}
                 {{ form_row(edit_form.state) }}
@@ -60,7 +61,6 @@
 
 {% block scripts %}
     {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/jquery.datetimepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/post.js') }}"></script>
 {% endblock %}
 

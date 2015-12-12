@@ -666,18 +666,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4"
+                "reference": "86d2b1c9c195c12175551d02a475067977c0afcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/303a576e2124efb07ec215e34ea2480b841cf5e4",
-                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/86d2b1c9c195c12175551d02a475067977c0afcf",
+                "reference": "86d2b1c9c195c12175551d02a475067977c0afcf",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.0",
                 "doctrine/migrations": "~1.0",
-                "php": ">=5.3.2",
+                "php": ">=5.4.0",
                 "symfony/framework-bundle": "~2.3|~3.0"
             },
             "type": "symfony-bundle",
@@ -716,7 +716,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2015-11-04 13:45:30"
+            "time": "2015-11-12 13:18:26"
         },
         {
             "name": "doctrine/inflector",
@@ -899,19 +899,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "68cc7bf629a7c1fc0696e583cc8ed46f897d0afb"
+                "reference": "b386d2a17634192fc406acc4090d58eb6e903ca5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/68cc7bf629a7c1fc0696e583cc8ed46f897d0afb",
-                "reference": "68cc7bf629a7c1fc0696e583cc8ed46f897d0afb",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/b386d2a17634192fc406acc4090d58eb6e903ca5",
+                "reference": "b386d2a17634192fc406acc4090d58eb6e903ca5",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.2",
                 "php": ">=5.4.0",
-                "symfony/console": "~2.3",
-                "symfony/yaml": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "dev-master",
@@ -959,7 +959,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-10-22 11:55:15"
+            "time": "2015-11-26 11:16:07"
         },
         {
             "name": "doctrine/orm",
@@ -2977,7 +2977,7 @@
         "doctrine/migrations": 20,
         "doctrine/doctrine-migrations-bundle": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.3.3"
