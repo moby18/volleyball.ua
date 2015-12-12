@@ -148,7 +148,23 @@ class GameController extends Controller
      */
     public function newAction()
     {
+        $session = $this->get('session');
+
+        $request = $session->get('request', new Request());
+        $gameFilter = new GameFilter();
+        $filterForm = $this
+            ->createForm(new GameFilterType($request), $gameFilter, [
+                'action' => $this->generateUrl('stat_game_filter'),
+                'method' => 'POST',
+            ])
+            ->add('filter', 'submit', array('label' => 'Filter'))
+            ->add('clear', 'submit', array('lable' => 'Clear'));
+        $filterForm->handleRequest($request);
+
+        /** @var Game $entity */
         $entity = new Game();
+        $entity->setSeason($gameFilter->getSeason());
+        $entity->setTour($gameFilter->getTour());
         $form = $this->createCreateForm($entity);
 
         return array(
