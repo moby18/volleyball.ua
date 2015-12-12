@@ -107,7 +107,7 @@ class GameController extends Controller
     /**
      * Creates a new Game entity.
      *
-     * @Route("/", name="stat_game_create")
+     * @Route("/new", name="stat_game_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Game:new.html.twig")
      */
