@@ -33,17 +33,9 @@ class GameController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $session = $this->get('session');
 
-        $request = $session->get('request', new Request());
-        $gameFilter = new GameFilter();
-        $filterForm = $this
-            ->createForm(new GameFilterType($request), $gameFilter, [
-                'action' => $this->generateUrl('stat_game_filter'),
-                'method' => 'POST',
-            ])
-            ->add('filter', 'submit', array('label' => 'Filter'));
-        $filterForm->handleRequest($request);
+        $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
+        $filterForm = $this->createFilterForm($gameFilter);
 
         $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
 
@@ -65,18 +57,18 @@ class GameController extends Controller
     public function filterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
+        if (array_key_exists('clear', $request->request->get('filter'))) {
+            $gameFilter = new GameFilter();
+            $filterForm = $this->createFilterForm($gameFilter);
+        } else {
+            $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
+            $filterForm = $this->createFilterForm($gameFilter);
+            $filterForm->handleRequest($request);
+        }
+
         $session = $this->get('session');
-
-        $gameFilter = new GameFilter();
-        $filterForm = $this
-            ->createForm(new GameFilterType($request), $gameFilter, [
-                'action' => $this->generateUrl('stat_game_filter'),
-                'method' => 'POST',
-            ])
-            ->add('filter', 'submit', array('label' => 'Filter'));
-        $filterForm->handleRequest($request);
-
-        $session->set('request', $request);
+        $session->set('gameFilter', $gameFilter);
 
         $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
 
@@ -84,6 +76,32 @@ class GameController extends Controller
             'entities' => $entities,
             'filter' => $filterForm->createView()
         );
+    }
+
+    private function createFilterForm($gameFilter)
+    {
+        $filterForm = $this
+            ->createForm(new GameFilterType($gameFilter), $gameFilter, [
+                'action' => $this->generateUrl('stat_game_filter'),
+                'method' => 'POST',
+            ])
+            ->add('filter', 'submit', array('label' => 'Filter'))
+            ->add('clear', 'submit', array('label' => 'Clear'));
+        return $filterForm;
+    }
+
+    private function mergeGameFilterWithSession($gameFilter)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->get('session');
+        $sessionGameFilter = $session->get('gameFilter', new GameFilter());
+        $gameFilter->setCountry($sessionGameFilter->getCountry() ? $em->getRepository('VolleyStatBundle:Country')->find($sessionGameFilter->getCountry()->getId()) : null);
+        $gameFilter->setTournament($sessionGameFilter->getTournament() ? $em->getRepository('VolleyStatBundle:Tournament')->find($sessionGameFilter->getTournament()->getId()) : null);
+        $gameFilter->setSeason($sessionGameFilter->getSeason() ? $em->getRepository('VolleyStatBundle:Season')->find($sessionGameFilter->getSeason()->getId()) : null);
+        $gameFilter->setRound($sessionGameFilter->getRound() ? $em->getRepository('VolleyStatBundle:Round')->find($sessionGameFilter->getRound()->getId()) : null);
+        $gameFilter->setTour($sessionGameFilter->getTour() ? $em->getRepository('VolleyStatBundle:Tour')->find($sessionGameFilter->getTour()->getId()) : null);
+        $gameFilter->setTeam($sessionGameFilter->getTeam() ? $em->getRepository('VolleyStatBundle:Team')->find($sessionGameFilter->getTeam()->getId()) : null);
+        return $gameFilter;
     }
 
     /**
@@ -148,18 +166,7 @@ class GameController extends Controller
      */
     public function newAction()
     {
-        $session = $this->get('session');
-
-        $request = $session->get('request', new Request());
-        $gameFilter = new GameFilter();
-        $filterForm = $this
-            ->createForm(new GameFilterType($request), $gameFilter, [
-                'action' => $this->generateUrl('stat_game_filter'),
-                'method' => 'POST',
-            ])
-            ->add('filter', 'submit', array('label' => 'Filter'))
-            ->add('clear', 'submit', array('lable' => 'Clear'));
-        $filterForm->handleRequest($request);
+        $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
 
         /** @var Game $entity */
         $entity = new Game();

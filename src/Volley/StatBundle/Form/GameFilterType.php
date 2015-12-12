@@ -25,13 +25,18 @@ class GameFilterType extends AbstractType
     private $request;
 
     /**
+     * @var GameFilter
+     */
+    private $gameFilter;
+
+    /**
      * GameFilterType constructor.
      *
-     * @param Request $request
+     * @param GameFilter $gameFilter
      */
-    public function __construct(Request $request)
+    public function __construct(GameFilter $gameFilter)
     {
-        $this->request = $request;
+        $this->gameFilter = $gameFilter;
     }
 
     /**
@@ -40,7 +45,7 @@ class GameFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $request = $this->request->request->get('filter',[]);
+        $gameFilter = $this->gameFilter;
         $builder
             ->add('country', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Country',
@@ -55,13 +60,13 @@ class GameFilterType extends AbstractType
                 'empty_value' => ' - Tournament - ',
                 'empty_data' => null,
                 'required' => false,
-                'query_builder' => function (TournamentRepository $repository) use ($request) {
+                'query_builder' => function (TournamentRepository $repository) use ($gameFilter) {
                     $query = $repository->createQueryBuilder('t')
                         ->add('orderBy', 't.id ASC');
-                    if (array_key_exists('country', $request) && $request['country']) {
+                    if ($gameFilter->getCountry()) {
                         $query
                             ->andWhere('t.country = ?1')
-                            ->setParameter(1, $request['country']);
+                            ->setParameter(1, $gameFilter->getCountry()->getId());
                     }
                     return $query;
                 }
@@ -72,17 +77,17 @@ class GameFilterType extends AbstractType
                 'empty_value' => ' - Season - ',
                 'empty_data' => null,
                 'required' => false,
-                'query_builder' => function (SeasonRepository $repository) use ($request) {
+                'query_builder' => function (SeasonRepository $repository) use ($gameFilter) {
                     $query = $repository->createQueryBuilder('s')
                         ->add('orderBy', 's.id ASC');
-                    if (array_key_exists('tournament',$request) && $request['tournament']) {
+                    if ($gameFilter->getTournament()) {
                         $query
                             ->andWhere('s.tournament = ?1')
-                            ->setParameter(1, $request['tournament']);
-                    } elseif (array_key_exists('country',$request) && $request['country']) {
+                            ->setParameter(1, $gameFilter->getTournament()->getId());
+                    } elseif ($gameFilter->getCountry()) {
                         $query
                             ->leftJoin('s.tournament', 'tournament', Join::WITH, 'tournament.country = ?1')
-                            ->setParameter(1, $request['country'])
+                            ->setParameter(1, $gameFilter->getCountry()->getId())
                             ->andWhere('s.tournament = tournament.id');
                     }
                     return $query;
@@ -94,17 +99,17 @@ class GameFilterType extends AbstractType
                 'empty_value' => ' - Round - ',
                 'empty_data' => null,
                 'required' => false,
-                'query_builder' => function (RoundRepository $repository) use ($request) {
+                'query_builder' => function (RoundRepository $repository) use ($gameFilter) {
                     $query = $repository->createQueryBuilder('r')
                         ->add('orderBy', 'r.id ASC');
-                    if (array_key_exists('season',$request) && $request['season']) {
+                    if ($gameFilter->getSeason()) {
                         $query
                             ->andWhere('r.season = ?1')
-                            ->setParameter(1, $request['season']);
-                    } elseif (array_key_exists('tournament',$request) && $request['tournament']) {
+                            ->setParameter(1, $gameFilter->getSeason()->getId());
+                    } elseif ($gameFilter->getTournament()) {
                         $query
                             ->leftJoin('r.season', 'season', Join::WITH, 'season.tournament = ?1')
-                            ->setParameter(1, $request['tournament'])
+                            ->setParameter(1, $gameFilter->getTournament()->getId())
                             ->andWhere('r.season = season.id');
                     }
                     return $query;
@@ -116,22 +121,22 @@ class GameFilterType extends AbstractType
                 'empty_value' => ' - Tour - ',
                 'empty_data' => null,
                 'required' => false,
-                'query_builder' => function (TourRepository $repository) use ($request) {
+                'query_builder' => function (TourRepository $repository) use ($gameFilter) {
                     $query = $repository->createQueryBuilder('t')
                         ->add('orderBy', 't.id ASC');
-                    if (array_key_exists('round',$request) && $request['round']) {
+                    if ($gameFilter->getRound()) {
                         $query
                             ->andWhere('t.round = ?1')
-                            ->setParameter(1, $request['round']);
-                    } elseif (array_key_exists('season',$request) && $request['season']) {
+                            ->setParameter(1, $gameFilter->getRound()->getId());
+                    } elseif ($gameFilter->getSeason()) {
                         $query
                             ->leftJoin('t.round', 'round', Join::WITH, 'round.season = ?1')
-                            ->setParameter(1, $request['season'])
+                            ->setParameter(1, $gameFilter->getSeason()->getId())
                             ->andWhere('t.round = round.id');
-                    } elseif (array_key_exists('tournament',$request) && $request['tournament']) {
+                    } elseif ($gameFilter->getTournament()) {
                         $query
                             ->leftJoin('t.season', 'season', Join::WITH, 'season.tournament = ?1')
-                            ->setParameter(1, $request['tournament'])
+                            ->setParameter(1, $gameFilter->getTournament()->getId())
                             ->andWhere('t.season = season.id');
                     }
                     return $query;
@@ -143,27 +148,27 @@ class GameFilterType extends AbstractType
                 'empty_value' => ' - Team - ',
                 'empty_data' => null,
                 'required' => false,
-                'query_builder' => function (TeamRepository $repository) use ($request) {
+                'query_builder' => function (TeamRepository $repository) use ($gameFilter) {
                     $query = $repository->createQueryBuilder('t')
                         ->add('orderBy', 't.id ASC');
-                    if (array_key_exists('season', $request) && $request['season']) {
+                    if ($gameFilter->getSeason()) {
                         $query
                             ->leftJoin('t.seasons', 'season')
                             ->andWhere('season = ?1')
-                            ->setParameter(1, $request['season']);
-                    } elseif (array_key_exists('tournament',$request) && $request['tournament']) {
+                            ->setParameter(1, $gameFilter->getSeason()->getId());
+                    } elseif ($gameFilter->getTournament()) {
                         $query
                             ->leftJoin('t.seasons', 'season')
                             ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournament')
                             ->andWhere('tournament.id = ?2')
-                            ->setParameter(2, $request['tournament']);
-                    } elseif (array_key_exists('country',$request) && $request['country']) {
+                            ->setParameter(2, $gameFilter->getTournament()->getId());
+                    } elseif ($gameFilter->getCountry()) {
                         $query
                             ->leftJoin('t.seasons', 'season')
                             ->leftJoin('season.tournament', 'tournament',Join::WITH, 'tournament.id = season.tournament')
                             ->leftJoin('tournament.country', 'country',Join::WITH, 'country.id = tournament.country')
                             ->andWhere('country.id = ?3')
-                            ->setParameter(3, $request['country']);
+                            ->setParameter(3, $gameFilter->getCountry()->getId());
                     }
                     return $query;
                 }
