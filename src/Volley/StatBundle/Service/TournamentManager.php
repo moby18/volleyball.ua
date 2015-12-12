@@ -75,14 +75,17 @@ class TournamentManager
             $homeTeamSets = $game->getScoreSetHome();
             $awayTeamSets = $game->getScoreSetAway();
 
+            if ($homeTeamId) $table[$homeTeamId]['win_sets'] += $homeTeamSets;
+            if ($homeTeamId) $table[$homeTeamId]['loss_sets'] += $awayTeamSets;
+            if ($awayTeamId) $table[$awayTeamId]['win_sets'] += $awayTeamSets;
+            if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $homeTeamSets;
+
             if ($homeTeamSets > $awayTeamSets) {
                 $table[$awayTeamId]['score'.$awayTeamSets.'3'] += 1;
                 $table[$homeTeamId]['score3'.$awayTeamSets] += 1;
 
                 if ($homeTeamId) $table[$homeTeamId]['win'] += 1;
-                if ($homeTeamId) $table[$homeTeamId]['win_sets'] += $homeTeamSets;
                 if ($awayTeamId) $table[$awayTeamId]['loss'] += 1;
-                if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $awayTeamSets;
                 if ($homeTeamSets - $awayTeamSets >= 2) {
                     if ($homeTeamId) $table[$homeTeamId]['points'] += 3;
                     if ($awayTeamId) $table[$awayTeamId]['points'] += 0;
@@ -95,9 +98,7 @@ class TournamentManager
                 $table[$awayTeamId]['score3'.$homeTeamSets] += 1;
 
                 if ($homeTeamId) $table[$homeTeamId]['loss'] += 1;
-                if ($homeTeamId) $table[$homeTeamId]['loss_sets'] += $homeTeamSets;
                 if ($awayTeamId) $table[$awayTeamId]['win'] += 1;
-                if ($awayTeamId) $table[$awayTeamId]['win_sets'] += $awayTeamSets;
                 if ($awayTeamSets - $homeTeamSets >= 2) {
                     if ($homeTeamId) $table[$homeTeamId]['points'] += 0;
                     if ($awayTeamId) $table[$awayTeamId]['points'] += 3;
