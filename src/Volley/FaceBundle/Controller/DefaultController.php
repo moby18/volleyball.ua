@@ -52,14 +52,12 @@ class DefaultController extends Controller
             if ($game->getHomeTeam()) {
                 $homeTeamId = $game->getHomeTeam()->getId();
                 $table[$homeTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $homeTeamId = 0;
             if ($game->getAwayTeam()) {
                 $awayTeamId = $game->getAwayTeam()->getId();
                 $table[$awayTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $awayTeamId = 0;
 
             $homeTeamSets = $game->getScoreSetHome();
@@ -117,14 +115,14 @@ class DefaultController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,5);
+        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([], null, 5);
         // news
-        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent'=> null]);
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
         $news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
-        return $this->render('VolleyWebBundle:Default:index.html.twig', [
+        return [
             'slides' => $slides,
             'news' => $news
-        ]);
+        ];
     }
 
     /**
