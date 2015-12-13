@@ -147,7 +147,7 @@ class GameController extends Controller
      */
     private function createCreateForm(Game $entity)
     {
-        $form = $this->createForm(new GameType(), $entity, array(
+        $form = $this->createForm(new GameType($entity), $entity, array(
             'action' => $this->generateUrl('stat_game_create'),
             'method' => 'POST',
         ));
@@ -170,6 +170,7 @@ class GameController extends Controller
 
         /** @var Game $entity */
         $entity = new Game();
+        $entity->setDate(new \DateTime());
         $entity->setSeason($gameFilter->getSeason());
         $entity->setTour($gameFilter->getTour());
         $form = $this->createCreateForm($entity);
@@ -191,7 +192,9 @@ class GameController extends Controller
     public function dublAction($game)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var Game $clone */
         $clone = clone $game;
+        $clone->setNumber($clone->getNumber()+1);
         $em->detach($clone);
         $em->persist($clone);
         $em->flush();
