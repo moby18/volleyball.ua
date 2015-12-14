@@ -33,7 +33,7 @@ class PostType extends AbstractType
             ->add('published', 'datetime', [
                 'widget' => 'single_text',
 //                'widget' => 'choice',
-//                'format' => 'YYYY-MM-dd hh:mm:ss',
+                'format' => 'YYYY-MM-dd hh:mm:ss',
                 'required' => true])
 //            ->add('content')
             ->add('createdBy')

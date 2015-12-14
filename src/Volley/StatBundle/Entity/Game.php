@@ -411,7 +411,8 @@ class Game
     public function setTour(\Volley\StatBundle\Entity\Tour $tour = null)
     {
         $this->tour = $tour;
-        $this->season = $tour->getSeason();
+        if ($this->tour)
+            $this->season = $tour->getSeason();
 
         return $this;
     }

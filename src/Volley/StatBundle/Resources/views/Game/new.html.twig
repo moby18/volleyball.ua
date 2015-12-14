@@ -61,6 +61,9 @@
             });
         });
     </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/game.js') }}"></script>
 {% endblock %}
 
 {% block body -%}
@@ -83,4 +86,9 @@
         <a href="{{ path('stat_game') }}" type="button"
            class="btn btn-default">Back to the list</a>
     </div>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
 {% endblock %}

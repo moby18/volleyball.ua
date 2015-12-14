@@ -41,7 +41,7 @@ class GameType extends AbstractType
                 'query_builder' =>  function (TeamRepository $repository) use ($game) {
                     $query = $repository->createQueryBuilder('t')
                         ->addOrderBy('t.id', 'ASC');
-                    if ($game->getSeason()) {
+                    if ($game ? $game->getSeason() : false) {
                         $query
                             ->leftJoin('t.seasons', 'season')
                             ->andWhere('season = ?1')
@@ -55,7 +55,7 @@ class GameType extends AbstractType
                 'query_builder' =>  function (TeamRepository $repository) use ($game) {
                     $query = $repository->createQueryBuilder('t')
                         ->addOrderBy('t.id', 'ASC');
-                    if ($game->getSeason()) {
+                    if ($game ? $game->getSeason() : false) {
                         $query
                             ->leftJoin('t.seasons', 'season')
                             ->andWhere('season = ?1')
@@ -72,7 +72,10 @@ class GameType extends AbstractType
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
-            ->add('date')
+            ->add('date', 'datetime', [
+                'widget' => 'single_text',
+                'format' => 'YYYY-MM-dd HH:mm:ss',
+                'required' => true])
             ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }

@@ -170,7 +170,8 @@ class GameController extends Controller
 
         /** @var Game $entity */
         $entity = new Game();
-        $entity->setDate(new \DateTime());
+        $date = new \DateTime();
+        $entity->setDate($date->setTime(18,0,0));
         $entity->setSeason($gameFilter->getSeason());
         $entity->setTour($gameFilter->getTour());
         $form = $this->createCreateForm($entity);
@@ -263,7 +264,7 @@ class GameController extends Controller
      */
     private function createEditForm(Game $entity)
     {
-        $form = $this->createForm(new GameType(), $entity, array(
+        $form = $this->createForm(new GameType($entity), $entity, array(
             'action' => $this->generateUrl('stat_game_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

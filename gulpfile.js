@@ -74,9 +74,10 @@ gulp.task('script_admin', function () {
         //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/*.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/jquery.datetimepicker.js',
+        //'src/Volley/FaceBundle/Resources/public/js/custom/jquery.datetimepicker.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/slide.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/post.js'
+        'src/Volley/FaceBundle/Resources/public/js/custom/post.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/game.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -89,7 +90,9 @@ gulp.task('script_admin', function () {
 
 gulp.task('script_install', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/js/custom/**/*.js'
+        'src/Volley/FaceBundle/Resources/public/js/custom/**/*.js',
+        'src/Volley/StatBundle/Resources/public/js/custom/**/*.js',
+
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
