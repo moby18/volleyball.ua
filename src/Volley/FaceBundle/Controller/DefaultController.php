@@ -15,6 +15,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class DefaultController extends Controller
 {
     /**
+     * @Route("/robots.txt", name="volley_face_robots")
+     * @Template()
+     */
+    public function robotsAction()
+    {
+        return [];
+    }
+
+
+    /**
      * @Route("/tournamentTable", name="volley_face_tournament_table")
      * @Template()
      */
