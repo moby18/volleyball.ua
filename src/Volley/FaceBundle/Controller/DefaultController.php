@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -16,11 +17,13 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/robots.txt", name="volley_face_robots")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:robots.txt.twig")
      */
     public function robotsAction()
     {
-        return [];
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/plain');
+        return $this->render("VolleyFaceBundle:Default:robots.txt.twig", [], $response);
     }
 
 
