@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
+use Volley\FaceBundle\Entity\Category;
+use Volley\FaceBundle\Entity\Post;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -229,13 +231,22 @@ class DefaultController extends Controller
     /**
      * Blog Route - should be at the bottom of routes list
      *
+     * @param Category $category
+     * @param Post $post
+     *
+     * @return void
+     *
      * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}, "repository_method" = "findWithOptions", "map_method_signature" = true})
      * @Template()
      */
-    public function postAction($category, $post)
+    public function postAction(Category $category, Post $post)
     {
+        $em = $this->getDoctrine()->getManager();
+        $post->setHits($post->getHits()+1);
+        $em->flush();
+
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
             'post' => $post
