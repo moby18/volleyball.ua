@@ -5,6 +5,7 @@
 /web/css/
 /web/media
 /web/images
+/web/fonts
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
