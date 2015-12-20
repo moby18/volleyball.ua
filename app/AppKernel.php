@@ -27,7 +27,6 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Volley\StatBundle\VolleyStatBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Volley\WebBundle\VolleyWebBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),

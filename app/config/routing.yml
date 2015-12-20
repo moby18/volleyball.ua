@@ -5,10 +5,6 @@ oneup_uploader:
     resource: .
     type: uploader
 
-volley_web:
-    resource: "@VolleyWebBundle/Resources/config/routing.yml"
-    prefix:   /
-
 volley_stat:
     resource: "@VolleyStatBundle/Controller/"
     type:     annotation
@@ -16,10 +12,6 @@ volley_stat:
 
 volley_user:
     resource: "@VolleyUserBundle/Resources/config/routing.yml"
-    prefix:   /
-
-volley_face:
-    resource: "@VolleyFaceBundle/Resources/config/routing.yml"
     prefix:   /
 
 fos_user_security:
@@ -40,3 +32,7 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+volley_face:
+    resource: "@VolleyFaceBundle/Resources/config/routing.yml"
+    prefix:   /

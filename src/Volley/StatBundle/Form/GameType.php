@@ -5,30 +5,77 @@ namespace Volley\StatBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\TeamRepository;
 
 class GameType extends AbstractType
 {
+    /**
+     * @var Game
+     */
+    private $game;
+
+    /**
+     * @param Game $game
+     *
+     * GameType constructor.
+     */
+    public function __construct(Game $game)
+    {
+        $this->game = $game;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $game = $this->game;
         $builder
             ->add('number')
-            ->add('name')
+            ->add('season')
+            ->add('tour')
+            ->add('homeTeam','entity',[
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'query_builder' =>  function (TeamRepository $repository) use ($game) {
+                    $query = $repository->createQueryBuilder('t')
+                        ->addOrderBy('t.id', 'ASC');
+                    if ($game ? $game->getSeason() : false) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->andWhere('season = ?1')
+                            ->setParameter(1, $game->getSeason()->getId());
+                    }
+                    return $query;
+                }
+            ])
+            ->add('awayTeam','entity',[
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'query_builder' =>  function (TeamRepository $repository) use ($game) {
+                    $query = $repository->createQueryBuilder('t')
+                        ->addOrderBy('t.id', 'ASC');
+                    if ($game ? $game->getSeason() : false) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->andWhere('season = ?1')
+                            ->setParameter(1, $game->getSeason()->getId());
+                    }
+                    return $query;
+                }
+            ])
+//            ->add('name')
             ->add('duration')
             ->add('homeTeamEmpty')
             ->add('awayTeamEmpty')
-            ->add('score')
+            ->add('score','hidden',[])
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
-            ->add('date')
-            ->add('homeTeam')
-            ->add('awayTeam')
-            ->add('tour')
-//            ->add('season')
+            ->add('date', 'datetime', [
+                'widget' => 'single_text',
+                'format' => 'YYYY-MM-dd HH:mm:ss',
+                'required' => true])
             ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Team
  *
  * @ORM\Table(name="stat_team")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TeamRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Team
@@ -40,7 +40,7 @@ class Team
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 

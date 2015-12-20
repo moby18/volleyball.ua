@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,18 +18,22 @@ class PostType extends AbstractType
         $builder
             ->add('title')
 //            ->add('slug')
-            ->add('content', 'textarea', array())
-            ->add('text', 'textarea', array(
+            ->add('content', 'textarea', [
+                'label' => 'Short content'
+            ])
+            ->add('text', 'textarea', [
+                'label' => 'Full text',
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced' // simple, advanced, bbcode
-                ), 'required'=>false))
+                ), 'required'=>false
+            ])
             ->add('state')
 //            ->add('created')
             ->add('published', 'datetime', [
                 'widget' => 'single_text',
 //                'widget' => 'choice',
-//                'format' => 'YYYY-MM-dd hh:mm:ss',
+                'format' => 'YYYY-MM-dd HH:mm:ss',
                 'required' => true])
 //            ->add('content')
             ->add('createdBy')
@@ -41,8 +46,17 @@ class PostType extends AbstractType
 //            ->add('metadata')
             ->add('featured')
             ->add('language')
-            ->add('category')
-            ->add('file')
+            ->add('category','entity', [
+                'class' => 'Volley\FaceBundle\Entity\Category',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+//                        ->select('c.id, c.name')
+                        ->orderBy('c.lft', 'ASC');
+                }
+            ])
+            ->add('file', null, [
+                'label' => 'Post Image (width>=555px and height>=350px)'
+            ])
         ;
     }
     

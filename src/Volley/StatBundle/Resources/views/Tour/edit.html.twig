@@ -5,12 +5,11 @@
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('stat_tour') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_tour') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
 {% endblock %}

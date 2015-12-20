@@ -6,58 +6,20 @@
 
         <div class="container">
 
-            <h1 class="text-center">Відео</h1>
+            <h1 class="text-center">{{ category.name }}</h1>
 
             <hr>
 
-            {% for post in posts %}
             <div class="row">
-
-            {% if loop.index is odd %}
-                <div class="col-md-7">
-                    <a href="{#{{ path('volley_face_post') }}#}">
-                        <img class="img-responsive" src="{{ post.getWebPath }}">
-                    </a>
+                <div class="col-lg-6">
+                    <div class="row">
+                        {% for item in posts %}
+                            {% include 'VolleyFaceBundle:Default/includes:post.html.twig' %}
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <h3>{{ post.title }}</h3>
-                    {#<h4>Subheading</h4>#}
-                    <p>
-                    {% autoescape %}
-                        {{ post.content|raw }}
-                    {% endautoescape %}
-                    </p>
-                    {%  if post.text != "" %}
-                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': post.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
-                    {% endif %}
-                </div>
-            {% else %}
-                <div class="col-md-5">
-                    <h3>{{ post.title }}</h3>
-                    {#<h4>Subheading</h4>#}
-                    <p>
-                    {% autoescape %}
-                        {{ post.content|raw }}
-                    {% endautoescape %}
-                    </p>
-                    {%  if post.text != "" %}
-                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': post.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
-                    {% endif %}
-                </div>
-                <div class="col-md-7">
-                    <a href="{#{{ path('volley_face_post') }}#}">
-                        <img class="img-responsive" src="{{ post.getWebPath }}">
-                    </a>
-                </div>
-            {% endif %}
 
             </div>
-
-            {% if not loop.last %}
-                <hr>
-            {% endif %}
-
-            {% endfor %}
 
         </div>
         <!-- /.container -->

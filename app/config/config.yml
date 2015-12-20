@@ -2,11 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine_extensions.yml }
+    - { resource: services.yml }
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
-    translator: ~
+    translator:      { fallback: "%locale%" }
+#    translator: ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -38,74 +39,12 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ VolleyFaceBundle ]
+    bundles:        [ VolleyFaceBundle,FOSUserBundle]
     filters:
         uglifycss:
             bin: %uglifycss_path%
         uglifyjs:
             bin: %uglifyjs_path%
-            mangle: true
-    assets:
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
-        datetimepicker_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/jquery.datetimepicker.js
-        datetimepicker_css:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/jquery.datetimepicker.css
-        bootstrap_css:
-            inputs:
-#                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css
-        bootstrap_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
-        volley_css:
-            inputs:
-                - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/styles.css
-#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
-            filters:
-                - ?uglifycss
-        volley_css_ie:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/ie.css
-            filters:
-                - ?uglifycss
-        volley_admin_css:
-            inputs:
-                - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/dashboard.css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/admin/styles.css
-            filters:
-                - ?uglifycss
-        volley_header_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/html5shiv.js
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/respond.min.js
-            filters:
-                - ?uglifyjs
-        volley_carousel_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/carousel.js
-        volley_footer_js:
-            inputs:
-                - @jquery
-                - @bootstrap_js
-                - @volley_carousel_js
 
 # Doctrine Configuration
 doctrine:
@@ -210,6 +149,7 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             softdeleteable: true
+            tree: true
 
 liip_imagine:
     resolvers:
@@ -217,10 +157,14 @@ liip_imagine:
           web_path: ~
     filter_sets:
         cache: ~
-        carousel:
+        main_pic:
             quality: 100
             filters:
-                thumbnail: { size: [760, 350], mode: outbound }
+                thumbnail: { size: [555, 350], mode: outbound }
+        main_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [278, 175], mode: outbound }
 
 oneup_uploader:
     mappings:

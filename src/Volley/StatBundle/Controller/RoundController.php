@@ -53,7 +53,7 @@ class RoundController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('round_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_round_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,7 +72,7 @@ class RoundController extends Controller
     private function createCreateForm(Round $entity)
     {
         $form = $this->createForm(new RoundType(), $entity, array(
-            'action' => $this->generateUrl('round_create'),
+            'action' => $this->generateUrl('stat_round_create'),
             'method' => 'POST',
         ));
 
@@ -161,7 +161,7 @@ class RoundController extends Controller
     private function createEditForm(Round $entity)
     {
         $form = $this->createForm(new RoundType(), $entity, array(
-            'action' => $this->generateUrl('round_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('stat_round_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -193,7 +193,7 @@ class RoundController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('round_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_round_edit', array('id' => $id)));
         }
 
         return array(
@@ -238,7 +238,7 @@ class RoundController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('round_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_round_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

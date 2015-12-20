@@ -61,6 +61,9 @@
             });
         });
     </script>
+
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/game.js') }}"></script>
 {% endblock %}
 
 {% block body -%}
@@ -72,18 +75,20 @@
         <label>Sets</label>
         <ul class="tags list-group list-inline" data-prototype="{{ form_widget(form.sets.vars.prototype)|e }}">
             {% for set in form.sets %}
-                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome) }} - {{ form_row(set.scoreSetAway) }}</li>
+                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome, {'label': false}) }} - {{ form_row(set.scoreSetAway, {'label': false}) }}</li>
             {% endfor %}
         </ul>
     </div>
 
     {{ form_end(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('stat_game') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_game') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
 {% endblock %}

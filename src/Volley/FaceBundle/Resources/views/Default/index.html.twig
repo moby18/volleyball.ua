@@ -2,60 +2,37 @@
 
 {% block carousel %}
 
-    <div class="section section-carousel">
+    <div class="section section-main">
         <div class="container">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-
-                    {% for slide in slides %}
-                        <div class="item {{ loop.first ? "active" : "" }}">
-                            <img src="{{ ('uploads/slides/' ~ slide.id ~ '.' ~ slide.image) | imagine_filter('carousel') }}">
-                            {#{{ '/uploads/slides/' ~ slide.id ~ '.' ~ slide.image | imagine_filter('carousel') }}#}
-
-                            <div class="carousel-caption">
-                                <h4><a href="#">{{ slide.title }}</a></h4>
-
-                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                    tempor
-                                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum
-                                    dolor
-                                    sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                                    labore
-                                    et dolore magna aliquyam erat.
-                                </p>
-                            </div>
-                        </div><!-- End Item -->
-                    {% endfor %}
-
+            <div class="row">
+                <div class="col-lg-6">
+                    {% include 'VolleyFaceBundle:Default/includes:thumb.html.twig' with {'slide': slides[0], thumbnail: 'main_pic'} %}
                 </div>
-                <!-- End Carousel Inner -->
-
-
-                <ul class="list-group col-sm-4">
-                    {% for slide in slides %}
-                        <li data-target="#myCarousel" data-slide-to="{{ loop.index - 1 }}"
-                            class="list-group-item {{ loop.first ? "active" : "" }}">
-                            <div>
-                                <h4>{{ slide.title }}</h4>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12 thumb-container">
+                            <div class="row">
+                                <div class="col-lg-6 thumb">
+                                    {% include 'VolleyFaceBundle:Default/includes:thumb.html.twig' with {'slide': slides[1], thumbnail: 'main_thumb'} %}
+                                </div>
+                                <div class="col-lg-6 thumb">
+                                    {% include 'VolleyFaceBundle:Default/includes:thumb.html.twig' with {'slide': slides[2], thumbnail: 'main_thumb'} %}
+                                </div>
                             </div>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-                <!-- Controls -->
-                <div class="carousel-controls">
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                            <div class="row">
+                                <div class="col-lg-6 thumb">
+                                    {% include 'VolleyFaceBundle:Default/includes:thumb.html.twig' with {'slide': slides[3], thumbnail: 'main_thumb'} %}
+                                </div>
+                                <div class="col-lg-6 thumb">
+                                    {% include 'VolleyFaceBundle:Default/includes:thumb.html.twig' with {'slide': slides[4], thumbnail: 'main_thumb'} %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-            <!-- End Carousel -->
+
         </div>
     </div>
 
@@ -63,27 +40,42 @@
 
 {% block content %}
 
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="sections">
 
         <div class="container">
 
-            <div class="row news">
-                {% for item in news %}
-                    <div class="news-item col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}">
-                            <img class="img-responsive" src="{{ item.getWebPath }}">
-                        </a>
-                        <a href="{{ path('volley_face_post',{'post_id': item.id}) }}"><h3>{{ item.title }}</h3></a>
-                        <span class="news-info">{{ item.created|date('d/m/Y H:i') ~ ' | ' ~ item.createdBy }}</span>
-                        {% autoescape %}
-                        {{ item.content|raw }}
-                        {% endautoescape %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        {% for item in news %}
+                            {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </div>
-            <!-- /.row -->
+                </div>
 
-            <hr>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':1, 'tournamentId': 1})) }}
+                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':2, 'tournamentId': 2})) }}
+                        </div>
+                        <div class="col-lg-6">
+                            {% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}
+                            {% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
         <!-- /.container -->

@@ -1,8 +1,3 @@
-volley_face_default:
-    resource: "Volley\FaceBundle\Controller\DefaultController"
-    type: annotation
-    prefix:   /
-
 volley_face_admin:
     resource: "@VolleyFaceBundle/Resources/config/routing/admin.yml"
     prefix:   /admin
@@ -44,3 +39,7 @@ VolleyFaceBundle_admin_slide:
     prefix:   /admin
     type:     annotation
 
+volley_face_default:
+    resource: "Volley\FaceBundle\Controller\DefaultController"
+    type: annotation
+    prefix:   /

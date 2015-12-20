@@ -44,6 +44,8 @@ class PostController extends Controller
 
             $entity->upload();
 
+            $entity->setCreatedBy($this->getUser());
+
             $em->persist($entity);
             $em->flush();
 
@@ -174,6 +176,8 @@ class PostController extends Controller
         if ($editForm->isValid()) {
 
             $entity->upload();
+
+            $entity->setModifiedBy($this->getUser()->getId());
 
             $em->flush();
 
