@@ -57,7 +57,8 @@ gulp.task('script', function () {
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
         //'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/js/dropdown.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/menu.js'
+        'src/Volley/FaceBundle/Resources/public/js/custom/menu.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/game.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
