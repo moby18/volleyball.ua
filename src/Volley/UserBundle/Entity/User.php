@@ -29,10 +29,16 @@ class User extends BaseUser
      **/
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="\Volley\FaceBundle\Entity\Post", mappedBy="modifiedBy")
+     **/
+    private $modified_posts;
+
     public function __construct()
     {
         parent::__construct();
         $this->posts = new ArrayCollection();
+        $this->modified_posts = new ArrayCollection();
     }
 
     /**

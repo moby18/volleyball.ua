@@ -163,6 +163,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Post $entity */
         $entity = $em->getRepository('VolleyFaceBundle:Post')->find($id);
 
         if (!$entity) {
@@ -177,7 +178,7 @@ class PostController extends Controller
 
             $entity->upload();
 
-            $entity->setModifiedBy($this->getUser()->getId());
+            $entity->setModifiedBy($this->getUser());
 
             $em->flush();
 
