@@ -114,6 +114,27 @@ class PostController extends Controller
     }
 
     /**
+     * Finds and displays a Post entity.
+     *
+     * @param int $id
+     * @return string
+     */
+    public function previewAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository('VolleyFaceBundle:Post')->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
+        }
+
+        $category = $post->getCategory();
+
+        return $this->render('VolleyFaceBundle:Default:post.html.twig', ['category' => $category, 'post' => $post]);
+    }
+
+    /**
      * Displays a form to edit an existing Post entity.
      *
      */

@@ -234,7 +234,7 @@ class DefaultController extends Controller
      * @param Category $category
      * @param Post $post
      *
-     * @return void
+     * @return string
      *
      * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
@@ -256,15 +256,18 @@ class DefaultController extends Controller
     /**
      * Blog Route - should be at the bottom of routes list
      *
+     * @param Category $category
+     *
+     * @return string
+     *
      * @Route("/{category_slug}", name="volley_face_blog")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */
-    public function blogAction($category)
+    public function blogAction(Category $category)
     {
         $em = $this->getDoctrine()->getManager();
 
-        // post
         $posts = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category);
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(

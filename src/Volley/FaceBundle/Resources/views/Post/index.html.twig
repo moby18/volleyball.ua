@@ -61,6 +61,8 @@
                     {#<td>{{ entity.language }}</td>#}
                     <td class="col-md-2 col-lg-2 col-sm-2">
                         <div class="btn-group pull-right" role="group" aria-label="">
+                            <a href="{{ path('post_preview', { 'id': entity.id }) }}" target="_blank" type="button"
+                               class="btn btn-default">preview</a>
                             <a href="{{ path('post_show', { 'id': entity.id }) }}" type="button"
                                class="btn btn-default">show</a>
                             <a href="{{ path('post_edit', { 'id': entity.id }) }}" type="button"
