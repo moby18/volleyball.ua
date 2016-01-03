@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Volley\FaceBundle\Entity\Tournament;
 use Volley\FaceBundle\Form\TournamentType;
+use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\Season;
 
 /**
  * Tournament controller.

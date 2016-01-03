@@ -6,6 +6,10 @@ post_show:
     pattern:  /{id}/show
     defaults: { _controller: "VolleyFaceBundle:Post:show" }
 
+post_preview:
+    pattern:  /{id}/preview
+    defaults: { _controller: "VolleyFaceBundle:Post:preview" }
+
 post_new:
     pattern:  /new
     defaults: { _controller: "VolleyFaceBundle:Post:new" }

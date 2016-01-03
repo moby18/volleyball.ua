@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Round
  *
  * @ORM\Table(name="stat_round")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\RoundRepository")
  */
 class Round
 {
@@ -194,5 +194,13 @@ class Round
     public function getTours()
     {
         return $this->tours;
+    }
+
+    function __toString()
+    {
+        $season = $this->getSeason();
+        $tournament = $season->getTournament();
+        $country = $tournament->getCountry();
+        return $country->getName().$tournament->getName().$season->getName().' - '.$this->getName();
     }
 }

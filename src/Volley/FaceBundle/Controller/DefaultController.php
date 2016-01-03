@@ -2,15 +2,33 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Volley\FaceBundle\Entity\Category;
+use Volley\FaceBundle\Entity\Post;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/robots.txt", name="volley_face_robots")
+     * @Template("VolleyFaceBundle:Default:robots.txt.twig")
+     */
+    public function robotsAction()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/plain');
+        return $this->render("VolleyFaceBundle:Default:robots.txt.twig", [], $response);
+    }
+
+
     /**
      * @Route("/tournamentTable", name="volley_face_tournament_table")
      * @Template()
@@ -49,14 +67,12 @@ class DefaultController extends Controller
             if ($game->getHomeTeam()) {
                 $homeTeamId = $game->getHomeTeam()->getId();
                 $table[$homeTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $homeTeamId = 0;
             if ($game->getAwayTeam()) {
                 $awayTeamId = $game->getAwayTeam()->getId();
                 $table[$awayTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $awayTeamId = 0;
 
             $homeTeamSets = $game->getScoreSetHome();
@@ -111,15 +127,17 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findAll();
+        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([], null, 5);
         // news
-        $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
-        return $this->render('VolleyWebBundle:Default:index.html.twig', [
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
+        $news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
+        return [
             'slides' => $slides,
             'news' => $news
-        ]);
+        ];
     }
 
     /**
@@ -188,45 +206,73 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post/{post_id}", name="volley_face_post")
+     * @Route("/contacts", name="volley_face_contacts")
      * @Template()
      */
-    public function postAction($post_id)
+    public function contactsAction()
+    {
+        return $this->render('VolleyFaceBundle:Default:contacts.html.twig', []);
+    }
+
+    /**
+     * * Deletes a Tournament entity.
+     *
+     * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
+     * @Method("GET")
+     * @param int $season_id
+     * @param int $tournament_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($season_id, $tournament_id)
+    {
+        return $this->render('VolleyFaceBundle:Stat:tournament.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($season_id, $tournament_id));
+    }
+
+    /**
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @param Category $category
+     * @param Post $post
+     *
+     * @return string
+     *
+     * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}, "repository_method" = "findWithOptions", "map_method_signature" = true})
+     * @Template()
+     */
+    public function postAction(Category $category, Post $post)
     {
         $em = $this->getDoctrine()->getManager();
-
-        // post
-        $post = $em->getRepository('VolleyFaceBundle:Post')->find($post_id);
+        $post->setHits($post->getHits()+1);
+        $em->flush();
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
+            'category' => $category,
             'post' => $post
         ));
     }
 
     /**
-     * @Route("/blog/{category_id}", name="volley_face_blog")
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @param Category $category
+     *
+     * @return string
+     *
+     * @Route("/{category_slug}", name="volley_face_blog")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */
-    public function blogAction($category_id)
+    public function blogAction(Category $category)
     {
         $em = $this->getDoctrine()->getManager();
 
-        // post
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category_id), array('id' => 'DESC'));
+        $posts = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category);
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
+            'category' => $category,
             'posts' => $posts
         ));
     }
-
-    /**
-     * @Route("/zayavka", name="volley_face_zayavka")
-     * @Template()
-     */
-    public function zayavkaAction()
-    {
-
-        return $this->render('VolleyFaceBundle:Default:zayavka.html.twig', array());
-    }
-
 }

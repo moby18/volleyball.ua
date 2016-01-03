@@ -1,0 +1,11 @@
+<div class="item">
+    <a href="{{ slide.type ? slide.link : path('volley_face_post',{'category_slug': slide.post.category.slug, 'post_slug': slide.post.slug}) }}">
+        <img width="100%" height="100%" src="{{ ('uploads/slides/' ~ slide.imageName) | imagine_filter(thumbnail) }}">
+        <div class="item-descr">
+            <h4>{{ slide.type ? slide.title : slide.post.title }}</h4>
+            {% if slide.type == 0 %}
+                <p> {{ slide.post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}} / {{ slide.post.category.name }} /  {{ slide.post.hits ~ ' просмотров' }}  / {{ slide.post.createdBy ? slide.post.createdBy.name : '' }}</p>
+            {% endif %}
+        </div>
+    </a>
+</div>

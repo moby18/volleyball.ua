@@ -2,6 +2,8 @@
 
 {% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}
 {% set title = post.title %}
+{% set meta_keywords = post.metakey %}
+{% set meta_description = post.metadescr %}
 
 {% block content %}
 
@@ -10,22 +12,24 @@
         <div class="container">
 
             <div class="pull-left" style="width: 760px;">
-                <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
+                <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
                     <h1>{{ post.title }}</h1>
                 </a>
-                {#<a href="{{ path('volley_face_post',{'post_id': post.id}) }}">#}
-                    {#<img class="img-responsive" src="{{ post.getWebPath }}">#}
-                {#</a>#}
+                <img alt="{{ title ~ meta_keywords }}" class="img-responsive" src="{{ post.getWebPath }}">
 
-                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span
+                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span>
+                <p>
+                    <b>{{ post.content|raw }}</b>
+                </p>
                 <p>
                     {% autoescape %}
-                    {{ post.content|raw }}
-                    {{ post.text|raw }}
+                        {{ post.text|raw }}
                     {% endautoescape %}
                 </p>
 
                 {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                <br/>
             </div>
 
         </div>

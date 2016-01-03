@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Tour
  *
  * @ORM\Table(name="stat_tour")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TourRepository")
  */
 class Tour
 {
@@ -135,6 +135,22 @@ class Tour
     public function getSeason()
     {
         return $this->season;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRound()
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param mixed $round
+     */
+    public function setRound($round)
+    {
+        $this->round = $round;
     }
 
     /**

@@ -62,6 +62,8 @@
         <a href="{{ path('stat_game_edit', { 'id': entity.id }) }}">
             Edit
         </a>
+        <a href="{{ path('stat_game_dubl', { 'id': entity.id }) }}" type="button" onclick="return confirm('Are you sure you want dublicate entity?')"
+           class="btn btn-default">Dublicate</a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>

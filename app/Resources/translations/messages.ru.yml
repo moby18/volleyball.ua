@@ -1,0 +1,9 @@
+# User
+user:
+  admin:
+    email: Email
+    password: Пароль
+
+# Menu
+News: Новости
+Contact Us: Контакты

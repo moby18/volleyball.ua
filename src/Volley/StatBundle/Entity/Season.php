@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Season
  *
  * @ORM\Table(name="stat_season")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\SeasonRepository")
  */
 class Season
 {

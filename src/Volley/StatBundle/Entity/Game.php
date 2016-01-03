@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Game
  *
  * @ORM\Table(name="stat_game")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\GameRepository")
  */
 class Game
 {
@@ -411,7 +411,8 @@ class Game
     public function setTour(\Volley\StatBundle\Entity\Tour $tour = null)
     {
         $this->tour = $tour;
-        $this->season = $tour->getSeason();
+        if ($this->tour)
+            $this->season = $tour->getSeason();
 
         return $this;
     }
@@ -482,5 +483,10 @@ class Game
     {
         if ($season)
             $this->season = $season;
+    }
+
+    public function __clone() {
+        $this->id = null;
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }

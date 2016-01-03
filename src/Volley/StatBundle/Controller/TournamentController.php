@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\GameSet;
+use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Tournament;
 use Volley\StatBundle\Form\TournamentType;
 
@@ -244,4 +248,21 @@ class TournamentController extends Controller
             ->getForm()
         ;
     }
+
+
+
+    /**
+     * * Deletes a Tournament entity.
+     *
+     * @Route("/{id}/table", name="stat_tournament_table")
+     * @Method("GET")
+     * @param $seasonId
+     * @param $tournamentId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($seasonId = 1, $tournamentId = 1)
+    {
+        return $this->render('VolleyStatBundle:Tournament:table.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($seasonId, $tournamentId));
+    }
+
 }

@@ -19,6 +19,10 @@
                 <td>{{ entity.slug }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+                <td><a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a></td>
+            </tr>
+            <tr>
                 <th>Text</th>
                 <td>{{ entity.text }}</td>
             </tr>

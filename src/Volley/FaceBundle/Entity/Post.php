@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Volley\UserBundle\Entity\User;
 
 /**
  * Post
@@ -37,7 +38,7 @@ class Post
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"title","id"},updatable=true)
+     * @Gedmo\Slug(fields={"id","title"}, updatable=true)
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     private $slug;
@@ -89,17 +90,15 @@ class Post
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
+     **/
     private $createdBy;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="modified_by", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="modified_posts")
+     * @ORM\JoinColumn(name="modifiedBy", referencedColumnName="id")
+     **/
     private $modifiedBy;
 
     /**
@@ -336,29 +335,6 @@ class Post
     }
 
     /**
-     * Set alias
-     *
-     * @param string $alias
-     * @return Post
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
-
-        return $this;
-    }
-
-    /**
-     * Get alias
-     *
-     * @return string 
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
-
-    /**
      * Set text
      *
      * @param string $text
@@ -430,7 +406,7 @@ class Post
     /**
      * Set createdBy
      *
-     * @param string $createdBy
+     * @param User $createdBy
      * @return Post
      */
     public function setCreatedBy($createdBy)
@@ -443,7 +419,7 @@ class Post
     /**
      * Get createdBy
      *
-     * @return string 
+     * @return User
      */
     public function getCreatedBy()
     {
@@ -451,9 +427,15 @@ class Post
     }
 
     /**
-     * Set modifiedBy
-     *
-     * @param string $modifiedBy
+     * @return User
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
+     * @param mixed $modifiedBy
      * @return Post
      */
     public function setModifiedBy($modifiedBy)
@@ -461,16 +443,6 @@ class Post
         $this->modifiedBy = $modifiedBy;
 
         return $this;
-    }
-
-    /**
-     * Get modifiedBy
-     *
-     * @return string 
-     */
-    public function getModifiedBy()
-    {
-        return $this->modifiedBy;
     }
 
     /**
