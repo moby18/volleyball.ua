@@ -19,10 +19,10 @@
                 {#<th>Text</th>#}
                 <th>State</th>
                 {#<th>Created</th>#}
-                {#<th>Published</th>#}
+                <th>Published</th>
                 {#<th>Content</th>#}
                 <th>Createdby</th>
-                <th>Modifiedby</th>
+                {#<th>Modifiedby</th>#}
                 {#<th>Source</th>#}
                 {#<th>Ordering</th>#}
                 {#<th>Metakey</th>#}
@@ -45,10 +45,10 @@
                         <span class="glyphicon {{ entity.state ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' }}" aria-hidden="true"></span>
                     </td>
                     {#<td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                    {#<td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                    <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
                     {#<td>{{ entity.content }}</td>#}
                     <td>{{ entity.createdBy }}</td>
-                    <td>{{ entity.modifiedBy }}</td>
+                    {#<td>{{ entity.modifiedBy }}</td>#}
                     {#<td>{{ entity.source }}</td>#}
                     {#<td>{{ entity.ordering }}</td>#}
                     {#<td>{{ entity.metakey }}</td>#}
