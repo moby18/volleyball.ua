@@ -49,7 +49,7 @@ class Round
     protected $season;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tour", mappedBy="season")
+     * @ORM\OneToMany(targetEntity="Tour", mappedBy="round")
      */
     protected $tours;
 
