@@ -84,6 +84,7 @@ class PostController extends Controller
     public function newAction()
     {
         $entity = new Post();
+        $entity->setPublished(new \DateTime());
         $form   = $this->createCreateForm($entity);
 
         return $this->render('VolleyFaceBundle:Post:new.html.twig', array(

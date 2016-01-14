@@ -25,9 +25,10 @@
                 <a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>
                 {{ form_row(edit_form.content) }}
                 {{ form_row(edit_form.text) }}
-                {{ form_row(edit_form.state) }}
                 {{ form_row(edit_form.published) }}
-                {{ form_row(edit_form.source) }}
+                {{ form_row(edit_form.sourceName) }}
+                {{ form_row(edit_form.sourceLink) }}
+                {{ form_row(edit_form.state) }}
                 {{ form_row(edit_form.featured) }}
             </div>
             <div role="tabpanel" class="tab-pane" id="meta">

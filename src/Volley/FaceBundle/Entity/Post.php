@@ -91,22 +91,30 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="posts")
-     * @ORM\JoinColumn(name="createdBy", referencedColumnName="id")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      **/
     private $createdBy;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="modified_posts")
-     * @ORM\JoinColumn(name="modifiedBy", referencedColumnName="id")
+     * @ORM\JoinColumn(name="modified_by", referencedColumnName="id")
      **/
     private $modifiedBy;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255, nullable=true)
+     * @ORM\Column(name="source_name", type="string", length=255, nullable=true)
      */
-    private $source;
+    private $sourceName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source_link", type="string", length=255, nullable=true)
+     * @Assert\Url()
+     */
+    private $sourceLink;
 
     /**
      * @var string
@@ -765,5 +773,37 @@ class Post
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceName()
+    {
+        return $this->sourceName;
+    }
+
+    /**
+     * @param string $sourceName
+     */
+    public function setSourceName($sourceName)
+    {
+        $this->sourceName = $sourceName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceLink()
+    {
+        return $this->sourceLink;
+    }
+
+    /**
+     * @param string $sourceLink
+     */
+    public function setSourceLink($sourceLink)
+    {
+        $this->sourceLink = $sourceLink;
     }
 }

@@ -26,7 +26,8 @@ gulp.task('style', function () {
 
 gulp.task('style_admin', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/css/dashboard.css'
+        'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css'
     ];
     gulp.src(source)
         .pipe(sourcemaps.init())
@@ -78,7 +79,8 @@ gulp.task('script_admin', function () {
         //'src/Volley/FaceBundle/Resources/public/js/custom/jquery.datetimepicker.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/slide.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/post.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/game.js'
+        'src/Volley/FaceBundle/Resources/public/js/custom/game.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js'
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())

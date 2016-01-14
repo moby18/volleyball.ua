@@ -28,7 +28,10 @@ class PostType extends AbstractType
                     'data-theme' => 'advanced' // simple, advanced, bbcode
                 ), 'required'=>false
             ])
-            ->add('state')
+            ->add('state',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Published', 'data-off' => 'Unpublished', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
+            ])
 //            ->add('created')
             ->add('published', 'datetime', [
                 'widget' => 'single_text',
@@ -38,13 +41,17 @@ class PostType extends AbstractType
 //            ->add('content')
             ->add('createdBy')
             ->add('modifiedBy')
-            ->add('source')
+            ->add('sourceName')
+            ->add('sourceLink')
             ->add('ordering')
             ->add('metakey')
             ->add('metadescr')
             ->add('hits')
 //            ->add('metadata')
-            ->add('featured')
+            ->add('featured',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Featured', 'data-off' => 'Not Featured', 'data-onstyle' => 'info']
+            ])
             ->add('language')
             ->add('category','entity', [
                 'class' => 'Volley\FaceBundle\Entity\Category',
