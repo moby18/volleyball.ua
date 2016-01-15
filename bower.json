@@ -22,6 +22,7 @@
     "components-font-awesome": "~4.3.0",
     "jquery": "~2.1.1",
     "fancybox": "~2.1.5",
-    "bootstrap-toggle": "~2.2.1"
+    "bootstrap-toggle": "~2.2.1",
+    "lightbox2": "lightbox#~2.8.2"
   }
 }
