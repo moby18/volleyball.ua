@@ -14,7 +14,7 @@ class PostRepository extends EntityRepository
 {
     public function findAll()
     {
-        return $this->findBy(array(), array('ordering' => 'DESC'));
+        return $this->findBy(array(), array('published' => 'DESC','id'=>'DESC'));
     }
 
     public function findByCategory(Category $category, $count = 5, $offset = 0)
