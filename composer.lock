@@ -4,58 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e8fe7dbb482dd132400a7491875665a",
-    "content-hash": "f948c79157788c7760ec36ade20ea418",
+    "hash": "08bfb1b68c3ea873cb09d9a462f3e60b",
+    "content-hash": "c58d6ef19af3dce97e912cf48b8d9506",
     "packages": [
-        {
-            "name": "astina/social-links-bundle",
-            "version": "2.1.0",
-            "target-dir": "Astina/Bundle/SocialLinksBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/astina/AstinaSocialLinksBundle.git",
-                "reference": "b878b7c0a1b0ff2915b1a953351055099444856a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/astina/AstinaSocialLinksBundle/zipball/b878b7c0a1b0ff2915b1a953351055099444856a",
-                "reference": "b878b7c0a1b0ff2915b1a953351055099444856a",
-                "shasum": ""
-            },
-            "require": {
-                "sensio/framework-extra-bundle": ">=2.3",
-                "social-links/social-links": "~1.3.0",
-                "symfony/symfony": "~2.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.2.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Astina\\Bundle\\SocialLinksBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Astina AG",
-                    "email": "admin@astina.ch"
-                }
-            ],
-            "description": "Symfony bundle that is using SocialLinks to generate share links for social networks.",
-            "homepage": "http://astina.ch",
-            "keywords": [
-                "astina",
-                "links",
-                "share",
-                "social"
-            ],
-            "time": "2014-11-17 10:14:57"
-        },
         {
             "name": "behat/transliterator",
             "version": "v1.1.0",
@@ -2140,72 +2091,6 @@
             "time": "2015-08-09 04:28:19"
         },
         {
-            "name": "oneup/uploader-bundle",
-            "version": "1.4.0",
-            "target-dir": "Oneup/UploaderBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
-                "reference": "ea2804ca78e8a139fcaf3f847997e9ff2a49b1a5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/ea2804ca78e8a139fcaf3f847997e9ff2a49b1a5",
-                "reference": "ea2804ca78e8a139fcaf3f847997e9ff2a49b1a5",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/finder": "^2.4.0|~3.0",
-                "symfony/framework-bundle": "^2.4.0|~3.0"
-            },
-            "require-dev": {
-                "amazonwebservices/aws-sdk-for-php": "1.5.*",
-                "knplabs/gaufrette": "0.2.*@dev",
-                "phpunit/phpunit": "~4.4",
-                "sensio/framework-extra-bundle": "2.*|~3.0",
-                "symfony/browser-kit": "2.*|~3.0",
-                "symfony/class-loader": "2.*|~3.0",
-                "symfony/security-bundle": "2.*|~3.0"
-            },
-            "suggest": {
-                "knplabs/knp-gaufrette-bundle": "0.1.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Oneup\\UploaderBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jim Schmid",
-                    "email": "js@1up.io",
-                    "homepage": "http://1up.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Handles multi file uploads in Symfony2. Features included: Chunked upload, Orphans management, Gaufrette support.",
-            "homepage": "http://1up.io",
-            "keywords": [
-                "FancyUpload",
-                "FineUploader",
-                "MooUpload",
-                "Uploadify",
-                "YUI3 Uploader",
-                "blueimp",
-                "dropzone",
-                "fileupload",
-                "jQuery File Uploader",
-                "plupload",
-                "upload"
-            ],
-            "time": "2016-01-04 11:03:05"
-        },
-        {
             "name": "paragonie/random_compat",
             "version": "1.1.5",
             "source": {
@@ -2439,48 +2324,6 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2015-03-17 06:36:52"
-        },
-        {
-            "name": "social-links/social-links",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/oscarotero/social-links.git",
-                "reference": "ff2ec63a055d2c96df8f925671ac90d5c56c9513"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oscarotero/social-links/zipball/ff2ec63a055d2c96df8f925671ac90d5c56c9513",
-                "reference": "ff2ec63a055d2c96df8f925671ac90d5c56c9513",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SocialLinks": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oscar Otero",
-                    "email": "oom@oscarotero.com",
-                    "homepage": "http://oscarotero.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP library to generate share buttons",
-            "homepage": "https://github.com/oscarotero/social-links",
-            "keywords": [
-                "image"
-            ],
-            "time": "2014-10-24 15:50:25"
         },
         {
             "name": "stfalcon/tinymce-bundle",
