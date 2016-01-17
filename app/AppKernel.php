@@ -28,7 +28,6 @@ class AppKernel extends Kernel
             new Volley\StatBundle\VolleyStatBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
-            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
