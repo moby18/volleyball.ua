@@ -24,7 +24,7 @@ framework:
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
-        cookie_lifetime: 86400
+        cookie_lifetime: 604800
     fragments:       ~
     http_method_override: true
 
@@ -34,18 +34,6 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
-        # resources: ['bootstrap_3_horizontal_layout.html.twig']
-
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ VolleyFaceBundle,FOSUserBundle]
-    filters:
-        uglifycss:
-            bin: %uglifycss_path%
-        uglifyjs:
-            bin: %uglifyjs_path%
 
 # Doctrine Configuration
 doctrine:
@@ -73,13 +61,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-assetic:
-    filters:
-        less:
-            node: C:\Program Files\nodejs\node.exe
-            node_paths: [c:\Program Files\nodejs\node_modules]
-            apply_to: "\.less$"
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
@@ -166,14 +147,3 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [278, 175], mode: outbound }
-
-#knp_paginator:
-#    page_range: 20                      # default page range used in pagination control
-#    default_options:
-#        page_name: page                # page query parameter name
-#        sort_field_name: sort          # sort field query parameter name
-#        sort_direction_name: direction # sort direction query parameter name
-#        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
-#    template:
-#        pagination: KnpPaginatorBundle:Pagination:sliding.html.twig     # sliding pagination controls template
-#        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
