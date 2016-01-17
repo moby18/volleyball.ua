@@ -134,15 +134,10 @@ class DefaultController extends Controller
         $slides = [];
         // news
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
-
-        //$news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT p FROM VolleyFaceBundle:Post p WHERE p.category =".$category->getId()." ORDER BY p.published DESC, p.id DESC";
-        $query = $em->createQuery($dql);
-
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $query,
+            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
             $request->query->getInt('page', 1),
             20
         );
