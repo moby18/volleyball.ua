@@ -623,3 +623,73 @@ body {
     display: inline-block;
     margin-top: 20px;
 }
+
+/* --------------------------------------------------
+2.16 Pagination (Bootstrap Pagination Overwrite)--- */
+
+.pagination-container {
+    padding-top:30px;
+    padding-bottom:30px;
+    border-top:1px solid #eaeaea;
+}
+
+
+.pagination {
+    margin: 0 ;
+    border-radius: 0;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    padding: 6px 11px;
+    color: #777;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    margin-left: 4px;
+    border-radius:0;
+    transition: all 0.45s ease;
+    -webkit-transition: all 0.45s ease;
+    min-width: 34px;
+    text-align: center;
+}
+
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    margin-left: 0;
+    border-radius:0;
+}
+
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-radius:0;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+    color: #505050;
+    background-color: #f1f1f1;
+    border-color: #d7d7d7;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+    color: #ffffff;
+}
+
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+    color: #777777;
+    background-color: #fff;
+    border-color: #eaeaea;
+    cursor: not-allowed;
+}

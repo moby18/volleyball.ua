@@ -130,13 +130,26 @@ class DefaultController extends Controller
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([], null, 5);
+        //$slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([], null, 5);
+        $slides = [];
         // news
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
-        $news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
+
+        //$news = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category, 10);
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT p FROM VolleyFaceBundle:Post p WHERE p.category =".$category->getId()." ORDER BY p.published DESC, p.id DESC";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            20
+        );
+
         return [
             'slides' => $slides,
-            'news' => $news
+            'news' => $pagination
         ];
     }
 
@@ -257,6 +270,7 @@ class DefaultController extends Controller
      * Blog Route - should be at the bottom of routes list
      *
      * @param Category $category
+     * @param Request $request
      *
      * @return string
      *
@@ -264,15 +278,19 @@ class DefaultController extends Controller
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */
-    public function blogAction(Category $category)
+    public function blogAction(Category $category, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findByCategory($category);
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
-            'posts' => $posts
+            'posts' => $pagination
         ));
     }
 }

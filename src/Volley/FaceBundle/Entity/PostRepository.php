@@ -14,25 +14,30 @@ class PostRepository extends EntityRepository
 {
     public function findAll()
     {
-        return $this->findBy(array(), array('published' => 'DESC','id'=>'DESC'));
+        return $this->findBy(array(), array('published' => 'DESC', 'id' => 'DESC'));
     }
 
     public function findByCategory(Category $category, $count = 5, $offset = 0)
     {
+        return $this->findByCategoryQuery($category, $count = 5, $offset = 0)
+            ->getResult();
+    }
+
+    public function findByCategoryQuery(Category $category, $count = 5, $offset = 0)
+    {
         return $this->createQueryBuilder('p')
             ->select('p')
-            ->innerJoin('p.category','category')
+            ->innerJoin('p.category', 'category')
             ->andWhere('category.lft >= :lft AND category.rgt <= :rgt')
-            ->setParameter('lft',$category->getLft())
-            ->setParameter('rgt',$category->getRgt())
+            ->setParameter('lft', $category->getLft())
+            ->setParameter('rgt', $category->getRgt())
             ->andWhere('p.state > 0')
             ->andWhere('p.published <= :date')
-            ->setParameter('date','now()')
+            ->setParameter('date', 'now()')
             ->setMaxResults($count)
             ->setFirstResult($offset)
             ->orderBy('p.published', 'DESC')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
     public function findWithOptions($slug)
@@ -40,10 +45,10 @@ class PostRepository extends EntityRepository
         return $this->createQueryBuilder('p')
             ->select('p')
             ->andWhere('p.slug = :slug')
-            ->setParameter('slug',$slug)
+            ->setParameter('slug', $slug)
             ->andWhere('p.state > 0')
             ->andWhere('p.published <= :date')
-            ->setParameter('date','now()')
+            ->setParameter('date', 'now()')
             ->getQuery()
             ->getOneOrNullResult();
     }
