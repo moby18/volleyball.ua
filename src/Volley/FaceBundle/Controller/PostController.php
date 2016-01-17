@@ -19,14 +19,21 @@ class PostController extends Controller
      * Lists all Post entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT p FROM VolleyFaceBundle:Post p ORDER BY p.published DESC, p.id DESC";
+        $query = $em->createQuery($dql);
 
-        $entities = $em->getRepository('VolleyFaceBundle:Post')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render('VolleyFaceBundle:Post:index.html.twig', array(
-            'entities' => $entities,
+            'entities' => $pagination,
         ));
     }
     /**
