@@ -34,18 +34,6 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
-        # resources: ['bootstrap_3_horizontal_layout.html.twig']
-
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ VolleyFaceBundle,FOSUserBundle]
-    filters:
-        uglifycss:
-            bin: %uglifycss_path%
-        uglifyjs:
-            bin: %uglifyjs_path%
 
 # Doctrine Configuration
 doctrine:
@@ -73,13 +61,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-assetic:
-    filters:
-        less:
-            node: C:\Program Files\nodejs\node.exe
-            node_paths: [c:\Program Files\nodejs\node_modules]
-            apply_to: "\.less$"
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
@@ -166,8 +147,3 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [278, 175], mode: outbound }
-
-oneup_uploader:
-    mappings:
-        gallery:
-            frontend: blueimp # or any uploader you use in the frontend
