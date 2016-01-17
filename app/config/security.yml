@@ -47,8 +47,13 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
+                remember_me: true
             logout:       true
             anonymous:    true
+            remember_me:
+                secret: "%secret%"
+                lifetime: 604800 # in seconds
+                always_remember_me: true
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
