@@ -1,5 +1,13 @@
+parameters:
+    volley.sitemap.listener.class: Volley\FaceBundle\Listener\SitemapListener
+
 services:
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+
+    my.sitemap.listener:
+            class: %volley.sitemap.listener.class%
+            arguments: [@router, @doctrine]
+            tags: [{name: "presta.sitemap.listener"}]
