@@ -1,5 +1,9 @@
 {% extends '::layout.html.twig' %}
 
+{% set title = category.name %}
+{% set meta_keywords = category.keywords %}
+{% set meta_description = category.description %}
+
 {% block content %}
 
     <div class="section">
