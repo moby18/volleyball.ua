@@ -67,7 +67,7 @@ class SitemapListener implements SitemapListenerInterface
                 $event->getGenerator()->addUrl(
                     new UrlConcrete(
                         $url,
-                        $post->getUpdated()
+                        $post->getModified()
                     ),
                     'posts'
                 );

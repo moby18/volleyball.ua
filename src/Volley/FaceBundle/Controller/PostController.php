@@ -207,6 +207,7 @@ class PostController extends Controller
 
             $entity->upload();
 
+            $entity->setModified(new \DateTime());
             $entity->setModifiedBy($this->getUser());
 
             $em->flush();

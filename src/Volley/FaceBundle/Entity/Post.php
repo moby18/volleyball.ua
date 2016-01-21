@@ -85,6 +85,13 @@ class Post
     private $published;
 
     /**
+     * @var /DateTime
+     *
+     * @Doctrine\ORM\Mapping\Column(type="datetime")
+     */
+    private $modified;
+
+    /**
      * @Doctrine\ORM\Mapping\Column(type="text")
      */
     private $content;
@@ -306,6 +313,7 @@ class Post
     function __construct()
     {
         $this->state = true;
+        $this->modified = new \DateTime();
     }
 
 
@@ -805,5 +813,21 @@ class Post
     public function setSourceLink($sourceLink)
     {
         $this->sourceLink = $sourceLink;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param mixed $modified
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
     }
 }
