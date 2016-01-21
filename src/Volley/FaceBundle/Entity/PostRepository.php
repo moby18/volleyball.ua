@@ -33,7 +33,7 @@ class PostRepository extends EntityRepository
             ->setParameter('rgt', $category->getRgt())
             ->andWhere('p.state > 0')
             ->andWhere('p.published <= :date')
-            ->setParameter('date', 'now()')
+            ->setParameter('date', new \DateTime())
             ->setMaxResults($count)
             ->setFirstResult($offset)
             ->orderBy('p.published', 'DESC')

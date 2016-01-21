@@ -134,9 +134,7 @@ class DefaultController extends Controller
         $slides = [];
         // news
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
+        $posts = $this->get('knp_paginator')->paginate(
             $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
             $request->query->getInt('page', 1),
             20
@@ -144,7 +142,7 @@ class DefaultController extends Controller
 
         return [
             'slides' => $slides,
-            'news' => $pagination
+            'news' => $posts
         ];
     }
 
