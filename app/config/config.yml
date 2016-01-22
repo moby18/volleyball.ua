@@ -158,3 +158,8 @@ knp_paginator:
     template:
         pagination: VolleyFaceBundle:Default/pagination:pagination.html.twig    # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+presta_sitemap:
+    timetolive: 3600
+    dumper_base_url: "http://volleyball.ua/"
+    route_annotation_listener: false

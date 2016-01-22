@@ -29,7 +29,8 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "liip/imagine-bundle": "~1.2",
         "knplabs/knp-paginator-bundle": "^2.4",
-        "mopa/bootstrap-bundle": "^3.0"
+        "mopa/bootstrap-bundle": "^3.0",
+        "presta/sitemap-bundle": "^1.4"
     },
     "scripts": {
         "post-install-cmd": [
