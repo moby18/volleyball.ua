@@ -6,7 +6,6 @@
 /web/fonts
 /web/media
 /web/images
-/web/fonts
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -20,7 +19,6 @@
 .idea
 .DS_Store
 .DS_Store?
-.idea
 nbproject
 .Spotlight-V100
 .Trashes
@@ -32,3 +30,4 @@ xcuserdata
 node_modules
 # bower dir
 /src/Volley/FaceBundle/Resources/public/bower_components
+/web/sitemap*.xml
