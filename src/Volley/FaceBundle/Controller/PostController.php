@@ -2,6 +2,9 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Presta\SitemapBundle\Event\SitemapPopulateEvent;
+use Presta\SitemapBundle\Service\Dumper;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -55,6 +58,8 @@ class PostController extends Controller
 
             $em->persist($entity);
             $em->flush();
+
+            self::sitemapAction();
 
             return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
         }
@@ -212,6 +217,8 @@ class PostController extends Controller
 
             $em->flush();
 
+            self::sitemapAction();
+
             return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
         }
 
@@ -221,6 +228,15 @@ class PostController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
+    /*
+     * Dispatch event for update sitemap.xml for posts
+     */
+    private function sitemapAction() {
+        $dispatcher = $this->get('event_dispatcher');
+        $dispatcher->dispatch(SitemapPopulateEvent::ON_SITEMAP_POPULATE, new SitemapPopulateEvent(new Dumper($dispatcher, new Filesystem()), 'posts'));
+    }
+
     /**
      * Deletes a Post entity.
      *
