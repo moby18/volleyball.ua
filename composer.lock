@@ -803,7 +803,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/b23bf53537c0e9d3f3cc11184f21720bac78234a",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/05c4799282325c0982617da6c39fd6fbf3473042",
                 "reference": "228133dca6229dfc38d316153c40b42aa2ba8b1f",
                 "shasum": ""
             },
