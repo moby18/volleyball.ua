@@ -18,6 +18,8 @@ class TournamentType extends AbstractType
             ->add('name')
             ->add('status')
             ->add('country')
+            ->add('keywords')
+            ->add('description')
         ;
     }
     
