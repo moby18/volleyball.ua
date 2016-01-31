@@ -279,6 +279,8 @@ class PostController extends Controller
 
             $em->remove($entity);
             $em->flush();
+
+            self::sitemapAction();
         }
 
         return $this->redirect($this->generateUrl('post'));
