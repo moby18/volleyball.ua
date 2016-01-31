@@ -1,76 +1,90 @@
 {% extends '::layout.html.twig' %}
 
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{#{% set title = tournament.name ~ ' - ' ~ season.name %}#}
+{#{% set meta_keywords = '' %}#}
+{#{% set meta_description = post.metadescr %}#}
+
 {% block content %}
 
     <div class="section">
-        <div class="container">
+        <div class="container tournament">
             <div class="row">
                 <h1>{{ tournament.name }} - {{ season.name }}</h1>
             </div>
             <div class="row">
                 <table class="table table-striped table-hover table-condensed">
                     <thead>
-                    <th>Місце</th>
+                    <th class="text-center">Місце</th>
                     <th>Команда</th>
-                    <th>Матчі</th>
-                    <th>Перемоги</th>
-                    <th>Поразки</th>
+                    <th class="text-center">Матчі</th>
+                    <th class="text-center">Перемоги</th>
+                    <th class="text-center">Поразки</th>
                     <th>3-0</th>
                     <th>3-1</th>
                     <th>3-2</th>
                     <th>2-3</th>
                     <th>1-3</th>
                     <th>0-3</th>
-                    <th>Партії</th>
-                    <th>М'ячі</th>
-                    <th>Очки</th>
+                    <th class="text-center">Партії</th>
+                    <th class="text-center">М'ячі</th>
+                    <th class="text-center">Очки</th>
                     </thead>
                     {% for row in table %}
                         <tr>
-                            <td>{{ loop.index }}</td>
+                            <td class="text-center">{{ loop.index }}</td>
                             {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
                             <td>{{ row['team'].name }}</td>
-                            <td>{{ row.games }}</td>
-                            <td>{{ row.win }}</td>
-                            <td>{{ row.loss }}</td>
+                            <td class="text-center">{{ row.games }}</td>
+                            <td class="text-center">{{ row.win }}</td>
+                            <td class="text-center">{{ row.loss }}</td>
                             <td>{{ row.score30 }}</td>
                             <td>{{ row.score31 }}</td>
                             <td>{{ row.score32 }}</td>
                             <td>{{ row.score23 }}</td>
                             <td>{{ row.score13 }}</td>
                             <td>{{ row.score03 }}</td>
-                            <td>{{ row.win_sets }}/{{ row.loss_sets }}</td>
-                            <td>{{ row.win_points }}/{{ row.loss_points }}</td>
-                            <td>{{ row.points }}</td>
+                            <td class="text-center">{{ row.win_sets }}/{{ row.loss_sets }}</td>
+                            <td class="text-center">{{ row.win_points }}/{{ row.loss_points }}</td>
+                            <td class="text-center">{{ row.points }}</td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
             <div class="row">
-                <table class="table table-striped table-hover table-condensed">
-                    <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Дата</td>
-                        <td>Час</td>
-                        <td>Команда А</td>
-                        <td>Команда Б</td>
-                        <td>Результат</td>
-                    </tr>
-                    </thead>
-                    <tfoot></tfoot>
-                    <tbody>
-                    {% for round in season.rounds %}
-                        {% for tour in round.tours %}
-                            <tr>
-                                <td colspan="100" class="text-center"><strong>{{ tour.name }}</strong></td>
+                {% for round in season.rounds %}
+                    {% for tour in round.tours %}
+                        <div class="anchor" id="{{ tour.ordering }}"></div>
+                        <table class="table table-striped table-hover table-condensed">
+                            <thead>
+                            <tr class="tour-head">
+                                <td colspan="11" class="text-center"><strong>{{ tour.name }}</strong></td>
                             </tr>
+                            {#{% if loop.first %}#}
+                            <tr>
+                                <th>#</th>
+                                <th>Дата</th>
+                                <th>Час</th>
+                                <th>Команда А</th>
+                                <th>Команда Б</th>
+                                <th>Результат</th>
+                                <th>1 сет</th>
+                                <th>2 сет</th>
+                                <th>3 сет</th>
+                                <th>4 сет</th>
+                                <th>5 сет</th>
+                            </tr>
+                            {#{% endif %}#}
+
+                            </thead>
+                            <tfoot></tfoot>
+                            <tbody>
                             {% for game in tour.games %}
                                 {% set winnerTeamA = (game.scoreSetHome > game.scoreSetAway) %}
                                 {% set winnerTeamB = (game.scoreSetHome < game.scoreSetAway) %}
                                 <tr>
                                     <td>{{ game.number }}</td>
-                                    <td>{% if game.date is not null %} {{ game.date|date("d/m") }} {% endif %}</td>
+                                    <td>{% if game.date is not null %} {{ game.date|date("d/m/y") }} {% endif %}</td>
                                     <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                                     <td>{{ winnerTeamA ? "<strong>" : "" }}
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.homeTeam.id}) }}"> {{ game.homeTeam.name }} </a>{{ winnerTeamA ? "</strong>" : "" }}#}
@@ -80,13 +94,22 @@
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.awayTeam.id}) }}"> {{ game.awayTeam.name }} </a>{{ winnerTeamB ? "</strong>" : "" }}#}
                                         {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
                                     </td>
-                                    <td>{{ game.score }}</td>
+                                    <td>{{ game.scoreSetHome }} - {{ game.scoreSetAway }}</td>
+                                    {% for set in game.sets %}
+                                        <td>{{ set.scoreSetHome }} - {{ set.scoreSetAway }}</td>
+                                    {% endfor %}
+                                    {% set count = (5 - game.sets|length) %}
+                                    {% if count != 0 %}
+                                        {% for set in 1..count %}
+                                            <td></td>
+                                        {% endfor %}
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
-                        {% endfor %}
+                            </tbody>
+                        </table>
                     {% endfor %}
-                    </tbody>
-                </table>
+                {% endfor %}
             </div>
         </div>
     </div>

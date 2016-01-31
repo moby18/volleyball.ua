@@ -287,6 +287,23 @@ h1, h2, h3, h4, h5, h6 {
     /*font-weight: 600;*/
 }
 
+.container.tournament table tr th {
+    background-color: #555;
+    color: #fff;
+    font-weight: normal;
+    border-bottom: 0;
+}
+
+.container.tournament table tr.tour-head {
+    background-color: #cdcdcd;
+}
+
+.container.tournament div.anchor {
+    /*margin-bottom: 65px;*/
+    display: block;
+    height: 56px;
+}
+
 /* Post */
 .post {
     padding: 0;
