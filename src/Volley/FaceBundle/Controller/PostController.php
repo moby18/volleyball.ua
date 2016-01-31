@@ -243,7 +243,7 @@ class PostController extends Controller
         $dumper = $this->get('presta_sitemap.dumper');
         $baseUrl = $this->getParameter('presta_sitemap.dumper_base_url');
         $baseUrl = rtrim($baseUrl, '/') . '/';
-        $options = array('gzip' => false,);
+        $options = array('gzip' => false,'section'=>'posts');
         $dumper->dump($targetDir, $baseUrl, null, $options);
 
 //        $kernel = $this->get('kernel');
