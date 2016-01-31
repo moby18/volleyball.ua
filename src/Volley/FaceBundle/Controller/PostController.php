@@ -4,6 +4,9 @@ namespace Volley\FaceBundle\Controller;
 
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\Dumper;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -233,8 +236,25 @@ class PostController extends Controller
      * Dispatch event for update sitemap.xml for posts
      */
     private function sitemapAction() {
-        $dispatcher = $this->get('event_dispatcher');
-        $dispatcher->dispatch(SitemapPopulateEvent::ON_SITEMAP_POPULATE, new SitemapPopulateEvent(new Dumper($dispatcher, new Filesystem()), 'posts'));
+//        $dispatcher = $this->get('event_dispatcher');
+//        $dispatcher->dispatch(SitemapPopulateEvent::ON_SITEMAP_POPULATE, new SitemapPopulateEvent(new Dumper($dispatcher, new Filesystem()), 'posts'));
+
+        $targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+        $dumper = $this->get('presta_sitemap.dumper');
+        $baseUrl = $this->getParameter('presta_sitemap.dumper_base_url');
+        $baseUrl = rtrim($baseUrl, '/') . '/';
+        $options = array('gzip' => false,);
+        $dumper->dump($targetDir, $baseUrl, null, $options);
+
+//        $kernel = $this->get('kernel');
+//        $application = new Application($kernel);
+//        $application->setAutoExit(false);
+//        $input = new ArrayInput(array(
+//            'command' => 'presta:sitemaps:dump',
+//            '--section' => 'posts',
+//            '--target' => '/var/www/volleyball.ua/web'
+//        ));
+//        $application->run($input, null);
     }
 
     /**
