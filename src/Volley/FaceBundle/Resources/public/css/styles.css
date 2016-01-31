@@ -282,9 +282,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Tournament Table */
+.tournament-short {
+    padding-top: 15px;
+}
+
 .tournament-short h2 {
-    font-size: 16px;
-    /*font-weight: 600;*/
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.tournament-short h2 a {
+    color: #363636;
+    font-weight: normal;
+    font-size: 15px;
+}
+.tournament-short h2 a:hover {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    color: #267dc1;
+}
+
+.tournament-short table tr th {
+    background-color: #cdcdcd;
+    border-bottom: 0;
 }
 
 .container.tournament table tr th {
