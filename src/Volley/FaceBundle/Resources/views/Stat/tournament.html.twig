@@ -1,9 +1,9 @@
 {% extends '::layout.html.twig' %}
 
-{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
-{#{% set title = tournament.name ~ ' - ' ~ season.name %}#}
-{#{% set meta_keywords = '' %}#}
-{#{% set meta_description = post.metadescr %}#}
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ tournament.getWebPath %}#}
+{% set title = tournament.name ~ ' - ' ~ season.name %}
+{% set meta_keywords = tournament.keywords %}
+{% set meta_description = tournament.description %}
 
 {% block content %}
 
