@@ -62,6 +62,9 @@ class PostController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $entity->setSlug($entity->getId().'-'.$entity->getSlug());
+            $em->flush();
+
             self::sitemapAction();
 
             return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
