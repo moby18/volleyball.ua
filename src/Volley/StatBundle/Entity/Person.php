@@ -25,6 +25,11 @@ class Person
         'libero' => 'Libero'
     ];
 
+    const SEX = [
+        'men' => 'Men',
+        'woman' => 'Woman'
+    ];
+
     /**
      * @var integer
      *
@@ -127,6 +132,11 @@ class Person
      * @ORM\JoinColumn(name="countryId", referencedColumnName="id")
      */
     protected $country;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $sex;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -656,5 +666,21 @@ class Person
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * @param mixed $sex
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
     }
 }
