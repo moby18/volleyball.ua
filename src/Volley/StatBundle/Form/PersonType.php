@@ -17,6 +17,12 @@ class PersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('sex', ChoiceType::class, [
+                'choices' => Person::SEX,
+                'expanded' => true,
+                'multiple' => false,
+                'label' => false
+            ])
             ->add('firstName')
             ->add('middleName')
             ->add('lastName')
