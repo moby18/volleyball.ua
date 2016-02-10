@@ -46,6 +46,11 @@ class Country
      */
     protected $persons;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="country")
+     */
+    protected $teams;
+
     function __construct()
     {
         $this->tournaments = new ArrayCollection();
@@ -173,10 +178,41 @@ class Country
         return $this->persons;
     }
 
+    /**
+     * Add teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     * @return Country
+     */
+    public function addTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->teams;
+    }
+
     function __toString()
     {
         return $this->getName();
     }
-
-
 }

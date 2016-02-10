@@ -23,6 +23,24 @@ class TeamType extends AbstractType
                     'required' => false
                 )
             )
+            ->add('logoImage', 'file', array(
+                    'data_class' => null,
+                    'required' => false
+                )
+            )
+            ->add('hallImage', 'file', array(
+                    'data_class' => null,
+                    'required' => false
+                )
+            )
+            ->add('country')
+            ->add('city')
+            ->add('address')
+            ->add('phone')
+            ->add('fax')
+            ->add('email')
+            ->add('site')
+            ->add('hall')
         ;
     }
     
