@@ -1,6 +1,6 @@
 <div class="news-item col-lg-12 col-md-12 col-sm-12 col-xs-12 fade-in">
     <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
-        <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('main_pic') }}" alt="{{ item.title ~ ' ' ~ item.keywords }}">
+        <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('main_pic') }}" alt="{{ item.title ~ ' ' ~ item.metakey }}">
     </a>
     <div class="news-info">
         <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}} / <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}">{{ item.category.name }}</a></span>
