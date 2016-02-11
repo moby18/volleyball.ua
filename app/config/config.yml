@@ -142,11 +142,13 @@ liip_imagine:
         main_pic:
             quality: 100
             filters:
-                thumbnail: { size: [555, 350], mode: inset }
+#                thumbnail: { size: [555, 350], mode: outbound }
+                relative_resize: { widen: 555 }
         post_pic:
             quality: 100
             filters:
-                thumbnail: { size: [760, 480], mode: inset }
+#                thumbnail: { size: [760, 480], mode: outbound }
+                relative_resize: { widen: 760 }
         main_thumb:
             quality: 100
             filters:
