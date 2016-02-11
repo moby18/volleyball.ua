@@ -38,6 +38,10 @@ class PersonType extends AbstractType
             ->add('file', null, [
                 'label' => 'Photo'
             ])
+            ->add('type', ChoiceType::class, [
+                'choices' => Person::TYPE
+            ])
+            ->add('title')
             ->add('position', ChoiceType::class, [
                 'choices' => Person::POSITIONS
             ])

@@ -30,6 +30,12 @@ class Person
         'woman' => 'Woman'
     ];
 
+    const TYPE = [
+        'player' => 'Player',
+        'coach' => 'Coach',
+        'staff' => 'Staff'
+    ];
+
     /**
      * @var integer
      *
@@ -137,6 +143,16 @@ class Person
      * @ORM\Column(type="string", length=255)
      */
     public $sex;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    public $type;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -682,5 +698,37 @@ class Person
     public function setSex($sex)
     {
         $this->sex = $sex;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 }
