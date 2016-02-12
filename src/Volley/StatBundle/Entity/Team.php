@@ -115,6 +115,10 @@ class Team
      */
     private $hallImage;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason", mappedBy="team")
+     */
+    private $teams_seasons;
 
     /**
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Season",  mappedBy="teams")
@@ -401,6 +405,22 @@ class Team
     public function setHallImage($hallImage)
     {
         $this->hallImage = $hallImage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamsSeasons()
+    {
+        return $this->teams_seasons;
+    }
+
+    /**
+     * @param mixed $teams_seasons
+     */
+    public function setTeamsSeasons($teams_seasons)
+    {
+        $this->teams_seasons = $teams_seasons;
     }
 
     public function getAbsolutePath()

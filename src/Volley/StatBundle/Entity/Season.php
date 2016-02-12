@@ -72,6 +72,11 @@ class Season
     protected $games;
 
     /**
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason", mappedBy="season")
+     */
+    private $teams_seasons;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="seasons")
      * @ORM\JoinTable(name="stat_seasons_teams")
      **/
@@ -329,5 +334,21 @@ class Season
     public function setGames($games)
     {
         $this->games = $games;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamsSeasons()
+    {
+        return $this->teams_seasons;
+    }
+
+    /**
+     * @param mixed $teams_seasons
+     */
+    public function setTeamsSeasons($teams_seasons)
+    {
+        $this->teams_seasons = $teams_seasons;
     }
 }

@@ -155,6 +155,12 @@ class Person
     public $title;
 
     /**
+     * @ORM\ManyToMany(targetEntity="TeamSeason", inversedBy="users")
+     * @ORM\JoinTable(name="stat_persons_teams_seasons")
+     */
+    private $teams_seasons;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
