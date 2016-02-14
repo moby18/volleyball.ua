@@ -65,7 +65,8 @@ class PostController extends Controller
             $entity->setSlug($entity->getId().'-'.$entity->getSlug());
             $em->flush();
 
-            self::sitemapAction();
+            if ($entity->getState())
+                self::sitemapAction();
 
             return $this->redirect($this->generateUrl('post_show', array('id' => $entity->getId())));
         }
@@ -223,7 +224,8 @@ class PostController extends Controller
 
             $em->flush();
 
-            self::sitemapAction();
+            if ($entity->getState())
+                self::sitemapAction();
 
             return $this->redirect($this->generateUrl('post_edit', array('id' => $id)));
         }
