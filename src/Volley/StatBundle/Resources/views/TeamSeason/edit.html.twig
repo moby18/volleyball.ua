@@ -1,0 +1,28 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Team edit</h1>
+
+    {{ form(edit_form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_team') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/select2/dist/css/select2.min.css') }}" type="text/css"/>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script  type="text/javascript" src="{{ asset('bundles/volleyface/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    <script  type="text/javascript">
+        $("#volley_statbundle_team_season_persons").select2();
+    </script>
+{% endblock %}

@@ -37,8 +37,9 @@ class TeamSeason
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Person",  mappedBy="teams_seasons")
-     **/
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Person", inversedBy="teams_seasons")
+     * @ORM\JoinTable(name="stat_persons_teams_seasons")
+     */
     protected $persons;
 
 

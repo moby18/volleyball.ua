@@ -194,7 +194,7 @@ class Team
      * @param \Volley\StatBundle\Entity\Season $seasons
      * @return Team
      */
-    public function addSeason(\Volley\StatBundle\Entity\Season $seasons)
+    public function addSeason(Season $seasons)
     {
         $seasons->addTeam($this); // synchronously updating inverse side
         $this->seasons[] = $seasons;

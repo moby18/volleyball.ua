@@ -155,9 +155,8 @@ class Person
     public $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="TeamSeason", inversedBy="users")
-     * @ORM\JoinTable(name="stat_persons_teams_seasons")
-     */
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason",  mappedBy="persons")
+     **/
     private $teams_seasons;
 
     /**
@@ -622,12 +621,6 @@ class Person
         return $this->teams;
     }
 
-    function __toString()
-    {
-        return $this->getFirstName() . " " . $this->getLastName();
-    }
-
-
     /**
      * Set path
      *
@@ -736,5 +729,13 @@ class Person
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->lastName. ' ' . $this->middleName .' '. $this->firstName;
     }
 }

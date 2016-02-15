@@ -3,6 +3,11 @@
 {% block body -%}
     <h1>Team edit</h1>
 
+    {% for team_season in entity.teamsSeasons %}
+        <p><a href="{{ path('stat_team_season_edit',{'id': team_season.team.id}) }}">{{ team_season }}<a></p>
+    {% endfor %}
+    <p><a class="btn btn-default" href="{{ path('stat_team_season_new') }}">Add team season</a></p>
+
     {{ form(edit_form) }}
 
     <div class="btn-group" role="group" aria-label="">
