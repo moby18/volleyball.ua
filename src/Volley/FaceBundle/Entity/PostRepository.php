@@ -36,7 +36,8 @@ class PostRepository extends EntityRepository
             ->setParameter('date', new \DateTime())
             ->setMaxResults($count)
             ->setFirstResult($offset)
-            ->orderBy('p.published', 'DESC')
+            ->orderBy('p.featured', 'DESC')
+            ->addOrderBy('p.published', 'DESC')
             ->getQuery();
     }
 
