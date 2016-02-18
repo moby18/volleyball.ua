@@ -15,6 +15,10 @@
                 <td>{{ entity.title }}</td>
             </tr>
             <tr>
+                <th>Full URL</th>
+                <td>{{ url('volley_face_post',{'category_slug': entity.category.slug, 'post_slug': entity.slug }) }}</td>
+            </tr>
+            <tr>
                 <th>Slug</th>
                 <td>{{ entity.slug }}</td>
             </tr>

@@ -19,6 +19,16 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="main">
                 <br>
+
+                <div class="form-group">
+                    <label class="control-label required" for="volley_bundle_facebundle_post_url">Full URL</label>
+                    <input
+                            type="text" id="volley_bundle_facebundle_post_url"
+                            name="volley_bundle_facebundle_post[url]" required="required" maxlength="255"
+                            class="form-control"
+                            value="{{ url('volley_face_post',{'category_slug': entity.category.slug, 'post_slug': entity.slug }) }}"
+                            disabled="disabled" >
+                </div>
                 {{ form_row(edit_form.category) }}
                 {{ form_row(edit_form.title) }}
                 {{ form_row(edit_form.file) }}
