@@ -102,7 +102,7 @@ class TeamController extends Controller
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/{id}", name="stat_team_show")
+     * @Route("/admin/{id}", name="stat_team_show")
      * @Method("GET")
      * @Template()
      */

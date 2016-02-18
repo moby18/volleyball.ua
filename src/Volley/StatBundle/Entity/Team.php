@@ -434,35 +434,51 @@ class Team
     {
         return null === $this->image
             ? null
-            : $this->getUploadDir() . '/' . $this->image;
+            : $this->getUploadDir() . '/' . $this->getImage();
+    }
+
+    public function getLogoWebPath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getLogoUploadDir() . '/' . $this->getLogoImage();
+    }
+
+    public function getHallWebPath()
+    {
+        return null === $this->image
+            ? null
+            : $this->getHallUploadDir() . '/' . $this->getHallImage();
     }
 
     protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
         return __DIR__ . '/../../../../web/' . $this->getUploadDir();
     }
 
     protected function getLogoUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return $this->getUploadRootDir() . '/logos';
+        return __DIR__ . '/../../../../web/' . $this->getLogoUploadDir();
     }
 
     protected function getHallUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return $this->getUploadRootDir() . '/halls';
+        return __DIR__ . '/../../../../web/' . $this->getLogoUploadDir();
     }
 
     protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
         return '/uploads/stat/teams';
+    }
+
+    protected function getLogoUploadDir()
+    {
+        return '/uploads/stat/teams/logos';
+    }
+
+    protected function getHallUploadDir()
+    {
+        return '/uploads/stat/teams/halls';
     }
 
     /**

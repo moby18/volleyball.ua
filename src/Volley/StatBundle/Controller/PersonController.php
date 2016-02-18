@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\PersonType;
 /**
  * Person controller.
  *
- * @Route("/person")
+ * @Route("/admin/person")
  */
 class PersonController extends Controller
 {

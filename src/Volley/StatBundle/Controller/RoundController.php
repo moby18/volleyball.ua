@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\RoundType;
 /**
  * Round controller.
  *
- * @Route("/round")
+ * @Route("/admin/round")
  */
 class RoundController extends Controller
 {

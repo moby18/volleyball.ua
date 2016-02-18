@@ -17,7 +17,7 @@ use Volley\StatBundle\Form\GameFilterType;
 /**
  * Game controller.
  *
- * @Route("/game")
+ * @Route("/admin/game")
  */
 class GameController extends Controller
 {

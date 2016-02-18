@@ -12,7 +12,7 @@
             {% for row in table %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ row['team'].name }}</td>
+                    <td><a href="{{ path('stat_team_front',{'id': row['team'].id}) }}">{{ row['team'].name }}</a></td>
                     {#<td>{{ row.games }}</td>#}
                     <td class="text-center">{{ row.win ~ '/' ~ row.loss }}</td>
                     <td class="text-center">{{ row.points|number_format(0) }}</td>
