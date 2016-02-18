@@ -51,4 +51,16 @@ class PostRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function unsetFeatured($entity)
+    {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.featured', '?1')
+            ->setParameter(1, 0)
+            ->andWhere('p.id <> :id')
+            ->setParameter('id', $entity->getId())
+            ->getQuery()
+            ->execute();
+    }
 }

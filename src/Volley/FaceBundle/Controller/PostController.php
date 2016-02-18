@@ -59,6 +59,10 @@ class PostController extends Controller
 
             $entity->setCreatedBy($this->getUser());
 
+            if($entity->getFeatured()) {
+                $em->getRepository('VolleyFaceBundle:Post')->unsetFeatured($entity);
+            }
+
             $em->persist($entity);
             $em->flush();
 
@@ -221,6 +225,10 @@ class PostController extends Controller
 
             $entity->setModified(new \DateTime());
             $entity->setModifiedBy($this->getUser());
+
+            if($entity->getFeatured()) {
+                $em->getRepository('VolleyFaceBundle:Post')->unsetFeatured($entity);
+            }
 
             $em->flush();
 
