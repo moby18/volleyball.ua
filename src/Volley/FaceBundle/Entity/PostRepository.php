@@ -36,7 +36,8 @@ class PostRepository extends EntityRepository
             ->setParameter('date', new \DateTime())
             ->setMaxResults($count)
             ->setFirstResult($offset)
-            ->orderBy('p.published', 'DESC')
+            ->orderBy('p.featured', 'DESC')
+            ->addOrderBy('p.published', 'DESC')
             ->getQuery();
     }
 
@@ -49,5 +50,17 @@ class PostRepository extends EntityRepository
             ->andWhere('p.state > 0')
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function unsetFeatured($entity)
+    {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.featured', '?1')
+            ->setParameter(1, 0)
+            ->andWhere('p.id <> :id')
+            ->setParameter('id', $entity->getId())
+            ->getQuery()
+            ->execute();
     }
 }
