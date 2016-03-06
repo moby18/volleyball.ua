@@ -2,6 +2,15 @@
 
 {% block body -%}
     <h1>Post list</h1>
+
+    <div class="row">
+        {% for user in users %}
+        <div class="col col-lg-3">
+            {{ user.username ~ ': ' ~ user.posts|length }}
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="pull-right">
         <a type="button"
            class="btn btn-success" href="{{ path('post_new') }}">
@@ -17,18 +26,19 @@
                 <th>Title</th>
                 {#<th>Slug</th>#}
                 {#<th>Text</th>#}
+                <th>Category</th>
                 <th>State</th>
-                {#<th>Created</th>#}
-                <th>Published</th>
+                <th>Featured</th>
+                <th>Hits</th>
+                <th>Created / Published</th>
                 {#<th>Content</th>#}
                 <th>Createdby</th>
-                {#<th>Modifiedby</th>#}
+                <th>Modifiedby</th>
                 {#<th>Ordering</th>#}
                 {#<th>Metakey</th>#}
                 {#<th>Metadescr</th>#}
-                {#<th>Hits</th>#}
                 {#<th>Metadata</th>#}
-                <th>Featured</th>
+
                 {#<th>Language</th>#}
                 <th class="text-center">Actions</th>
             </tr>
@@ -49,22 +59,22 @@
                     <td>{{ entity.title }}</td>
                     {#<td>{{ entity.slug }}</td>#}
                     {#<td>{{ entity.text }}</td>#}
+                    <td>{{ entity.category }}</td>
                     <td class="text-center">
                         <span class="glyphicon {{ entity.state ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' }}" aria-hidden="true"></span>
                     </td>
-                    {#<td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>#}
-                    <td>{% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
-                    {#<td>{{ entity.content }}</td>#}
-                    <td>{{ entity.createdBy }}</td>
-                    {#<td>{{ entity.modifiedBy }}</td>#}
-                    {#<td>{{ entity.ordering }}</td>#}
-                    {#<td>{{ entity.metakey }}</td>#}
-                    {#<td>{{ entity.metadescr }}</td>#}
-                    {#<td>{{ entity.hits }}</td>#}
-                    {#<td>{{ entity.metadata }}</td>#}
                     <td class="text-center">
                         <span class="glyphicon {{ entity.featured ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty' }}" aria-hidden="true"></span>
                     </td>
+                    <td>{{ entity.hits }}</td>
+                    <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %} <br/> {% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    {#<td>{{ entity.content }}</td>#}
+                    <td>{{ entity.createdBy }}</td>
+                    <td>{{ entity.modifiedBy }}</td>
+                    {#<td>{{ entity.ordering }}</td>#}
+                    {#<td>{{ entity.metakey }}</td>#}
+                    {#<td>{{ entity.metadescr }}</td>#}
+                    {#<td>{{ entity.metadata }}</td>#}
                     {#<td>{{ entity.language }}</td>#}
                     <td class="col-md-2 col-lg-2 col-sm-2">
                         <div class="btn-group pull-right" role="group" aria-label="">
