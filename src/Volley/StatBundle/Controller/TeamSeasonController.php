@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\TeamSeasonType;
 /**
  * TeamSeason controller.
  *
- * @Route("/admin/teamSeason")
+ * @Route("/admin/stat/teamSeason")
  */
 class TeamSeasonController extends Controller
 {

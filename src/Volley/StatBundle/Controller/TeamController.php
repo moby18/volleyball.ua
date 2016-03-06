@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\TeamType;
 /**
  * Team controller.
  *
- * @Route("/team")
+ * @Route("/admin/stat/team")
  */
 class TeamController extends Controller
 {
@@ -102,7 +102,7 @@ class TeamController extends Controller
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/admin/{id}", name="stat_team_show")
+     * @Route("/{id}", name="stat_team_show")
      * @Method("GET")
      * @Template()
      */

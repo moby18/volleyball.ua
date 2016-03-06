@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\CountryType;
 /**
  * Country controller.
  *
- * @Route("/admin/country")
+ * @Route("/admin/stat/country")
  */
 class CountryController extends Controller
 {

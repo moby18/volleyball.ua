@@ -17,7 +17,7 @@ use Volley\StatBundle\Form\TournamentType;
 /**
  * Tournament controller.
  *
- * @Route("/admin/tournament")
+ * @Route("/admin/stat/tournament")
  */
 class TournamentController extends Controller
 {

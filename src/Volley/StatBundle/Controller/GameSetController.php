@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\GameSetType;
 /**
  * GameSet controller.
  *
- * @Route("/admin/gameset")
+ * @Route("/admin/stat/gameset")
  */
 class GameSetController extends Controller
 {

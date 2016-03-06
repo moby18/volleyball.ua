@@ -13,7 +13,7 @@ use Volley\StatBundle\Form\TourType;
 /**
  * Tour controller.
  *
- * @Route("/admin/tour")
+ * @Route("/admin/stat/tour")
  */
 class TourController extends Controller
 {

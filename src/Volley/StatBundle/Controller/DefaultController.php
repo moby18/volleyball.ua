@@ -22,12 +22,15 @@ class DefaultController extends Controller
 
         $entity = $em->getRepository('VolleyStatBundle:Team')->find($id);
 
+        $seasons = $entity->getSeasons();
+
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Team entity.');
         }
 
         return array(
-            'team'      => $entity
+            'team'      => $entity,
+            'seasons' => $seasons
         );
     }
 }
