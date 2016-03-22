@@ -336,6 +336,17 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
+.post iframe {
+    max-width: 100%;
+    /*width: 100% !important;*/
+}
+
+@media (max-width: 768px) {
+    .post iframe {
+        height: 163px !important;
+    }
+}
+
 /* Footer */
 footer {
     color: #fff;
