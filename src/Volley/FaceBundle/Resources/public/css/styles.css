@@ -347,7 +347,8 @@ h1, h2, h3, h4, h5, h6 {
         height: 163px !important;
     }
     .post img {
-        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
     }
 }
 
