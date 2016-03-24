@@ -342,16 +342,6 @@ h1, h2, h3, h4, h5, h6 {
     /*width: 100% !important;*/
 }
 
-@media (max-width: 768px) {
-    .post iframe {
-        height: 163px !important;
-    }
-    .post img {
-        width: 100% !important;
-        height: auto !important;
-    }
-}
-
 /* Footer */
 footer {
     color: #fff;
@@ -747,4 +737,18 @@ body {
     background-color: #fff;
     border-color: #eaeaea;
     cursor: not-allowed;
+}
+
+/* Mobile Device */
+@media (max-width: 768px) {
+    .post iframe {
+        height: 163px !important;
+    }
+    .post img {
+        width: 100% !important;
+        height: auto !important;
+    }
+    .navbar-brand {
+        margin-left: 15px !important;
+    }
 }
