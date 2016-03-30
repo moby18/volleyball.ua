@@ -638,6 +638,7 @@ footer .bottom-links ul li:hover a {
 /* Boxes */
 .box {
     padding-top: 15px;
+    text-align: center;
 }
 
 /* Sticky footer styles
@@ -742,13 +743,21 @@ body {
 /* Mobile Device */
 @media (max-width: 768px) {
     .post iframe {
-        height: 163px !important;
+        /*height: 163px !important;*/
     }
     .post img {
-        width: 100% !important;
+        max-width: 100% !important;
         height: auto !important;
     }
     .navbar-brand {
         margin-left: 15px !important;
+    }
+    div#vk_groups {
+        width: inherit !important;
+        height: auto !important;
+    }
+
+    footer .footer-below {
+        padding-bottom: 60px;
     }
 }
