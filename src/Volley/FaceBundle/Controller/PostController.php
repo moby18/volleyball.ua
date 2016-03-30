@@ -38,8 +38,11 @@ class PostController extends Controller
             20
         );
 
+        $users = $em->getRepository('VolleyUserBundle:User')->findAll();
+
         return $this->render('VolleyFaceBundle:Post:index.html.twig', array(
             'entities' => $pagination,
+            'users' => $users
         ));
     }
     /**

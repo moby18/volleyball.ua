@@ -336,6 +336,12 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
+.post iframe {
+    border: 0;
+    max-width: 100%;
+    /*width: 100% !important;*/
+}
+
 /* Footer */
 footer {
     color: #fff;
@@ -632,6 +638,7 @@ footer .bottom-links ul li:hover a {
 /* Boxes */
 .box {
     padding-top: 15px;
+    text-align: center;
 }
 
 /* Sticky footer styles
@@ -731,4 +738,26 @@ body {
     background-color: #fff;
     border-color: #eaeaea;
     cursor: not-allowed;
+}
+
+/* Mobile Device */
+@media (max-width: 768px) {
+    .post iframe {
+        /*height: 163px !important;*/
+    }
+    .post img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    .navbar-brand {
+        margin-left: 15px !important;
+    }
+    div#vk_groups {
+        width: inherit !important;
+        height: auto !important;
+    }
+
+    footer .footer-below {
+        padding-bottom: 60px;
+    }
 }

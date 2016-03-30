@@ -167,5 +167,5 @@ knp_paginator:
 
 presta_sitemap:
     timetolive: 3600
-    dumper_base_url: "http://volleyball.ua/"
+    dumper_base_url: "http://www.volleyball.ua/"
     route_annotation_listener: false

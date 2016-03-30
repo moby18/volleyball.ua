@@ -50,4 +50,12 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
 }
