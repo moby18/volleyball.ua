@@ -58,6 +58,12 @@ class Round
      */
     protected $games;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="rounds")
+     * @ORM\JoinTable(name="stat_rounds_teams")
+     **/
+    protected  $teams;
+
 
     /**
      * Get id
@@ -232,6 +238,40 @@ class Round
     public function getGames()
     {
         return $this->games;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     * @return Season
+     */
+    public function addTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $teams->addSeason($this);
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 
     function __toString()
