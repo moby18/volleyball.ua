@@ -1,7 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
-{% set title =  team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')'  %}
+{% set title =  team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' %}
 {#{% set meta_keywords = post.metakey %}#}
 {#{% set meta_description = post.metadescr %}#}
 
@@ -13,88 +13,76 @@
 
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12">
-                    <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath }}" alt="{{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
+                    <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath }}"
+                         alt="{{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col col-lg-12">
-                    <h1>{{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}</h1>
+                    <h1>{{ title }}</h1>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col col-lg-4 col-md-4 col-sm-4">
-                    <img class="photo" src="{{ team.getLogoWebPath }}" alt="Команда з пляжного волейболу ">
+                    <img class="photo" src="{{ team.getLogoWebPath }}" alt="{{ title }}">
                 </div>
                 <div class="col col-lg-8 col-md-8 col-sm-8">
-                    <a href="#">
-                        <div class="row player_names">
-                            <div class="col col-lg-2 col-md-2 col-sm-2">
-                                <div class="team_player_number">
-                                    1
+                    {% for i in 0..10 %}
+                        <a href="#">
+                            <div class="row player_names">
+                                <div class="col col-lg-2 col-md-2 col-sm-2">
+                                    <div class="team_player_number">
+                                        {{ i }}
+                                    </div>
+                                </div>
+                                <div class="col col-lg-10 col-md-10 col-sm-10">
+                                    <div class="team_player_name">
+                                        sdfgsdfg
+                                        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col col-lg-10 col-md-10 col-sm-10">
-                                <div class="team_player_name">
-                                   sdfgsdfg
-                                    <span class="glyphicon glyphicon-circle-arrow-right"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="row player_names">
-                            <div class="col col-lg-2 col-md-2 col-sm-2">
-                                <div class="team_player_number">
-                                    2
-                                </div>
-                            </div>
-                            <div class="col col-lg-10 col-md-10 col-sm-10">
-                                <div class="team_player_name">
-                                    sdfsadfsa
-                                    <span class="glyphicon glyphicon-circle-arrow-right"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    {% endfor %}
                     <hr/>
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-3 col-sm-3">
-                            <div class="team_label">
-                                Очки
-                            </div>
-                        </div>
-                        <div class="col col-lg-9 col-md-9 col-sm-9">
-                            <div class="team_value">
-                              asdfasdf
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-3 col-sm-3">
-                            <div class="team_label">
-                                Рейтинг
-                            </div>
-                        </div>
-                        <div class="col col-lg-9 col-md-9 col-sm-9">
-                            <div class="team_value">
-                                asdfasdf
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col col-lg-3 col-md-3 col-sm-3">
-                            <div class="team_label">
-                                Місце
-                            </div>
-                        </div>
-                        <div class="col col-lg-9 col-md-9 col-sm-9">
-                            <div class="team_value">
-                              asdfasdf
-                            </div>
-                        </div>
-                    </div>
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Очки#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Рейтинг#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Місце#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
                 </div>
             </div>
 
