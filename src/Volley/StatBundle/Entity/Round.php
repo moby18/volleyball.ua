@@ -53,6 +53,11 @@ class Round
      */
     protected $tours;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
+     */
+    protected $games;
+
 
     /**
      * Get id
@@ -194,6 +199,39 @@ class Round
     public function getTours()
     {
         return $this->tours;
+    }
+
+    /**
+     * Add games
+     *
+     * @param \Volley\StatBundle\Entity\Game $games
+     * @return Round
+     */
+    public function addGame(\Volley\StatBundle\Entity\Game $games)
+    {
+        $this->games[] = $games;
+
+        return $this;
+    }
+
+    /**
+     * Remove games
+     *
+     * @param \Volley\StatBundle\Entity\Game $games
+     */
+    public function removeGame(\Volley\StatBundle\Entity\Game $games)
+    {
+        $this->games->removeElement($games);
+    }
+
+    /**
+     * Get games
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGames()
+    {
+        return $this->games;
     }
 
     function __toString()
