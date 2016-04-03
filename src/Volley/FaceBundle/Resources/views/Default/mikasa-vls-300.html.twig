@@ -1,0 +1,147 @@
+{% extends '::layout.html.twig' %}
+
+{% set page_image = asset("uploads/products/mikasa-vls300/VLS300.png") %}
+{% set title = "Mikasa VLS300 мяч для пляжного волейбола" %}
+{% set meta_keywords = "мяч, mikasa, vls300, волейбол, пляжний, купить, Україна" %}
+{% set meta_description = "Mikasa VLS 300 мячи для пляжного волейбола от volleyball.ua. Купить в Украине. Цена 1399 гривен." %}
+
+{% block content %}
+
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="section post">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+                    <h1>Mikasa VLS300 мяч для пляжного волейбола</h1>
+
+                    <div class="row">
+                        <div class="col col-lg-8 col-md-12 col-sm-12">
+                            <p>Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для пляжного волейбола <b>Mikasa
+                                    VLS300</b>. Одобреный
+                                FIVB мяч обьединяет в себе все последние технологии для удобной игры и превосходной
+                                управляемости. Mikasa VLS300 официальный мяч Олимпийских Игр и всех профессиональных
+                                пляжных
+                                соревнований Мирового Тура.</p>
+                            <p>
+                            <h2>Описание:</h2>
+                            <ul>
+                                <li>Официальный мяч FIVB</li>
+                                <li>Мягкое комбинированное покрытие</li>
+                                <li>Улучшеная управляемость при передаче и ударе</li>
+                                <li>Двойная тканная основа для лучшего поддержания формы</li>
+                                <li>Сделан из 10 соединенных фигурных панелей, для хорошей узнаваемости</li>
+                                <li>Улучшеная водостойкость</li>
+                                <li>Размер 5</li>
+                            </ul>
+                            </p>
+                        </div>
+                        <div class="col col-lg-4 col-md-12 col-sm-12">
+                            <img alt="{{ title }}" class="img-responsive"
+                                 src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">
+                        </div>
+                    </div>
+
+                    <p>По вопросам пишите <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>.
+                    </p>
+
+                    <h2>Цена: 1399 грн.</h2></p>
+
+                    <p>
+                        <form action="{{ path('volley_face_mikasa_vls300') }}" method="post">
+
+                            <h2 class="form-signin-heading">Форма заказа. Заполните форму и мы свяжемся с вами!</h2>
+
+                    <p><label for="name"
+                              class="sr-only">Имя:</label>
+                        <input type="text" id="name" class="form-control"
+                               placeholder="Имя"
+                               required="true"
+                               autofocus="" name="name">
+                    </p>
+
+                    <p><label for="phone"
+                              class="sr-only">Телефон:</label>
+                        <input type="text" id="phone" class="form-control"
+                               placeholder="Телефон"
+                               required="false"
+                               autofocus="" name="phone">
+                    </p>
+
+                    <p><label for="email"
+                              class="sr-only">Email:</label>
+                        <input type="text" id="email" class="form-control"
+                               placeholder="Email"
+                               required="false"
+                               autofocus="" name="email">
+                    </p>
+
+                    <p><label for="comments"
+                              class="sr-only">Комментарий:</label>
+                        <input type="text" id="comments" class="form-control"
+                               placeholder="Комментарий"
+                               required="false"
+                               autofocus="" name="comments">
+                    </p>
+
+                    <button class="btn btn-lg btn-success btn-block" id="_submit" name="_submit"
+                            type="submit">ХОЧУ КУПИТЬ!
+                    </button>
+                    </form>
+                    </p>
+
+
+                    <p>
+                    <h2>Mikasa VLS300 в разрезе</h2>
+                    </p>
+
+                    <p>
+                        <img alt="{{ title }}" class="img-responsive"
+                             src="{{ asset('uploads/products/mikasa-vls300/mikasa-vls300.png') }}">
+                    </p>
+
+                    <p>
+                    <h2>Промо-видео Mikasa VLS300</h2>
+                    </p>
+                    <p>
+                        <iframe width="750" height="422" src="https://www.youtube.com/embed/q_pIC8h7K-k" frameborder="0"
+                                allowfullscreen></iframe>
+                    </p>
+
+                    <p>
+                        <iframe width="750" height="422" src="https://www.youtube.com/embed/P8qhJJdLu7w" frameborder="0"
+                                allowfullscreen></iframe>
+                    </p>
+
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>
+                </div>
+                <div class="col-lg-1 col-md-0 col-sm-0"></div>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    {% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}
+                    {% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

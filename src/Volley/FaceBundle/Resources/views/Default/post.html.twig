@@ -26,7 +26,7 @@
                         <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
                             <h1>{{ post.title }}</h1>
                         </a>
-                        <img alt="{{ title ~ ' ' ~ meta_keywords }}" class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
+                        <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
 
                         <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span>
                         <p>

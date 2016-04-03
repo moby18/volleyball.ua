@@ -5,19 +5,38 @@
 
 {% block content %}
 
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <div class="section post">
 
         <div class="container">
 
-            <div class="pull-left" style="width: 760px;">
-                <a href="{{ path('volley_face_contacts') }}">
-                    <h1>{% trans %}Contact Us{% endtrans %}</h1>
-                </a>
-                <p>
-                    Email: <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>
-                </p>
+            <div class="row">
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+                    <a href="{{ path('volley_face_contacts') }}">
+                        <h1>{% trans %}Contact Us{% endtrans %}</h1>
+                    </a>
+                    <p>
+                        Email: <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>
+                    </p>
 
-                {% include '@VolleyFace/Social/uptolike.html.twig' %}
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>
+                </div>
+                <div class="col-lg-1 col-md-0 col-sm-0"></div>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    {% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}
+                    {% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}
+                </div>
             </div>
 
         </div>

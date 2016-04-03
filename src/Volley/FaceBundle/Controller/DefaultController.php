@@ -221,6 +221,46 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
+     * @Method("GET")
+     * @Template()
+     */
+    public function mikasaVls300Action()
+    {
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', []);
+    }
+
+    /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy")
+     * @Method("POST")
+     * @Template()
+     */
+    public function buyMikasaVls300Action(Request $request)
+    {
+        $data = $request->request;
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Mikasa VLS300 - BUY')
+            ->setFrom('volleyball.ua@gmail.com')
+            ->setTo('volleybal.ua@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'VolleyFaceBundle:Email:order.html.twig',
+                    [
+                        'name' => $data->get('name', ''),
+                        'phone' => $data->get('phone', ''),
+                        'email' => $data->get('email', ''),
+                        'comments' => $data->get('comments', ''),
+                    ]
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', []);
+    }
+
+    /**
      * * Deletes a Tournament entity.
      *
      * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
@@ -250,7 +290,7 @@ class DefaultController extends Controller
     public function postAction(Category $category, Post $post)
     {
         $em = $this->getDoctrine()->getManager();
-        $post->setHits($post->getHits()+1);
+        $post->setHits($post->getHits() + 1);
         $em->flush();
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
@@ -273,8 +313,8 @@ class DefaultController extends Controller
      */
     public function blogAction(Category $category, Request $request)
     {
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $paginator  = $this->get('knp_paginator');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
             $request->query->getInt('page', 1),
