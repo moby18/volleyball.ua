@@ -241,8 +241,8 @@ class DefaultController extends Controller
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Mikasa VLS300 - BUY')
-            ->setFrom('volleyball.ua@gmail.com')
-            ->setTo('volleybal.ua@gmail.com')
+            ->setFrom('moby.ekreative@gmail.com')
+            ->setTo('volleyball.ua@gmail.com')
             ->setBody(
                 $this->renderView(
                     'VolleyFaceBundle:Email:order.html.twig',
