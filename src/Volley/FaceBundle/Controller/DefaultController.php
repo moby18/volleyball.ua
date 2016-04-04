@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Volley\FaceBundle\Entity\Category;
 use Volley\FaceBundle\Entity\Post;
+use Volley\FaceBundle\Entity\Purchase;
+use Volley\FaceBundle\Form\PurchaseType;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -237,7 +239,15 @@ class DefaultController extends Controller
      */
     public function buyMikasaVls300Action(Request $request)
     {
-        $data = $request->request;
+        $entity = new Purchase();
+        $form = $this->createForm(new PurchaseType(), $entity, array());
+        $form->add('submit', 'submit', []);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+        }
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Mikasa VLS300 - BUY')
@@ -247,10 +257,10 @@ class DefaultController extends Controller
                 $this->renderView(
                     'VolleyFaceBundle:Email:order.html.twig',
                     [
-                        'name' => $data->get('name', ''),
-                        'phone' => $data->get('phone', ''),
-                        'email' => $data->get('email', ''),
-                        'comments' => $data->get('comments', ''),
+                        'name' => $entity->getName(),
+                        'phone' => $entity->getPhone(),
+                        'email' => $entity->getEmail(),
+                        'comments' => $entity->getComment(),
                     ]
                 ),
                 'text/html'
