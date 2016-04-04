@@ -56,13 +56,13 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport:  sendmail
+    transport:  gmail
     host:       smtp.gmail.com
     username:   "%mailer_user%"
     password:   "%mailer_password%"
-    encryption: ssl
-    auth_mode:  login
-    port:       465
+    #encryption: ssl
+    #auth_mode:  login
+    #port:       465
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
