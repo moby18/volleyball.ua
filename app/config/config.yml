@@ -59,9 +59,6 @@ swiftmailer:
     transport: '%mailer_transport%'
     username:  '%mailer_user%'
     password:  '%mailer_password%'
-    #encryption: ssl
-    #auth_mode:  login
-    #port:       465
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
