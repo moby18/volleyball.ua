@@ -35,6 +35,15 @@ class SitemapListener implements SitemapListenerInterface
                 ),
                 'default'
             );
+            $event->getGenerator()->addUrl(
+                new UrlConcrete(
+                    $this->router->generate('volley_face_mikasa_vls300', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                    new \DateTime(),
+                    UrlConcrete::CHANGEFREQ_DAILY,
+                    1
+                ),
+                'default'
+            );
             /** @var Post $post */
             $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy([],['updated'=>'DESC']);
             $event->getGenerator()->addUrl(
