@@ -26,6 +26,14 @@
                 <div class="col col-lg-8 col-md-12 col-sm-12">
                     <h1>Mikasa VLS300 мяч для пляжного волейбола</h1>
 
+                    {% if (submit) %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            Спасибо что обратились к нам! Мы скоро свяжемся с вами, если вы правильно указали контактные данные.
+                        </div>
+                        {#<div class="alert alert-success" role="alert"></div>#}
+                    {% endif %}
+
                     <div class="row">
                         <div class="col col-lg-8 col-md-12 col-sm-12">
                             <p>Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для пляжного волейбола <b>Mikasa
@@ -53,60 +61,56 @@
                         </div>
                     </div>
 
-                    <p>По вопросам пишите <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>.
-                    </p>
-
                     <h2>Цена: 1399 грн.</h2></p>
 
                     <p>
                         {#<form action="{{ path('volley_face_mikasa_vls300') }}" method="post">#}
 
-                            {#<h2 class="form-signin-heading">Форма заказа. Заполните форму и мы свяжемся с вами!</h2>#}
+                        {#<h2 class="form-signin-heading">Форма заказа. Заполните форму и мы свяжемся с вами!</h2>#}
 
-                    {#<p><label for="name"#}
-                              {#class="sr-only">Имя:</label>#}
+                        {#<p><label for="name"#}
+                        {#class="sr-only">Имя:</label>#}
                         {#<input type="text" id="name" class="form-control"#}
-                               {#placeholder="Имя"#}
-                               {#required="true"#}
-                               {#autofocus="" name="name">#}
-                    {#</p>#}
+                        {#placeholder="Имя"#}
+                        {#required="true"#}
+                        {#autofocus="" name="name">#}
+                        {#</p>#}
 
-                    {#<p><label for="phone"#}
-                              {#class="sr-only">Телефон:</label>#}
+                        {#<p><label for="phone"#}
+                        {#class="sr-only">Телефон:</label>#}
                         {#<input type="text" id="phone" class="form-control"#}
-                               {#placeholder="Телефон"#}
-                               {#required="false"#}
-                               {#autofocus="" name="phone">#}
-                    {#</p>#}
+                        {#placeholder="Телефон"#}
+                        {#required="false"#}
+                        {#autofocus="" name="phone">#}
+                        {#</p>#}
 
-                    {#<p><label for="email"#}
-                              {#class="sr-only">Email:</label>#}
+                        {#<p><label for="email"#}
+                        {#class="sr-only">Email:</label>#}
                         {#<input type="text" id="email" class="form-control"#}
-                               {#placeholder="Email"#}
-                               {#required="false"#}
-                               {#autofocus="" name="email">#}
-                    {#</p>#}
+                        {#placeholder="Email"#}
+                        {#required="false"#}
+                        {#autofocus="" name="email">#}
+                        {#</p>#}
 
-                    {#<p><label for="comments"#}
-                              {#class="sr-only">Комментарий:</label>#}
+                        {#<p><label for="comments"#}
+                        {#class="sr-only">Комментарий:</label>#}
                         {#<input type="text" id="comments" class="form-control"#}
-                               {#placeholder="Комментарий"#}
-                               {#required="false"#}
-                               {#autofocus="" name="comments">#}
-                    {#</p>#}
+                        {#placeholder="Комментарий"#}
+                        {#required="false"#}
+                        {#autofocus="" name="comments">#}
+                        {#</p>#}
 
-                    {#<button class="btn btn-lg btn-success btn-block" id="_submit" name="_submit"#}
-                            {#type="submit">ХОЧУ КУПИТЬ!#}
-                    {#</button>#}
-                    {#</form>#}
-                        {{ render(controller(
-                        'VolleyFaceBundle:Purchase:buy',
-                        { }
-                        )) }}
+                        {#<button class="btn btn-lg btn-success btn-block" id="_submit" name="_submit"#}
+                        {#type="submit">ХОЧУ КУПИТЬ!#}
+                        {#</button>#}
+                        {#</form>#}
+
+                        {{ render(controller('VolleyFaceBundle:Purchase:buy',{ })) }}
                     </p>
 
                     <p>
-                    <h2>Купить мяч в <a href="https://vk.com/volleyballua?w=product-24019026_198041%2Fquery" target="_blank">vk.com</a></h2>
+                    <h2>Купить мяч в <a href="https://vk.com/volleyballua?w=product-24019026_198041%2Fquery"
+                                        target="_blank">vk.com</a></h2>
                     </p>
 
                     <p>
@@ -129,6 +133,9 @@
                     <p>
                         <iframe width="750" height="422" src="https://www.youtube.com/embed/P8qhJJdLu7w" frameborder="0"
                                 allowfullscreen></iframe>
+                    </p>
+
+                    <p>С вопросами обращайтесь на email <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>.
                     </p>
 
                     {% include '@VolleyFace/Social/uptolike.html.twig' %}
