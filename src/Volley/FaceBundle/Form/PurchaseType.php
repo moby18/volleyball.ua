@@ -16,16 +16,20 @@ class PurchaseType extends AbstractType
     {
         $builder
             ->add('name',null, [
-                'label' => 'Имя'
+                'label' => 'Имя',
+                'required' => false
             ])
             ->add('phone', null, [
-                'label' => 'Телефон'
+                'label' => 'Телефон',
+                'required' => false
             ])
             ->add('email', null, [
-                'label' => 'Email'
+                'label' => 'Email',
+                'required' => false
             ])
             ->add('comment', 'textarea', [
-                'label' => 'Комментарий'
+                'label' => 'Комментарий',
+                'required' => false
             ])
         ;
     }
