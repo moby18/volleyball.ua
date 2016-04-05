@@ -229,7 +229,7 @@ class DefaultController extends Controller
      */
     public function mikasaVls300Action()
     {
-        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', []);
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>false]);
     }
 
     /**
@@ -267,7 +267,7 @@ class DefaultController extends Controller
             );
         $this->get('mailer')->send($message);
 
-        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', []);
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>true]);
     }
 
     /**

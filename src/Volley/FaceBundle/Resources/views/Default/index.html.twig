@@ -41,10 +41,11 @@
 {% block content %}
 
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
+    <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
@@ -76,6 +77,20 @@
                         <div class="col-lg-6">
                             {% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}
                             {% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}
+                            <p></p>
+                            <a href="{{ path('volley_face_mikasa_vls300') }}" title="Mikasa VLS300 мяч для пляжного волейбола">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <p>
+                                        <img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"
+                                             src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">
+                                    </p>
+                                    <p class="text-center">Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для пляжного волейбола
+                                        <b>Mikasa VLS300</b>.
+                                    </p>
+                                </div>
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
