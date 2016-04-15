@@ -192,6 +192,59 @@ h1, h2, h3, h4, h5, h6 {
     margin: 3px 0 0;
 }
 
+/* Megamenu */
+.megamenu-container {
+    position: static !important;
+}
+
+.megamenu {
+    left:0;
+    right:0;
+}
+
+.navbar-nav .megamenu-title {
+    font-size:15px;
+    margin:10px 0 6px;
+}
+
+.navbar-nav .dropdown-menu.megamenu li a,
+.navbar-nav .megamenu-title {
+    padding:6px 0;
+    white-space:normal;
+}
+
+.navbar-nav .megamenu-title {
+    padding-bottom:15px;
+    margin:0 0 10px;
+    border-bottom:1px solid transparent;
+}
+
+.boxed-container  .megamenu {
+    left:15px;
+    right:15px;
+}
+
+.navbar-nav li > .dropdown-menu.megamenu {
+    float:none;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.megamenu-container .container-fluid {
+    padding: 0 30px;
+}
+
+.container .megamenu-container .container-fluid,
+.container .megamenu-container .container-fluid,
+.boxed .container-fluid .megamenu-container .container-fluid,
+.boxed-long .container-fluid .megamenu-container .container-fluid {
+    padding: 0 15px;
+}
+
+.navbar-default .navbar-nav .megamenu-title  {
+    color: #7a7a7a;
+}
+
 /* Front Content */
 
 /* Slider */
@@ -760,4 +813,9 @@ body {
     footer .footer-below {
         padding-bottom: 60px;
     }
+
+    .navbar-nav .megamenu a {
+        padding: 5px 15px 5px 25px;
+    }
+
 }
