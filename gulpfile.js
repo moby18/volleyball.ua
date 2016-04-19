@@ -57,6 +57,7 @@ gulp.task('script', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/main.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/menu.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/game.js'
     ];

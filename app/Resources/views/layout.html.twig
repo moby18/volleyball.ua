@@ -89,8 +89,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav navbar-right">
+        <div class="collapse navbar-collapse navbar-ex1 -collapse">
+            <ul class="nav navbar-nav">
                 <li class="dropdown megamenu-container">
                     <a href="#" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">Elements<span class="angle"></span></a>
                     <div class="dropdown-menu megamenu" role="menu">
@@ -304,6 +304,7 @@
 <!-- /.container -->
 
 {% block scripts %}
+    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/modernizr.js') }}"></script>
     <script  type="text/javascript" src="{{ asset('js/script.js') }}"></script>
 {% endblock %}
 
