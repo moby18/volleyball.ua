@@ -9,18 +9,23 @@ var shell = require('gulp-shell');
 
 gulp.task('style', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
-        'src/Volley/FaceBundle/Resources/public/css/animations.css',
-        'src/Volley/FaceBundle/Resources/public/css/styles.css'
+        'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
+        'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
+        // 'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/animations.css',
+        'src/Volley/FaceBundle/Resources/public/css/boss/style.css',
+        'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
+        'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
+        'src/Volley/FaceBundle/Resources/public/css/custom/header.css'
     ];
     gulp.src(source)
-        //.pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(concat('style.css'))
         //.pipe(minifyCss({
         //    keepSpecialComments: 0
         //}))
-        //.pipe(sourcemaps.write("."))
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
 
@@ -53,21 +58,49 @@ gulp.task('style_ie', function () {
         .pipe(gulp.dest('web/css/'));
 });
 
-gulp.task('script', function () {
+gulp.task('script_header', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/main.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/menu.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/game.js'
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/analytics.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/queryloader2.min.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
         .pipe(babel())
-        .pipe(concat('script.js'))
+        .pipe(concat('script_header.js'))
         //.pipe(uglify())
         //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/js/'));
+});
+
+gulp.task('script_footer', function () {
+    var source = [
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.hoverIntent.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.nicescroll.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/waypoints.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/waypoints-sticky.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.debouncedresize.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/retina.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jflickrfeed.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.tweet.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.infinitescroll.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/main.js'
+    ];
+    gulp.src(source)
+        //.pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(concat('script_footer.js'))
+        //.pipe(uglify())
+        //.pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('web/js/'));
+});
+
+
+gulp.task('script', function () {
+    gulp.start(['script_header','script_footer']);
 });
 
 gulp.task('script_admin', function () {

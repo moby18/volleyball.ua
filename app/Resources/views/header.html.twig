@@ -1,0 +1,243 @@
+{#<nav class="navbar navbar-inverse navbar-fixed-top animated-dropdown ttb-dropdown" role="navigation">#}
+    {#<div class="container">#}
+        {#<div class="navbar-header">#}
+            {#<button type="button" class="navbar-toggle btn-circle pull-right opened" data-toggle="collapse" data-target="#main-navbar-container" aria-expanded="true">#}
+                {#<span class="sr-only">Toggle navigation</span>#}
+                {#<span class="icon-bar"></span>#}
+                {#</button>#}
+            {#<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">#}
+                {#<span class="sr-only">Toggle navigation</span>#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+                {#</button>#}
+            {#<!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->#}
+            {#<a class="navbar-brand" href="{{ path('volley_web_homepage') }}" title="Волейбол в Україні - volleyball.ua"></a>#}
+            {#</div>#}
+
+        {#<!-- Collect the nav links, forms, and other content for toggling -->#}
+        {#<div class="collapse navbar-collapse navbar-ex1 -collapse">#}
+            {#<ul class="nav navbar-nav">#}
+                {#<li class="dropdown megamenu-container">#}
+                    {#<a href="#" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">Elements<span class="angle"></span></a>#}
+
+                    {#</li>#}
+
+                {#<li class="dropdown megamenu-container">#}
+                    {#<a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">{% trans %}News{% endtrans %}</a>#}
+                    {#<ul class="dropdown-menu pull-right" role="menu">#}
+                        {#<li class="dropdown sub-dropdown">#}
+                            {#<a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Волейбол України<i class="fa fa-angle-right"></i></a>#}
+                            {#<ul class="dropdown-menu pull-right" role="menu">#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>#}
+                                {#</ul>#}
+                            {#</li>#}
+                        {#<li class="dropdown sub-dropdown">#}
+                            {#<a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Європейські Кубки<i class="fa fa-angle-right"></i></a>#}
+                            {#<ul class="dropdown-menu pull-right" role="menu">#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга Чемпіонів</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Кубок Виклику</a></li>#}
+                                {#</ul>#}
+                            {#</li>#}
+                        {#<li class="dropdown sub-dropdown">#}
+                            {#<a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Національні Ліги<i class="fa fa-angle-right"></i></a>#}
+                            {#<ul class="dropdown-menu pull-right" role="menu">#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>#}
+                                {#</ul>#}
+                            {#</li>#}
+                        {#<li class="dropdown sub-dropdown">#}
+                            {#<a href="{{ path("volley_face_blog",{'category_slug': 'international-sompetitions'}) }}" class="dropdown-toggle" role="button" aria-expanded="false">Міжнародні змагання<i class="fa fa-angle-right"></i></a>#}
+                            {#<ul class="dropdown-menu pull-right" role="menu">#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські Ігри</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>#}
+                                {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>#}
+                                {#</ul>#}
+                            {#</li>#}
+                        {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></li>#}
+                        {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></li>#}
+                        {#<li><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></li>#}
+                        {#</ul>#}
+                    {#</li>#}
+                {#<li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>#}
+                {#</ul>#}
+            {#</div>#}
+        {#<!-- /.navbar-collapse -->#}
+        {#</div>#}
+    {#<!-- /.container -->#}
+    {#</nav>#}
+
+<header id="header" role="banner">
+    <div class="collapse navbar-white" id="header-search-form">
+        <div class="container">
+            <form class="navbar-form animated fadeInDown">
+                <input type="search" id="s" name="s" class="form-control" placeholder="Search in here...">
+                <button type="submit" class="btn-circle" title="Search"><i class="fa fa-search"></i></button>
+            </form>
+        </div><!-- End .container -->
+    </div><!-- End #header-search-form -->
+    <nav class="navbar navbar-white animated-dropdown ttb-dropdown" role="navigation">
+
+        {#<div class="navbar-top clearfix">#}
+        {#<div class="container">#}
+            {#<div class="pull-left">#}
+                {#<ul class="navbar-top-nav clearfix hidden-sm hidden-xs">#}
+                    {#<li><a href="http://eonythemes.com/themes/wb/boss/main/index21.html#"><i class="fa fa-user"></i>My Account</a></li>#}
+                    {#<li><a href="http://eonythemes.com/themes/wb/boss/main/login.html"><i class="fa fa-external-link"></i>Login</a></li>#}
+                    {#<li><a href="http://eonythemes.com/themes/wb/boss/main/register.html"><i class="fa fa-terminal"></i>Register</a></li>#}
+                    {#<li><a href="http://eonythemes.com/themes/wb/boss/main/index21.html#"><i class="fa fa-gift"></i>My Wishlist</a></li>#}
+                    {#</ul>#}
+                {#<div class="dropdown account-dropdown visible-sm visible-xs">#}
+                    {#<a class="dropdown-toggle" href="http://eonythemes.com/themes/wb/boss/main/index21.html#" id="account-dropdown" data-toggle="dropdown" aria-expanded="true">#}
+                        {#<i class="fa fa-user"></i>My Account#}
+                        {#<span class="angle"></span>#}
+                        {#</a>#}
+                    {#<ul class="dropdown-menu" role="menu" aria-labelledby="account-dropdown">#}
+                        {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/shop-dashboard.html"><i class="fa fa-user"></i>My Account</a></li>#}
+                        {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/login.html"><i class="fa fa-external-link"></i>Login</a></li>#}
+                        {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/register.html"><i class="fa fa-terminal"></i>Register</a></li>#}
+                        {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#"><i class="fa fa-gift"></i>My Wishlist</a></li>#}
+                        {#</ul>#}
+                    {#</div><!-- End .account-dropdown -->#}
+                {#</div><!-- End .pull-left -->#}
+
+            {#<div class="pull-right">#}
+                {#<div class="social-icons pull-right hidden-xs">#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-facebook" title="Facebook">#}
+                        {#<i class="fa fa-facebook"></i>#}
+                        {#</a>#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-twitter" title="Twitter">#}
+                        {#<i class="fa fa-twitter"></i>#}
+                        {#</a>#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-google-plus" title="Google Plus">#}
+                        {#<i class="fa fa-google-plus"></i>#}
+                        {#</a>#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-dribbble" title="Dribbble">#}
+                        {#<i class="fa fa-dribbble"></i>#}
+                        {#</a>#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-reddit" title="Reddit">#}
+                        {#<i class="fa fa-reddit"></i>#}
+                        {#</a>#}
+                    {#<a href="http://eonythemes.com/themes/wb/boss/main/index21.html#" class="social-icon icon-skype" title="Skype">#}
+                        {#<i class="fa fa-skype"></i>#}
+                        {#</a>#}
+                    {#</div><!-- End .social-icons -->#}
+
+                {#<div class="dropdowns-container pull-right clearfix">#}
+                    {#<div class="dropdown currency-dropdown pull-right">#}
+                        {#<a class="dropdown-toggle" href="http://eonythemes.com/themes/wb/boss/main/index21.html#" id="currency-dropdown" data-toggle="dropdown" aria-expanded="true">#}
+                            {#Currency#}
+                            {#<span class="angle"></span>#}
+                            {#</a>#}
+                        {#<ul class="dropdown-menu" role="menu" aria-labelledby="currency-dropdown">#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Us Dollar</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Euro</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Turkish TL</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Pound</a></li>#}
+                            {#</ul>#}
+                        {#</div><!-- End .currency-dropdown -->#}
+
+                    {#<div class="dropdown language-dropdown pull-right">#}
+                        {#<a class="dropdown-toggle" href="http://eonythemes.com/themes/wb/boss/main/index21.html#" id="language-dropdown" data-toggle="dropdown" aria-expanded="true">#}
+                            {#Languages#}
+                            {#<span class="angle"></span>#}
+                            {#</a>#}
+                        {#<ul class="dropdown-menu" role="menu" aria-labelledby="language-dropdown">#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">English</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Spanish</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Turkish</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">German</a></li>#}
+                            {#<li role="presentation"><a role="menuitem" tabindex="-1" href="http://eonythemes.com/themes/wb/boss/main/index21.html#">Italian</a></li>#}
+                            {#</ul>#}
+                        {#</div><!-- End .curreny-dropdown -->#}
+                    {#</div><!-- End. dropdowns-container -->#}
+
+                {#</div><!-- End .pull-right -->#}
+            {#</div><!-- End .container -->#}
+        {#</div><!-- End .navbar-top -->#}
+
+        <div class="navbar-inner sticky-menu">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle btn-circle pull-right" data-toggle="collapse" data-target="#main-navbar-container" aria-expanded="true">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="{{ path('volley_web_homepage') }}" title="Волейбол в Україні - volleyball.ua"></a>
+
+                    {#<button type="button" class="navbar-btn btn-icon btn-circle pull-right last visible-sm visible-xs" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>#}
+
+                </div><!-- End .navbar-header -->
+
+                <div class="navbar-collapse collapse" id="main-navbar-container" aria-expanded="true">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown megamenu-container">
+                            <a href="{{ path("volley_face_blog",{'category_slug': 'news'}) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans %}News{% endtrans %}<span class="angle"></span></a>
+                            <div class="dropdown-menu megamenu" role="menu">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}" class="megamenu-title">Волейбол України</a>
+                                            <ul>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>
+                                            </ul>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}" class="megamenu-title">Європейські Кубки</a>
+                                            <ul>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга Чемпіонів</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Кубок Виклику</a></li>
+                                            </ul>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'international-sompetitions'}) }}" class="megamenu-title">Міжнародні змагання</a>
+                                            <ul>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські Ігри</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>
+                                            </ul>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}" class="megamenu-title">Національні Ліги</a>
+                                            <ul>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
+                                            </ul>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}" class="megamenu-title">Пляжний волейбол</a>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}" class="megamenu-title">Аматорський волейбол</a>
+                                        </div><!-- End .col-sm-3 -->
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}" class="megamenu-title">Дитячий волейбол</a>
+                                        </div><!-- End .col-sm-3 -->
+
+                                    </div><!-- End .row -->
+                                </div><!-- End .container -->
+                            </div><!-- End .megamenu -->
+                        </li>
+                        <li class="visible-lg"><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
+                        {#<li><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>#}
+                    </ul>
+
+                    {#<button type="button" class="navbar-btn btn-icon btn-circle navbar-right last  hidden-sm hidden-xs" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>#}
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </div><!-- End .navbar-inner -->
+    </nav>
+</header><!-- End #header -->
