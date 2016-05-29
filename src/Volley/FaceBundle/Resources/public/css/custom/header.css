@@ -30,7 +30,7 @@
 }
 
 #main-navbar-container .nav.navbar-nav {
-    float: right;
+    /*float: right;*/
 }
 
 @media (min-width: 992px) {

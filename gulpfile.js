@@ -9,15 +9,16 @@ var shell = require('gulp-shell');
 
 gulp.task('style', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
-        'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
-        'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
+        // 'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
         // 'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
         // 'src/Volley/FaceBundle/Resources/public/css/animations.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/style.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
-        'src/Volley/FaceBundle/Resources/public/css/custom/header.css'
+        'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
+        'src/Volley/FaceBundle/Resources/public/css/custom/body.css'
     ];
     gulp.src(source)
         .pipe(sourcemaps.init())
