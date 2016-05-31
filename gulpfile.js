@@ -32,16 +32,17 @@ gulp.task('style', function () {
 
 gulp.task('style_admin', function () {
     var source = [
+        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css'
     ];
     gulp.src(source)
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(concat('style_admin.css'))
-        .pipe(minifyCss({
-            keepSpecialComments: 0
-        }))
-        .pipe(sourcemaps.write("."))
+        // .pipe(minifyCss({
+        //     keepSpecialComments: 0
+        // }))
+        // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
 

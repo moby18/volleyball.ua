@@ -6,7 +6,6 @@
   "dependencies": {
     "connect": "^3.4.1",
     "gulp": "^3.9.1",
-    "gulp-cleanbower ": "^0.3.2",
     "gulp-concat": "^2.6.0",
     "gulp-copy": "0.0.2",
     "gulp-install": "~0.2.0",
