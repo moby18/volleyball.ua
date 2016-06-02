@@ -10,3 +10,14 @@
            class="btn btn-default">Back to the list</a>
     </div>
 {% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/category.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}" type="text/css" />
+{% endblock %}
