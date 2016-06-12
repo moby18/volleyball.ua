@@ -109,9 +109,6 @@
                             <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>
                             <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>
                             <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></h4></li>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></h4></li>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></h4></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -140,15 +137,37 @@
                         </ul>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></h4></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></h4></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></h4></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             </div>
         </section>
         <div class="footer-below">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        volleyball.ua &copy; 2015-2016 - Волейбол в Україні
+                    <div class="col-lg-5 col-md-6 copyright">
+                        <img src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png"> volleyball.ua &copy; 2015-2016 - Волейбол в Україні
                     </div>
-                    <div class="col-lg-4 col-md-0">
+                    <div class="col-lg-3 col-md-0">
                     </div>
                     <div class="col-lg-4 col-md-6 text-right">
                         <div class="social-icons pull-right">

@@ -3,7 +3,7 @@
         <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('main_pic') }}" alt="{{ item.title ~ ' ' ~ item.metakey }}">
     </a>
     <div class="news-info">
-        <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}} / <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}">{{ item.category.name }}</a></span>
+        <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM")}} <br/> <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}">{{ item.category.name }}</a></span>
         {#<span class="news-author"> / {{ item.createdBy }}</span>#}
         <span class="clearfix"></span>
     </div>
@@ -11,7 +11,7 @@
     {% autoescape %}
         {{ item.content|raw }}
     {% endautoescape %}
-    {%  if not loop.last %}
-    <hr class="underline"/>
-    {% endif %}
+    {#{%  if not loop.last %}#}
+    {#<hr class="underline"/>#}
+    {#{% endif %}#}
 </div>

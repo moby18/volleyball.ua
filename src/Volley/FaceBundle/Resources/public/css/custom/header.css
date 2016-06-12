@@ -67,7 +67,27 @@
     color: #428bca !important;
 }
 
+.dropdown-menu.megamenu {
+    background-image: url('../bundles/volleyface/images/menu-bg.png');
+    background-color: transparent;
+    background-repeat: repeat;
+}
 
+.navbar-white .navbar-nav .megamenu-title {
+    border-bottom: 0;
+}
+
+.dropdown-menu.megamenu .megamenu-title {
+    color: #FFC926;
+}
+
+.dropdown-menu.megamenu .megamenu-title {
+    color: #FFC926;
+}
+
+.dropdown-menu.megamenu ul li a {
+    color: #ffffff;
+}
 
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {

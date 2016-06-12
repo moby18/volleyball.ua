@@ -12,9 +12,15 @@
     color: #363636;
     transition: color 0.5s ease;
     padding-top: 15px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .news-item h3 {
     transition: all 0.5s ease;
+    margin: 5px 0;
+    color: #363636;
+    border-left: 4px solid #267dc1;
+    padding-left: 5px;
 }
 .news-item:hover {
     color: #363636;
@@ -37,10 +43,6 @@
 * html .news-item:nth-child(even)             { zoom: 1; } /* IE6 */
 *:first-child+html .news-item:nth-child(even) { zoom: 1; } /* IE7 */
 
-.news-item h3 {
-    margin: 5px 0;
-    color: #363636;
-}
 .news-item .news-info,
 .post .news-info,
 .news-item .news-info a,
@@ -48,7 +50,6 @@
 {
     color: #888888;
     font-size: 12px;
-    padding: 3px;
     transition: color 0.5s ease;
 }
 
@@ -167,8 +168,13 @@ footer .footer-col {
 }
 
 footer .footer-below {
-    padding: 20px 0;
-    background-color: #222;
+    border-top: 1px solid #313140;
+    padding: 10px 0;
+    /*background-color: #222;*/
+}
+
+footer .social-icon {
+    margin: 0;
 }
 
 footer .social-icons a {
@@ -182,11 +188,12 @@ footer .social-icons a:hover {
 }
 
 footer .bottom-links {
-    background-color: #262626;
+    /*background-color: #262626;*/
+    color: #72727D;
 }
 
 footer .bottom-links .row {
-    padding: 15px 0;
+    padding: 15px 0 5px;
 }
 
 footer .bottom-links ul {
@@ -195,11 +202,12 @@ footer .bottom-links ul {
 
 footer .bottom-links ul li a,
 footer .bottom-links ul li h4 {
-    color: #ffffff;
+    color: #72727D;
     font-size: 14px;
 }
-footer .bottom-links ul li h4 {
+footer .bottom-links ul li h4 a {
     font-weight: 600;
+    color: #B8B8C7;
 }
 
 
@@ -456,15 +464,22 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 260px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 260px;
+    background-color: transparent;
+    background-image: url('../bundles/volleyface/images/footer-bg.png');
+    background-repeat: repeat;
+}
+
+.footer .copyright {
+    line-height: 39px;
+    color: #6E6E81;
 }
 
 /* Bootstrap Override */

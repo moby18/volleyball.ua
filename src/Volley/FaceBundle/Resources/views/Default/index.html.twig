@@ -62,6 +62,9 @@
                             <div class="col-lg-6">
                                 {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
                             </div>
+                            {% if loop.index is even %}
+                                <div style="clear: both"></div>
+                            {% endif %}
                         {% endfor %}
 
                     </div>
