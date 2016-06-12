@@ -138,6 +138,10 @@
     padding: 0;
 }
 
+.post  h1 {
+    margin: 20px 0;
+}
+
 .post .news-info {
     padding: 5px 0;
     display: block;
