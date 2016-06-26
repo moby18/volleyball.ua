@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}" type="text/css"/>
 
     <style type="text/css">
         body {
@@ -56,6 +57,7 @@
             <input type="text" id="inputEmail" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}"
                    required="true"
                    autofocus="" name="_username">
+            <br>
             <label for="inputPassword"
                    class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
             <input type="password" id="inputPassword" class="form-control"

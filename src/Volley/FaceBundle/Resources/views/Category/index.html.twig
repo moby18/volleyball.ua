@@ -15,7 +15,7 @@
             </thead>
             <tbody>
             {% for entity in entities %}
-                {% set color = entity.color ? entity.color : entity.parent and entity.parent.color ? entity.parent.color : entity.parent and entity.parent.parent and entity.parent.parent.color ? entity.parent.parent.color : "grey" %}
+                {% set color = entity.color ? entity.color : entity.parent and entity.parent.color ? entity.parent.color : entity.parent and entity.parent.parent and entity.parent.parent.color ? entity.parent.parent.color : default_category_color %}
                 <tr>
                     <td style="background-color: {{ color }}"><a
                                 href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
