@@ -15,11 +15,13 @@
             </thead>
             <tbody>
             {% for entity in entities %}
+                {% set color = entity.color ? entity.color : entity.parent and entity.parent.color ? entity.parent.color : entity.parent and entity.parent.parent and entity.parent.parent.color ? entity.parent.parent.color : "grey" %}
                 <tr>
-                    <td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                    <td>{% for i in range(0, entity.lvl) %} {{ '-' }} {% endfor %}{{ entity.name }}</td>
-                    <td>{{ entity.parent }}</td>
-                    <td>
+                    <td style="background-color: {{ color }}"><a
+                                href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td style="background-color: {{ color }}">{% for i in range(0, entity.lvl) %} {{ '-' }} {% endfor %}{{ entity.name }}</td>
+                    <td style="background-color: {{ color }}">{{ entity.parent }}</td>
+                    <td style="background-color: {{ color }}">
                         <div class="btn-group" role="group" aria-label="">
                             <a href="{{ path('category_show', { 'id': entity.id }) }}" type="button"
                                class="btn btn-default">show</a>
