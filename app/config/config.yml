@@ -35,7 +35,7 @@ twig:
     form:
         resources: ['bootstrap_3_layout.html.twig']
     globals:
-        default_category_color: "grey"
+        default_category_color: "#888888"
 
 # Doctrine Configuration
 doctrine:

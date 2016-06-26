@@ -5,13 +5,16 @@
 {% set meta_keywords = post.metakey %}
 {% set meta_description = post.metadescr %}
 
+{% set color = post.category.color ? post.category.color : post.category.parent and post.category.parent.color ? post.category.parent.color : post.category.parent and post.category.parent.parent and post.category.parent.parent.color ? post.category.parent.parent.color : default_category_color %}
+
 {% block content %}
 
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
+    <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
@@ -23,24 +26,37 @@
 
             <div class="row">
                 <div class="col col-lg-8 col-md-12 col-sm-12">
-                        <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
-                            <h1>{{ post.title }}</h1>
-                        </a>
-                        <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
+                    <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
+                        <h1>{{ post.title }}</h1>
+                    </a>
+                    <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
 
-                        <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span>
-                        <p>
-                            <b>{{ post.content|raw }}</b>
-                        </p>
-                        <p>
-                            {% autoescape %}
-                                {{ post.text|raw }}
-                            {% endautoescape %}
-                        </p>
+                    <div class="news-info row">
+                        <div class="col-lg-9">
+            <span class="news-date">{{ post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
+            <a href="{{ path('volley_face_blog',{'category_slug': post.category.slug}) }}"
+               title="{{ post.category.name }}"
+               style="color: {{ color }}">{{ post.category.name }}</a></span>
 
-                        {% include '@VolleyFace/Social/uptolike.html.twig' %}
+                        </div>
+                        <div class="col-lg-3">
+                            <span class="news-author pull-right"> {{ post.createdBy }}</span>
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
 
-                        <br/>
+                    <p>
+                        <b>{{ post.content|raw }}</b>
+                    </p>
+                    <p>
+                        {% autoescape %}
+                            {{ post.text|raw }}
+                        {% endautoescape %}
+                    </p>
+
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>
                 </div>
                 <div class="col-lg-1 col-md-0 col-sm-0"></div>
                 <div class="col-lg-3 col-md-12 col-sm-12">
@@ -54,7 +70,8 @@
                                     <img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"
                                          src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">
                                 </p>
-                                <p class="text-center">Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для пляжного волейбола
+                                <p class="text-center">Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для
+                                    пляжного волейбола
                                     <b>Mikasa VLS300</b>.
                                 </p>
                             </div>

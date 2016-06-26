@@ -166,6 +166,21 @@ class Post
     private $featured;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="images", type="boolean")
+     */
+    private $images;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="videos", type="boolean")
+     */
+    private $videos;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -620,6 +635,38 @@ class Post
     public function getFeatured()
     {
         return $this->featured;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param boolean $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param boolean $videos
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
     }
 
     /**
