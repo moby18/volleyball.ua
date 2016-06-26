@@ -18,6 +18,12 @@
     border: 0;
 }
 
+.navbar-toggle,
+.btn-toggle {
+    padding: 8px 9px;
+    margin: 12px 15px 12px 15px;
+}
+
 /*Navigatior Bar*/
 #main-navbar-container .nav.navbar-nav > li > a {
     padding-top: 17.5px;
@@ -27,6 +33,12 @@
 
 .navbar-white .sticky-menu.fixed {
     background-color: #222;
+}
+
+@media (max-width: 767px) {
+    .navbar-white .navbar-nav .open > .dropdown-toggle, .navbar-white .navbar-nav .open > .dropdown-toggle:hover, .navbar-white .navbar-nav .open > .dropdown-toggle:focus {
+        background-color: transparent;
+    }
 }
 
 #main-navbar-container .nav.navbar-nav {
@@ -48,22 +60,23 @@
     padding-top: 7px;
     padding-bottom: 7px;
 }
+
 .navbar-nav li li a {
     font-size: 14px;
     background-color: transparent;
 }
 
-.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text {
     color: #ffffff;
     font-size: 16px;
     padding-top: 21px;
 }
 
-.navbar-inverse .navbar-nav li>a {
+.navbar-inverse .navbar-nav li > a {
     transition: color 0.5s ease;
 }
 
-.navbar-inverse .navbar-nav li>a:hover {
+.navbar-inverse .navbar-nav li > a:hover {
     color: #428bca !important;
 }
 

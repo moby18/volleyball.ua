@@ -481,6 +481,15 @@ body {
     background-repeat: repeat;
 }
 
+@media (max-width: 767px) {
+    body {
+        margin-bottom: 777px;
+    }
+    .footer {
+        height: 777px;
+    }
+}
+
 .footer .copyright {
     line-height: 39px;
     color: #6E6E81;
