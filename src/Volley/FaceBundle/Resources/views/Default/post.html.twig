@@ -32,15 +32,19 @@
                     <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
 
                     <div class="news-info row">
-                        <div class="col-lg-9">
+                        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
             <span class="news-date">{{ post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
             <a href="{{ path('volley_face_blog',{'category_slug': post.category.slug}) }}"
                title="{{ post.category.name }}"
                style="color: {{ color }}">{{ post.category.name }}</a></span>
 
                         </div>
-                        <div class="col-lg-3">
-                            <span class="news-author pull-right"> {{ post.createdBy }}</span>
+                        <div class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <span class="pull-right">
+                                <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
+                                <br/>
+                                {#<span class="news-author ">{{ post.createdBy }}</span>#}
+                            </span>
                         </div>
                         <span class="clearfix"></span>
                     </div>
@@ -60,8 +64,8 @@
                 </div>
                 <div class="col-lg-1 col-md-0 col-sm-0"></div>
                 <div class="col-lg-3 col-md-12 col-sm-12">
-                    {% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}
-                    {% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}
+                    {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
+                    {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
                     <p></p>
                     <a href="{{ path('volley_face_mikasa_vls300') }}" title="Mikasa VLS300 мяч для пляжного волейбола">
                         <div class="row">
@@ -69,10 +73,6 @@
                                 <p>
                                     <img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"
                                          src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">
-                                </p>
-                                <p class="text-center">Скоро лето! <b>volleyball.ua</b> начинает продажу мячей для
-                                    пляжного волейбола
-                                    <b>Mikasa VLS300</b>.
                                 </p>
                             </div>
                         </div>
