@@ -43,6 +43,7 @@ class PostRepository extends EntityRepository
 
     public function findPopularByCategory(Category $category, $count = 5, $offset = 0)
     {
+        $today = new \DateTime();
         return $this->createQueryBuilder('p')
             ->select('p')
             ->innerJoin('p.category', 'category')
@@ -50,8 +51,10 @@ class PostRepository extends EntityRepository
             ->setParameter('lft', $category->getLft())
             ->setParameter('rgt', $category->getRgt())
             ->andWhere('p.state > 0')
-            ->andWhere('p.published <= :date')
-            ->setParameter('date', new \DateTime())
+            ->andWhere('p.published <= :date1')
+            ->setParameter('date1', $today)
+            ->andWhere('p.published >= :date2')
+            ->setParameter('date2', $today->sub( new \DateInterval('P14D') ))
             ->setMaxResults($count)
             ->setFirstResult($offset)
             ->addOrderBy('p.hits', 'DESC')
