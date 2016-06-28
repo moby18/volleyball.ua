@@ -44,6 +44,8 @@ class PostRepository extends EntityRepository
     public function findPopularByCategory(Category $category, $count = 5, $offset = 0)
     {
         $today = new \DateTime();
+        $later = new \DateTime();
+        $later->sub(new \DateInterval('P14D'));
         return $this->createQueryBuilder('p')
             ->select('p')
             ->innerJoin('p.category', 'category')
@@ -54,7 +56,7 @@ class PostRepository extends EntityRepository
             ->andWhere('p.published <= :date1')
             ->setParameter('date1', $today)
             ->andWhere('p.published >= :date2')
-            ->setParameter('date2', $today->sub( new \DateInterval('P14D') ))
+            ->setParameter('date2', $later)
             ->setMaxResults($count)
             ->setFirstResult($offset)
             ->addOrderBy('p.hits', 'DESC')
