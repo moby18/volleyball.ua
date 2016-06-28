@@ -29,6 +29,11 @@
                     <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
                         <h1>{{ post.title }}</h1>
                     </a>
+                    <div class="news-info row">
+                        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
+                        </div>
+                    </div>
                     <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
 
                     <div class="news-info row">
@@ -41,8 +46,8 @@
                         </div>
                         <div class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <span class="pull-right">
-                                <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
-                                <br/>
+                                {#<span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>#}
+                                {#<br/>#}
                                 {#<span class="news-author ">{{ post.createdBy }}</span>#}
                             </span>
                         </div>
@@ -58,6 +63,8 @@
                         {% endautoescape %}
                     </p>
 
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
                     <p id="google-adsende-banner" style="height: 100px; width: 100%;">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                         <!-- AdsBlockForPost -->
@@ -71,12 +78,24 @@
                         </script>
                     </p>
 
-                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
-
                     <br/>
                 </div>
-                <div class="col-lg-1 col-md-0 col-sm-0"></div>
-                <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="col col-lg-4 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title">
+                                {{ 'popular-section-in-category'|trans({}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for item in popularPosts %}
+                            <div class="col-lg-12">
+                                {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
+                            </div>
+                            <div style="clear: both"></div>
+                        {% endfor %}
+                    </div>
                     {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
                     {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
                     <p></p>

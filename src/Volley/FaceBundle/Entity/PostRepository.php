@@ -41,6 +41,24 @@ class PostRepository extends EntityRepository
             ->getQuery();
     }
 
+    public function findPopularByCategory(Category $category, $count = 5, $offset = 0)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->innerJoin('p.category', 'category')
+            ->andWhere('category.lft >= :lft AND category.rgt <= :rgt')
+            ->setParameter('lft', $category->getLft())
+            ->setParameter('rgt', $category->getRgt())
+            ->andWhere('p.state > 0')
+            ->andWhere('p.published <= :date')
+            ->setParameter('date', new \DateTime())
+            ->setMaxResults($count)
+            ->setFirstResult($offset)
+            ->addOrderBy('p.hits', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findWithOptions($slug)
     {
         return $this->createQueryBuilder('p')

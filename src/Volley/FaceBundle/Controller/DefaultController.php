@@ -141,10 +141,12 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             20
         );
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, 10);
 
         return [
             'slides' => $slides,
-            'news' => $posts
+            'news' => $posts,
+            'popularPosts' => $popularPosts
         ];
     }
 
@@ -302,10 +304,12 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post->setHits($post->getHits() + 1);
         $em->flush();
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), 5);
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
-            'post' => $post
+            'post' => $post,
+            'popularPosts' => $popularPosts
         ));
     }
 
