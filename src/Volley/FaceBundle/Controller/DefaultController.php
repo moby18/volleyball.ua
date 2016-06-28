@@ -334,10 +334,12 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             20
         );
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, 10);
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
-            'posts' => $pagination
+            'posts' => $pagination,
+            'popularPosts' => $popularPosts
         ));
     }
 }
