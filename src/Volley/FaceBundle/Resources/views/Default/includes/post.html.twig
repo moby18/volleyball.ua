@@ -1,13 +1,16 @@
 {% set color = item.category.color ? item.category.color : item.category.parent and item.category.parent.color ? item.category.parent.color : item.category.parent and item.category.parent.parent and item.category.parent.parent.color ? item.category.parent.parent.color : default_category_color %}
+{% set popular = popular is defined ? popular : false %}
 <div class="news-item col-lg-12 col-md-12 col-sm-12 col-xs-12 fade-in">
-    <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}" title="{{ item.title }}">
+    <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}"
+       title="{{ item.title }}">
         <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('blog_post') }}"
              alt="{{ item.title ~ ' ' ~ item.metakey }}">
     </a>
     <div class="news-info row">
         <div class="col-lg-9">
             <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
-            <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}" title="{{ item.category.name }}"
+            <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}"
+               title="{{ item.category.name }}"
                style="color: {{ color }}">{{ item.category.name }}</a></span>
             {#<span class="news-author"> / {{ item.createdBy }}</span>#}
         </div>
@@ -27,9 +30,11 @@
     </div>
     <a href="{{ path('volley_face_post',{'category_slug': item.category.slug, 'post_slug': item.slug}) }}">
         <h3 style="border-left-color: {{ color }}">{{ item.title }}</h3></a>
-    {% autoescape %}
-        {{ item.content|raw }}
-    {% endautoescape %}
+    {% if not popular %}
+        {% autoescape %}
+            {{ item.content|raw }}
+        {% endautoescape %}
+    {% endif %}
     {#{%  if not loop.last %}#}
     {#<hr class="underline"/>#}
     {#{% endif %}#}
