@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
-var minifyCss = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
@@ -23,7 +23,7 @@ gulp.task('style', function () {
     gulp.src(source)
         .pipe(sourcemaps.init())
         .pipe(concat('style.css'))
-        //.pipe(minifyCss({
+        //.pipe(cleanCSS({
         //    keepSpecialComments: 0
         //}))
         .pipe(sourcemaps.write("."))
@@ -39,7 +39,7 @@ gulp.task('style_admin', function () {
     gulp.src(source)
         // .pipe(sourcemaps.init())
         .pipe(concat('style_admin.css'))
-        // .pipe(minifyCss({
+        // .pipe(cleanCSS({
         //     keepSpecialComments: 0
         // }))
         // .pipe(sourcemaps.write("."))
@@ -53,7 +53,7 @@ gulp.task('style_ie', function () {
     gulp.src(source)
         .pipe(sourcemaps.init())
         .pipe(concat('style_ie.css'))
-        .pipe(minifyCss({
+        .pipe(cleanCSS({
             keepSpecialComments: 0
         }))
         .pipe(sourcemaps.write("."))
