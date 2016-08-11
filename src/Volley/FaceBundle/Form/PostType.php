@@ -52,6 +52,14 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Featured', 'data-off' => 'Not Featured', 'data-onstyle' => 'info']
             ])
+            ->add('images',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Images', 'data-off' => 'No Images', 'data-onstyle' => 'info']
+            ])
+            ->add('videos',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Videos', 'data-off' => 'No Videos', 'data-onstyle' => 'info']
+            ])
             ->add('language')
             ->add('category','entity', [
                 'class' => 'Volley\FaceBundle\Entity\Category',

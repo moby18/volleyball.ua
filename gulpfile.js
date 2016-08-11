@@ -35,6 +35,8 @@ gulp.task('style_admin', function () {
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        'src/Volley/FaceBundle/Resources/public/css/admin/styles.css'
     ];
     gulp.src(source)
         // .pipe(sourcemaps.init())

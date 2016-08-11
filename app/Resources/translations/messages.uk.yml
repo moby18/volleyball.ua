@@ -7,3 +7,10 @@ user:
 # Menu
 News: Новини
 Contact Us: Контакти
+
+# Texts
+post-item:
+  post-info:
+    icon-images: Фото всередині
+    icon-videos: Відео всередині
+    icon-hits: Переглядів

@@ -34,6 +34,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    globals:
+        default_category_color: "#888888"
 
 # Doctrine Configuration
 doctrine:
@@ -151,6 +153,10 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [278, 175], mode: outbound }
+        blog_post:
+            quality: 100
+            filters:
+                thumbnail: { size: [370, 240], mode: outbound }
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control

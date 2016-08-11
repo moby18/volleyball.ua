@@ -58,6 +58,25 @@
     color: #267dc1;;
 }
 
+.news-item .news-info .icon-images,
+.news-item .news-info .icon-videos {
+    float: right;
+    margin: 5px 0 5px 5px;
+}
+
+.news-item .news-info .icon-images {
+    width: 17px;
+    height: 14px;
+    background-image: url('../bundles/volleyface/images/icon-image.png');
+}
+
+.news-item .news-info .icon-videos {
+    width: 20px;
+    height: 12px;
+    margin: 6px 0 6px 5px;
+    background-image: url('../bundles/volleyface/images/icon-video.png');
+}
+
 .underline {
     display: block;
     height: 1px;
@@ -133,6 +152,11 @@
     height: 56px;
 }
 
+/* Category */
+.category-title {
+    margin-top: 20px;
+}
+
 /* Post */
 .post {
     padding: 0;
@@ -183,12 +207,16 @@ footer .social-icon {
 
 footer .social-icons a {
     padding: 10px;
-    color: #ffffff;
+    color: social-icons;
     transition: color 0.5s ease;
 }
 
 footer .social-icons a:hover {
     color: #428bca;
+}
+
+footer .bottom-links .container {
+    padding: 20px 15px;
 }
 
 footer .bottom-links {
@@ -212,6 +240,7 @@ footer .bottom-links ul li h4 {
 footer .bottom-links ul li h4 a {
     font-weight: 600;
     color: #B8B8C7;
+    text-transform: uppercase;
 }
 
 
@@ -468,17 +497,26 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 260px;
+    margin-bottom: 316px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 260px;
-    background-color: transparent;
-    background-image: url('../bundles/volleyface/images/footer-bg.png');
+    height: 316px;
+    background-color: #000000;
+    background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
     background-repeat: repeat;
+}
+
+@media (max-width: 767px) {
+    body {
+        margin-bottom: 777px;
+    }
+    .footer {
+        height: 777px;
+    }
 }
 
 .footer .copyright {
