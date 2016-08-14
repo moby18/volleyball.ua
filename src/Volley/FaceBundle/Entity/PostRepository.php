@@ -86,4 +86,23 @@ class PostRepository extends EntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function findAllPosts($categoryFilter = null, $stateFilter = 12, $featuredFilter = 12, $userFilter = null, $searchFilter = "")
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->orderBy('p.published', 'DESC');
+        if ($categoryFilter)
+            $qb->andWhere('p.category = ?1')->setParameter(1, $categoryFilter);
+        if ($stateFilter < 12)
+            $qb->andWhere('p.state = ?2')->setParameter(2, $stateFilter);
+        if ($featuredFilter < 12)
+            $qb->andWhere('p.featured = ?3')->setParameter(3, $featuredFilter);
+        if ($userFilter)
+            $qb->andWhere('p.createdBy = ?4')->setParameter(4, $userFilter);
+        if ($searchFilter != "")
+            $qb->andWhere($qb->expr()->like('p.title', $qb->expr()->literal('%' . $searchFilter . '%')));
+
+        return $qb->getQuery();
+    }
 }

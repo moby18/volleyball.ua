@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Volley\FaceBundle\Entity\Post;
+use Volley\FaceBundle\Form\FilterType;
+use Volley\FaceBundle\Form\Model\Filter;
 use Volley\FaceBundle\Form\PostType;
 
 /**
@@ -27,14 +29,51 @@ class PostController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT p FROM VolleyFaceBundle:Post p ORDER BY p.published DESC, p.id DESC";
-        $query = $em->createQuery($dql);
+        $em = $this->get('doctrine.orm.entity_manager');
+        $session = $request->getSession();
 
-        $paginator  = $this->get('knp_paginator');
+        if ($request->request->get('reset', 0)) {
+            $categoryFilter = null;
+            $stateFilter = 12;
+            $featuredFilter = 12;
+            $userFilter = null;
+            $searchFilter = '';
+            $page = 1;
+        } else {
+            $categoryFilter = $request->request->get('category', $session->get('categoryFilter', null));
+            $stateFilter = $request->request->get('state', $session->get('stateFilter', 12));
+            $featuredFilter = $request->request->get('featured', $session->get('featuredFilter', 12));
+            $userFilter = $request->request->get('user', $session->get('userFilter', null));
+            $searchFilter = $request->request->get('search', $session->get('searchFilter', ''));
+            if ($session->get('stateFilter') != $stateFilter || $session->get('searchFilter') != $searchFilter || $session->get('featuredFilter') != $featuredFilter || $session->get('categoryFilter') != $categoryFilter)
+                $page = 1;
+            else
+                $page = $request->query->get('page', $session->get('page', 1));
+        }
+
+        $session->set('categoryFilter', $categoryFilter);
+        $session->set('stateFilter', $stateFilter);
+        $session->set('featuredFilter', $featuredFilter);
+        $session->set('userFilter', $userFilter);
+        $session->set('searchFilter', $searchFilter);
+        $session->set('page', $page);
+
+        $filter = new Filter($categoryFilter ? $em->getRepository('VolleyFaceBundle:Category')->find($categoryFilter) : null, $stateFilter, $featuredFilter, $userFilter ? $em->getRepository('VolleyUserBundle:User')->find($userFilter) : null, $searchFilter);
+        $filterForm = $this->createForm(new FilterType(), $filter);
+
+        $query = $em->getRepository('VolleyFaceBundle:Post')
+            ->findAllPosts(
+                $categoryFilter,
+                $stateFilter,
+                $featuredFilter,
+                $userFilter,
+                $searchFilter
+            );
+
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1),
+            $page,
             20
         );
 
@@ -42,9 +81,11 @@ class PostController extends Controller
 
         return $this->render('VolleyFaceBundle:Post:index.html.twig', array(
             'entities' => $pagination,
-            'users' => $users
+            'users' => $users,
+            'filter' => $filterForm->createView(),
         ));
     }
+
     /**
      * Creates a new Post entity.
      *
@@ -62,14 +103,14 @@ class PostController extends Controller
 
             $entity->setCreatedBy($this->getUser());
 
-            if($entity->getFeatured()) {
+            if ($entity->getFeatured()) {
                 $em->getRepository('VolleyFaceBundle:Post')->unsetFeatured($entity);
             }
 
             $em->persist($entity);
             $em->flush();
 
-            $entity->setSlug($entity->getId().'-'.$entity->getSlug());
+            $entity->setSlug($entity->getId() . '-' . $entity->getSlug());
             $em->flush();
 
             if ($entity->getState())
@@ -80,17 +121,17 @@ class PostController extends Controller
 
         return $this->render('VolleyFaceBundle:Post:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Post entity.
-    *
-    * @param Post $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Post entity.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Post $entity)
     {
         $form = $this->createForm(new PostType(), $entity, array(
@@ -111,11 +152,11 @@ class PostController extends Controller
     {
         $entity = new Post();
         $entity->setPublished(new \DateTime());
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('VolleyFaceBundle:Post:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -136,8 +177,8 @@ class PostController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('VolleyFaceBundle:Post:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),));
     }
 
     /**
@@ -179,19 +220,19 @@ class PostController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('VolleyFaceBundle:Post:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Post entity.
-    *
-    * @param Post $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Post entity.
+     *
+     * @param Post $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Post $entity)
     {
         $form = $this->createForm(new PostType(), $entity, array(
@@ -203,6 +244,7 @@ class PostController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Post entity.
      *
@@ -229,7 +271,7 @@ class PostController extends Controller
             $entity->setModified(new \DateTime());
             $entity->setModifiedBy($this->getUser());
 
-            if($entity->getFeatured()) {
+            if ($entity->getFeatured()) {
                 $em->getRepository('VolleyFaceBundle:Post')->unsetFeatured($entity);
             }
 
@@ -242,8 +284,8 @@ class PostController extends Controller
         }
 
         return $this->render('VolleyFaceBundle:Post:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -251,7 +293,8 @@ class PostController extends Controller
     /*
      * Dispatch event for update sitemap.xml for posts
      */
-    private function sitemapAction() {
+    private function sitemapAction()
+    {
 //        $dispatcher = $this->get('event_dispatcher');
 //        $dispatcher->dispatch(SitemapPopulateEvent::ON_SITEMAP_POPULATE, new SitemapPopulateEvent(new Dumper($dispatcher, new Filesystem()), 'posts'));
 
@@ -259,7 +302,7 @@ class PostController extends Controller
         $dumper = $this->get('presta_sitemap.dumper');
         $baseUrl = $this->getParameter('presta_sitemap.dumper_base_url');
         $baseUrl = rtrim($baseUrl, '/') . '/';
-        $options = array('gzip' => false,'section'=>'posts');
+        $options = array('gzip' => false, 'section' => 'posts');
         $dumper->dump($targetDir, $baseUrl, null, $options);
 
 //        $kernel = $this->get('kernel');
@@ -312,7 +355,6 @@ class PostController extends Controller
             ->setAction($this->generateUrl('post_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
