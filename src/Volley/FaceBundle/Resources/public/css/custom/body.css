@@ -193,6 +193,26 @@
     /*width: 100% !important;*/
 }
 
+.post img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.post table {
+    border: 1px solid #2c3e50;
+}
+
+.post table th,
+.post table td {
+    border: 1px solid #2c3e50;
+    padding: 5px
+}
+
+.post table p {
+    margin: 0;
+}
+
 /* Footer */
 footer {
     color: #fff;
