@@ -210,7 +210,7 @@ class Post
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('file', new Assert\File(array(
-            'maxSize' => 6000000,
+            'maxSize' => 8000000,
         )));
     }
 
