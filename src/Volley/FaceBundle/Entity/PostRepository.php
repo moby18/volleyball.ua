@@ -45,7 +45,7 @@ class PostRepository extends EntityRepository
     {
         $today = new \DateTime();
         $later = new \DateTime();
-        $later->sub(new \DateInterval('P14D'));
+        $later->sub(new \DateInterval('P21D'));
         return $this->createQueryBuilder('p')
             ->select('p')
             ->innerJoin('p.category', 'category')
