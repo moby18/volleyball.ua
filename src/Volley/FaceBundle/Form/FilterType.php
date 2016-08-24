@@ -36,6 +36,14 @@ class FilterType extends AbstractType
                 'expanded' => false,
                 'empty_value' => false
             ])
+            ->add('recommended', 'choice', [
+                'choices' => [12 => "All", 0 => 'None Recommended', 1 => 'Recommended'],
+                'label' => 'Filter',
+                'required' => false,
+                'multiple' => false,
+                'expanded' => false,
+                'empty_value' => false
+            ])
             ->add('user',EntityType::class, [
                 'class' => 'Volley\UserBundle\Entity\User',
                 'required' => false

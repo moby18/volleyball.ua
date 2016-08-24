@@ -23,6 +23,11 @@ class Filter
     private $featured;
 
     /**
+     * @var integer
+     */
+    private $recommended;
+
+    /**
      * @var User
      */
     private $user;
@@ -37,11 +42,12 @@ class Filter
      */
     protected $form;
 
-    function __construct($category, $state, $featured, $user, $search)
+    function __construct($category, $state, $featured, $recommended, $user, $search)
     {
         $this->category = $category;
         $this->state = $state;
         $this->featured = $featured;
+        $this->recommended = $recommended;
         $this->user = $user;
         $this->search = $search;
     }
@@ -92,6 +98,22 @@ class Filter
     public function setFeatured($featured)
     {
         $this->featured = $featured;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * @param int $recommended
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
     }
 
     /**
