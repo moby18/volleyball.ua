@@ -168,6 +168,13 @@ class Post
     /**
      * @var boolean
      *
+     * @ORM\Column(name="recommended", type="boolean", nullable=true)
+     */
+    private $recommended;
+
+    /**
+     * @var boolean
+     *
      * @ORM\Column(name="images", type="boolean")
      */
     private $images;
@@ -635,6 +642,22 @@ class Post
     public function getFeatured()
     {
         return $this->featured;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * @param boolean $recommended
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
     }
 
     /**

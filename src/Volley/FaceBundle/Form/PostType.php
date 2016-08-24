@@ -52,6 +52,10 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Featured', 'data-off' => 'Not Featured', 'data-onstyle' => 'info']
             ])
+            ->add('recommended',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Recommended', 'data-off' => 'Not Recommended', 'data-onstyle' => 'info']
+            ])
             ->add('images',null,[
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Images', 'data-off' => 'No Images', 'data-onstyle' => 'info']

@@ -1,5 +1,6 @@
 {% set color = item.category.color ? item.category.color : item.category.parent and item.category.parent.color ? item.category.parent.color : item.category.parent and item.category.parent.parent and item.category.parent.parent.color ? item.category.parent.parent.color : default_category_color %}
 {% set popular = popular is defined ? popular : false %}
+{% set recommended = recommended is defined ? recommended : false %}
 <div class="news-item col-lg-12 col-md-12 col-sm-12 col-xs-12 fade-in">
     <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}"
        title="{{ item.title }}">
@@ -30,7 +31,7 @@
     </div>
     <a href="{{ path('volley_face_post',{'category_slug': item.category.slug, 'post_slug': item.slug}) }}">
         <h3 style="border-left-color: {{ color }}">{{ item.title }}</h3></a>
-    {% if not popular %}
+    {% if not popular and not recommended %}
         {% autoescape %}
             {{ item.content|raw }}
         {% endautoescape %}

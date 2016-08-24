@@ -31,7 +31,8 @@
                     </a>
                     <div class="news-info row">
                         <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
+                            <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye"
+                                                                                             aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
                         </div>
                     </div>
                     <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
@@ -77,38 +78,60 @@
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </p>
-
                 </div>
-                <div class="col col-lg-4 col-md-12 col-sm-12">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="section-title">
-                                {{ 'popular-section-in-category'|trans({}) }}
+
+                {% if recommendedPosts|length %}
+                    <div class="col col-lg-4 col-md-12 col-sm-12">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    {{ 'recommended-section-in-category'|trans({}) }}
+                                </div>
                             </div>
                         </div>
+                        <div class="row">
+                            {% for item in recommendedPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'recommended': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="row">
-                        {% for item in popularPosts %}
+                {% endif %}
+
+                {% if popularPosts|length %}
+                    <div class="col col-lg-4 col-md-12 col-sm-12">
+                        <div class="row">
                             <div class="col-lg-12">
-                                {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
+                                <div class="section-title">
+                                    {{ 'popular-section-in-category'|trans({}) }}
+                                </div>
                             </div>
-                            <div style="clear: both"></div>
-                        {% endfor %}
-                    </div>
-                    {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
-                    {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
-                    <p></p>
-                    {#<a href="{{ path('volley_face_mikasa_vls300') }}" title="Mikasa VLS300 мяч для пляжного волейбола">#}
+                        </div>
+                        <div class="row">
+                            {% for item in popularPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
+                        {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
+                        {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
+                        <p></p>
+                        {#<a href="{{ path('volley_face_mikasa_vls300') }}" title="Mikasa VLS300 мяч для пляжного волейбола">#}
                         {#<div class="row">#}
-                            {#<div class="col-lg-12 col-md-12 col-sm-12 text-center">#}
-                                {#<p>#}
-                                    {#<img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"#}
-                                         {#src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">#}
-                                {#</p>#}
-                            {#</div>#}
+                        {#<div class="col-lg-12 col-md-12 col-sm-12 text-center">#}
+                        {#<p>#}
+                        {#<img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"#}
+                        {#src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">#}
+                        {#</p>#}
                         {#</div>#}
-                    {#</a>#}
-                </div>
+                        {#</div>#}
+                        {#</a>#}
+                    </div>
+                {% endif %}
             </div>
 
 
