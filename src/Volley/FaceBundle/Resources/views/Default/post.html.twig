@@ -94,10 +94,19 @@
 
                     <p id="comments">
                         <!-- Put this div tag to the place, where the Comments block will be -->
-                    <div id="vk_comments"></div>
-                    <script type="text/javascript">
-                        VK.Widgets.Comments("vk_comments", {limit: 10, width: "770", attach: "*", pageUrl: "{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"});
-                    </script>
+                        <div id="vk_comments"></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Comments("vk_comments", {
+                                limit: 10,
+                                width: "770",
+                                attach: "*",
+                                pageUrl: "{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
+                            });
+                        </script>
+
+                        <div class="fb-comments"
+                             data-href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
+                             data-width="770" data-numposts="5"></div>
                     </p>
                 </div>
 
