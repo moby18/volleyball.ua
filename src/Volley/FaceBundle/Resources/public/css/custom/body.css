@@ -518,6 +518,26 @@ footer .bottom-links ul li:hover a {
     height: auto;
 }
 
+/* Comments */
+#comments {
+    padding-bottom: 20px;
+}
+
+#comments .nav-tabs > li.active > a,
+#comments .nav-tabs > li > a:hover,
+#comments .nav-tabs > li > a:focus {
+    border-top-width: 1px;
+    border-radius: 0;
+    margin-top: 0;
+}
+
+#comments .nav-tabs > li.active > a#vk-tab {
+    color: #507299;
+}
+#comments .nav-tabs > li.active > a#fb-tab {
+    color: #45639e;
+}
+
 /* Boxes */
 .box {
     padding-top: 15px;
