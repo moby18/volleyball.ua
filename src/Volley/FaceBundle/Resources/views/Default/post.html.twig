@@ -78,6 +78,27 @@
                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </p>
+
+                    <p id="google-adsende-banner" style="height: auto; width: 100%;">
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- AdsBlockForPost -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-9185300483138228"
+                             data-ad-slot="2365888996"
+                             data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </p>
+
+                    <p id="comments">
+                        <!-- Put this div tag to the place, where the Comments block will be -->
+                    <div id="vk_comments"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Comments("vk_comments", {limit: 10, width: "770", attach: "*", pageUrl: "{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"});
+                    </script>
+                    </p>
                 </div>
 
                 {% if recommendedPosts|length %}
@@ -143,4 +164,14 @@
 
 
 
+{% endblock %}
+
+{% block head_scripts %}
+    {{ parent() }}
+    <!-- Put this script tag to the <head> of your page -->
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?127"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 2680597, onlyWidgets: true});
+    </script>
 {% endblock %}
