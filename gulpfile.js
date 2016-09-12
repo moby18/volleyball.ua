@@ -110,7 +110,7 @@ gulp.task('script', function () {
 gulp.task('script_admin', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/slide.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/game.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js',

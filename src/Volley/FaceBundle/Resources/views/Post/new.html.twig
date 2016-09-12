@@ -1,6 +1,7 @@
 {% extends '::admin.html.twig' %}
 
 {% block body -%}
+    {% include "ComurImageBundle:Form:croppable_image_modal.html.twig" with {'include_jquery': true, 'include_bootstrap': false}%}
     <h1>Post creation</h1>
 
     {{ form_start(form) }}
@@ -56,6 +57,9 @@
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/post.js') }}"></script>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock %}
 
 {% block styles %}

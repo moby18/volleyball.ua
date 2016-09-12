@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Volley\FaceBundle\Entity\Post;
 
 class PostType extends AbstractType
 {
@@ -16,6 +17,33 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('image', 'comur_image', array(
+                'uploadConfig' => array(
+                    'uploadRoute' => 'comur_api_upload',        //optional
+                    'uploadUrl' => Post::getUploadRootDir(),       // required - see explanation below (you can also put just a dir path)
+                    'webDir' => Post::getUploadDir(),              // required - see explanation below (you can also put just a dir path)
+                    'fileExt' => '*.jpg;*.gif;*.png;*.jpeg',    //optional
+                    'libraryDir' => null,                       //optional
+                    'libraryRoute' => 'comur_api_image_library', //optional
+                    'showLibrary' => true,                      //optional
+                    'saveOriginal' => 'originalImage',          //optional
+                    'generateFilename' => true          //optional
+                ),
+                'cropConfig' => array(
+                    'minWidth' => 588,
+                    'minHeight' => 300,
+                    'aspectRatio' => true,              //optional
+                    'cropRoute' => 'comur_api_crop',    //optional
+                    'forceResize' => false,             //optional
+                    'thumbs' => array(                  //optional
+                        array(
+                            'maxWidth' => 180,
+                            'maxHeight' => 400,
+                            'useAsFieldImage' => true  //optional
+                        )
+                    )
+                )
+            ))
             ->add('title')
 //            ->add('slug')
             ->add('content', 'textarea', [

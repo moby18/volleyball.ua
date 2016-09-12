@@ -173,3 +173,13 @@ presta_sitemap:
     timetolive: 3600
     dumper_base_url: "http://www.volleyball.ua/"
     route_annotation_listener: false
+
+comur_image:
+    config:
+        cropped_image_dir: 'cropped'
+        thumbs_dir: 'thumbnails'
+        media_lib_thumb_size: 150
+        web_dirname: 'web'
+        translation_domain: 'ComurImageBundle'
+        gallery_thumb_size: 150
+        gallery_dir: 'gallery'

@@ -190,6 +190,48 @@ class Post
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    protected $image;
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $originalImage;
+
+    /**
+     * @return mixed
+     */
+    public function getOriginalImage()
+    {
+        return $this->originalImage;
+    }
+
+    /**
+     * @param mixed $originalImage
+     */
+    public function setOriginalImage($originalImage)
+    {
+        $this->originalImage = $originalImage;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     public $path;
 
     /**
@@ -214,28 +256,38 @@ class Post
         )));
     }
 
+//    public function getAbsolutePath()
+//    {
+//        return null === $this->path
+//            ? null
+//            : $this->getUploadRootDir().'/'.$this->path;
+//    }
+
     public function getAbsolutePath()
     {
-        return null === $this->path
-            ? null
-            : $this->getUploadRootDir().'/'.$this->path;
+        return null === $this->image ? null : $this->getUploadRootDir().'/'.$this->image;
     }
+
+//    public function getWebPath()
+//    {
+//        return null === $this->path
+//            ? null
+//            : $this->getUploadDir().'/'.$this->path;
+//    }
 
     public function getWebPath()
     {
-        return null === $this->path
-            ? null
-            : $this->getUploadDir().'/'.$this->path;
+        return null === $this->image ? null : '/'.$this->getUploadDir().'/'.$this->image;
     }
 
-    protected function getUploadRootDir()
+    public static function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/'.self::getUploadDir();
     }
 
-    protected function getUploadDir()
+    public static function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
