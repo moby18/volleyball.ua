@@ -1,6 +1,7 @@
 {% extends '::layout.html.twig' %}
 
-{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath | imagine_filter(thumbnail) }} %}#}
+{% set page_image = post.getWebPath | imagine_filter('post_pic_fb') }} %}
 {% set title = post.title %}
 {% set meta_keywords = post.metakey %}
 {% set meta_description = post.metadescr %}
@@ -35,7 +36,7 @@
                                                                                              aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
                         </div>
                     </div>
-                    <img class="img-responsive" src="{{ post.getWebPath }}" alt="{{ post.title }}">
+                    <img class="img-responsive" src="{{ post.getWebPath | imagine_filter('post_pic') }}" alt="{{ post.title }}">
 
                     <div class="news-info row">
                         <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
