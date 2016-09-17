@@ -186,6 +186,12 @@ class Post
      */
     private $videos;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="translated", type="boolean")
+     */
+    private $translated;
 
     /**
      * @var string
@@ -690,6 +696,22 @@ class Post
     public function setVideos($videos)
     {
         $this->videos = $videos;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTranslated()
+    {
+        return $this->translated;
+    }
+
+    /**
+     * @param boolean $translated
+     */
+    public function setTranslated($translated)
+    {
+        $this->translated = $translated;
     }
 
     /**
