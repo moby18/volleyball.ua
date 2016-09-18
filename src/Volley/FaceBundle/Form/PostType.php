@@ -78,7 +78,13 @@ class PostType extends AbstractType
                 }
             ])
             ->add('file', null, [
-                'label' => 'Post Image (width>=555px and height>=350px)'
+                'label' => 'Post Image (width>=760 and height>=400px)'
+            ])
+            ->add('imageDescr', null, [
+                'label' => 'Post Image Description'
+            ])
+            ->add('imageSource', null, [
+                'label' => 'Post Image Source'
             ])
         ;
     }
