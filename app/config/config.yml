@@ -143,12 +143,16 @@ liip_imagine:
     filter_sets:
         cache: ~
         main_pic:
-            quality: 100
+            quality: 80
             filters:
 #                thumbnail: { size: [555, 350], mode: outbound }
                 relative_resize: { widen: 555 }
+        main_thumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [278, 175], mode: outbound }
         post_pic:
-            quality: 100
+            quality: 90
             filters:
 #                thumbnail: { size: [760, 480], mode: outbound }
                 relative_resize: { widen: 760 }
@@ -156,12 +160,8 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [760, 400], mode: outbound }
-        main_thumb:
-            quality: 100
-            filters:
-                thumbnail: { size: [278, 175], mode: outbound }
         blog_post:
-            quality: 100
+            quality: 85
             filters:
                 thumbnail: { size: [370, 240], mode: outbound }
 
