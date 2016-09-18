@@ -23,10 +23,6 @@
         <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/volleyface/images/favicon.ico') }}"> {# should be png #}
         <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/volleyface/images/favicon.ico') }}"> {# should be png #}
 
-        <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/boss/animate.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/boss/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/boss/style.css') }}">
-
         <!-- Fonts -->
         <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -71,10 +67,7 @@
     {% endblock %}
 
     {% block head_scripts %}
-        <script src="{{ asset('bundles/volleyface/js/boss/analytics.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/volleyface/js/boss/modernizr.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('bundles/volleyface/js/boss/jquery.min.js') }}" type="text/javascript"></script>
-        {#<script src="{{ asset('js/script_header.js') }}" type="text/javascript"></script>#}
+        <script src="{{ asset('js/script_header.js') }}" type="text/javascript"></script>
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="{{ asset('js/script_ie.js') }}" type="text/javascript"></script>
@@ -203,21 +196,24 @@
 <!-- /.container -->
 
 {% block scripts %}
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/smoothscroll.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/bootstrap.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.hoverIntent.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.nicescroll.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/waypoints.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/waypoints-sticky.min.js') }}"></script>
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/smoothscroll.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/bootstrap.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.hoverIntent.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.nicescroll.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/waypoints.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/waypoints-sticky.min.js') }}"></script>#}
+
+    {# no need #}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.debouncedresize.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/retina.min.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/owl.carousel.min.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jflickrfeed.min.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.tweet.min.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/jquery.infinitescroll.min.js') }}"></script>#}
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/wow.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/skrollr.min.js') }}"></script>
-    <script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/main.js') }}"></script>
+
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/wow.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/skrollr.min.js') }}"></script>#}
+    {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/main.js') }}"></script>#}
 
     <script  type="text/javascript" src="{{ asset('js/script_footer.js') }}"></script>
 {% endblock %}
