@@ -39,9 +39,7 @@ gulp.task('style_admin', function () {
     gulp.src(source)
         // .pipe(sourcemaps.init())
         .pipe(concat('style_admin.css'))
-        // .pipe(cleanCSS({
-        //     keepSpecialComments: 0
-        // }))
+        .pipe(cleanCSS())
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
@@ -117,7 +115,7 @@ gulp.task('script_admin', function () {
         //.pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('script_admin.js'))
-        //.pipe(uglify())
+        .pipe(uglify())
         //.pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/js/'));
 });
