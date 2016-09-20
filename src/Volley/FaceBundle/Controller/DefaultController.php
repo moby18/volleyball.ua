@@ -141,8 +141,8 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             20
         );
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, 10);
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, 20);
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return [
             'slides' => $slides,
@@ -306,8 +306,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post->setHits($post->getHits() + 1);
         $em->flush();
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), 5);
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(), 20);
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
@@ -339,7 +339,7 @@ class DefaultController extends Controller
             20
         );
         $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, 20);
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
