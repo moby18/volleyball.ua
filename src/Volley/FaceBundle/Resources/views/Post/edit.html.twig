@@ -31,8 +31,12 @@
                 </div>
                 {{ form_row(edit_form.category) }}
                 {{ form_row(edit_form.title) }}
+
                 {{ form_row(edit_form.file) }}
                 <a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>
+                {{ form_row(edit_form.imageDescr) }}
+                {{ form_row(edit_form.imageSource) }}
+
                 {{ form_row(edit_form.content) }}
                 {{ form_row(edit_form.text) }}
                 {{ form_row(edit_form.published) }}
@@ -40,6 +44,11 @@
                 {{ form_row(edit_form.sourceLink) }}
                 {{ form_row(edit_form.state) }}
                 {{ form_row(edit_form.featured) }}
+
+                {{ form_row(edit_form.recommended) }}
+                {{ form_row(edit_form.images) }}
+                {{ form_row(edit_form.videos) }}
+                {{ form_row(edit_form.translated) }}
             </div>
             <div role="tabpanel" class="tab-pane" id="meta">
                 <br>

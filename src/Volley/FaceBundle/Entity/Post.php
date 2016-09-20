@@ -111,6 +111,20 @@ class Post
     /**
      * @var string
      *
+     * @ORM\Column(name="image_descr", type="string", length=255, nullable=true)
+     */
+    private $imageDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_source", type="string", length=255, nullable=true)
+     */
+    private $imageSource;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="source_name", type="string", length=255, nullable=true)
      */
     private $sourceName;
@@ -873,6 +887,38 @@ class Post
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageDescr()
+    {
+        return $this->imageDescr;
+    }
+
+    /**
+     * @param string $imageDescr
+     */
+    public function setImageDescr($imageDescr)
+    {
+        $this->imageDescr = $imageDescr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageSource()
+    {
+        return $this->imageSource;
+    }
+
+    /**
+     * @param string $imageSource
+     */
+    public function setImageSource($imageSource)
+    {
+        $this->imageSource = $imageSource;
     }
 
     /**

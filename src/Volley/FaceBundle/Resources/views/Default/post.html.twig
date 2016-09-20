@@ -1,7 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath | imagine_filter(thumbnail) }} %}#}
-{% set page_image = post.getWebPath | imagine_filter('post_pic_fb') }} %}
+{% set page_image = post.getWebPath | imagine_filter('post_pic_fb') %}
 {% set title = post.title %}
 {% set meta_keywords = post.metakey %}
 {% set meta_description = post.metadescr %}
@@ -36,7 +36,14 @@
                                                                                              aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
                         </div>
                     </div>
-                    <img class="img-responsive" src="{{ post.getWebPath | imagine_filter('post_pic') }}" alt="{{ post.title }}">
+
+                    <figure class="img-caption">
+                        <img class="img-responsive" src="{{ post.getWebPath | imagine_filter('post_pic') }}"
+                             alt="{{ post.imageDescr ~ ' ' ~ post.title }}">
+                        <figcaption
+                                class="img-caption-text">{{ post.imageDescr ? post.imageDescr : '' }} {{ post.imageSource ? ' / ' ~ post.imageSource : '' }}</figcaption>
+                    </figure>
+
 
                     <div class="news-info row">
                         <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
@@ -64,21 +71,21 @@
                             {{ post.text|raw }}
                         {% endautoescape %}
                     </p>
+                    <p>
+                        {% autoescape %}
+                            {% if (post.sourceName|trim != '' or post.sourceLink|trim != '') %}
+                                {{ 'post-item.post-info.source'|trans({}) }}:
+                                {% if post.sourceLink|trim == '' %}
+                                    {{ post.sourceName }}
+                                {% else %}
+                                    <a href="{{ post.sourceLink }}"
+                                       title="{{ post.sourceName ? post.sourceName : post.sourceLink }}">{{ post.sourceName ? post.sourceName : post.sourceLink }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endautoescape %}
+                    </p>
 
                     {% include '@VolleyFace/Social/uptolike.html.twig' %}
-
-                    <p id="google-adsende-banner" style="height: auto; width: 100%;">
-                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                        <!-- AdsBlockForPost -->
-                        <ins class="adsbygoogle"
-                             style="display:block"
-                             data-ad-client="ca-pub-9185300483138228"
-                             data-ad-slot="2365888996"
-                             data-ad-format="auto"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </p>
 
                     <p id="google-adsende-banner" style="height: auto; width: 100%;">
                         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
