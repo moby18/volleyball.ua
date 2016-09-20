@@ -338,7 +338,7 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             20
         );
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, 10);
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
         $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, 20);
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(

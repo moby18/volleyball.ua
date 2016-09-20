@@ -21,3 +21,5 @@ parameters:
 
     fb_app_id:          ~
     ga_id:              ~
+
+    popular_post_count: 5
