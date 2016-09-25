@@ -19,6 +19,9 @@ class CategoryType extends AbstractType
             ->add('slug',null, [
                 'required' => false
             ])
+            ->add('color',null, [
+                'required' => false
+            ])
             ->add('keywords',null, [
                 'required' => false
             ])

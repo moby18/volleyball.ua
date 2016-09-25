@@ -41,6 +41,13 @@ class Category
     /**
      * @var string
      *
+     * @ORM\Column(name="color", type="string", length=255)
+     */
+    private $color;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
      */
     private $keywords;
@@ -324,6 +331,22 @@ class Category
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
     }
 
     public function __toString()

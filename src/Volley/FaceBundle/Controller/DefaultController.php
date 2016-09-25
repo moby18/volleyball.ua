@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Volley\FaceBundle\Entity\Category;
 use Volley\FaceBundle\Entity\Post;
+use Volley\FaceBundle\Entity\Purchase;
+use Volley\FaceBundle\Form\PurchaseType;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -139,10 +141,14 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             20
         );
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return [
             'slides' => $slides,
-            'news' => $posts
+            'news' => $posts,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
         ];
     }
 
@@ -221,6 +227,54 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
+     * @Method("GET")
+     * @Template()
+     */
+    public function mikasaVls300Action()
+    {
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>false]);
+    }
+
+    /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy")
+     * @Method("POST")
+     * @Template()
+     */
+    public function buyMikasaVls300Action(Request $request)
+    {
+        $entity = new Purchase();
+        $form = $this->createForm(new PurchaseType(), $entity, array());
+        $form->add('submit', 'submit', []);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+        }
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Mikasa VLS300 - BUY')
+            ->setFrom('moby.ekreative@gmail.com')
+            ->setTo('volleyball.ua@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'VolleyFaceBundle:Email:order.html.twig',
+                    [
+                        'name' => $entity->getName(),
+                        'phone' => $entity->getPhone(),
+                        'email' => $entity->getEmail(),
+                        'comments' => $entity->getComment(),
+                    ]
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>true]);
+    }
+
+    /**
      * * Deletes a Tournament entity.
      *
      * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
@@ -250,12 +304,16 @@ class DefaultController extends Controller
     public function postAction(Category $category, Post $post)
     {
         $em = $this->getDoctrine()->getManager();
-        $post->setHits($post->getHits()+1);
+        $post->setHits($post->getHits() + 1);
         $em->flush();
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
-            'post' => $post
+            'post' => $post,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
         ));
     }
 
@@ -273,17 +331,21 @@ class DefaultController extends Controller
      */
     public function blogAction(Category $category, Request $request)
     {
-        $em    = $this->get('doctrine.orm.entity_manager');
-        $paginator  = $this->get('knp_paginator');
+        $em = $this->get('doctrine.orm.entity_manager');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
             $request->query->getInt('page', 1),
             20
         );
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
-            'posts' => $pagination
+            'posts' => $pagination,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
         ));
     }
 }

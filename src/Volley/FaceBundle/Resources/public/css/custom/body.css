@@ -1,200 +1,22 @@
-/*
-Custom CSS for...
-'Modern Business' HTML Theme by Start Bootstrap
-
-All Start Bootstrap themes are licensed under Apache 2.0.
-For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap.com!
-*/
-
-/* Global Styles */
-body {
-    padding-top: 57px;
-    /* body padding for fixed top nav */
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-.img-home-portfolio,
-.img-customer,
-.portfolio-item {
-    margin-bottom: 30px;
-}
-
-.tab-pane {
-    margin-top: 15px;
-}
-
-/* Page Sections */
-.section {
-    padding: 0;
-}
-
-.section-colored {
-    padding: 50px 0;
-    background-color: #e1e1e1;
-    /* change this to change the background color of a colored section */
-}
-
-.sidebar {
-    margin-top: 40px;
-}
-
-.sidebar ul {
-    border-radius: 5px;
-    padding: 5px;
-    border: 1px solid #cccccc;
-}
-
-/* Half Page Height Carousel Customization */
-.carousel {
-    height: 50%;
-}
-
-.item,
-.active,
-.carousel-inner {
-    height: 100%;
-}
-
-.fill {
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-}
-
-/* Social Icons Styles */
-.list-social-icons {
-    margin-bottom: 45px;
-}
-
-.tooltip-social a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.facebook-link a:hover {
-    color: #3b5998;
-}
-
-.linkedin-link a:hover {
-    color: #007fb1;
-}
-
-.twitter-link a:hover {
-    color: #39a9e0;
-}
-
-.google-plus-link a:hover {
-    color: #d14836;
-}
-
-/* Service Page Styles */
-.service-icon {
-    font-size: 50px;
-}
-
-/* 404 Page Styles */
-.error-404 {
-    font-size: 8em;
-}
-
-/* Pricing Page Styles */
-.price {
-    font-size: 4em;
-}
-
-.price-cents {
-    vertical-align: super;
-    font-size: 50%;
-}
-
-.price-month {
-    font-size: 35%;
-    font-style: italic;
-}
-
-
-h1, h2, h3, h4, h5, h6 {
-    line-height: 130%;
-}
-
-/* Header */
-.navbar-brand {
-    background-image: url('/uploads/images/logo_volleyball.png');
-    height: 56px;
-    width: 200px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left;
-    margin-left: 0 !important;
-}
-
-.navbar-right {
-    margin-right: 0 !important;
-}
-
-.navbar li li a {
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-.navbar-nav li li a {
-    font-size: 14px;
-    background-color: transparent;
-}
-
-.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
-    color: #ffffff;
-    font-size: 16px;
-    padding-top: 21px;
-}
-
-.navbar-inverse .navbar-nav li>a {
-    transition: color 0.5s ease;
-}
-
-.navbar-inverse .navbar-nav li>a:hover {
-    color: #428bca !important;
-}
-
-.collapse.navbar-collapse,
-.navbar-inverse .navbar-nav{
-    background-color: #222;
-}
-
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-    background-color: transparent;
-}
-
-/* Top To Bottom animation */
-.ttb-dropdown .dropdown .dropdown-menu {
-    z-index: -1;
-    padding: 0;
-    border-radius: 0;
-}
-.ttb-dropdown .dropdown.open > .dropdown-menu {
-    animation-name: topToBottom;
-    -webkit-animation-name: topToBottom;
-}
-
-.navbar-nav .sub-dropdown .dropdown-menu {
-    right: auto;
-    left: 100%;
-    top: 0;
-    /*border-top: none;*/
-}
-
-.navbar-nav ul i {
-    float: right;
-    margin: 3px 0 0;
-}
-
 /* Front Content */
 
 /* Slider */
+
+/* Section */
+.section-title {
+    background-color: #191928;
+    background-color: #20A3CF;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    font-family: "Myriad Pro";
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+}
 
 /* News */
 .news-item {
@@ -206,9 +28,15 @@ h1, h2, h3, h4, h5, h6 {
     color: #363636;
     transition: color 0.5s ease;
     padding-top: 15px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .news-item h3 {
     transition: all 0.5s ease;
+    margin: 5px 0;
+    color: #363636;
+    border-left: 4px solid #267dc1;
+    padding-left: 5px;
 }
 .news-item:hover {
     color: #363636;
@@ -231,10 +59,6 @@ h1, h2, h3, h4, h5, h6 {
 * html .news-item:nth-child(even)             { zoom: 1; } /* IE6 */
 *:first-child+html .news-item:nth-child(even) { zoom: 1; } /* IE7 */
 
-.news-item h3 {
-    margin: 5px 0;
-    color: #363636;
-}
 .news-item .news-info,
 .post .news-info,
 .news-item .news-info a,
@@ -242,13 +66,31 @@ h1, h2, h3, h4, h5, h6 {
 {
     color: #888888;
     font-size: 12px;
-    padding: 3px;
     transition: color 0.5s ease;
 }
 
 .news-item .news-info a:hover,
 .post .news-info a:hover {
     color: #267dc1;;
+}
+
+.news-item .news-info .icon-images,
+.news-item .news-info .icon-videos {
+    float: right;
+    margin: 5px 0 5px 5px;
+}
+
+.news-item .news-info .icon-images {
+    width: 17px;
+    height: 14px;
+    background-image: url('../bundles/volleyface/images/icon-image.png');
+}
+
+.news-item .news-info .icon-videos {
+    width: 20px;
+    height: 12px;
+    margin: 6px 0 6px 5px;
+    background-image: url('../bundles/volleyface/images/icon-video.png');
 }
 
 .underline {
@@ -326,9 +168,18 @@ h1, h2, h3, h4, h5, h6 {
     height: 56px;
 }
 
+/* Category */
+.category-title {
+    margin-top: 20px;
+}
+
 /* Post */
 .post {
     padding: 0;
+}
+
+.post h1 {
+    margin: 15px 0;
 }
 
 .post .news-info {
@@ -340,6 +191,64 @@ h1, h2, h3, h4, h5, h6 {
     border: 0;
     max-width: 100%;
     /*width: 100% !important;*/
+}
+
+.post img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+.post .img-caption {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.post .img-caption img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.post .img-caption:after {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.6) 100%) repeat 0 0;
+    z-index: 1;
+}
+.post .img-caption-text {
+    display: block;
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    padding: 7px;
+    font-size: 90%;
+    font-weight: 500;
+    z-index: 2;
+    /*background: rgba(0, 0, 0, 0.5);*/
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.post table {
+    border: 1px solid #2c3e50;
+}
+
+.post table th,
+.post table td {
+    border: 1px solid #2c3e50;
+    padding: 5px
+}
+
+.post table p {
+    margin: 0;
 }
 
 /* Footer */
@@ -361,13 +270,18 @@ footer .footer-col {
 }
 
 footer .footer-below {
-    padding: 20px 0;
-    background-color: #222;
+    border-top: 1px solid #313140;
+    padding: 10px 0;
+    /*background-color: #222;*/
+}
+
+footer .social-icon {
+    margin: 0;
 }
 
 footer .social-icons a {
     padding: 10px;
-    color: #ffffff;
+    color: social-icons;
     transition: color 0.5s ease;
 }
 
@@ -375,12 +289,17 @@ footer .social-icons a:hover {
     color: #428bca;
 }
 
+footer .bottom-links .container {
+    padding: 20px 15px;
+}
+
 footer .bottom-links {
-    background-color: #262626;
+    /*background-color: #262626;*/
+    color: #72727D;
 }
 
 footer .bottom-links .row {
-    padding: 15px 0;
+    padding: 15px 0 5px;
 }
 
 footer .bottom-links ul {
@@ -389,11 +308,13 @@ footer .bottom-links ul {
 
 footer .bottom-links ul li a,
 footer .bottom-links ul li h4 {
-    color: #ffffff;
+    color: #72727D;
     font-size: 14px;
 }
-footer .bottom-links ul li h4 {
+footer .bottom-links ul li h4 a {
     font-weight: 600;
+    color: #B8B8C7;
+    text-transform: uppercase;
 }
 
 
@@ -635,6 +556,26 @@ footer .bottom-links ul li:hover a {
     height: auto;
 }
 
+/* Comments */
+#comments {
+    padding-bottom: 20px;
+}
+
+#comments .nav-tabs > li.active > a,
+#comments .nav-tabs > li > a:hover,
+#comments .nav-tabs > li > a:focus {
+    border-top-width: 1px;
+    border-radius: 0;
+    margin-top: 0;
+}
+
+#comments .nav-tabs > li.active > a#vk-tab {
+    color: #507299;
+}
+#comments .nav-tabs > li.active > a#fb-tab {
+    color: #45639e;
+}
+
 /* Boxes */
 .box {
     padding-top: 15px;
@@ -650,15 +591,31 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 316px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #f5f5f5;
+    height: 316px;
+    background-color: #000000;
+    background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
+    background-repeat: repeat;
+}
+
+@media (max-width: 767px) {
+    body {
+        margin-bottom: 777px;
+    }
+    .footer {
+        height: 777px;
+    }
+}
+
+.footer .copyright {
+    line-height: 39px;
+    color: #6E6E81;
 }
 
 /* Bootstrap Override */
@@ -758,6 +715,13 @@ body {
     }
 
     footer .footer-below {
-        padding-bottom: 60px;
+        padding-bottom: 0px;
     }
+}
+
+/* Advert */
+#google-adsende-banner {
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
 }

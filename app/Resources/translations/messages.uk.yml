@@ -7,3 +7,16 @@ user:
 # Menu
 News: Новини
 Contact Us: Контакти
+
+# Texts
+post-item:
+  post-info:
+    icon-images: Фото всередині
+    icon-videos: Відео всередині
+    icon-hits: Переглядів
+    source: Джерело
+
+popular-section: Популярні
+popular-section-in-category: Популярні у категорії
+recommended-section: Рекомендовані
+recommended-section-in-category: Рекомендовані у категорії

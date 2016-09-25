@@ -111,6 +111,20 @@ class Post
     /**
      * @var string
      *
+     * @ORM\Column(name="image_descr", type="string", length=255, nullable=true)
+     */
+    private $imageDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_source", type="string", length=255, nullable=true)
+     */
+    private $imageSource;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="source_name", type="string", length=255, nullable=true)
      */
     private $sourceName;
@@ -166,6 +180,34 @@ class Post
     private $featured;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recommended", type="boolean", nullable=true)
+     */
+    private $recommended;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="images", type="boolean")
+     */
+    private $images;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="videos", type="boolean")
+     */
+    private $videos;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="translated", type="boolean")
+     */
+    private $translated;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -195,7 +237,7 @@ class Post
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('file', new Assert\File(array(
-            'maxSize' => 6000000,
+            'maxSize' => 8000000,
         )));
     }
 
@@ -623,6 +665,70 @@ class Post
     }
 
     /**
+     * @return boolean
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * @param boolean $recommended
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param boolean $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param boolean $videos
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTranslated()
+    {
+        return $this->translated;
+    }
+
+    /**
+     * @param boolean $translated
+     */
+    public function setTranslated($translated)
+    {
+        $this->translated = $translated;
+    }
+
+    /**
      * Set language
      *
      * @param string $language
@@ -781,6 +887,38 @@ class Post
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageDescr()
+    {
+        return $this->imageDescr;
+    }
+
+    /**
+     * @param string $imageDescr
+     */
+    public function setImageDescr($imageDescr)
+    {
+        $this->imageDescr = $imageDescr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageSource()
+    {
+        return $this->imageSource;
+    }
+
+    /**
+     * @param string $imageSource
+     */
+    public function setImageSource($imageSource)
+    {
+        $this->imageSource = $imageSource;
     }
 
     /**

@@ -5,10 +5,51 @@
 
     <div class="row">
         {% for user in users %}
-        <div class="col col-lg-3">
-            {{ user.username ~ ': ' ~ user.posts|length }}
-        </div>
+            <div class="col col-lg-3">
+                {{ user.username ~ ': ' ~ user.posts|length }}
+            </div>
         {% endfor %}
+    </div>
+
+    <p></p>
+    <p></p>
+    <div class="row">
+        <div class="col col-lg-12">
+            <form name="volley_facebundle_filter" method="post" action="" class="form-inline">
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_category">Category: </label>
+                    {{ form_widget(filter.category) }}
+                </div>
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_state">State: </label>
+                    {{ form_widget(filter.state) }}
+                </div>
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_featured">Featured: </label>
+                    {{ form_widget(filter.featured) }}
+                </div>
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_recommended">Recommended: </label>
+                    {{ form_widget(filter.recommended) }}
+                </div>
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_featured">User: </label>
+                    {{ form_widget(filter.user) }}
+                </div>
+                <p></p>
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_search">Search:</label>
+                    {{ form_widget(filter.search, {'attr': {'placeholder': ''}}) }}
+                </div>
+                <button class="btn btn-primary" name="filter" type="submit" id="module_submit" iconclass="fa fa-filter"
+                        value="1"><i class="fa fa-filter"></i> Filter
+                </button>
+                <button class="btn btn-danger" name="reset" type="submit" id="module_submit" iconclass="fa fa-filter"
+                        value="1"><i class="fa fa-filter"></i> Reset
+                </button>
+                {{ form_rest(filter) }}
+            </form>
+        </div>
     </div>
 
     <div class="pull-right">
@@ -22,18 +63,18 @@
         <table class="table table-striped table-hover .table-condensed">
             <thead>
             <tr>
-                <th>Id</th>
+                <th{% if entities.isSorted('p.id') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Id', 'p.id') }}</th>
                 <th>Title</th>
                 {#<th>Slug</th>#}
                 {#<th>Text</th>#}
                 <th>Category</th>
                 <th>State</th>
                 <th>Featured</th>
-                <th>Hits</th>
+                <th{% if entities.isSorted('p.hits') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(entities, 'Hits', 'p.hits') }}</th>
                 <th>Created / Published</th>
                 {#<th>Content</th>#}
-                <th>Createdby</th>
-                <th>Modifiedby</th>
+                <th>CreatedBy</th>
+                <th>ModifiedBy</th>
                 {#<th>Ordering</th>#}
                 {#<th>Metakey</th>#}
                 {#<th>Metadescr</th>#}
@@ -44,13 +85,13 @@
             </tr>
             </thead>
             <tfoot>
-                <tr>
-                    <td colspan="100">
-                        <div class="navigation">
-                            {{ knp_pagination_render(entities) }}
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td colspan="100">
+                    <div class="navigation">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </td>
+            </tr>
             </tfoot>
             <tbody>
             {% for entity in entities %}
@@ -61,13 +102,16 @@
                     {#<td>{{ entity.text }}</td>#}
                     <td>{{ entity.category }}</td>
                     <td class="text-center">
-                        <span class="glyphicon {{ entity.state ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' }}" aria-hidden="true"></span>
+                        <span class="glyphicon {{ entity.state ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove' }}"
+                              aria-hidden="true"></span>
                     </td>
                     <td class="text-center">
-                        <span class="glyphicon {{ entity.featured ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty' }}" aria-hidden="true"></span>
+                        <span class="glyphicon {{ entity.featured ? 'glyphicon glyphicon-star' : 'glyphicon glyphicon-star-empty' }}"
+                              aria-hidden="true"></span>
                     </td>
                     <td>{{ entity.hits }}</td>
-                    <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %} <br/> {% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}
+                        <br/> {% if entity.published %}{{ entity.published|date('Y-m-d H:i:s') }}{% endif %}</td>
                     {#<td>{{ entity.content }}</td>#}
                     <td>{{ entity.createdBy }}</td>
                     <td>{{ entity.modifiedBy }}</td>

@@ -52,6 +52,22 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Featured', 'data-off' => 'Not Featured', 'data-onstyle' => 'info']
             ])
+            ->add('recommended',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Recommended', 'data-off' => 'Not Recommended', 'data-onstyle' => 'info']
+            ])
+            ->add('images',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Images', 'data-off' => 'No Images', 'data-onstyle' => 'info']
+            ])
+            ->add('videos',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Videos', 'data-off' => 'No Videos', 'data-onstyle' => 'info']
+            ])
+            ->add('translated',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Translated', 'data-off' => "Not translated", 'data-onstyle' => 'info']
+            ])
             ->add('language')
             ->add('category','entity', [
                 'class' => 'Volley\FaceBundle\Entity\Category',
@@ -62,7 +78,13 @@ class PostType extends AbstractType
                 }
             ])
             ->add('file', null, [
-                'label' => 'Post Image (width>=555px and height>=350px)'
+                'label' => 'Post Image (width>=760 and height>=400px)'
+            ])
+            ->add('imageDescr', null, [
+                'label' => 'Post Image Description'
+            ])
+            ->add('imageSource', null, [
+                'label' => 'Post Image Source'
             ])
         ;
     }

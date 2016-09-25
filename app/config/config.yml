@@ -34,6 +34,11 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: ['bootstrap_3_layout.html.twig']
+    globals:
+        default_category_color: "#888888"
+        fb_app_id: %fb_app_id%
+        ga_id: %ga_id%
+
 
 # Doctrine Configuration
 doctrine:
@@ -56,11 +61,9 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: '%mailer_transport%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
@@ -140,19 +143,27 @@ liip_imagine:
     filter_sets:
         cache: ~
         main_pic:
-            quality: 100
+            quality: 80
             filters:
 #                thumbnail: { size: [555, 350], mode: outbound }
                 relative_resize: { widen: 555 }
+        main_thumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [278, 175], mode: outbound }
         post_pic:
-            quality: 100
+            quality: 90
             filters:
 #                thumbnail: { size: [760, 480], mode: outbound }
                 relative_resize: { widen: 760 }
-        main_thumb:
+        post_pic_fb:
             quality: 100
             filters:
-                thumbnail: { size: [278, 175], mode: outbound }
+                thumbnail: { size: [760, 400], mode: outbound }
+        blog_post:
+            quality: 85
+            filters:
+                thumbnail: { size: [370, 240], mode: outbound }
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
