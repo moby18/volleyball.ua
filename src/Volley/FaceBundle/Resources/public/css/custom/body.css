@@ -725,3 +725,32 @@ body {
     height: auto;
     margin: 20px 0;
 }
+
+/* Matches Carousel */
+#owl-demo .item {
+    background: #3fbf79;
+    padding: 30px 50px;
+    margin: 0px;
+    color: #FFF;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+.customNavigation {
+    position: relative;
+    top: 0;
+}
+.customNavigation .prev {
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    z-index: 1;
+
+}
+.customNavigation .next {
+    position: absolute;
+    right: -30px;;
+    top: -30px;
+    z-index: 1;
+}
