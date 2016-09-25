@@ -9,7 +9,7 @@ var shell = require('gulp-shell');
 
 gulp.task('style', function () {
     var source = [
-        // 'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
         // 'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
@@ -18,7 +18,8 @@ gulp.task('style', function () {
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
-        'src/Volley/FaceBundle/Resources/public/css/custom/body.css'
+        'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
     ];
     gulp.src(source)
         // .pipe(sourcemaps.init())
@@ -87,7 +88,8 @@ gulp.task('script_footer', function () {
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.infinitescroll.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/main.js'
+        'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/owl.carousel.min.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())

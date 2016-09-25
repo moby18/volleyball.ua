@@ -24,6 +24,7 @@
     "fancybox": "~2.1.5",
     "bootstrap-toggle": "~2.2.1",
     "select2": "~4.0.1",
-    "mjolnic-bootstrap-colorpicker": "bootstrap-colorpicker#^2.3.3"
+    "mjolnic-bootstrap-colorpicker": "bootstrap-colorpicker#^2.3.3",
+    "owl.carousel": "owl-carousel2#^2.1.6"
   }
 }

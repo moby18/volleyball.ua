@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col col-lg-12 col-md-12 col-sm-12">
+        <div class="container">
+            <div class="row">
+                <div id="owl-demo" class="owl-carousel owl-theme">
+                    <div class="item"><h1>1</h1></div>
+                    <div class="item"><h1>2</h1></div>
+                    <div class="item"><h1>3</h1></div>
+                    <div class="item"><h1>4</h1></div>
+                    <div class="item"><h1>5</h1></div>
+                    <div class="item"><h1>6</h1></div>
+                    <div class="item"><h1>7</h1></div>
+                    <div class="item"><h1>8</h1></div>
+                    <div class="item"><h1>9</h1></div>
+                    <div class="item"><h1>10</h1></div>
+                    <div class="item"><h1>11</h1></div>
+                    <div class="item"><h1>12</h1></div>
+                    <div class="item"><h1>13</h1></div>
+                    <div class="item"><h1>14</h1></div>
+                    <div class="item"><h1>15</h1></div>
+                    <div class="item"><h1>16</h1></div>
+                </div>
+
+                <div class="customNavigation">
+                    <a class="btn prev">Previous</a>
+                    <a class="btn next">Next</a>
+                    <a class="btn play">Autoplay</a>
+                    <a class="btn stop">Stop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #owl-demo .item {
+        background: #3fbf79;
+        padding: 30px 50px;
+        margin: 0px;
+        color: #FFF;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        text-align: center;
+    }
+
+    .customNavigation {
+        text-align: center;
+    }
+
+    .customNavigation a {
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        var owl = $("#owl-demo");
+
+        owl.owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 3,
+                    nav: false
+                },
+                1000: {
+                    items: 5,
+                    nav: true,
+                    loop: false
+                }
+            }
+        })
+
+        // Custom Navigation Events
+        $(".next").click(function () {
+            owl.trigger('owl.next');
+        })
+        $(".prev").click(function () {
+            owl.trigger('owl.prev');
+        })
+        $(".play").click(function () {
+            owl.trigger('owl.play', 1000); //owl.play event accept autoPlay speed as second parameter
+        })
+        $(".stop").click(function () {
+            owl.trigger('owl.stop');
+        })
+
+    });
+</script>
