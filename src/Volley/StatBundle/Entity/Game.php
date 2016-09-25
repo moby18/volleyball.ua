@@ -106,6 +106,12 @@ class Game
     protected $tour;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Round", inversedBy="games")
+     * @ORM\JoinColumn(name="roundId", referencedColumnName="id")
+     */
+    protected $round;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="games")
      * @ORM\JoinColumn(name="seasonId", referencedColumnName="id")
      */
@@ -483,6 +489,22 @@ class Game
     {
         if ($season)
             $this->season = $season;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRound()
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param mixed $round
+     */
+    public function setRound($round)
+    {
+        $this->round = $round;
     }
 
     public function __clone() {

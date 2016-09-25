@@ -125,6 +125,11 @@ class Team
      **/
     protected $seasons;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Round",  mappedBy="rounds")
+     **/
+    protected $rounds;
+
 
     function __construct()
     {
@@ -221,6 +226,41 @@ class Team
     {
         return $this->seasons;
     }
+
+    /**
+     * Add rounds
+     *
+     * @param \Volley\StatBundle\Entity\Round $rounds
+     * @return Team
+     */
+    public function addRound(Round $rounds)
+    {
+        $rounds->addTeam($this); // synchronously updating inverse side
+        $this->rounds[] = $rounds;
+
+        return $this;
+    }
+
+    /**
+     * Remove rounds
+     *
+     * @param \Volley\StatBundle\Entity\Round $rounds
+     */
+    public function removeRound(\Volley\StatBundle\Entity\Round $rounds)
+    {
+        $this->rounds->removeElement($rounds);
+    }
+
+    /**
+     * Get rounds
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRounds()
+    {
+        return $this->rounds;
+    }
+
 
     /**
      * @return string
