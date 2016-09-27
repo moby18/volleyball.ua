@@ -35,6 +35,7 @@ class GameType extends AbstractType
         $builder
             ->add('number')
             ->add('season')
+            ->add('round')
             ->add('tour')
             ->add('homeTeam','entity',[
                 'class' => 'Volley\StatBundle\Entity\Team',

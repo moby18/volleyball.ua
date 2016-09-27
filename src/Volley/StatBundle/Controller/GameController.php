@@ -174,6 +174,7 @@ class GameController extends Controller
         $entity->setDate($date->setTime(18,0,0));
         $entity->setSeason($gameFilter->getSeason());
         $entity->setTour($gameFilter->getTour());
+        $entity->setRound($gameFilter->getRound());
         $form = $this->createCreateForm($entity);
 
         return array(

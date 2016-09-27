@@ -139,6 +139,8 @@ class TournamentManager
             ];
         }
 
+        $c=3;
+
         return array(
             'season' => $season,
             'tournament' => $tournament,

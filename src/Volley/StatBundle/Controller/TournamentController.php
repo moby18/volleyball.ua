@@ -252,7 +252,7 @@ class TournamentController extends Controller
 
 
     /**
-     * * Deletes a Tournament entity.
+     * * Tournament table
      *
      * @Route("/{id}/table", name="stat_tournament_table")
      * @Method("GET")

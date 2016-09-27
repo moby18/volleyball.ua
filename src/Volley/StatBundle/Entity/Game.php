@@ -123,6 +123,14 @@ class Game
     protected $sets;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -417,8 +425,8 @@ class Game
     public function setTour(\Volley\StatBundle\Entity\Tour $tour = null)
     {
         $this->tour = $tour;
-        if ($this->tour)
-            $this->season = $tour->getSeason();
+        if ($this->tour && $this->tour->getSeason())
+            $this->setSeason($tour->getSeason());
 
         return $this;
     }
@@ -431,13 +439,6 @@ class Game
     public function getTour()
     {
         return $this->tour;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -487,8 +488,7 @@ class Game
      */
     public function setSeason($season)
     {
-        if ($season)
-            $this->season = $season;
+        $this->season = $season;
     }
 
     /**

@@ -17,7 +17,7 @@ class TourType extends AbstractType
         $builder
             ->add('name')
             ->add('ordering')
-//            ->add('season')
+            ->add('season')
             ->add('round')
         ;
     }
