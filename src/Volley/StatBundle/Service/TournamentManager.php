@@ -30,33 +30,41 @@ class TournamentManager
      *
      * @param int $seasonId
      * @param int $tournamentId
+     * @param int $roundId
      *
      * @return array
      */
-    public function getTournamentData($seasonId, $tournamentId)
+    public function getTournamentData($seasonId, $tournamentId, $roundId = null)
     {
         $em = $this->doctrine->getManager();
 
         /** @var Season $season */
         $season = $em->getRepository('VolleyStatBundle:Season')->find($seasonId);
 
-        /** @var Tournament  $tournament */
+        /** @var Tournament $tournament */
         $tournament = $em->getRepository('VolleyStatBundle:Tournament')->find($tournamentId);
 
         $teams = $season->getTeams();
 
-        $rounds = $season->getRounds();
-
         $tournamentRounds = [];
 
         /** @var Round $round */
+        $round = null;
+        if ($roundId) {
+            $round = $em->getRepository('VolleyStatBundle:Round')->find($roundId);
+        }
+        if ($round)
+            $rounds = [$round];
+        else
+            $rounds = $season->getRounds();
+        
         foreach ($rounds as $round) {
 
             $games = $round->getGames();
 
             $table = [];
             foreach ($teams as $team) {
-                $table[$team->getID()] = ['team' => $team, 'points' => 0, 'games' => 0, 'win' => 0, 'loss' => 0, 'win_sets' => 0, 'loss_sets' => 0, 'win_points' => 0, 'loss_points' => 0, 'score30' => 0, 'score31' => 0, 'score32'=> 0, 'score23' => 0, 'score13' => 0, 'score03' => 0];
+                $table[$team->getID()] = ['team' => $team, 'points' => 0, 'games' => 0, 'win' => 0, 'loss' => 0, 'win_sets' => 0, 'loss_sets' => 0, 'win_points' => 0, 'loss_points' => 0, 'score30' => 0, 'score31' => 0, 'score32' => 0, 'score23' => 0, 'score13' => 0, 'score03' => 0];
             }
 
             /**
@@ -70,14 +78,12 @@ class TournamentManager
                 if ($game->getHomeTeam()) {
                     $homeTeamId = $game->getHomeTeam()->getId();
                     $table[$homeTeamId]['games'] += 1;
-                }
-                else
+                } else
                     $homeTeamId = 0;
                 if ($game->getAwayTeam()) {
                     $awayTeamId = $game->getAwayTeam()->getId();
                     $table[$awayTeamId]['games'] += 1;
-                }
-                else
+                } else
                     $awayTeamId = 0;
 
                 $homeTeamSets = $game->getScoreSetHome();
@@ -89,8 +95,8 @@ class TournamentManager
                 if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $homeTeamSets;
 
                 if ($homeTeamSets > $awayTeamSets) {
-                    $table[$awayTeamId]['score'.$awayTeamSets.'3'] += 1;
-                    $table[$homeTeamId]['score3'.$awayTeamSets] += 1;
+                    $table[$awayTeamId]['score' . $awayTeamSets . '3'] += 1;
+                    $table[$homeTeamId]['score3' . $awayTeamSets] += 1;
 
                     if ($homeTeamId) $table[$homeTeamId]['win'] += 1;
                     if ($awayTeamId) $table[$awayTeamId]['loss'] += 1;
@@ -102,8 +108,8 @@ class TournamentManager
                         if ($awayTeamId) $table[$awayTeamId]['points'] += 1;
                     }
                 } else {
-                    $table[$homeTeamId]['score'.$homeTeamSets.'3'] += 1;
-                    $table[$awayTeamId]['score3'.$homeTeamSets] += 1;
+                    $table[$homeTeamId]['score' . $homeTeamSets . '3'] += 1;
+                    $table[$awayTeamId]['score3' . $homeTeamSets] += 1;
 
                     if ($homeTeamId) $table[$homeTeamId]['loss'] += 1;
                     if ($awayTeamId) $table[$awayTeamId]['win'] += 1;
@@ -126,7 +132,7 @@ class TournamentManager
             }
 
             foreach ($table as &$row) {
-                $row['k'] = $row['points']*1000000 + ($row['loss_sets']?$row['win_sets']/$row['loss_sets']:$row['win_sets'])*1000 + ($row['loss_points']?$row['win_points']/$row['loss_points']:$row['win_points']);
+                $row['k'] = $row['points'] * 1000000 + ($row['loss_sets'] ? $row['win_sets'] / $row['loss_sets'] : $row['win_sets']) * 1000 + ($row['loss_points'] ? $row['win_points'] / $row['loss_points'] : $row['win_points']);
             }
 
             usort($table, function ($a, $b) {
@@ -139,8 +145,6 @@ class TournamentManager
             ];
         }
 
-        $c=3;
-
         return array(
             'season' => $season,
             'tournament' => $tournament,
@@ -150,7 +154,8 @@ class TournamentManager
 
     }
 
-    private function cmp($a, $b) {
+    private function cmp($a, $b)
+    {
         if ($a == $b) {
             return 0;
         }

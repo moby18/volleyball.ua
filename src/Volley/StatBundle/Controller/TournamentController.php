@@ -260,9 +260,9 @@ class TournamentController extends Controller
      * @param $tournamentId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function tableAction($seasonId = 1, $tournamentId = 1)
+    public function tableAction($seasonId = 1, $tournamentId = 1, $roundId = 1)
     {
-        return $this->render('VolleyStatBundle:Tournament:table.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($seasonId, $tournamentId));
+        return $this->render('VolleyStatBundle:Tournament:table.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($seasonId, $tournamentId, $roundId));
     }
 
 }

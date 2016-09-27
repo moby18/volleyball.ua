@@ -285,7 +285,6 @@ class DefaultController extends Controller
      */
     public function tableAction($season_id, $tournament_id)
     {
-        $a = 1;
         return $this->render('VolleyFaceBundle:Stat:tournament.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($season_id, $tournament_id));
     }
 
