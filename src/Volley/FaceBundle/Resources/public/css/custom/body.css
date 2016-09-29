@@ -195,7 +195,6 @@
 
 .post img {
     max-width: 100%;
-    width: 100%;
     height: auto;
 }
 
@@ -207,6 +206,7 @@
 .post .img-caption img {
     display: block;
     max-width: 100%;
+    width: 100%;
     height: auto;
 }
 .post .img-caption:after {
