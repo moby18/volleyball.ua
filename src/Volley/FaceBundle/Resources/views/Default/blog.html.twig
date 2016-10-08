@@ -16,23 +16,26 @@
 
             <div class="row">
                 <div class="col col-lg-8 col-md-8 col-sm-8">
-                    <div class="row">
+                    {% if (posts|length > 0) %}
+                        <div class="row">
+                            {% for item in posts %}
+                                <div class="col-lg-6">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
+                                </div>
+                                {% if loop.index is even %}
+                                    <div style="clear: both"></div>
+                                {% endif %}
+                            {% endfor %}
 
-                        {% for item in posts %}
-                            <div class="col-lg-6">
-                                {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
-                            </div>
-                            {% if loop.index is even %}
-                                <div style="clear: both"></div>
-                            {% endif %}
-                        {% endfor %}
-
-                    </div>
-                    <div class="row">
-                        <div class="pagination-container">
-                            {{ knp_pagination_render(posts) }}
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="pagination-container">
+                                {{ knp_pagination_render(posts) }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <p> {{ 'not_found'|trans({}) }}</p>
+                    {% endif %}
                     <div class="row">
                         <p id="google-adsende-banner" style="height: 100px; width: 100%;">
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

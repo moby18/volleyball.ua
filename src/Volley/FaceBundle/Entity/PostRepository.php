@@ -125,4 +125,21 @@ class PostRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    public function search($searchText = "")
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('p')
+            ->orderBy('p.published', 'DESC');
+        if ($searchText != "")
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('p.title', $qb->expr()->literal('%' . $searchText . '%')),
+                    $qb->expr()->like('p.content', $qb->expr()->literal('%' . $searchText . '%')),
+                    $qb->expr()->like('p.text', $qb->expr()->literal('%' . $searchText . '%'))
+                )
+            );
+
+        return $qb->getQuery();
+    }
 }
