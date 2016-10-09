@@ -289,6 +289,37 @@ class DefaultController extends Controller
     }
 
     /**
+     * Search Route - should be at the bottom of routes list
+     *
+     * @param Request $request
+     *
+     * @return string
+     *
+     * @Route("/search", name="volley_face_search")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $em->getRepository('VolleyFaceBundle:Post')->search($request->query->get('s', '')),
+            $request->query->getInt('page', 1),
+            20
+        );
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+
+        return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
+            'category' => $category,
+            'posts' => $pagination,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
+        ));
+    }
+
+    /**
      * Blog Route - should be at the bottom of routes list
      *
      * @param Category $category
