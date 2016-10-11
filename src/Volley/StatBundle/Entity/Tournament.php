@@ -13,6 +13,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Tournament
 {
+    const WOMAN = 'woman';
+    const MAN = 'man';
+
     /**
      * @var integer
      *
@@ -28,6 +31,14 @@ class Tournament
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sex", type="text", nullable=true)
+     */
+    private $sex;
 
     /**
      * @var boolean
@@ -69,7 +80,7 @@ class Tournament
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -92,7 +103,7 @@ class Tournament
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -115,11 +126,27 @@ class Tournament
     /**
      * Get status
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * @param string $sex
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
     }
 
     /**
@@ -170,7 +197,7 @@ class Tournament
     /**
      * Get country
      *
-     * @return \Volley\StatBundle\Entity\Country 
+     * @return \Volley\StatBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -203,7 +230,7 @@ class Tournament
     /**
      * Get seasons
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSeasons()
     {
@@ -214,6 +241,4 @@ class Tournament
     {
         return $this->getName();
     }
-
-
 }

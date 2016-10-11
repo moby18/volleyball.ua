@@ -3,8 +3,10 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Volley\StatBundle\Entity\Tournament;
 
 class TournamentType extends AbstractType
 {
@@ -16,13 +18,22 @@ class TournamentType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('status')
+            ->add('sex', ChoiceType::class, [
+                'choices' => [
+                    'No' => null,
+                    Tournament::MAN => 'Man',
+                    Tournament::WOMAN => 'Woman',
+                ]
+            ])
+            ->add('status', null, [
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => "Enabled", 'data-off' => "Disabled", 'data-onstyle' => 'info']
+            ])
             ->add('country')
             ->add('keywords')
-            ->add('description')
-        ;
+            ->add('description');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
