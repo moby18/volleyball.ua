@@ -39,6 +39,7 @@ class TournamentController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Tournament entity.
      *
@@ -62,7 +63,7 @@ class TournamentController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -95,11 +96,11 @@ class TournamentController extends Controller
     public function newAction()
     {
         $entity = new Tournament();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -123,7 +124,7 @@ class TournamentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -149,19 +150,19 @@ class TournamentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Tournament entity.
-    *
-    * @param Tournament $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Tournament entity.
+     *
+     * @param Tournament $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Tournament $entity)
     {
         $form = $this->createForm(new TournamentType(), $entity, array(
@@ -173,6 +174,7 @@ class TournamentController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Tournament entity.
      *
@@ -201,11 +203,12 @@ class TournamentController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Tournament entity.
      *
@@ -245,11 +248,8 @@ class TournamentController extends Controller
             ->setAction($this->generateUrl('stat_tournament_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
-
-
 
     /**
      * * Tournament table

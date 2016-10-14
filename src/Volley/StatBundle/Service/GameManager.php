@@ -9,6 +9,9 @@
 namespace Volley\StatBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Entity\Season;
+use Volley\StatBundle\Entity\Tournament;
 use Volley\StatBundle\Form\Model\GameFilter;
 
 class GameManager
@@ -82,5 +85,31 @@ class GameManager
             'rounds' => $rounds,
             'tours' => $tours
         ];
+    }
+
+    /**
+     * Populate data for games table
+     *
+     * @param int $seasonId
+     * @param int $tournamentId
+     * @param int $roundId
+     *
+     * @return array
+     */
+    public function getGamesData($seasonId, $tournamentId, $roundId = null) {
+        $em = $this->doctrine->getManager();
+
+        /** @var Tournament $tournament */
+        $tournament = $em->getRepository('VolleyStatBundle:Tournament')->find($tournamentId);
+
+        /** @var Season $season */
+        $season = $em->getRepository('VolleyStatBundle:Season')->find($seasonId);
+
+        /** @var Round $round */
+        $round = $roundId ? $em->getRepository('VolleyStatBundle:Round')->find($roundId) : $round;
+
+        $games = $round ? $round->getGames() : $season->getGames();
+
+        return $games;
     }
 }

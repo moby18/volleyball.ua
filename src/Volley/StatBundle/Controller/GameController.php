@@ -357,4 +357,18 @@ class GameController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm();
     }
+
+    /**
+     * * Game table
+     *
+     * @Route("/{id}/table", name="stat_game_table")
+     * @Method("GET")
+     * @param $seasonId
+     * @param $tournamentId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($seasonId = 1, $tournamentId = 1, $roundId = 1)
+    {
+        return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getGamesData($seasonId, $tournamentId, $roundId));
+    }
 }
