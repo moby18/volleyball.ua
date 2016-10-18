@@ -54,7 +54,8 @@
 
         <div class="container">
 
-            {% include 'VolleyFaceBundle:Default/includes:carousel.html.twig' %}
+            {# match carousel #}
+            {#{% include 'VolleyFaceBundle:Default/includes:carousel.html.twig' %}#}
 
             <div class="row">
                 <div class="col col-lg-8 col-md-8 col-sm-8">
@@ -91,6 +92,7 @@
                     </div>
                 </div>
 
+
                 {% if true %}
                     <div class="col col-lg-4 col-md-12 col-sm-12">
                         {#<div class="row">#}
@@ -101,7 +103,7 @@
                         {#</div>#}
                         {#</div>#}
                         <div class="row">
-                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
+                            {{ render(controller('VolleyStatBundle:Game:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
                         </div>
                     </div>
                 {% endif %}
@@ -115,9 +117,24 @@
                         {#</div>#}
                         {#</div>#}
                         {#</div>#}
-                        <div class="row">
-                            {{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':2, 'tournamentId': 2, 'roundId': 2})) }}
-                        </div>
+                        {#<div class="row">#}
+                            {#{{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}#}
+                        {#</div>#}
+                    </div>
+                {% endif %}
+
+                {% if true %}
+                    <div class="col col-lg-4 col-md-12 col-sm-12">
+                        {#<div class="row">#}
+                        {#<div class="col-lg-12">#}
+                        {#<div class="section-title">#}
+                        {#{{ 'popular-section'|trans({}) }}#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#{{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':2, 'tournamentId': 2, 'roundId': 2})) }}#}
+                        {#</div>#}
                     </div>
                 {% endif %}
 

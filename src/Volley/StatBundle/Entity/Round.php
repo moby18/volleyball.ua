@@ -244,11 +244,10 @@ class Round
      * Add teams
      *
      * @param \Volley\StatBundle\Entity\Team $teams
-     * @return Season
+     * @return Round
      */
     public function addTeam(\Volley\StatBundle\Entity\Team $teams)
     {
-        $teams->addSeason($this);
         $this->teams[] = $teams;
 
         return $this;

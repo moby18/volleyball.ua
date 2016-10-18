@@ -50,4 +50,51 @@ class GameRepository extends EntityRepository
         return $query->getQuery()->getResult();
 
     }
+
+    function findDayGames(\DateTime $date = null)
+    {
+        $today = $date ? $date : new \DateTime();
+        $qb = $this->createQueryBuilder('g');
+        $query = $qb
+            ->andWhere($qb->expr()->gte('g.date', ':date_from'))
+            ->setParameter('date_from', $today->format('Y-m-d 00:00:00'))
+            ->andWhere($qb->expr()->lte('g.date', ':date_to'))
+            ->setParameter('date_to', $today->format('Y-m-d 23:59:59'))
+            ->addOrderBy('g.tour', 'ASC')
+            ->addOrderBy('g.date', 'ASC')
+            ->addOrderBy('g.number', 'ASC')
+            ->addOrderBy('g.id', 'ASC');
+
+        return $query->getQuery()->getResult();
+    }
+
+    function findNextGamesDate(\DateTime $date = null)
+    {
+        $today = $date ? $date : new \DateTime();
+        $qb = $this->createQueryBuilder('g');
+        $query = $qb
+            ->select('g.date')
+            ->andWhere($qb->expr()->isNotNull('g.date'))
+            ->andWhere($qb->expr()->gt('g.date',':date'))
+            ->setParameter('date', $today->format('Y-m-d'))
+            ->orderBy('g.date', 'ASC')
+            ->setMaxResults(1);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
+    function findPrevGamesDate(\DateTime $date = null)
+    {
+        $today = $date ? $date : new \DateTime();
+        $qb = $this->createQueryBuilder('g');
+        $query = $qb
+            ->select('g.date')
+            ->andWhere($qb->expr()->isNotNull('g.date'))
+            ->andWhere($qb->expr()->lt('g.date',':date'))
+            ->setParameter('date', $today->format('Y-m-d'))
+            ->orderBy('g.date', 'DESC')
+            ->setMaxResults(1);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
 }

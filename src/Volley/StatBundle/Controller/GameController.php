@@ -90,7 +90,7 @@ class GameController extends Controller
         return $filterForm;
     }
 
-    private function mergeGameFilterWithSession($gameFilter)
+    private function mergeGameFilterWithSession(GameFilter $gameFilter)
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
@@ -166,6 +166,7 @@ class GameController extends Controller
      */
     public function newAction()
     {
+        /** @var GameFilter $gameFilter */
         $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
 
         /** @var Game $entity */
@@ -369,6 +370,6 @@ class GameController extends Controller
      */
     public function tableAction($seasonId = 1, $tournamentId = 1, $roundId = 1)
     {
-        return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getGamesData($seasonId, $tournamentId, $roundId));
+        return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getLatestGames());
     }
 }

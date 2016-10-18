@@ -13,8 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Tournament
 {
-    const WOMAN = 'woman';
-    const MAN = 'man';
+    const WOMAN = 'women';
+    const MAN = 'men';
 
     /**
      * @var integer
