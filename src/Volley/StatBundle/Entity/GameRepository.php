@@ -3,7 +3,6 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\Expr\Join;
 use Volley\StatBundle\Form\Model\GameFilter;
 

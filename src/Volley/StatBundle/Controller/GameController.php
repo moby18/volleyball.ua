@@ -2,15 +2,10 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Volley\StatBundle\Form\Model\GameFilter;
 use Volley\StatBundle\Form\GameFilterType;
 
