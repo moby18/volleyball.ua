@@ -9,6 +9,7 @@
 namespace Volley\StatBundle\Service;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Entity\Round;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Tournament;
@@ -36,7 +37,8 @@ class GameManager
      * @param GameFilter $filter
      * @return array
      */
-    public function getFilterData(GameFilter $filter) {
+    public function getFilterData(GameFilter $filter)
+    {
         $countries = [];
         $tournaments = [];
         $seasons = [];
@@ -44,7 +46,7 @@ class GameManager
         $tours = [];
         if ($filter->getCountry()) {
             $countries = [$filter->getCountry()];
-            $tournaments = $this->doctrine->getRepository('VolleyStatBundle:Tournament')->findBy(['country'=>$filter->getCountry()]);
+            $tournaments = $this->doctrine->getRepository('VolleyStatBundle:Tournament')->findBy(['country' => $filter->getCountry()]);
             $seasons = $this->doctrine->getRepository('VolleyStatBundle:Season')->findByTournaments($tournaments);
             $rounds = $this->doctrine->getRepository('VolleyStatBundle:Round')->findBySeasons($seasons);
             $tours = $this->doctrine->getRepository('VolleyStatBundle:Tour')->findByRounds($rounds);
@@ -96,7 +98,8 @@ class GameManager
      *
      * @return array
      */
-    public function getGamesData($seasonId, $tournamentId, $roundId = null) {
+    public function getGamesData($seasonId, $tournamentId, $roundId = null)
+    {
         $em = $this->doctrine->getManager();
 
         /** @var Tournament $tournament */
@@ -110,6 +113,55 @@ class GameManager
 
         $games = $round ? $round->getGames() : $season->getGames();
 
-        return $games;
+        return [
+            'tournament' => $tournament,
+            'season' => $season,
+            'round' => $round,
+            'games' => $games
+        ];
+    }
+
+    /**
+     * Populate data for games table
+     *
+     * @return array
+     */
+    public function getLatestGames()
+    {
+        $em = $this->doctrine->getManager();
+
+        $date = new \DateTime();
+
+        $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames();
+
+        if (!count($games)) {
+            if ($date = $this->doctrine->getRepository('VolleyStatBundle:Game')->findNextGamesDate()) {
+                $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames($date['date']);
+            }
+        }
+
+        if (!count($games)) {
+            if ($date = $this->doctrine->getRepository('VolleyStatBundle:Game')->findPrevGamesDate()) {
+                $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames($date['date']);
+            }
+        }
+
+        $tours = [];
+        /** @var Game $game */
+        foreach ($games as $game) {
+            /** @var Round $round */
+            $tour = $game->getTour();
+            if (!array_key_exists($tour->getId(), $tours)) {
+                $tours[$tour->getId()] = [];
+                $tours[$tour->getId()]['tour'] = $tour;
+                $tours[$tour->getId()]['games'] = [];
+            }
+            $tours[$tour->getId()]['games'][] = $game;
+        }
+
+        return [
+            'date' => $date,
+            'tours' => $tours
+        ];
     }
 }

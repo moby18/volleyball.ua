@@ -2,15 +2,10 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Volley\StatBundle\Form\Model\GameFilter;
 use Volley\StatBundle\Form\GameFilterType;
 
@@ -90,7 +85,7 @@ class GameController extends Controller
         return $filterForm;
     }
 
-    private function mergeGameFilterWithSession($gameFilter)
+    private function mergeGameFilterWithSession(GameFilter $gameFilter)
     {
         $em = $this->getDoctrine()->getManager();
         $session = $this->get('session');
@@ -166,6 +161,7 @@ class GameController extends Controller
      */
     public function newAction()
     {
+        /** @var GameFilter $gameFilter */
         $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
 
         /** @var Game $entity */
@@ -369,6 +365,6 @@ class GameController extends Controller
      */
     public function tableAction($seasonId = 1, $tournamentId = 1, $roundId = 1)
     {
-        return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getGamesData($seasonId, $tournamentId, $roundId));
+        return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getLatestGames());
     }
 }

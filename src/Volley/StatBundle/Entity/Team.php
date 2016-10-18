@@ -126,7 +126,7 @@ class Team
     protected $seasons;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Round",  mappedBy="rounds")
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Round",  mappedBy="teams")
      **/
     protected $rounds;
 
