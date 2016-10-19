@@ -62,13 +62,13 @@ class Round
      * @ORM\ManyToMany(targetEntity="Team", inversedBy="rounds")
      * @ORM\JoinTable(name="stat_rounds_teams")
      **/
-    protected  $teams;
+    protected $teams;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -91,7 +91,7 @@ class Round
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -114,7 +114,7 @@ class Round
     /**
      * Get ordering
      *
-     * @return string 
+     * @return string
      */
     public function getOrdering()
     {
@@ -137,12 +137,13 @@ class Round
     /**
      * Get type
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getType()
     {
         return $this->type;
     }
+
     /**
      * Constructor
      */
@@ -167,7 +168,7 @@ class Round
     /**
      * Get season
      *
-     * @return \Volley\StatBundle\Entity\Season 
+     * @return \Volley\StatBundle\Entity\Season
      */
     public function getSeason()
     {
@@ -200,7 +201,7 @@ class Round
     /**
      * Get tours
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTours()
     {
@@ -278,6 +279,6 @@ class Round
         $season = $this->getSeason();
         $tournament = $season->getTournament();
         $country = $tournament->getCountry();
-        return $country->getName().$tournament->getName().$season->getName().' - '.$this->getName();
+        return $country->getName() . ' - ' . $tournament->getName() . ' - ' . $tournament->getSex() . ' - ' . $season->getName() . ' - ' . $this->getName();
     }
 }

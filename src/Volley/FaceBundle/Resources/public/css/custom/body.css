@@ -612,14 +612,14 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 316px;
+    margin-bottom: 414px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 316px;
+    height: 414px;
     background-color: #000000;
     background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
     background-repeat: repeat;
@@ -627,10 +627,10 @@ body {
 
 @media (max-width: 767px) {
     body {
-        margin-bottom: 777px;
+        margin-bottom: 945px;
     }
     .footer {
-        height: 777px;
+        height: 945px;
     }
 }
 

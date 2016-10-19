@@ -53,6 +53,7 @@
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські Ігри</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'club-world-championship'}) }}">Клубний Чемпіонат Світу</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
@@ -75,6 +76,29 @@
                                             <a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}" class="megamenu-title">Дитячий волейбол</a>
                                         </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown megamenu-container">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% trans %}Tournaments{% endtrans %}<span class="angle"></span></a>
+                            <div class="dropdown-menu megamenu" role="menu">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <a href="#" class="megamenu-title">Україна. Суперліга. Чоловіки</a>
+                                            <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 1, 'tournament_id': 1}) }}">Сезон 2015-2016</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 3, 'tournament_id': 1}) }}">Сезон 2016-2017</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <a href="#" class="megamenu-title">Україна. Суперліга. Жінки</a>
+                                            <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 2, 'tournament_id': 2}) }}">Сезон 2015-2016</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 4, 'tournament_id': 2}) }}">Сезон 2016-2017</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

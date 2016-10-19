@@ -80,8 +80,8 @@ class Season
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="seasons")
      * @ORM\JoinTable(name="stat_seasons_teams")
      **/
-    protected  $teams;
-    
+    protected $teams;
+
 
     function __construct()
     {
@@ -93,7 +93,7 @@ class Season
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -116,7 +116,7 @@ class Season
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -139,7 +139,7 @@ class Season
     /**
      * Get fromYear
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getFromYear()
     {
@@ -162,7 +162,7 @@ class Season
     /**
      * Get toYear
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getToYear()
     {
@@ -185,7 +185,7 @@ class Season
     /**
      * Get status
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStatus()
     {
@@ -208,7 +208,7 @@ class Season
     /**
      * Get tournament
      *
-     * @return \Volley\StatBundle\Entity\Tournament 
+     * @return \Volley\StatBundle\Entity\Tournament
      */
     public function getTournament()
     {
@@ -241,16 +241,11 @@ class Season
     /**
      * Get tours
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTours()
     {
         return $this->tours;
-    }
-
-    function __toString()
-    {
-        return $this->getTournament()->getName().$this->getName();
     }
 
     /**
@@ -279,7 +274,7 @@ class Season
     /**
      * Get rounds
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRounds()
     {
@@ -350,5 +345,10 @@ class Season
     public function setTeamsSeasons($teams_seasons)
     {
         $this->teams_seasons = $teams_seasons;
+    }
+
+    function __toString()
+    {
+        return $this->getTournament()->getCountry()->getName() . ' - ' . $this->getTournament()->getName() .' - ' . $this->getTournament()->getSex(). ' - ' . $this->getName();
     }
 }
