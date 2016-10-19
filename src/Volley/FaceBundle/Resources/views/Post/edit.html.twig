@@ -31,6 +31,8 @@
                 </div>
                 {{ form_row(edit_form.category) }}
                 {{ form_row(edit_form.title) }}
+                {{ form_row(edit_form.slug) }}
+                {{ form_row(edit_form.slugUpdateble) }}
 
                 {{ form_row(edit_form.file) }}
                 <a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>

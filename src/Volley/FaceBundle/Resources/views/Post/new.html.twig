@@ -19,6 +19,8 @@
                 <br>
                 {{ form_row(form.category) }}
                 {{ form_row(form.title) }}
+                {{ form_row(form.slug, { 'attr': {'disabled': 'disabled'}}) }}
+                {{ form_row(form.slugUpdateble) }}
 
                 {{ form_row(form.file) }}
                 {{ form_row(form.imageDescr) }}

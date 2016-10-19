@@ -38,10 +38,17 @@ class Post
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"id","title"}, updatable=true)
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Gedmo\Slug(fields={"id","title"}, updatable=false)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true, nullable=true)
      */
     private $slug;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="slug_updateble", type="boolean", options={"default" : true})
+     */
+    private $slugUpdateble;
 
     /**
      * @var string
@@ -355,6 +362,7 @@ class Post
     function __construct()
     {
         $this->state = true;
+        $this->slugUpdateble = true;
         $this->modified = new \DateTime();
     }
 
@@ -772,6 +780,22 @@ class Post
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSlugUpdateble()
+    {
+        return $this->slugUpdateble;
+    }
+
+    /**
+     * @param boolean $slugUpdateble
+     */
+    public function setSlugUpdateble($slugUpdateble)
+    {
+        $this->slugUpdateble = $slugUpdateble;
     }
 
     /**

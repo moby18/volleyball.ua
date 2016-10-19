@@ -4,6 +4,8 @@ namespace Volley\FaceBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -17,7 +19,11 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-//            ->add('slug')
+            ->add('slug')
+            ->add('slugUpdateble',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Slug Update', 'data-off' => 'Slug Manual', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
+            ])
             ->add('content', 'textarea', [
                 'label' => 'Short content'
             ])

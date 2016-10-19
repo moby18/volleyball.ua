@@ -279,6 +279,10 @@ class PostController extends Controller
                 $em->getRepository('VolleyFaceBundle:Post')->unsetFeatured($entity);
             }
 
+            if ($entity->isSlugUpdateble()) {
+                $entity->setSlug(null);
+            }
+
             $em->flush();
 
             if ($entity->getState())
