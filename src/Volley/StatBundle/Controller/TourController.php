@@ -29,7 +29,7 @@ class TourController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Tour')->findAll();
+        $entities = $em->getRepository('VolleyStatBundle:Tour')->findBy(array(), array('season' => 'ASC', 'round' => 'ASC', 'id' => 'ASC'));
 
         return array(
             'entities' => $entities,
