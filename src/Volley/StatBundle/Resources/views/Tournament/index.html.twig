@@ -23,7 +23,7 @@
             {% for entity in entities %}
                 <tr>
                     <td><a href="{{ path('stat_tournament_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.country.name ~' - '~ entity.name ~ ' - ' ~ entity.sex|trans  }}</td>
                     <td>{{ entity.status }}</td>
                     <td class="col-md-2 col-lg-2 col-sm-2">
                         <div class="btn-group pull-right" role="group" aria-label="">

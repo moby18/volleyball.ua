@@ -52,7 +52,8 @@ class GameFilterType extends AbstractType
                 'label' => false,
                 'empty_value' => ' - Country - ',
                 'empty_data' => null,
-                'required' => false
+                'required' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('tournament', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Tournament',
@@ -69,7 +70,8 @@ class GameFilterType extends AbstractType
                             ->setParameter(1, $gameFilter->getCountry()->getId());
                     }
                     return $query;
-                }
+                },
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('season', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Season',
@@ -91,7 +93,8 @@ class GameFilterType extends AbstractType
                             ->andWhere('s.tournament = tournament.id');
                     }
                     return $query;
-                }
+                },
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('round', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Round',
@@ -113,7 +116,8 @@ class GameFilterType extends AbstractType
                             ->andWhere('r.season = season.id');
                     }
                     return $query;
-                }
+                },
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('tour', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Tour',
@@ -140,7 +144,8 @@ class GameFilterType extends AbstractType
                             ->andWhere('t.season = season.id');
                     }
                     return $query;
-                }
+                },
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('team', 'entity', [
                 'class' => 'Volley\StatBundle\Entity\Team',
@@ -171,7 +176,8 @@ class GameFilterType extends AbstractType
                             ->setParameter(3, $gameFilter->getCountry()->getId());
                     }
                     return $query;
-                }
+                },
+                'attr'=>["onchange"=>"this.form.submit()"]
             ]);
 
     }

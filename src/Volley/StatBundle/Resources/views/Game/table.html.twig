@@ -11,7 +11,7 @@
                 {% for tour in tours %}
                     <tr>
                         <th colspan="100">
-                            <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) }}">
+                            <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) ~ '#' ~ tour.tour.ordering }}">
                                 {{ tour.tour.round.season.tournament.country.name }}
                                 - {{ tour.tour.round.season.tournament.name }}
                                 - {{ tour.tour.round.season.tournament.sex|trans }}
@@ -28,17 +28,17 @@
                             <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                             <td class="teamA">
                                 {{ winnerTeamA ? "<strong>" : "" }}
-                                {#<a href="{{ path('volley_face_team',{'team_id':game.homeTeam.id}) }}"> #}
+                                <a href="{{ path('volley_face_team',{'team_id':game.homeTeam.id}) }}">
                                 {{ game.homeTeam.name }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamA ? "</strong>" : "" }}
                             </td>
                             <td><span class="text-nowrap">{{ game.scoreSetHome~'-'~game.scoreSetAway }}</span></td>
                             <td class="teamB">
                                 {{ winnerTeamB ? "<strong>" : "" }}
-                                {#<a href="{{ path('volley_face_team',{'team_id':game.awayTeam.id}) }}"> #}
+                                <a href="{{ path('volley_face_team',{'team_id':game.awayTeam.id}) }}">
                                 {{ game.awayTeam.name }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamB ? "</strong>" : "" }}
                             </td>
                         </tr>
