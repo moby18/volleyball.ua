@@ -3,7 +3,21 @@
 {% block body -%}
     <h1>Team creation</h1>
 
-    {{ form(form) }}
+    {#{{ form(form) }}#}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.city) }}
+    {{ form_row(form.country) }}
+
+
+    {{ form_row(form.image) }}
+    {{ form_row(form.logoImage) }}
+    {{ form_row(form.hallImage) }}
+
+    {{ form_end(form) }}
 
     <div class="btn-group" role="group" aria-label="">
         <a href="{{ path('stat_team') }}" type="button"

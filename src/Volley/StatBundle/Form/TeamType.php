@@ -16,7 +16,8 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('city')
+            ->add('country')
 //            ->add('seasons')
             ->add('image', 'file', array(
                     'data_class' => null,
@@ -33,17 +34,21 @@ class TeamType extends AbstractType
                     'required' => false
                 )
             )
-            ->add('country')
-            ->add('city')
             ->add('address')
             ->add('phone')
             ->add('fax')
             ->add('email')
             ->add('site')
             ->add('hall')
-        ;
+            ->add('description', 'textarea', [
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced' // simple, advanced, bbcode
+                ),
+                'required' => false
+            ]);
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

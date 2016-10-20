@@ -50,7 +50,13 @@ class PersonType extends AbstractType
             ->add('weight')
             ->add('spike')
             ->add('block')
-            ->add('description');
+            ->add('description', 'textarea', [
+                'attr' => array(
+                    'class' => 'tinymce',
+                    'data-theme' => 'advanced' // simple, advanced, bbcode
+                ),
+                'required' => false
+            ]);
     }
 
     /**

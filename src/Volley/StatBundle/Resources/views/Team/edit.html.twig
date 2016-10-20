@@ -8,7 +8,23 @@
     {% endfor %}
     <p><a class="btn btn-default" href="{{ path('stat_team_season_new') }}">Add team season</a></p>
 
-    {{ form(edit_form) }}
+    {#{{ form(edit_form) }}#}
+
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+
+    {{ form_row(edit_form.name) }}
+    {{ form_row(edit_form.city) }}
+    {{ form_row(edit_form.country) }}
+
+    {% if entity.image %}<a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.image) }}
+    {% if entity.logoImage %}<a href="{{ entity.getLogoWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getLogoWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.logoImage) }}
+    {% if entity.hallImage %}<a href="{{ entity.getHallWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getHallWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.hallImage) }}
+
+    {{ form_end(edit_form) }}
 
     <div class="btn-group" role="group" aria-label="">
         <a href="{{ path('stat_team') }}" type="button"

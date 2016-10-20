@@ -4,7 +4,14 @@
     <h1 class="page-header">Player creation</h1>
 
     <div class="table-responsive">
-        {{ form(form) }}
+        {#{{ form(form) }}#}
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {% if entity.path %}<a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>{% endif %}
+        {{ form_row(form.file) }}
+
+        {{ form_end(form) }}
     </div>
 
     <ul class="record_actions">
