@@ -60,5 +60,5 @@ security:
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/admin/(player|season|tournament|team|round|team|stat), roles: ROLE_SUPER_ADMIN }
+         - { path: ^/admin/(player|season|tournament|team|round|team), roles: ROLE_SUPER_ADMIN }
          - { path: ^/admin/, role: ROLE_ADMIN }
