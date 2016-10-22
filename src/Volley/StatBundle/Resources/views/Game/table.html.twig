@@ -3,12 +3,13 @@
         <div class="section-title">
             Матч-центр
         </div>
+        {% for date in dates %}
         <h2>
-            {% if date.date is not null %} {{ date.date|date("d.m.Y") }} {% endif %}
+            {% if date.date.date is not null %} {{ date.date.date|date("d.m.Y") }} {% endif %}
         </h2>
         <div class="game-center-data">
             <table class="table table-hover table-condensed">
-                {% for tour in tours %}
+                {% for tour in date.tours %}
                     <tr>
                         <th colspan="100">
                             <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) ~ '#' ~ tour.tour.ordering }}">
@@ -46,5 +47,6 @@
                 {% endfor %}
             </table>
         </div>
+        {% endfor %}
     </div>
 </div>

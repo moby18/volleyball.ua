@@ -130,22 +130,39 @@ class GameManager
     {
         $em = $this->doctrine->getManager();
 
+        $dates = [];
+
+        // current or next date
         $date = new \DateTime();
-
         $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames();
-
         if (!count($games)) {
             if ($date = $this->doctrine->getRepository('VolleyStatBundle:Game')->findNextGamesDate()) {
                 $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames($date['date']);
             }
         }
+        $tours = self::groupByTours($games);
 
-        if (!count($games)) {
-            if ($date = $this->doctrine->getRepository('VolleyStatBundle:Game')->findPrevGamesDate()) {
-                $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames($date['date']);
-            }
+        if (count($tours))
+            $dates[1] = ['date' => $date, 'tours' => $tours];
+
+        // previous date
+        if ($date = $this->doctrine->getRepository('VolleyStatBundle:Game')->findPrevGamesDate()) {
+            $games = $this->doctrine->getRepository('VolleyStatBundle:Game')->findDayGames($date['date']);
         }
+        $tours = self::groupByTours($games);
 
+        if (count($tours))
+            $dates[0] = ['date' => $date, 'tours' => $tours];
+
+        ksort($dates);
+
+        return [
+            'dates' => $dates,
+        ];
+    }
+
+    private function groupByTours($games)
+    {
         $tours = [];
         /** @var Game $game */
         foreach ($games as $game) {
@@ -159,9 +176,6 @@ class GameManager
             $tours[$tour->getId()]['games'][] = $game;
         }
 
-        return [
-            'date' => $date,
-            'tours' => $tours
-        ];
+        return $tours;
     }
 }
