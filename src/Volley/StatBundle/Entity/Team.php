@@ -34,6 +34,13 @@ class Team
     /**
      * @var string
      *
+     * @ORM\Column(name="short_name", type="string", length=255)
+     */
+    private $shortName;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -168,6 +175,22 @@ class Team
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName()
+    {
+        return $this->shortName;
+    }
+
+    /**
+     * @param string $shortName
+     */
+    public function setShortName($shortName)
+    {
+        $this->shortName = $shortName;
     }
 
     /**

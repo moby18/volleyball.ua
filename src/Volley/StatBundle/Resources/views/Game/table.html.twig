@@ -30,7 +30,7 @@
                             <td class="teamA">
                                 {{ winnerTeamA ? "<strong>" : "" }}
                                 {#<a href="{{ path('volley_face_team',{'team_id':game.homeTeam.id}) }}">#}
-                                {{ game.homeTeam.name }}
+                                {{ game.homeTeam.shortName }}
                                 {#</a>#}
                                 {{ winnerTeamA ? "</strong>" : "" }}
                             </td>
@@ -38,7 +38,7 @@
                             <td class="teamB">
                                 {{ winnerTeamB ? "<strong>" : "" }}
                                 {#<a href="{{ path('volley_face_team',{'team_id':game.awayTeam.id}) }}">#}
-                                {{ game.awayTeam.name }}
+                                {{ game.awayTeam.shortName }}
                                 {#</a>#}
                                 {{ winnerTeamB ? "</strong>" : "" }}
                             </td>

@@ -16,6 +16,7 @@ class TeamType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('shortName')
             ->add('city')
             ->add('country')
 //            ->add('seasons')
