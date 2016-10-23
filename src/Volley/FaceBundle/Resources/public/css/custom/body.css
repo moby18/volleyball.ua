@@ -184,9 +184,13 @@
 }
 
 .container.tournament div.anchor {
-    /*margin-bottom: 65px;*/
     display: block;
     height: 56px;
+}
+
+.container.tournament .table>tbody>tr>td,
+.container.tournament .table>thead>tr>th {
+    padding: 5px;
 }
 
 /* Category */

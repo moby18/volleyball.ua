@@ -35,16 +35,16 @@
                             <tr>
                                 <td class="text-center">{{ loop.index }}</td>
                                 {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
-                                <td>{{ row['team'].name }}</td>
+                                <td><span class="text-nowrap">{{ '"' ~ row['team'].name ~ '" ' ~ row['team'].city}}</span></td>
                                 <td class="text-center">{{ row.games }}</td>
                                 <td class="text-center">{{ row.win }}</td>
                                 <td class="text-center">{{ row.loss }}</td>
-                                <td>{{ row.score30 }}</td>
-                                <td>{{ row.score31 }}</td>
-                                <td>{{ row.score32 }}</td>
-                                <td>{{ row.score23 }}</td>
-                                <td>{{ row.score13 }}</td>
-                                <td>{{ row.score03 }}</td>
+                                <td class="text-center">{{ row.score30 }}</td>
+                                <td class="text-center">{{ row.score31 }}</td>
+                                <td class="text-center">{{ row.score32 }}</td>
+                                <td class="text-center">{{ row.score23 }}</td>
+                                <td class="text-center">{{ row.score13 }}</td>
+                                <td class="text-center">{{ row.score03 }}</td>
                                 <td class="text-center">{{ row.win_sets }}/{{ row.loss_sets }}</td>
                                 <td class="text-center">{{ row.win_points }}/{{ row.loss_points }}</td>
                                 <td class="text-center">{{ row.points }}</td>
