@@ -122,13 +122,20 @@ class DefaultController extends Controller
     }
 
     /**
+     * Paginated home page
+     *
+     * @param int $page
+     * @param int $home
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/", name="volley_web_homepage")
+     *
+     * @return array
+     * @Route("/page/{page}", defaults={"home" = 0}, requirements={"page": "\d+"}, name="volley_web_homepage_pages")
+     * @Route("/", defaults={"page" = 1, "home" = 1}, name="volley_web_homepage")
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction($page, $home, Request $request)
     {
+
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
@@ -138,17 +145,17 @@ class DefaultController extends Controller
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
         $posts = $this->get('knp_paginator')->paginate(
             $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
-            $request->query->getInt('page', 1),
+            $page,
             20
         );
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+        if ($home)
+            $posts->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
 
         return [
             'slides' => $slides,
             'news' => $posts,
-            'popularPosts' => $popularPosts,
-            'recommendedPosts' => $recommendedPosts
+            'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count')),
+            'recommendedPosts' => $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'))
         ];
     }
 
@@ -352,23 +359,28 @@ class DefaultController extends Controller
      * Blog Route - should be at the bottom of routes list
      *
      * @param Category $category
+     * @param int $page
+     * @param int $blog
      * @param Request $request
      *
      * @return string
      *
-     * @Route("/{category_slug}", name="volley_face_blog")
+     * @Route("/{category_slug}/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_blog_pages")
+     * @Route("/{category_slug}/", defaults={"page" = 1, "blog" = 1}, name="volley_face_blog")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @Template()
      */
-    public function blogAction(Category $category, Request $request)
+    public function blogAction(Category $category, $page, $blog, Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
-            $request->query->getInt('page', 1),
+            $page,
             20
         );
+        if ($blog)
+            $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
         $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
         $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
