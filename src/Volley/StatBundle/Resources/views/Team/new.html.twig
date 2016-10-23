@@ -9,6 +9,7 @@
     {{ form_errors(form) }}
 
     {{ form_row(form.name) }}
+    {{ form_row(form.slug, { 'attr': {'disabled': 'disabled'}}) }}
     {{ form_row(form.shortName) }}
     {{ form_row(form.city) }}
     {{ form_row(form.country) }}

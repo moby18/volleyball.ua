@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Person
@@ -65,6 +66,14 @@ class Person
      * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"id","firstName","middleName","lastName"}, updatable=true)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true, nullable=true)
+     */
+    private $slug;
 
     /**
      * @var \DateTime
@@ -379,6 +388,22 @@ class Person
     public function getLastName()
     {
         return $this->lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**

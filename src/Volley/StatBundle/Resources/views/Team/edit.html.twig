@@ -14,6 +14,7 @@
     {{ form_errors(edit_form) }}
 
     {{ form_row(edit_form.name) }}
+    {{ form_row(edit_form.slug, { 'attr': {'disabled': 'disabled'}}) }}
     {{ form_row(edit_form.shortName) }}
     {{ form_row(edit_form.city) }}
     {{ form_row(edit_form.country) }}

@@ -6,33 +6,56 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\Person;
+use Volley\StatBundle\Entity\Team;
 
 class DefaultController extends Controller
 {
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/team/{id}", name="stat_team_front")
+     * @param Team $team
+     *
+     * @Route("/team/{team_slug}", name="stat_team_front")
+     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_slug": "slug"}})
      * @Method("GET")
      * @Template()
+     *
+     * @return array
      */
-    public function teamAction($id)
+    public function teamAction(Team $team)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('VolleyStatBundle:Team')->find($id);
-
-        $seasons = $entity->getSeasons();
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Team entity.');
+        if (!$team) {
+            throw $this->createNotFoundException('Unable to find team.');
         }
-
         return array(
-            'team'      => $entity,
-            'seasons' => $seasons
+            'team' => $team,
+            'seasons' => $team->getSeasons()
+        );
+    }
+
+    /**
+     * Finds and displays a Person entity.
+     *
+     * @param Person $person
+     *
+     * @Route("/person/{person_slug}", name="stat_person_front")
+     * @ParamConverter("person", class="VolleyStatBundle:Person", options={"mapping": {"person_slug": "slug"}})
+     * @Method("GET")
+     * @Template()
+     *
+     * @return array
+     */
+    public function personAction(Person $person)
+    {
+        if (!$person) {
+            throw $this->createNotFoundException('Unable to find person.');
+        }
+        return array(
+            'person' => $person
         );
     }
 

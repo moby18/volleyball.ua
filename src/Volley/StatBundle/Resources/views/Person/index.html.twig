@@ -31,7 +31,7 @@
                     <td>{{ entity.firstName }}</td>
                     <td>{{ entity.middleName }}</td>
                     <td>{{ entity.lastName }}</td>
-                    <td>{% if entity.birthDate %}{{ entity.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if entity.birthDate %}{{ entity.birthDate|date('d/m/Y') }}{% endif %}</td>
                     <td>{{ entity.height }}</td>
                     <td>{{ entity.weight }}</td>
                     <td>{{ entity.spike }}</td>

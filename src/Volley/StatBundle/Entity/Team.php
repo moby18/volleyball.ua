@@ -5,6 +5,7 @@ namespace Volley\StatBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Team
@@ -30,6 +31,15 @@ class Team
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"id","name","city"}, updatable=true)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true, nullable=true)
+     */
+    private $slug;
+
 
     /**
      * @var string
@@ -175,6 +185,22 @@ class Team
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     /**

@@ -1,0 +1,73 @@
+{% extends '::layout.html.twig' %}
+
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{% set title =  person.firstName ~ (person.middleName is not empty ? ' ' ~ person.middleName : '') ~ ' ' ~ person.lastName %}
+{#{% set meta_keywords = post.metakey %}#}
+{#{% set meta_description = post.metadescr %}#}
+
+{% block content %}
+
+    <div class="section person">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col col-lg-12">
+                    <h1>{{ title }}</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-4 col-md-4 col-sm-4">
+                    <img class="photo" src="{{ person.webPath }}" alt="{{ title }}">
+                </div>
+                <div class="col col-lg-8 col-md-8 col-sm-8">
+
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Очки#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Рейтинг#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="row">#}
+                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
+                    {#<div class="team_label">#}
+                    {#Місце#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
+                    {#<div class="team_value">#}
+                    {#asdfasdf#}
+                    {#</div>#}
+                    {#</div>#}
+                    {#</div>#}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

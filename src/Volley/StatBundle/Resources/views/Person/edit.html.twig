@@ -6,6 +6,9 @@
 <div class="table-responsive">
     {#{{ form(edit_form) }}#}
     {{ form_start(edit_form) }}
+
+    {{ form_row(edit_form.slug, { 'attr': {'disabled': 'disabled'}}) }}
+
     {{ form_errors(edit_form) }}
 
     {% if entity.path %}<a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>{% endif %}
