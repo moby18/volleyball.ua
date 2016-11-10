@@ -33,7 +33,7 @@
         <h3 style="border-left-color: {{ color }}">{{ item.title }}</h3></a>
     {% if not popular and not recommended %}
         {% autoescape %}
-            {{ item.content|raw }}
+            {#{{ item.content|raw }}#}
         {% endautoescape %}
     {% endif %}
     {#{%  if not loop.last %}#}
