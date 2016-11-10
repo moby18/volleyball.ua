@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Volley\StatBundle\Entity\Team;
 use Volley\StatBundle\Entity\TeamSeason;
 use Volley\StatBundle\Form\TeamSeasonType;
 
@@ -38,11 +39,17 @@ class TeamSeasonController extends Controller
     /**
      * Creates a new TeamSeason entity.
      *
-     * @Route("/", name="stat_team_season_create")
+     * @param Request $request
+     * @param Team $team
+     *
+     * @Route("/team/{team_id}", name="stat_team_season_create")
+     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
      * @Method("POST")
      * @Template("VolleyStatBundle:TeamSeason:new.html.twig")
+     *
+     * @return array
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, Team $team)
     {
         $entity = new TeamSeason();
         $form = $this->createCreateForm($entity);

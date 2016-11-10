@@ -17,7 +17,7 @@ class TeamSeasonType extends AbstractType
         $builder
             ->add('team')
             ->add('season')
-            ->add('persons',null,[])
+            ->add('team_season_persons', 'collection', array('type' => new TeamSeasonPersonType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
     

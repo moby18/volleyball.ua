@@ -169,6 +169,11 @@ class Person
     private $teams_seasons;
 
     /**
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason", mappedBy="team")
+     */
+    private $teams_season_persons;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;

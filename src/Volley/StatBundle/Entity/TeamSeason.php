@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Team
+ * Team Season
  *
  * @ORM\Table(name="stat_team_season")
  * @ORM\Entity()
@@ -37,15 +37,14 @@ class TeamSeason
     protected $season;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Person", inversedBy="teams_seasons")
-     * @ORM\JoinTable(name="stat_persons_teams_seasons")
+     * @ORM\OneToMany(targetEntity="TeamSeasonPerson", mappedBy="team_season", cascade={"persist"}, orphanRemoval=true)
      */
-    protected $persons;
+    protected $team_season_persons;
 
 
     function __construct()
     {
-        $this->persons = new ArrayCollection();
+        $this->team_season_persons = new ArrayCollection();
     }
 
     /**
@@ -91,37 +90,37 @@ class TeamSeason
     }
 
     /**
-     * Add persons
+     * Add team_season_persons
      *
-     * @param \Volley\StatBundle\Entity\Person $persons
+     * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
      * @return Team
      */
-    public function addPerson(\Volley\StatBundle\Entity\Person $persons)
+    public function addTeamSeasonPersons(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
     {
-        $persons->addTeam($this); // synchronously updating inverse side
-        $this->persons[] = $persons;
+        $team_season_persons->setTeamSeason($this); // synchronously updating inverse side
+        $this->team_season_persons[] = $team_season_persons;
 
         return $this;
     }
 
     /**
-     * Remove persons
+     * Remove team_season_persons
      *
-     * @param \Volley\StatBundle\Entity\Person $persons
+     * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
      */
-    public function removePerson(\Volley\StatBundle\Entity\Person $persons)
+    public function removeTeamSeasonPersons(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
     {
-        $this->persons->removeElement($persons);
+        $this->team_season_persons->removeElement($team_season_persons);
     }
 
     /**
-     * Get persons
+     * Get team_season_persons
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPersons()
+    public function getTeamSeasonPersons()
     {
-        return $this->persons;
+        return $this->team_season_persons;
     }
 
     function __toString()
