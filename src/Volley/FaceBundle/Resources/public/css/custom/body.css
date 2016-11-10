@@ -631,10 +631,10 @@ body {
 
 @media (max-width: 767px) {
     body {
-        margin-bottom: 945px;
+        margin-bottom: 1024px;
     }
     .footer {
-        height: 945px;
+        height: 1024px;
     }
 }
 
