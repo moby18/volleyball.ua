@@ -2,6 +2,10 @@ volley_face_admin:
     resource: "@VolleyFaceBundle/Resources/config/routing/admin.yml"
     prefix:   /admin
 
+VolleyFaceBundle_setting:
+    resource: "@VolleyFaceBundle/Resources/config/routing/setting.yml"
+    prefix:   /admin/setting
+
 VolleyFaceBundle_player:
     resource: "@VolleyFaceBundle/Resources/config/routing/player.yml"
     prefix:   /admin/player
