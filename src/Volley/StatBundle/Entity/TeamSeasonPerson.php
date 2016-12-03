@@ -31,11 +31,10 @@ class TeamSeasonPerson
     protected $team_season;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Person",  inversedBy="team_season_persons")
+     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Person",  inversedBy="teams_season_persons")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      **/
     protected $person;
-
 
     function __construct()
     {

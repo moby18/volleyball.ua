@@ -164,12 +164,7 @@ class Person
     public $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason",  mappedBy="persons")
-     **/
-    private $teams_seasons;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeason", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeasonPerson", mappedBy="person")
      */
     private $teams_season_persons;
 
