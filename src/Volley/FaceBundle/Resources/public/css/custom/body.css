@@ -194,6 +194,15 @@
 }
 
 /* Category */
+.home-title {
+    text-transform: uppercase;
+    font-family: 'Open Sans',Verdana,sans-serif;
+    font-weight: normal;
+    color: #20a3cf;
+    margin: 15px 15px 0;
+    height: 55px;
+    line-height: 45px;
+}
 .category-title {
     margin-top: 20px;
 }

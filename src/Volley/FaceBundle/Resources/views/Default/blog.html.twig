@@ -12,12 +12,17 @@
 
         <div class="container">
 
-            <h1 class="text-center category-title" style="color: {{ color }}">{{ category.name }}</h1>
-
             <div class="row">
                 <div class="col col-lg-8 col-md-8 col-sm-8">
+
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="home-title" style="color: {{ color }}">{{ category.name }}</h1>
+                        </div>
+                    </div>
+
                     {% if (posts|length > 0) %}
-                        <div class="row">
+                        <div class="row" style="margin-top: -15px">
                             {% for item in posts %}
                                 <div class="col-lg-6">
                                     {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
