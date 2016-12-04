@@ -1,22 +1,26 @@
-{% set title = title|default('Волейбол в Україні - volleyball.ua') ~ "" %}
+{% set setting = getSetting() %}
+{% set title = title|default(setting.title)|default('Волейбол в Україні - все про волейбол на сайті volleyball.ua') ~ "" %}
 {% set host = app.request.getSchemeAndHttpHost() %}
 {% set route = app.request.attributes.get('_route') %}
 {% if route is not empty %}{% set full_url = url(route, app.request.attributes.get('_route_params')) %}{% endif %}
 {% set page_image = page_image|default(app.request.getSchemeAndHttpHost() ~ asset('bundles/volleyface/images/fb_sharing_image.jpg')) %}
 {% set type = type|default('website') %}
-{% set meta_keywords = meta_keywords|default('волейбол, новини волейболу, україна, результати, чемпіонат україни, пляжний волейбол, аматорський волейбол') %}
-{% set meta_description = meta_description|default('Новини волейболу, результати матчів, турнірні таблиці, статистика, календарі змагань, команди, волейболісти, аматорський волейбол, пляжний волейбол, фото та відео.') %}
+{% set meta_keywords = meta_keywords|default(setting.keywords)|default('волейбол, волейбол в Україні, волейбол в Украине, новини волейболу, новости волейбола, трансляції волейбольних матчів, трансляции волейбольмых матчей, пляжний волейбол, розклад, результати, чемпіонат України, аматорський волейбол, дитячий волейбол') %}
+{% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') %}
 <!DOCTYPE html>
 <html lang="en" class="js no-touch csstransitions skrollr skrollr-desktop" style="height: auto;">
 <head>
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
+        <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-        <meta name="keywords" content="{{ meta_keywords }}" />
-        <meta name="description" content="{{ meta_description }}" />
+        <meta name="keywords" content="{{ meta_keywords }}"/>
+        <meta name="description" content="{{ meta_description }}"/>
 
+        <meta name="application-name" content="volleyball.ua">
+        <meta name="application-url" content="http://www.volleyball.ua/">
         <meta name="author" content="volleyball.ua@gmail.com">
 
         <link rel="shortcut icon" type="image/ico" href="{{ asset('bundles/volleyface/images/favicon.ico') }}">
@@ -41,30 +45,31 @@
         {#<meta name="theme-color" content="#1c1b29">#}
 
         <!-- Fonts -->
-        <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}"
+              rel="stylesheet" type="text/css">
 
         {% block facebook_meta %}
-            <meta property="og:site_name" content="Волейбол в Україні - volleyball.ua" />
-            <meta property="og:title" content="{{ title }}" />
-            <meta property="og:url" content="{{ full_url }}" />
-            <meta property="og:image" content="{{ page_image }}" />
-            <meta property="og:image:url" content="{{ page_image }}" />
-            <meta property="og:image:type" content="image/jpeg" />
-            <meta property="og:image:width" content="760" />
-            <meta property="og:image:height" content="400" />
-            <meta property="og:type" content="{{ type }}" />
-            <meta property="fb:app_id" content="{{ fb_app_id }}" />
-            <meta property="og:locale" content="uk_UA" />
-            <meta property="og:locale:alternate" content="ru_RU" />
+            <meta property="og:site_name" content="{{ setting.siteName|default('Волейбол в Україні - volleyball.ua') }}"/>
+            <meta property="og:title" content="{{ title }}"/>
+            <meta property="og:url" content="{{ full_url }}"/>
+            <meta property="og:image" content="{{ page_image }}"/>
+            <meta property="og:image:url" content="{{ page_image }}"/>
+            <meta property="og:image:type" content="image/jpeg"/>
+            <meta property="og:image:width" content="760"/>
+            <meta property="og:image:height" content="400"/>
+            <meta property="og:type" content="{{ type }}"/>
+            <meta property="fb:app_id" content="{{ fb_app_id }}"/>
+            <meta property="og:locale" content="uk_UA"/>
+            <meta property="og:locale:alternate" content="ru_RU"/>
         {% endblock %}
 
         {% block twitter_meta %}
-            <meta name="twitter:site" content="Волейбол в Україні - volleyball.ua" />
-            <meta name="twitter:card" content="summary" />
-            <meta name="twitter:title" content="{{ title }}" />
-            <meta name="twitter:url" content="{{ full_url }}" />
-            <meta name="twitter:description" content="{{ meta_description }}" />
-            <meta name="twitter:image" content="{{ page_image }}" />
+            <meta name="twitter:site" content="{{ setting.siteName|default('Волейбол в Україні - volleyball.ua') }}"/>
+            <meta name="twitter:card" content="summary"/>
+            <meta name="twitter:title" content="{{ title }}"/>
+            <meta name="twitter:url" content="{{ full_url }}"/>
+            <meta name="twitter:description" content="{{ meta_description }}"/>
+            <meta name="twitter:image" content="{{ page_image }}"/>
         {% endblock %}
 
         {% block vk_meta %}
@@ -78,7 +83,7 @@
     {% block styles %}
         <link href='{{ asset('css/style.css') }}?v=2' rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
-        <link href='{{ asset('css/style_ie.css') }}' rel="stylesheet" type='text/css'>
+        <link href='{{ asset(' css/style_ie.css') }}' rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
@@ -91,10 +96,17 @@
     {% endblock %}
 
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', '{{ ga_id }}', 'auto');
         ga('send', 'pageview');
@@ -103,150 +115,177 @@
 
 <body>
 
-    {% include('::header.html.twig') %}
+{% include('::header.html.twig') %}
 
-    {#{% block carousel %}#}
-    {#{% endblock %}#}
+{#{% block carousel %}#}
+{#{% endblock %}#}
 
-    {% block content %}
-    {% endblock %}
-
-
+{% block content %}
+{% endblock %}
 
 
-    <footer class="footer">
-        <section class="bottom-links">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}">Волейбол України</a></h4></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська Суперліга</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська Вища Ліга</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок України</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}">Європейські Кубки</a></h4></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга Чемпіонів</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Кубок Виклику</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'international-competitions'}) }}">Міжнародні змагання</a></h4></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські Ігри</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'club-world-championship'}) }}">Клубний Чемпіонат Світу</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}">Національні Ліги</a></h4></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
-                            <li><a href="{{ path("volley_face_blog",{'category_slug': 'france'}) }}">Франція</a></li>
-                        </ul>
-                    </div>
+<footer class="footer">
+    <section class="bottom-links">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'ukraine'}) }}">Волейбол
+                                    України</a></h4></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-superleague'}) }}">Українська
+                                Суперліга</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-high-league'}) }}">Українська
+                                Вища Ліга</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'ukrainian-cup'}) }}">Кубок
+                                України</a></li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний волейбол</a></h4></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський волейбол</a></h4></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий волейбол</a></h4></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                        </ul>
-                    </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'european-cups'}) }}">Європейські
+                                    Кубки</a></h4></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'champions-league'}) }}">Ліга
+                                Чемпіонів</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'cev-cup'}) }}">Кубок ЄКВ</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'challenge-cup'}) }}">Кубок
+                                Виклику</a></li>
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="#">Україна. Суперліга. Чоловіки</a></h4></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 1, 'tournament_id': 1}) }}">Сезон 2015-2016</a></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 3, 'tournament_id': 1}) }}">Сезон 2016-2017</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="#">Україна. Суперліга. Жінки</a></h4></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 2, 'tournament_id': 2}) }}">Сезон 2015-2016</a></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 4, 'tournament_id': 2}) }}">Сезон 2016-2017</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="#">Україна. Вища ліга. Чоловіки</a></h4></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 5, 'tournament_id': 3}) }}">Сезон 2016-2017</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul>
-                            <li><h4><a href="#">Україна. Вища ліга. Жінки</a></h4></li>
-                            <li><a href="{{ path('stat_tournament_page', {'season_id': 6, 'tournament_id': 4}) }}">Сезон 2016-2017</a></li>
-                        </ul>
-                    </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4>
+                                <a href="{{ path("volley_face_blog",{'category_slug': 'international-competitions'}) }}">Міжнародні
+                                    змагання</a></h4></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'olympic-games'}) }}">Олімпійські
+                                Ігри</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a>
+                        </li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат
+                                Європи</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'club-world-championship'}) }}">Клубний
+                                Чемпіонат Світу</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'national-leagues'}) }}">Національні
+                                    Ліги</a></h4></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
+                        <li><a href="{{ path("volley_face_blog",{'category_slug': 'france'}) }}">Франція</a></li>
+                    </ul>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}">Пляжний
+                                    волейбол</a></h4></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}">Аматорський
+                                    волейбол</a></h4></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="{{ path("volley_face_blog",{'category_slug': 'childrens-volleyball'}) }}">Дитячий
+                                    волейбол</a></h4></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                    </ul>
+                </div>
             </div>
-        </section>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 copyright">
-                        <img src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png"> volleyball.ua &copy; 2015-2016 - Волейбол в Україні
-                    </div>
-                    <div class="col-lg-3 col-md-0">
-                    </div>
-                    <div class="col-lg-4 col-md-6 text-right">
-                        <div class="social-icons pull-right">
-                            <a href="https://www.facebook.com/volleyballua" target="_blank" class="social-icon icon-facebook" title="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-                            <a href="https://vk.com/volleyballua" target="_blank" class="social-icon icon-vk" title="VK">
-                                <i class="fa fa-vk"></i>
-                            </a>
-                            <a href="https://twitter.com/volleyballua" target="_blank" class="social-icon icon-twitter" title="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-                            <a href="https://instagram.com/volleyball.ua" target="_blank" class="social-icon icon-twitter" title="Instagram">
-                                <i class="fa fa-instagram"></i>
-                            </a>
-                            <a href="https://plus.google.com/+VolleyballUa" target="_blank" class="social-icon icon-google-plus" title="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                            <!--LiveInternet counter--><script type="text/javascript"><!--
-                                document.write("<a href='//www.liveinternet.ru/click' "+
-                                        "target=_blank><img src='//counter.yadro.ru/hit?t50.4;r"+
-                                        escape(document.referrer)+((typeof(screen)=="undefined")?"":
-                                        ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-                                                screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-                                        ";"+Math.random()+
-                                        "' alt='' title='LiveInternet' "+
-                                        "border='0' width='31' height='31'><\/a>")
-                                //--></script><!--/LiveInternet-->
-                        </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="#">Україна. Суперліга. Чоловіки</a></h4></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 1, 'tournament_id': 1}) }}">Сезон
+                                2015-2016</a></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 3, 'tournament_id': 1}) }}">Сезон
+                                2016-2017</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="#">Україна. Суперліга. Жінки</a></h4></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 2, 'tournament_id': 2}) }}">Сезон
+                                2015-2016</a></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 4, 'tournament_id': 2}) }}">Сезон
+                                2016-2017</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="#">Україна. Вища ліга. Чоловіки</a></h4></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 5, 'tournament_id': 3}) }}">Сезон
+                                2016-2017</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <ul>
+                        <li><h4><a href="#">Україна. Вища ліга. Жінки</a></h4></li>
+                        <li><a href="{{ path('stat_tournament_page', {'season_id': 6, 'tournament_id': 4}) }}">Сезон
+                                2016-2017</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 copyright">
+                    <img src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png">
+                    volleyball.ua &copy; 2015-2016 - Волейбол в Україні
+                </div>
+                <div class="col-lg-3 col-md-0">
+                </div>
+                <div class="col-lg-4 col-md-6 text-right">
+                    <div class="social-icons pull-right">
+                        <a href="https://www.facebook.com/volleyballua" target="_blank"
+                           class="social-icon icon-facebook" title="Facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a href="https://vk.com/volleyballua" target="_blank" class="social-icon icon-vk" title="VK">
+                            <i class="fa fa-vk"></i>
+                        </a>
+                        <a href="https://twitter.com/volleyballua" target="_blank" class="social-icon icon-twitter"
+                           title="Twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/volleyball.ua" target="_blank" class="social-icon icon-twitter"
+                           title="Instagram">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="https://plus.google.com/+VolleyballUa" target="_blank"
+                           class="social-icon icon-google-plus" title="Google Plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <!--LiveInternet counter-->
+                        <script type="text/javascript"><!--
+                            document.write("<a href='//www.liveinternet.ru/click' " +
+                                "target=_blank><img src='//counter.yadro.ru/hit?t50.4;r" +
+                                escape(document.referrer) + ((typeof(screen) == "undefined") ? "" :
+                                ";s" + screen.width + "*" + screen.height + "*" + (screen.colorDepth ?
+                                    screen.colorDepth : screen.pixelDepth)) + ";u" + escape(document.URL) +
+                                ";" + Math.random() +
+                                "' alt='' title='LiveInternet' " +
+                                "border='0' width='31' height='31'><\/a>")
+                            //--></script><!--/LiveInternet-->
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <!-- /.container -->
 
@@ -270,7 +309,7 @@
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/skrollr.min.js') }}"></script>#}
     {#<script  type="text/javascript" src="{{ asset('bundles/volleyface/js/boss/main.js') }}"></script>#}
 
-    <script  type="text/javascript" src="{{ asset('js/script_footer.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}"></script>
 {% endblock %}
 
 </body>

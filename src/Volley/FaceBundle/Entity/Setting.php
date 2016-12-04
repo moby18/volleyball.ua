@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Category
  *
  * @ORM\Table(name="setting")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Volley\FaceBundle\Entity\SettingRepository")
  */
 class Setting
 {
@@ -20,6 +20,13 @@ class Setting
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $site_name;
 
     /**
      * @var string
@@ -50,6 +57,22 @@ class Setting
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteName()
+    {
+        return $this->site_name;
+    }
+
+    /**
+     * @param string $site_name
+     */
+    public function setSiteName($site_name)
+    {
+        $this->site_name = $site_name;
     }
 
     /**

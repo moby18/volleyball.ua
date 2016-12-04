@@ -15,6 +15,7 @@ class SettingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('siteName')
             ->add('title')
             ->add('keywords',null, [
                 'required' => false
