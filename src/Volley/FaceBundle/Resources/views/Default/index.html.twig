@@ -1,5 +1,7 @@
 {% extends '::layout.html.twig' %}
 
+{% set page = news.currentPageNumber > 1 ? ' - Сторінка ' ~ news.currentPageNumber : '' %}
+
 {% block carousel %}
 
     <div class="section section-main">

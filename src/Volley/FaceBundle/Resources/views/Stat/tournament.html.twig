@@ -1,7 +1,8 @@
 {% extends '::layout.html.twig' %}
 
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ tournament.getWebPath %}#}
-{% set title = tournament.name ~ ' - ' ~ season.name %}
+{% set title = tournament.title ~ ' - ' ~ season.name %}
+{% set h1 = tournament.h1 %}
 {% set meta_keywords = tournament.keywords %}
 {% set meta_description = tournament.description %}
 
@@ -10,7 +11,8 @@
     <div class="section">
         <div class="container tournament">
             <div class="row">
-                <h1>{{ tournament.country.name }} - {{ tournament.name }} - {{ tournament.sex|trans }} - {{ season.name }}</h1>
+                {#<h1>{{ tournament.country.name }} - {{ tournament.name }} - {{ tournament.sex|trans }} - {{ season.name }}</h1>#}
+                <h1>{{ h1 }} - {{ season.name }}</h1>
             </div>
             {% for round in rounds %}
                 <div class="row">
