@@ -48,6 +48,20 @@ class Category
     /**
      * @var string
      *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="h1", type="string", length=255, nullable=true)
+     */
+    private $h1;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
      */
     private $keywords;
@@ -132,6 +146,38 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getH1()
+    {
+        return $this->h1;
+    }
+
+    /**
+     * @param string $h1
+     */
+    public function setH1($h1)
+    {
+        $this->h1 = $h1;
     }
 
     /**
