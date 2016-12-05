@@ -30,6 +30,8 @@ class TournamentType extends AbstractType
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => "Enabled", 'data-off' => "Disabled", 'data-onstyle' => 'info']
             ])
             ->add('country')
+            ->add('title')
+            ->add('h1')
             ->add('keywords')
             ->add('description');
     }
