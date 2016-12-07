@@ -199,9 +199,10 @@
     font-family: 'Open Sans',Verdana,sans-serif;
     font-weight: normal;
     color: #20a3cf;
-    margin: 15px 15px 0;
-    height: 55px;
-    line-height: 45px;
+    margin: 15px;
+    /*height: 55px;*/
+    line-height: 40px;
+    display: inline-block;
 }
 .category-title {
     margin-top: 20px;
@@ -640,10 +641,10 @@ body {
 
 @media (max-width: 767px) {
     body {
-        margin-bottom: 1024px;
+        margin-bottom: 1065px;
     }
     .footer {
-        height: 1024px;
+        height: 1065px;
     }
 }
 
