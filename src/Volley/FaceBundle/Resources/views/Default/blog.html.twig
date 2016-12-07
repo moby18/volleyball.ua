@@ -6,6 +6,13 @@
 {% set meta_keywords = category.keywords %}
 {% set meta_description = category.description %}
 
+{% if app.request.attributes.get('_route') == 'volley_face_search' %}
+    {% set h1 =  'search'|trans() ~ ': ' ~ app.request.query.get('s') %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = 'пошук, новини волейболу' %}
+    {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
 {% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}
 
 {% block content %}
@@ -24,7 +31,7 @@
                     </div>
 
                     {% if (posts|length > 0) %}
-                        <div class="row" style="margin-top: -15px">
+                        <div class="row">
                             {% for item in posts %}
                                 <div class="col-lg-6">
                                     {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
