@@ -161,7 +161,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="metadescr", type="string", length=255, nullable=true)
+     * @ORM\Column(name="metadescr", type="string", length=255, nullable=false)
      */
     private $metadescr;
 
