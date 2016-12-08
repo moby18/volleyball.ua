@@ -860,3 +860,27 @@ body {
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
 }
+
+/* Social Modal */
+.modal-dialog {
+    width: 680px;
+    margin: 75px auto;
+}
+.modal-header {
+    background-color: #fafafa;
+}
+.modal-header .close {
+    background-color: transparent;
+    color: #000000;
+}
+.modal-content {
+    border: 0;
+}
+.modal-body {
+    padding: 0 50px 50px;
+}
+
+.modal-title {
+    color: #428bca;
+    /*color: #363636;*/
+}

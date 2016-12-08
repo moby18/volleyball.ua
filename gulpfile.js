@@ -90,6 +90,7 @@ gulp.task('script_footer', function () {
         'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/owl.carousel.min.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/jquery.cookie/jquery.cookie.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
     ];
     gulp.src(source)
