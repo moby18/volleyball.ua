@@ -884,3 +884,10 @@ body {
     color: #428bca;
     /*color: #363636;*/
 }
+@media (max-width: 767px) {
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10px;
+    }
+}
