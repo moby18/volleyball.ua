@@ -60,7 +60,12 @@
             {#{% include 'VolleyFaceBundle:Default/includes:carousel.html.twig' %}#}
 
             <div class="row">
-                <div class="col col-lg-8 col-md-8 col-sm-8">
+                <div class="col col-lg-8 col-md-8 col-sm-6 col-xs-12">
+
+                    {# Matc-center for mobile devices #}
+                    <div class="row visible-xs">
+                        {{ render(controller('VolleyStatBundle:Game:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
+                    </div>
 
                     <div class="row">
                         <div class="col text-center">
@@ -71,7 +76,7 @@
                     <div class="row" style="margin-top: -15px">
 
                         {% for item in news %}
-                            <div class="col-lg-6">
+                            <div class="col col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
                             </div>
                             {% if loop.index is even %}
@@ -81,7 +86,7 @@
 
                     </div>
                     <div class="row">
-                        <div class="col col-lg-12">
+                        <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="pagination-container text-center">
                                 {{ knp_pagination_render(news) }}
                             </div>
@@ -104,8 +109,9 @@
                 </div>
 
 
+                <div class="col col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
                 {% if true %}
-                    <div class="col col-lg-4 col-md-12 col-sm-12">
                         {#<div class="row">#}
                         {#<div class="col-lg-12">#}
                         {#<div class="section-title">#}
@@ -113,14 +119,13 @@
                         {#</div>#}
                         {#</div>#}
                         {#</div>#}
-                        <div class="row">
+                        {# Matc-center for desctop and iPad #}
+                        <div class="row visible-lg visible-md visible-sm">
                             {{ render(controller('VolleyStatBundle:Game:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
                         </div>
-                    </div>
                 {% endif %}
 
                 {% if true %}
-                    <div class="col col-lg-4 col-md-12 col-sm-12">
                         {#<div class="row">#}
                         {#<div class="col-lg-12">#}
                         {#<div class="section-title">#}
@@ -131,11 +136,9 @@
                         {#<div class="row">#}
                             {#{{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}#}
                         {#</div>#}
-                    </div>
                 {% endif %}
 
                 {% if true %}
-                    <div class="col col-lg-4 col-md-12 col-sm-12">
                         {#<div class="row">#}
                         {#<div class="col-lg-12">#}
                         {#<div class="section-title">#}
@@ -146,11 +149,9 @@
                         {#<div class="row">#}
                             {#{{ render(controller('VolleyStatBundle:Tournament:table',{'seasonId':2, 'tournamentId': 2, 'roundId': 2})) }}#}
                         {#</div>#}
-                    </div>
                 {% endif %}
 
                 {% if recommendedPosts|length %}
-                    <div class="col col-lg-4 col-md-12 col-sm-12">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section-title">
@@ -166,11 +167,9 @@
                                 <div style="clear: both"></div>
                             {% endfor %}
                         </div>
-                    </div>
                 {% endif %}
 
                 {% if popularPosts|length %}
-                    <div class="col col-lg-4 col-md-12 col-sm-12">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="section-title">
@@ -186,8 +185,9 @@
                                 <div style="clear: both"></div>
                             {% endfor %}
                         </div>
-                    </div>
                 {% endif %}
+
+                </div>
 
                 {#<div class="col-lg-6">#}
                 {#<div class="row">#}

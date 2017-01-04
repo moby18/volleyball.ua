@@ -626,14 +626,14 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 414px;
+    margin-bottom: 430px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 414px;
+    height: 430px;
     background-color: #000000;
     background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
     background-repeat: repeat;
@@ -645,6 +645,14 @@ body {
     }
     .footer {
         height: 1065px;
+    }
+}
+@media (width: 768px) {
+    body {
+        margin-bottom: 600px;
+    }
+    .footer {
+        height: 600px;
     }
 }
 
@@ -668,6 +676,7 @@ body {
 .pagination-container {
     padding-top:30px;
     padding-bottom:30px;
+    border-top: 0;
 }
 
 

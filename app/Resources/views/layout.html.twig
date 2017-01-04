@@ -83,14 +83,14 @@
 
     <!-- Bootstrap Core CSS -->
     {% block styles %}
-        <link href='{{ asset('css/style.css') }}?v=5' rel="stylesheet" type='text/css'>
+        <link href="{{ asset('css/style.css') }}?v=7" rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
-        <link href='{{ asset(' css/style_ie.css') }}' rel="stylesheet" type='text/css'>
+        <link href="{{ asset(' css/style_ie.css') }}" rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
     {% block head_scripts %}
-        <script src="{{ asset('js/script_header.js') }}?v=5" type="text/javascript"></script>
+        <script src="{{ asset('js/script_header.js') }}?v=7" type="text/javascript"></script>
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="{{ asset('js/script_ie.js') }}" type="text/javascript"></script>
@@ -244,13 +244,13 @@
     <div class="footer-below">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6 copyright">
+                <div class="col-lg-5 col-md-6 col-sm-7 col-xs-12 copyright">
                     <img src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png">
                     volleyball.ua &copy; 2015-2016 - Волейбол в Україні
                 </div>
-                <div class="col-lg-3 col-md-0">
+                <div class="col-lg-3 col-md-0 col-sm-0 col-xs-0">
                 </div>
-                <div class="col-lg-4 col-md-6 text-right">
+                <div class="col-lg-4 col-md-6 col-sm-5 col-xs-12 text-right">
                     <div class="social-icons pull-right">
                         <a href="https://www.facebook.com/volleyballua" target="_blank"
                            class="social-icon icon-facebook" title="Facebook">
@@ -292,9 +292,9 @@
 <!-- /.container -->
 
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=5"></script>
+    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=7"></script>
 
-    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=5" ></script>
+    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=7" ></script>
 {% endblock %}
 
 <!-- Modal social -->
