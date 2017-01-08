@@ -14,9 +14,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="stat_person")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\PersonRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Person
+class Person implements \JsonSerializable
 {
     const POSITIONS = [
         'setter' => 'Setter',
@@ -762,5 +763,13 @@ class Person
     public function __toString()
     {
         return $this->lastName. ' ' . $this->middleName .' '. $this->firstName;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'text' => $this->__toString()
+        ];
     }
 }

@@ -41,16 +41,14 @@ class TeamSeasonController extends Controller
      * Creates a new TeamSeason entity.
      *
      * @param Request $request
-     * @param Team $team
      *
-     * @Route("/team/{team_id}", name="stat_team_season_create")
-     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
+     * @Route("/", name="stat_team_season_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:TeamSeason:new.html.twig")
      *
      * @return array
      */
-    public function createAction(Request $request, Team $team)
+    public function createAction(Request $request)
     {
         $entity = new TeamSeason();
         $form = $this->createCreateForm($entity);
@@ -92,13 +90,19 @@ class TeamSeasonController extends Controller
     /**
      * Displays a form to create a new TeamSeason entity.
      *
-     * @Route("/new", name="stat_team_season_new")
+     * @param Team $team
+     * @return array
+     *
+     * @Route("/new/team/{team_id}", name="stat_team_season_new")
+     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction(Team $team)
     {
         $entity = new TeamSeason();
+        if ($team)
+            $entity->setTeam($team);
         $form   = $this->createCreateForm($entity);
 
         return array(

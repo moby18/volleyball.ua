@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

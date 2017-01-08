@@ -93,9 +93,9 @@ class TeamSeason
      * Add team_season_persons
      *
      * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
-     * @return Team
+     * @return TeamSeason
      */
-    public function addTeamSeasonPersons(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
+    public function addTeamSeasonPerson(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
     {
         $team_season_persons->setTeamSeason($this); // synchronously updating inverse side
         $this->team_season_persons[] = $team_season_persons;
@@ -108,7 +108,7 @@ class TeamSeason
      *
      * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
      */
-    public function removeTeamSeasonPersons(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
+    public function removeTeamSeasonPerson(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
     {
         $this->team_season_persons->removeElement($team_season_persons);
     }

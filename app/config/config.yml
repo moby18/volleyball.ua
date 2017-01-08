@@ -38,6 +38,8 @@ twig:
         default_category_color: "#888888"
         fb_app_id: %fb_app_id%
         ga_id: %ga_id%
+    form_themes:
+        - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
 
 
 # Doctrine Configuration

@@ -5,6 +5,7 @@ namespace Volley\StatBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class TeamSeasonPersonType extends AbstractType
 {
@@ -15,7 +16,21 @@ class TeamSeasonPersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('person');
+            ->add('person',  Select2EntityType::class, [
+                'label' => false,
+                'multiple' => false,
+                'remote_route' => 'stat_person_json',
+                'class' => 'Volley\StatBundle\Entity\Person',
+                'primary_key' => 'id',
+                'minimum_input_length' => 2,
+                'page_limit' => 10,
+                'allow_clear' => true,
+                'delay' => 250,
+                'cache' => true,
+                'cache_timeout' => 60000, // if 'cache' is true
+                'language' => 'ru',
+                'placeholder' => 'Введіть імя',
+            ]);
     }
 
     /**

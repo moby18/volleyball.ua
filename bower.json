@@ -26,6 +26,7 @@
     "select2": "~4.0.1",
     "mjolnic-bootstrap-colorpicker": "bootstrap-colorpicker#^2.3.3",
     "owl.carousel": "owl-carousel2#^2.1.6",
-    "jquery.cookie": "https://github.com/carhartl/jquery-cookie.git#^1.4.1"
+    "jquery.cookie": "https://github.com/carhartl/jquery-cookie.git#^1.4.1",
+    "select2-bootstrap-theme": "^0.1.0-beta.9"
   }
 }

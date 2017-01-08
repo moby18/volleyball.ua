@@ -17,7 +17,7 @@
     <title>{{ title|default('Manage') }}</title>
 
     {% block styles %}
-        <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}" type="text/css"/>
+        <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}?v=1" type="text/css"/>
     {% endblock %}
 
     {{ tinymce_init() }}

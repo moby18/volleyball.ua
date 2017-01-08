@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -97,6 +98,21 @@ class PersonController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
+    }
+
+    /**
+     * Get Persons json
+     *
+     * @Route("/json", name="stat_person_json")
+     * @Method("GET")
+     *
+     * @return JsonResponse
+     */
+    public function getPersonsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $persons = $em->getRepository('VolleyStatBundle:Person')->findAll();
+        return JsonResponse::create($persons);
     }
 
     /**

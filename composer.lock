@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc881321d42cb4bbaacb86b908df5b1e",
-    "content-hash": "0d12c64720ebb7d43b9339347bfa9fd0",
+    "hash": "1011d7ae3598fe2c77027df4d6854c40",
+    "content-hash": "f22aa8c563f5ee9466452af7e439fd68",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -570,7 +570,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/c0a2f5d069e56e2ac7a42719dfda63fd996a39ed",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/86d2b1c9c195c12175551d02a475067977c0afcf",
                 "reference": "86d2b1c9c195c12175551d02a475067977c0afcf",
                 "shasum": ""
             },
@@ -803,7 +803,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/5f9429e5e6dd31d0f36c8951daa184112a39e195",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/228133dca6229dfc38d316153c40b42aa2ba8b1f",
                 "reference": "228133dca6229dfc38d316153c40b42aa2ba8b1f",
                 "shasum": ""
             },
@@ -3158,6 +3158,54 @@
                 "framework"
             ],
             "time": "2016-03-27 12:57:53"
+        },
+        {
+            "name": "tetranz/select2entity-bundle",
+            "version": "v2.8.1",
+            "target-dir": "Tetranz/Select2EntityBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tetranz/select2entity-bundle.git",
+                "reference": "d53cb14f9dd17ff7d170282a0edea24e0c56a57c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tetranz/select2entity-bundle/zipball/d53cb14f9dd17ff7d170282a0edea24e0c56a57c",
+                "reference": "d53cb14f9dd17ff7d170282a0edea24e0c56a57c",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": ">=2.4",
+                "php": ">=5.4.0",
+                "symfony/symfony": ">=2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": []
+            },
+            "autoload": {
+                "psr-0": {
+                    "Tetranz\\Select2EntityBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ross Keatinge",
+                    "email": "tetranz@gmail.com"
+                }
+            ],
+            "description": "A Symfony2 bundle that integrates Select2 as a drop-in replacement for a standard entity field on a Symfony form.",
+            "keywords": [
+                "autocomplete",
+                "select2",
+                "symfony",
+                "typeahead"
+            ],
+            "time": "2016-12-24 19:34:44"
         },
         {
             "name": "twig/extensions",
