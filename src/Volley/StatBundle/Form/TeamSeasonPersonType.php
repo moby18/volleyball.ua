@@ -29,7 +29,8 @@ class TeamSeasonPersonType extends AbstractType
                 'cache' => true,
                 'cache_timeout' => 60000, // if 'cache' is true
                 'language' => 'ru',
-                'placeholder' => 'Введіть імя',
+                'placeholder' => "Введіть ім'я гравця, тренера або працівника команди",
+                'attr' => ['width'=>'100%']
             ]);
     }
 

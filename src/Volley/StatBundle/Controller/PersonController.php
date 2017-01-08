@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -103,15 +104,18 @@ class PersonController extends Controller
     /**
      * Get Persons json
      *
+     * @param Request $request
+     *
      * @Route("/json", name="stat_person_json")
      * @Method("GET")
      *
      * @return JsonResponse
      */
-    public function getPersonsAction()
+    public function getPersonsByNameAction(Request $request)
     {
+        $q = $request->query->get('q',' ');
         $em = $this->getDoctrine()->getManager();
-        $persons = $em->getRepository('VolleyStatBundle:Person')->findAll();
+        $persons = $em->getRepository('VolleyStatBundle:Person')->findByName($q);
         return JsonResponse::create($persons);
     }
 
