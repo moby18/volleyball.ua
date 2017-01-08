@@ -2,6 +2,8 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\Paginator;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,6 +24,29 @@ use Volley\StatBundle\Form\GameFilterType;
  */
 class GameController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return PaginationInterface
+     */
+    private function getPagination(Request $request, $gameFilter) {
+        $em = $this->getDoctrine()->getManager();
+
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('game_page', 1));
+        $session->set('game_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
+
+        return $pagination;
+    }
 
     /**
      * Lists all Game entities.
@@ -31,17 +56,15 @@ class GameController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
         $filterForm = $this->createFilterForm($gameFilter);
 
-        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+        $pagination = self::getPagination($request, $gameFilter);
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
             'filter' => $filterForm->createView()
         );
     }
@@ -57,8 +80,6 @@ class GameController extends Controller
      */
     public function filterAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
         if (array_key_exists('clear', $request->request->get('filter'))) {
             $gameFilter = new GameFilter();
             $filterForm = $this->createFilterForm($gameFilter);
@@ -71,10 +92,10 @@ class GameController extends Controller
         $session = $this->get('session');
         $session->set('gameFilter', $gameFilter);
 
-        $entities = $em->getRepository('VolleyStatBundle:Game')->findByFilter($gameFilter);
+        $pagination = self::getPagination($request, $gameFilter);
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
             'filter' => $filterForm->createView()
         );
     }

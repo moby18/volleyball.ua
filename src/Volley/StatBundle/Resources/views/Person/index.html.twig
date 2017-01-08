@@ -53,6 +53,15 @@
                 </tr>
             {% endfor %}
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="100">
+                    <div class="navigation">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
         </table>
     </div>
 

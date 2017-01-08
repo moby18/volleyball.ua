@@ -46,7 +46,7 @@ class GameRepository extends EntityRepository
             $query->andWhere('tour.id = ?6')
                 ->setParameter(6, $filter->getTour());
         }
-        return $query->getQuery()->getResult();
+        return $query->getQuery();
 
     }
 

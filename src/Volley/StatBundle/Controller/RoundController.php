@@ -25,14 +25,25 @@ class RoundController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Round')->findAll();
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('round_page', 1));
+        $session->set('round_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Round')->createQueryBuilder('r')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
         );
     }
     /**
