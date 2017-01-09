@@ -22,16 +22,16 @@
                         <th class="text-center">Місце</th>
                         <th>Команда</th>
                         <th class="text-center">Матчі</th>
-                        <th class="text-center">Перемоги</th>
-                        <th class="text-center">Поразки</th>
-                        <th><span class="text-nowrap">3-0</span></th>
-                        <th><span class="text-nowrap">3-1</span></th>
-                        <th><span class="text-nowrap">3-2</span></th>
-                        <th><span class="text-nowrap">2-3</span></th>
-                        <th><span class="text-nowrap">1-3</span></th>
-                        <th><span class="text-nowrap">0-3</span></th>
-                        <th class="text-center">Партії</th>
-                        <th class="text-center">М'ячі</th>
+                        <th class="text-center hidden-xs">Перемоги</th>
+                        <th class="text-center hidden-xs">Поразки</th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-0</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-1</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-2</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">2-3</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">1-3</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">0-3</span></th>
+                        <th class="text-center hidden-xs">Партії</th>
+                        <th class="text-center hidden-xs">М'ячі</th>
                         <th class="text-center">Очки</th>
                         </thead>
                         {% for row in round.table %}
@@ -40,16 +40,16 @@
                                 {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
                                 <td><span class="text-nowrap">{{ '"' ~ row['team'].name ~ '" ' ~ row['team'].city}}</span></td>
                                 <td class="text-center">{{ row.games }}</td>
-                                <td class="text-center">{{ row.win }}</td>
-                                <td class="text-center">{{ row.loss }}</td>
-                                <td class="text-center">{{ row.score30 }}</td>
-                                <td class="text-center">{{ row.score31 }}</td>
-                                <td class="text-center">{{ row.score32 }}</td>
-                                <td class="text-center">{{ row.score23 }}</td>
-                                <td class="text-center">{{ row.score13 }}</td>
-                                <td class="text-center">{{ row.score03 }}</td>
-                                <td class="text-center">{{ row.win_sets }}/{{ row.loss_sets }}</td>
-                                <td class="text-center">{{ row.win_points }}/{{ row.loss_points }}</td>
+                                <td class="text-center hidden-xs">{{ row.win }}</td>
+                                <td class="text-center hidden-xs">{{ row.loss }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score30 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score31 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score32 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score23 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score13 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score03 }}</td>
+                                <td class="text-center hidden-xs">{{ row.win_sets }}/{{ row.loss_sets }}</td>
+                                <td class="text-center hidden-xs">{{ row.win_points }}/{{ row.loss_points }}</td>
                                 <td class="text-center">{{ row.points }}</td>
                             </tr>
                         {% endfor %}
@@ -66,17 +66,17 @@
                             </tr>
                             {#{% if loop.first %}#}
                             <tr>
-                                <th>#</th>
+                                <th class="hidden-xs">#</th>
                                 <th>Дата</th>
                                 <th>Час</th>
                                 <th>Команда А</th>
                                 <th>Команда Б</th>
                                 <th>Результат</th>
-                                <th>1 сет</th>
-                                <th>2 сет</th>
-                                <th>3 сет</th>
-                                <th>4 сет</th>
-                                <th>5 сет</th>
+                                <th class="hidden-xs">1 сет</th>
+                                <th class="hidden-xs">2 сет</th>
+                                <th class="hidden-xs">3 сет</th>
+                                <th class="hidden-xs">4 сет</th>
+                                <th class="hidden-xs">5 сет</th>
                             </tr>
                             {#{% endif %}#}
 
@@ -87,7 +87,7 @@
                                 {% set winnerTeamA = (game.scoreSetHome > game.scoreSetAway) %}
                                 {% set winnerTeamB = (game.scoreSetHome < game.scoreSetAway) %}
                                 <tr>
-                                    <td>{{ game.number }}</td>
+                                    <td class="hidden-xs">{{ game.number }}</td>
                                     <td>{% if game.date is not null %} {{ game.date|date("d/m/y") }} {% endif %}</td>
                                     <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                                     <td>{{ winnerTeamA ? "<strong>" : "" }}
@@ -100,12 +100,12 @@
                                     </td>
                                     <td>{{ game.scoreSetHome }} - {{ game.scoreSetAway }}</td>
                                     {% for set in game.sets %}
-                                        <td>{{ set.scoreSetHome }} - {{ set.scoreSetAway }}</td>
+                                        <td class="hidden-xs">{{ set.scoreSetHome }} - {{ set.scoreSetAway }}</td>
                                     {% endfor %}
                                     {% set count = (5 - game.sets|length) %}
                                     {% if count != 0 %}
                                         {% for set in 1..count %}
-                                            <td></td>
+                                            <td class="hidden-xs"></td>
                                         {% endfor %}
                                     {% endif %}
                                 </tr>
