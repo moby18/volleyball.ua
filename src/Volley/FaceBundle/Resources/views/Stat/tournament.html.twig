@@ -11,8 +11,10 @@
     <div class="section">
         <div class="container tournament">
             <div class="row">
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 {#<h1>{{ tournament.country.name }} - {{ tournament.name }} - {{ tournament.sex|trans }} - {{ season.name }}</h1>#}
                 <h1>{{ h1 }} - {{ season.name }}</h1>
+                </div>
             </div>
             {% for round in rounds %}
                 {% if season.tournamentTable %}
