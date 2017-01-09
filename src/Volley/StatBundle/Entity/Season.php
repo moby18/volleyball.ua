@@ -51,6 +51,13 @@ class Season
     private $status;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="tournamentTable", type="boolean", nullable=true)
+     */
+    private $tournamentTable;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Tournament", inversedBy="seasons")
      * @ORM\JoinColumn(name="tournamentId", referencedColumnName="id")
      */
@@ -88,6 +95,7 @@ class Season
         $this->tours = new ArrayCollection();
         $this->games = new ArrayCollection();
         $this->teams = new ArrayCollection();
+        $this->tournamentTable = true;
     }
 
     /**
@@ -190,6 +198,22 @@ class Season
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTournamentTable()
+    {
+        return $this->tournamentTable;
+    }
+
+    /**
+     * @param mixed $tournamentTable
+     */
+    public function setTournamentTable($tournamentTable)
+    {
+        $this->tournamentTable = $tournamentTable;
     }
 
     /**

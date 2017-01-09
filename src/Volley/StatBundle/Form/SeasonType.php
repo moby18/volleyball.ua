@@ -22,6 +22,10 @@ class SeasonType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => "Enabled", 'data-off' => "Disabled", 'data-onstyle' => 'info']
             ])
+            ->add('tournamentTable', null, [
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => "Show Tables", 'data-off' => "Hide Tables", 'data-onstyle' => 'info']
+            ])
             ->add('tournament')
             ->add('teams');
     }
