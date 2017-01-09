@@ -64,7 +64,7 @@
 
                     {# Matc-center for mobile devices #}
                     <div class="row visible-xs">
-                        {{ render(controller('VolleyStatBundle:Game:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
+                        {{ render(controller('VolleyStatBundle:Game:table')) }}
                     </div>
 
                     <div class="row">
@@ -121,7 +121,7 @@
                         {#</div>#}
                         {# Matc-center for desctop and iPad #}
                         <div class="row visible-lg visible-md visible-sm">
-                            {{ render(controller('VolleyStatBundle:Game:table',{'seasonId':1, 'tournamentId': 1, 'roundId': 1})) }}
+                            {{ render(controller('VolleyStatBundle:Game:table')) }}
                         </div>
                 {% endif %}
 
