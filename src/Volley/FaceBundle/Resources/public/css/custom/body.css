@@ -868,6 +868,13 @@ body {
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
 }
+.game-center .game-center-data span.game-live {
+    background-color: #db4437;
+    color: #ffffff;
+    padding: 3px 5px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
 
 /* Social Modal */
 .modal-dialog {
