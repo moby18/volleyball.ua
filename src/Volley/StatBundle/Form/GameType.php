@@ -78,6 +78,7 @@ class GameType extends AbstractType
                 'format' => 'YYYY-MM-dd HH:mm:ss',
                 'required' => true])
             ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('links', 'collection', array('type' => new GameLinkType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
     

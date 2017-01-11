@@ -123,11 +123,17 @@ class Game
     protected $sets;
 
     /**
+     * @ORM\OneToMany(targetEntity="GameLink", mappedBy="game", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $links;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->links = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -473,6 +479,40 @@ class Game
     public function getSets()
     {
         return $this->sets;
+    }
+
+    /**
+     * Add links
+     *
+     * @param \Volley\StatBundle\Entity\GameLink $links
+     * @return Game
+     */
+    public function addLink(\Volley\StatBundle\Entity\GameLink $links)
+    {
+        $this->links[] = $links;
+        $links->setGame($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove links
+     *
+     * @param \Volley\StatBundle\Entity\GameLink $links
+     */
+    public function removeLink(\Volley\StatBundle\Entity\GameLink $links)
+    {
+        $this->links->removeElement($links);
+    }
+
+    /**
+     * Get links
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLinks()
+    {
+        return $this->links;
     }
 
     /**

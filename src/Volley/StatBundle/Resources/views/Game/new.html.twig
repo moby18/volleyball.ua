@@ -1,14 +1,50 @@
 {% extends '::admin.html.twig' %}
 
+{% block body -%}
+    <h1>Game creation</h1>
+
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        <label>Sets</label>
+        <ul class="tags list-group list-inline" data-prototype="{{ form_widget(form.sets.vars.prototype)|e }}">
+            {% for set in form.sets %}
+                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome, {'label': false}) }} - {{ form_row(set.scoreSetAway, {'label': false}) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="form-group">
+        <label>Links</label>
+        <ul class="links list-group list-inline" data-prototype="{{ form_widget(form.links.vars.prototype)|e }}">
+            {% for link in form.links %}
+                <li class="list-group-item list-unstyled">{{ form_row(link.title, {'label': true}) }} - {{ form_row(link.url, {'label': true}) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {{ form_end(form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_game') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
+{% endblock %}
+
 {% block scripts %}
     {{ parent() }}
     <script type="text/javascript">
-        var $collectionHolder;
+        var $collectionHolderSet;
 
         // setup an "add a tag" set
-        var $addTagAnswer = $('<a href="#" class="btn btn-primary add_tag_set">Add a set</a>');
-        var $newAnswerLi = $('<li class="list-group-item list-unstyled"></li>').append($addTagAnswer);
-        function addTagForm($collectionHolder, $newAnswerLi) {
+        var $addTagAnswerSet = $('<a href="#" class="btn btn-primary add_tag_set">Add a set</a>');
+        var $newAnswerLiSet = $('<li class="list-group-item list-unstyled"></li>').append($addTagAnswerSet);
+        function addTagFormSet($collectionHolder, $newAnswerLi) {
             // Get the data-prototype explained earlier
             var prototype = $collectionHolder.data('prototype');
 
@@ -25,9 +61,9 @@
             // Display the form in the page in an li, before the "Add a tag" set li
             var $newFormLi = $('<li class="list-group-item"></li>').append(newForm);
             $newAnswerLi.before($newFormLi);
-            addTagFormDeleteAnswer($newFormLi);
+            addTagFormDeleteAnswerSet($newFormLi);
         }
-        function addTagFormDeleteAnswer($tagFormLi) {
+        function addTagFormDeleteAnswerSet($tagFormLi) {
             var $removeFormA = $('<a class="btn btn-danger" href="#"><i class="fa fa-times"></i> delete this set</a>');
             $tagFormLi.append($removeFormA);
 
@@ -41,23 +77,83 @@
         }
         jQuery(document).ready(function () {
             // Get the ul that holds the collection of tags
-            $collectionHolder = $('ul.tags');
-            $collectionHolder.find('li').each(function () {
-                addTagFormDeleteAnswer($(this));
+            $collectionHolderSet = $('ul.tags');
+            $collectionHolderSet.find('li').each(function () {
+                addTagFormDeleteAnswerSet($(this));
             });
             // add the "add a tag" anchor and li to the tags ul
-            $collectionHolder.append($newAnswerLi);
+            $collectionHolderSet.append($newAnswerLiSet);
 
             // count the current form inputs we have (e.g. 2), use that as the new
             // index when inserting a new item (e.g. 2)
-            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $collectionHolderSet.data('index', $collectionHolderSet.find(':input').length);
 
-            $addTagAnswer.on('click', function (e) {
+            $addTagAnswerSet.on('click', function (e) {
                 // prevent the set from creating a "#" on the URL
                 e.preventDefault();
 
                 // add a new tag form (see next code block)
-                addTagForm($collectionHolder, $newAnswerLi);
+                addTagFormSet($collectionHolderSet, $newAnswerLiSet);
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        var $collectionHolderLink;
+
+        // setup an "add a tag" link
+        var $addTagAnswerLink = $('<a href="#" class="btn btn-primary add_tag_link">Add a link</a>');
+        var $newAnswerLiLink = $('<li class="list-group-item list-unstyled"></li>').append($addTagAnswerLink);
+        function addTagFormLink($collectionHolder, $newAnswerLi) {
+            // Get the data-prototype explained earlier
+            var prototype = $collectionHolder.data('prototype');
+
+            // get the new index
+            var index = $collectionHolder.data('index');
+
+            // Replace '__name__' in the prototype's HTML to
+            // instead be a number based on how many items we have
+            var newForm = prototype.replace(/__name__/g, index);
+
+            // increase the index with one for the next item
+            $collectionHolder.data('index', index + 1);
+
+            // Display the form in the page in an li, before the "Add a tag" link li
+            var $newFormLi = $('<li class="list-group-item"></li>').append(newForm);
+            $newAnswerLi.before($newFormLi);
+            addTagFormDeleteAnswerLink($newFormLi);
+        }
+        function addTagFormDeleteAnswerLink($tagFormLi) {
+            var $removeFormA = $('<a class="btn btn-danger" href="#"><i class="fa fa-times"></i> delete this link</a>');
+            $tagFormLi.append($removeFormA);
+
+            $removeFormA.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the li for the tag form
+                $tagFormLi.remove();
+            });
+        }
+        jQuery(document).ready(function () {
+            // Get the ul that holds the collection of links
+            $collectionHolderLink = $('ul.links');
+            $collectionHolderLink.find('li').each(function () {
+                addTagFormDeleteAnswerLink($(this));
+            });
+            // add the "add a tag" anchor and li to the links ul
+            $collectionHolderLink.append($newAnswerLiLink);
+
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $collectionHolderLink.data('index', $collectionHolderLink.find(':input').length);
+
+            $addTagAnswerLink.on('click', function (e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // add a new tag form (see next code block)
+                addTagFormLink($collectionHolderLink, $newAnswerLiLink);
             });
         });
     </script>
@@ -65,31 +161,4 @@
     <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/game.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/post.js') }}"></script>
-{% endblock %}
-
-{% block body -%}
-    <h1>Game creation</h1>
-
-    {{ form_start(form) }}
-
-    <div class="form-group">
-        <label>Sets</label>
-        <ul class="tags list-group list-inline" data-prototype="{{ form_widget(form.sets.vars.prototype)|e }}">
-            {% for set in form.sets %}
-                <li class="list-group-item list-unstyled">{{ form_row(set.scoreSetHome, {'label': false}) }} - {{ form_row(set.scoreSetAway, {'label': false}) }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    {{ form_end(form) }}
-
-    <div class="btn-group" role="group" aria-label="">
-        <a href="{{ path('stat_game') }}" type="button"
-           class="btn btn-default">Back to the list</a>
-    </div>
-{% endblock %}
-
-{% block styles %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
 {% endblock %}
