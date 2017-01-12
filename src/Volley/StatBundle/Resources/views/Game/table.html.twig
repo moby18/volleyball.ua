@@ -43,8 +43,8 @@
                                 {{ winnerTeamB ? "</strong>" : "" }}
                             </td>
                             <td class="text-right">
-                                {% if date(game.date) <= date('','Europe/Kiev') and game.date|date_modify("+2 hour") >= date('','Europe/Kiev') and not game.played %}
-                                     <span class="game-live">{{ game.date|date_modify("+2 hour") }}</span>
+                                {% if date(game.date) <= date('','Europe/Kiev') and date('','Europe/Kiev') <= game.date|date_modify("+2 hour") and not game.played %}
+                                     <span class="game-live">live</span>
                                 {% endif %}
                             </td>
                         </tr>
