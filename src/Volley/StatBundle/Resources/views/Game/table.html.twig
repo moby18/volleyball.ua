@@ -44,7 +44,7 @@
                             </td>
                             <td class="text-right">
                                 {% if date(game.date) >= date('','Europe/Kiev') and date(game.date) <= date('+2hours','Europe/Kiev') and not game.played %}
-                                     <span class="game-live">{{ date('+2hours','Europe/Kiev')|date("H:i") }}</span>
+                                     <span class="game-live">{{ date('','Europe/Kiev')|date("H:i") }}</span>
                                     {#<div>#}
                                         {#<span>{{ date(game.date) }}</span>#}
                                         {#<span>{{ date('','Europe/Kiev') }}</span>#}
