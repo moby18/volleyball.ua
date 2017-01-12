@@ -44,7 +44,7 @@
                             </td>
                             <td class="text-right">
                                 {% if date(game.date) <= date('','Europe/Kiev') and date('','Europe/Kiev') <= game.date|date_modify("+2 hour") and not game.played %}
-                                    {% if game.links|length %} <a target="_blank" href="{{ game.links[0].url }}"> {% endif %}
+                                    {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
                                          <span class="game-live">live</span>
                                     {% if game.links|length %} </a> {% endif %}</a>
                                 {% endif %}
