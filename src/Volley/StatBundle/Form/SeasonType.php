@@ -3,8 +3,10 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Volley\StatBundle\Entity\Season;
 
 class SeasonType extends AbstractType
 {
@@ -21,6 +23,12 @@ class SeasonType extends AbstractType
             ->add('status', null, [
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => "Enabled", 'data-off' => "Disabled", 'data-onstyle' => 'info']
+            ])
+            ->add('standingSystem',ChoiceType::class, [
+                'choices'  => array(
+                    Season::STANDING_SYSTEM_POINTS => 'Points',
+                    Season::STANDING_SYSTEM_WINS => 'Wins'
+                ),
             ])
             ->add('tournamentTable', null, [
                 'label' => false,

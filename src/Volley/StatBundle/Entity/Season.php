@@ -13,6 +13,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Season
 {
+    const STANDING_SYSTEM_POINTS = 'points';
+    const STANDING_SYSTEM_WINS = 'wins';
+
     /**
      * @var integer
      *
@@ -49,6 +52,13 @@ class Season
      * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="standingSystem", type="string", length=255)
+     */
+    private $standingSystem;
 
     /**
      * @var boolean
@@ -96,6 +106,7 @@ class Season
         $this->games = new ArrayCollection();
         $this->teams = new ArrayCollection();
         $this->tournamentTable = true;
+        $this->standingSystem = self::STANDING_SYSTEM_POINTS;
     }
 
     /**
@@ -198,6 +209,22 @@ class Season
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStandingSystem()
+    {
+        return $this->standingSystem;
+    }
+
+    /**
+     * @param string $standingSystem
+     */
+    public function setStandingSystem($standingSystem)
+    {
+        $this->standingSystem = $standingSystem;
     }
 
     /**

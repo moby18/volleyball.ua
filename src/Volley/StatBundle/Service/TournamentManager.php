@@ -132,7 +132,13 @@ class TournamentManager
             }
 
             foreach ($table as &$row) {
-                $row['k'] = $row['points'] * 1000000 + ($row['loss_sets'] ? $row['win_sets'] / $row['loss_sets'] : $row['win_sets']) * 1000 + ($row['loss_points'] ? $row['win_points'] / $row['loss_points'] : $row['win_points']);
+                $standingSystem = $season->getStandingSystem();
+                if ($standingSystem == Season::STANDING_SYSTEM_WINS) {
+                    $row['k'] = $row['win'] * 1000000000 + $row['points'] * 1000000;
+                } else {
+                    $row['k'] = $row['points'] * 1000000000 + $row['win'] * 1000000;
+                }
+                $row['k'] +=  ($row['loss_sets'] ? $row['win_sets'] / $row['loss_sets'] : $row['win_sets']) * 1000 + ($row['loss_points'] ? $row['win_points'] / $row['loss_points'] : $row['win_points']);
             }
 
             usort($table, function ($a, $b) {
