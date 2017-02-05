@@ -32,6 +32,13 @@ class Roster
     private $name;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="current", type="boolean", nullable=false)
+     */
+    private $current;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Team",  inversedBy="teams_rosters")
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
      **/
@@ -45,6 +52,7 @@ class Roster
 
     function __construct()
     {
+        $this->current = false;
         $this->roster_persons = new ArrayCollection();
     }
 
@@ -72,6 +80,22 @@ class Roster
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * @param mixed $current
+     */
+    public function setCurrent($current)
+    {
+        $this->current = $current;
     }
 
     /**

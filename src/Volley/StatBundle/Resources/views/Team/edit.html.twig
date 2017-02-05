@@ -4,12 +4,12 @@
     <h1>Team edit</h1>
 
     {% for team_season in entity.teamsSeasons %}
-        <p><a href="{{ path('stat_team_season_edit',{'id': team_season.id}) }}">{{ team_season }}<a></p>
+        <p><a href="{{ path('stat_team_season_edit',{'id': team_season.id}) }}">{{ team_season }}</a></p>
     {% endfor %}
     <p><a class="btn btn-default" href="{{ path('stat_team_season_new',{'team_id': entity.id}) }}">Add team season</a></p>
 
     {% for team_roster in entity.teamsRosters %}
-        <p><a href="{{ path('stat_team_roster_edit',{'id': team_roster.id}) }}">{{ team_roster }}<a></p>
+        <p><a href="{{ path('stat_team_roster_edit',{'id': team_roster.id}) }}">{{ team_roster }}</a> {{ team_roster.current ?  '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>' : '' }}</p>
     {% endfor %}
     <p><a class="btn btn-default" href="{{ path('stat_team_roster_new',{'team_id': entity.id}) }}">Add team roster</a></p>
 

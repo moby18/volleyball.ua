@@ -17,6 +17,7 @@ class RosterType extends AbstractType
         $builder
             ->add('name')
             ->add('team')
+            ->add('current')
             ->add('roster_persons', 'collection', array('type' => new RosterPersonType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
