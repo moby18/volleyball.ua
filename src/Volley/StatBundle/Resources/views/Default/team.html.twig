@@ -29,17 +29,17 @@
                     <img class="photo" src="{{ team.getLogoWebPath }}" alt="{{ title }}">
                 </div>
                 <div class="col col-lg-8 col-md-8 col-sm-8">
-                    {% for i in 0..10 %}
+                    {% for person in roster.rosterPersons %}
                         <a href="#">
                             <div class="row player_names">
                                 <div class="col col-lg-2 col-md-2 col-sm-2">
                                     <div class="team_player_number">
-                                        {{ i }}
+                                        {{ person.id }}
                                     </div>
                                 </div>
                                 <div class="col col-lg-10 col-md-10 col-sm-10">
                                     <div class="team_player_name">
-                                        sdfgsdfg
+                                        {{ person }}
                                         <span class="glyphicon glyphicon-circle-arrow-right"></span>
                                     </div>
                                 </div>

@@ -31,9 +31,11 @@ class DefaultController extends Controller
         if (!$team) {
             throw $this->createNotFoundException('Unable to find team.');
         }
+        $em = $this->getDoctrine()->getManager();
+        $roster = $em->getRepository('VolleyStatBundle:Roster')->findOneBy(['team'=> $team->getId(), 'current' => true]);
         return array(
             'team' => $team,
-            'seasons' => $team->getSeasons()
+            'roster' => $roster
         );
     }
 

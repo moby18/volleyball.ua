@@ -67,7 +67,7 @@ class RosterPerson
     }
 
     /**
-     * @return mixed
+     * @return Person
      */
     public function getPerson()
     {
@@ -84,7 +84,7 @@ class RosterPerson
 
     function __toString()
     {
-        return $this->getPerson();
+        return $this->getPerson()->getFirstName() . ' ' . $this->getPerson()->getLastName();
     }
 
 

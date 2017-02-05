@@ -189,23 +189,23 @@ class DefaultController extends Controller
      * @Route("/team/{team_id}", name="volley_face_team")
      * @Template()
      */
-    public function teamAction($team_id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        // team
-        $teamID = $team_id;
-        $team = $em->getRepository('VolleyFaceBundle:Team')->find($teamID);
-
-        // players
-        $players[] = $team->getPlayerOne();
-        $players[] = $team->getPlayerTwo();
-
-        return $this->render('VolleyFaceBundle:Default:team.html.twig', array(
-            'team' => $team,
-            'players' => $players
-        ));
-    }
+//    public function teamAction($team_id)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        // team
+//        $teamID = $team_id;
+//        $team = $em->getRepository('VolleyFaceBundle:Team')->find($teamID);
+//
+//        // players
+//        $players[] = $team->getPlayerOne();
+//        $players[] = $team->getPlayerTwo();
+//
+//        return $this->render('VolleyFaceBundle:Default:team.html.twig', array(
+//            'team' => $team,
+//            'players' => $players
+//        ));
+//    }
 
     /**
      * @Route("/player/{player_id}", name="volley_face_player")
