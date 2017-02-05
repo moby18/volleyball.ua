@@ -9,11 +9,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Team Season Person
  *
- * @ORM\Table(name="stat_team_season_person")
+ * @ORM\Table(name="stat_roster_person")
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
  */
-class TeamSeasonPerson
+class RosterPerson
 {
     /**
      * @var integer
@@ -25,13 +25,13 @@ class TeamSeasonPerson
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamSeason", inversedBy="team_season_persons")
-     * @ORM\JoinColumn(name="team_season_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Roster", inversedBy="roster_persons")
+     * @ORM\JoinColumn(name="roster_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $team_season;
+    protected $roster;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Person",  inversedBy="teams_season_persons")
+     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Person",  inversedBy="roster_persons")
      * @ORM\JoinColumn(name="person_id", referencedColumnName="id")
      **/
     protected $person;
@@ -53,17 +53,17 @@ class TeamSeasonPerson
     /**
      * @return mixed
      */
-    public function getTeamSeason()
+    public function getRoster()
     {
-        return $this->team_season;
+        return $this->roster;
     }
 
     /**
-     * @param mixed $team_season
+     * @param mixed $roster
      */
-    public function setTeamSeason($team_season)
+    public function setRoster($roster)
     {
-        $this->team_season = $team_season;
+        $this->roster = $roster;
     }
 
     /**

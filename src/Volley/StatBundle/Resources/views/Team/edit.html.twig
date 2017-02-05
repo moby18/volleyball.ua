@@ -8,6 +8,11 @@
     {% endfor %}
     <p><a class="btn btn-default" href="{{ path('stat_team_season_new',{'team_id': entity.id}) }}">Add team season</a></p>
 
+    {% for team_roster in entity.teamsRosters %}
+        <p><a href="{{ path('stat_team_roster_edit',{'id': team_roster.id}) }}">{{ team_roster }}<a></p>
+    {% endfor %}
+    <p><a class="btn btn-default" href="{{ path('stat_team_roster_new',{'team_id': entity.id}) }}">Add team roster</a></p>
+
     {#{{ form(edit_form) }}#}
 
     {{ form_start(edit_form) }}

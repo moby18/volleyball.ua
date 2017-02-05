@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
-class TeamSeasonPersonType extends AbstractType
+class RosterPersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -40,7 +40,7 @@ class TeamSeasonPersonType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Volley\StatBundle\Entity\TeamSeasonPerson'
+            'data_class' => 'Volley\StatBundle\Entity\RosterPerson'
         ));
     }
 
@@ -49,6 +49,6 @@ class TeamSeasonPersonType extends AbstractType
      */
     public function getName()
     {
-        return 'volley_statbundle_teamseasonperson';
+        return 'volley_statbundle_rosterperson';
     }
 }

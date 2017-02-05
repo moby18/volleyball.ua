@@ -138,6 +138,11 @@ class Team
     private $teams_seasons;
 
     /**
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\Roster", mappedBy="team")
+     */
+    private $teams_rosters;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Season",  mappedBy="teams")
      **/
     protected $seasons;
@@ -510,6 +515,22 @@ class Team
     public function setTeamsSeasons($teams_seasons)
     {
         $this->teams_seasons = $teams_seasons;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeamsRosters()
+    {
+        return $this->teams_rosters;
+    }
+
+    /**
+     * @param mixed $teams_rosters
+     */
+    public function setTeamsRosters($teams_rosters)
+    {
+        $this->teams_rosters = $teams_rosters;
     }
 
     public function getAbsolutePath()

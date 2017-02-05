@@ -165,9 +165,9 @@ class Person implements \JsonSerializable
     public $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\TeamSeasonPerson", mappedBy="person")
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\RosterPerson", mappedBy="person")
      */
-    private $teams_season_persons;
+    private $roster_persons;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

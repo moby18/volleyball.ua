@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TeamSeasonType extends AbstractType
+class RosterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +15,9 @@ class TeamSeasonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name')
             ->add('team')
-            ->add('season')
-            ->add('roster')
+            ->add('roster_persons', 'collection', array('type' => new RosterPersonType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
     
@@ -27,7 +27,7 @@ class TeamSeasonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Volley\StatBundle\Entity\TeamSeason'
+            'data_class' => 'Volley\StatBundle\Entity\Roster'
         ));
     }
 
@@ -36,6 +36,6 @@ class TeamSeasonType extends AbstractType
      */
     public function getName()
     {
-        return 'volley_statbundle_team_season';
+        return 'volley_statbundle_roster';
     }
 }

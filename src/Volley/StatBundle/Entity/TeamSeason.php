@@ -37,9 +37,10 @@ class TeamSeason
     protected $season;
 
     /**
-     * @ORM\OneToMany(targetEntity="TeamSeasonPerson", mappedBy="team_season", cascade={"persist"}, orphanRemoval=true)
-     */
-    protected $team_season_persons;
+     * @ORM\ManyToOne(targetEntity="Volley\StatBundle\Entity\Roster",  inversedBy="teams_seasons")
+     * @ORM\JoinColumn(name="roster_id", referencedColumnName="id")
+     **/
+    protected $roster;
 
 
     function __construct()
@@ -80,6 +81,22 @@ class TeamSeason
     }
 
     /**
+     * @return mixed
+     */
+    public function getRoster()
+    {
+        return $this->roster;
+    }
+
+    /**
+     * @param mixed $roster
+     */
+    public function setRoster($roster)
+    {
+        $this->roster = $roster;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -87,40 +104,6 @@ class TeamSeason
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Add team_season_persons
-     *
-     * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
-     * @return TeamSeason
-     */
-    public function addTeamSeasonPerson(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
-    {
-        $team_season_persons->setTeamSeason($this); // synchronously updating inverse side
-        $this->team_season_persons[] = $team_season_persons;
-
-        return $this;
-    }
-
-    /**
-     * Remove team_season_persons
-     *
-     * @param \Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons
-     */
-    public function removeTeamSeasonPerson(\Volley\StatBundle\Entity\TeamSeasonPerson $team_season_persons)
-    {
-        $this->team_season_persons->removeElement($team_season_persons);
-    }
-
-    /**
-     * Get team_season_persons
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTeamSeasonPersons()
-    {
-        return $this->team_season_persons;
     }
 
     function __toString()
