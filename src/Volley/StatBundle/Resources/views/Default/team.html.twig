@@ -30,7 +30,7 @@
                 </div>
                 <div class="col col-lg-8 col-md-8 col-sm-8">
                     {% for person in roster.rosterPersons %}
-                        <a href="#">
+                        <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
                             <div class="row player_names">
                                 <div class="col col-lg-2 col-md-2 col-sm-2">
                                     <div class="team_player_number">
@@ -47,42 +47,6 @@
                         </a>
                     {% endfor %}
                     <hr/>
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Очки#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Рейтинг#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Місце#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
                 </div>
             </div>
 
