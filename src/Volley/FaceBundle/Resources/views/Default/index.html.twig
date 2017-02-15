@@ -1,6 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {% set page = news.currentPageNumber > 1 ? ' - Сторінка ' ~ news.currentPageNumber : '' %}
+{% set pageNumber = news.currentPageNumber %}
 
 {% block carousel %}
 
@@ -69,7 +70,7 @@
 
                     <div class="row">
                         <div class="col text-center">
-                            <h1 class="home-title">Новини Волейболу</h1>
+                            <h1 class="home-title">Новини Волейболу {{ page|default('') }}</h1>
                         </div>
                     </div>
 

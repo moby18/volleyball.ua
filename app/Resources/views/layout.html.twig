@@ -1,14 +1,14 @@
 {% set setting = getSetting() %}
 {% set title = title|default(setting.title)|default('Волейбол в Україні - все про волейбол на сайті volleyball.ua') ~ "" %}
 {% set title = title ~ page|default('') %}
+{% set pageNumber = pageNumber|default(0) %}
 {% set host = app.request.getSchemeAndHttpHost() %}
 {% set route = app.request.attributes.get('_route') %}
 {% if route is not empty %}{% set full_url = url(route, app.request.attributes.get('_route_params')) %}{% endif %}
 {% set page_image = page_image|default(app.request.getSchemeAndHttpHost() ~ asset('bundles/volleyface/images/sharing_image.jpeg')) %}
 {% set type = type|default('website') %}
-{% set meta_keywords = meta_keywords|default(setting.keywords)|default('волейбол, волейбол в Україні, волейбол в Украине, новини волейболу, новости волейбола, трансляції волейбольних матчів, трансляции волейбольмых матчей, пляжний волейбол, розклад, результати, чемпіонат України, аматорський волейбол, дитячий волейбол') %}
-{% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') %}
-{% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') %}
+{% set meta_keywords = meta_keywords|default(setting.keywords)|default('волейбол, волейбол в Україні, волейбол в Украине, новини волейболу, новости волейбола, трансляції волейбольних матчів, трансляции волейбольмых матчей, пляжний волейбол, розклад, результати, чемпіонат України, аматорський волейбол, дитячий волейбол') ~ (pageNumber > 1 ?', сторінка ' ~ pageNumber : '') %}
+{% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') ~ page|default('') %}
 <!DOCTYPE html>
 <html lang="en" class="js no-touch csstransitions skrollr skrollr-desktop" style="height: auto;">
 <head>

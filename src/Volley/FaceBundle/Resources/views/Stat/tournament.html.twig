@@ -2,9 +2,9 @@
 
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ tournament.getWebPath %}#}
 {% set title = tournament.title ~ ' - ' ~ season.name %}
-{% set h1 = tournament.h1 %}
-{% set meta_keywords = tournament.keywords %}
-{% set meta_description = tournament.description %}
+{% set h1 = tournament.h1%}
+{% set meta_keywords = tournament.keywords ~ ', ' ~ season.name %}
+{% set meta_description = tournament.description ~ ' - ' ~ season.name %}
 
 {% block content %}
 

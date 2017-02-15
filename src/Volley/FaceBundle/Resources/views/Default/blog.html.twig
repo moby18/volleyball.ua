@@ -1,6 +1,7 @@
 {% extends '::layout.html.twig' %}
 
 {% set page = posts.currentPageNumber > 1 ? ' - Сторінка ' ~ posts.currentPageNumber : '' %}
+{% set pageNumber = posts.currentPageNumber %}
 {% set title = category.title %}
 {% set h1 = category.h1 %}
 {% set meta_keywords = category.keywords %}
@@ -26,7 +27,7 @@
 
                     <div class="row">
                         <div class="col text-center">
-                            <h1 class="home-title" style="color: {{ color }}">{{ h1 }}</h1>
+                            <h1 class="home-title" style="color: {{ color }}">{{ h1 ~ page|default('') }}</h1>
                         </div>
                     </div>
 
