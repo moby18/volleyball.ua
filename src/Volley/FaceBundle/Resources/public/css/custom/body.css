@@ -539,23 +539,34 @@ footer .bottom-links ul li:hover a {
     margin-bottom: 0px;
 }
 
-.team .player {
+.team .person-container,
+.person .person-container {
     padding: 30px 0;
-
 }
 
-.team .player .player-image {
+.team .person-container .person-image {
     width: 130px;
     height: 180px;
     background-color: green;
     float: left;
 }
 
-.team .player .player-info {
+.person .person-container .person-image {
+    width: 190px;
+    height: 270px;
+    background-color: green;
+    float: left;
+}
+
+.person-container .person-info {
     display: block;
 }
 
-.team .player .team-player-number {
+.person-container .person-top-info {
+    height: 50px;
+}
+
+.person-container .team-person-number {
     background-color: #FFBF00;
     float: left;
     margin: 0 10px;
@@ -569,7 +580,7 @@ footer .bottom-links ul li:hover a {
     color: #ffffff;
 }
 
-.team .player .team-player-name {
+.person-container .team-person-name {
     font-family: "Myriad Pro";
     font-size: 20px;
     color: #1F1F2E;
@@ -578,14 +589,23 @@ footer .bottom-links ul li:hover a {
     float: left;
 }
 
-.team .player .player-middle-info,
-.team .player .player-bottom-info {
-    padding-left: 140px;
-    height: 65px;
+.team .person-container .person-middle-info,
+.team .person-container .person-bottom-info {
     position: relative;
     color: #757584;
     font-family: "Myriad Pro";
     font-size: 16px;
+}
+
+.team .person-container .person-middle-info,
+.team .person-container .person-bottom-info {
+    padding-left: 140px;
+    height: 65px;
+}
+
+.person .person-container .person-middle-info,
+.person .person-container .person-bottom-info {
+    padding-left: 200px;
 }
 
 /* Team Page Beach Volleyball */

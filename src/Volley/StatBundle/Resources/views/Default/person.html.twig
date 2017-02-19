@@ -6,59 +6,49 @@
 {#{% set meta_description = post.metadescr %}#}
 
 {% block content %}
+    <div class="section team-upperline">
+        <div class="container text-center">
+            <span class="team-title">ГРАВЦІ</span>
+        </div>
+    </div>
 
     <div class="section person">
 
         <div class="container">
 
             <div class="row">
-                <div class="col col-lg-12">
-                    <h1>{{ title }}</h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col col-lg-4 col-md-4 col-sm-4">
-                    <img class="photo" src="{{ person.webPath }}" alt="{{ title }}">
-                </div>
                 <div class="col col-lg-8 col-md-8 col-sm-8">
+                    <div class="person-container">
+                        <div class="person-image" style="background-image: url({{ person.webPath }}); background-size: cover;"></div>
+                        <div class="person-info">
+                            <div class="person-top-info">
+                                <div class="team-person-number">
+                                    {{ person.id }}
+                                </div>
+                                <div class="team-person-name">
+                                    <div style="display: block; line-height: 46px;">{{ title }}</div>
+                                </div>
+                            </div>
 
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Очки#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Рейтинг#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="row">#}
-                    {#<div class="col col-lg-3 col-md-3 col-sm-3">#}
-                    {#<div class="team_label">#}
-                    {#Місце#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#<div class="col col-lg-9 col-md-9 col-sm-9">#}
-                    {#<div class="team_value">#}
-                    {#asdfasdf#}
-                    {#</div>#}
-                    {#</div>#}
-                    {#</div>#}
+                            <div class="person-middle-info">
+                                <div>{{ person.grade }}</div>
+                                <div>{{ person.position|trans }}</div>
+                                <div>Громадянство: {{ person.country }}</div>
+                                <div>Національність: {{ person.nationality }}</div>
+                                <div>Дата народження: {{ person.birthDate|date('d.m.Y') }}</div>
+                                <div>Зріст: {{ person.height }}</div>
+                                <div>Вага: {{ person.weight }}</div>
+                                <div>Висота удару: {{ person.spike }}</div>
+                                <div>Висота блоку: {{ person.block }}</div>
+                            </div>
+                            <div class="person-bottom-info">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-4">
+
                 </div>
             </div>
 

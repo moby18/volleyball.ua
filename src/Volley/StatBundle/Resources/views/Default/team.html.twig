@@ -40,24 +40,24 @@
                         {% for person in roster.rosterPersons %}
                                 <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
-                                        <div class="player">
-                                            <div class="player-image"></div>
-                                            <div class="player-info">
+                                        <div class="person-container">
+                                            <div class="person-image"></div>
+                                            <div class="person-info">
                                                 <div style="height: 50px;">
-                                                    <div class="team-player-number">
+                                                    <div class="team-person-number">
                                                         {{ person.id }}
                                                     </div>
-                                                    <div class="team-player-name">
+                                                    <div class="team-person-name">
                                                         <div style="display: block; line-height: 23px;">{{ person.person.firstName }}</div>
                                                         <div style="display: block; line-height: 23px;">{{ person.person.lastName }}</div>
                                                     </div>
                                                 </div>
 
-                                                <div class="player-middle-info">
+                                                <div class="person-middle-info">
                                                     <div>{{ person.person.grade }}</div>
                                                     <div>{{ person.person.position|trans }}</div>
                                                 </div>
-                                                <div class="player-bottom-info">
+                                                <div class="person-bottom-info">
                                                     <div>Вік: {{ person.person.birthDate|age }}</div>
                                                     <div>Зріст: {{ person.person.height }}</div>
                                                 </div>
