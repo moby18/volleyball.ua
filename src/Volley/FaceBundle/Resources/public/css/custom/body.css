@@ -453,8 +453,142 @@ footer .bottom-links ul li:hover a {
     border-color: orange;
 }
 
-
 /* Team Page */
+.team-title {
+    color: #ffffff;
+    font-family: "Myriad Pro Semibold";
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.team-upperline {
+    background-image: url(../bundles/volleyface/images/team-upperline.png);
+    background-repeat: repeat-x;
+    padding: 15px 0;
+}
+.team .team-logo-container {
+    padding: 30px;
+    display: inline-block;
+}
+
+.team .team-logo-container .team-logo {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+}
+
+.team .team-logo-container .team-name {
+    float: left;
+    color: #1F1F2E;
+    text-transform: uppercase;
+    height: 100px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.team .team-logo-container .team-name > h1 {
+    font-family: "Myriad Pro Semibold";
+    font-size: 26px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    font-weight: inherit;
+    color: #1F1F2E;
+}
+
+.team .team-logo-container .team-name > h2 {
+    font-family: "Myriad Pro";
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: inherit;
+    color: #1F1F2E;
+}
+
+.team .team-descr {
+    font-family: "Myriad Pro";
+    font-size: 18px;
+    color: #1F1F2E;
+    text-align: justify;
+}
+
+.team .team-address {
+    height: 300px;
+    background-image: url(../bundles/volleyface/images/team-address.png);
+    padding: 20px;
+    padding-right: 0;
+    font-family: "Myriad Pro";
+    font-size: 18px;
+    color: #1F1F2E;
+}
+
+.team .team-address .team-name {
+    font-family: "Myriad Pro Semibold";
+    font-size: 20px;
+}
+
+.team .team-map {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.team #map {
+    width: 100%;
+    height: 300px;
+    background-color: grey;
+    margin-bottom: 0px;
+}
+
+.team .player {
+    padding: 30px 0;
+
+}
+
+.team .player .player-image {
+    width: 130px;
+    height: 180px;
+    background-color: green;
+    float: left;
+}
+
+.team .player .player-info {
+    display: block;
+}
+
+.team .player .team-player-number {
+    background-color: #FFBF00;
+    float: left;
+    margin: 0 10px;
+    padding: 11px 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 22px;
+    font-family: "Myriad Pro Bold";
+    font-size: 26px;
+    color: #ffffff;
+}
+
+.team .player .team-player-name {
+    font-family: "Myriad Pro";
+    font-size: 20px;
+    color: #1F1F2E;
+    text-transform: uppercase;
+    margin: 0;
+    float: left;
+}
+
+.team .player .player-middle-info,
+.team .player .player-bottom-info {
+    padding-left: 140px;
+    height: 65px;
+    position: relative;
+    color: #757584;
+    font-family: "Myriad Pro";
+    font-size: 16px;
+}
+
+/* Team Page Beach Volleyball */
 #team h1 {
     padding: 0 15px;
 }

@@ -24,3 +24,5 @@ parameters:
 
     popular_post_count: 5
     recommended_post_count: 5
+
+    google_api_key: ~

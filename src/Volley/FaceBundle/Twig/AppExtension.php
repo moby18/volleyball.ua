@@ -56,6 +56,7 @@ class AppExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('imgToBase64', [$this, 'imgToBase64']),
+            new \Twig_SimpleFilter('age', [$this, 'getAge']),
         ];
     }
 
@@ -63,5 +64,18 @@ class AppExtension extends \Twig_Extension
         $type = pathinfo($url, PATHINFO_EXTENSION);
         $data = file_get_contents($url);
         return 'data:image/' . $type . ';base64,' . base64_encode($data);
+    }
+
+    public function getAge($date)
+    {
+        if (!$date instanceof \DateTime) {
+            return null;
+        }
+
+        $referenceDateTimeObject = new \DateTime();
+
+        $diff = $referenceDateTimeObject->diff($date);
+
+        return $diff->y;
     }
 }

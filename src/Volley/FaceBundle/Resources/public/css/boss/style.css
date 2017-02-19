@@ -11482,18 +11482,18 @@ Onepage Homepages --------------------*/
 -----------------  16.Contact Us  -------------
 ==============================================*/
 
-#map {
-	height:360px;
-	margin-bottom:40px;
-}
+/*#map {*/
+	/*height:360px;*/
+	/*margin-bottom:40px;*/
+/*}*/
 
-#map.map3 {
-	margin:30px 0 50px;
-}
+/*#map.map3 {*/
+	/*margin:30px 0 50px;*/
+/*}*/
 
-#map.map4 {
-	border:6px solid rgba(255, 255, 255, 0.95);
-}
+/*#map.map4 {*/
+	/*border:6px solid rgba(255, 255, 255, 0.95);*/
+/*}*/
 
 .contact-list {
 	margin-bottom: 30px;
@@ -11517,27 +11517,27 @@ Onepage Homepages --------------------*/
 }
 
 @media (min-width: 768px) {
-	#map {
-		height:500px;
-		margin-bottom: 50px;
-	}
+	/*#map {*/
+		/*height:500px;*/
+		/*margin-bottom: 50px;*/
+	/*}*/
 
-	#map.map2 { 
-		height:600px;
-	}
+	/*#map.map2 { */
+		/*height:600px;*/
+	/*}*/
 	
-	#map.map3 {
-		margin:50px 0 60px;
-	}
+	/*#map.map3 {*/
+		/*margin:50px 0 60px;*/
+	/*}*/
 
-	#map.larger {
-		height:700px;
-	}
+	/*#map.larger {*/
+		/*height:700px;*/
+	/*}*/
 
-	#map.larger.vertical {
-		margin-bottom:0;
-		height:600px;
-	}
+	/*#map.larger.vertical {*/
+		/*margin-bottom:0;*/
+		/*height:600px;*/
+	/*}*/
 
 	.contact-list {
 		margin-bottom: 40px;
@@ -11549,9 +11549,9 @@ Onepage Homepages --------------------*/
 }
 
 @media (min-width: 992px) {
-	#map.map2 {
-		margin-bottom:60px;
-	}
+	/*#map.map2 {*/
+		/*margin-bottom:60px;*/
+	/*}*/
 }
 
 /* Partners Carousel */

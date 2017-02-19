@@ -6,50 +6,93 @@
 {#{% set meta_description = post.metadescr %}#}
 
 {% block content %}
+    <div class="section team-upperline">
+        <div class="container text-center">
+            <span class="team-title">КОМАНДИ</span>
+        </div>
+    </div>
 
-    <div class="section post">
+    <div class="section team">
 
         <div class="container">
 
             <div class="row">
-                <div class="col col-lg-12 col-md-12 col-sm-12">
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <div class="team-logo-container">
+                        <div class="team-logo" style="background-image: url({{ team.getLogoWebPath }}); "></div>
+                        <div class="team-name">
+                            <h1>{{ team.name }}</h1>
+                            <h2>{{ team.city ~ ' ' ~ team.country }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath }}"
                          alt="{{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-12">
-                    <h1>{{ title }}</h1>
+                    {% if roster %}
+                        {% for person in roster.rosterPersons %}
+                                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
+                                        <div class="player">
+                                            <div class="player-image"></div>
+                                            <div class="player-info">
+                                                <div style="height: 50px;">
+                                                    <div class="team-player-number">
+                                                        {{ person.id }}
+                                                    </div>
+                                                    <div class="team-player-name">
+                                                        <div style="display: block; line-height: 23px;">{{ person.person.firstName }}</div>
+                                                        <div style="display: block; line-height: 23px;">{{ person.person.lastName }}</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="player-middle-info">
+                                                    <div>{{ person.person.grade }}</div>
+                                                    <div>{{ person.person.position|trans }}</div>
+                                                </div>
+                                                <div class="player-bottom-info">
+                                                    <div>Вік: {{ person.person.birthDate|age }}</div>
+                                                    <div>Зріст: {{ person.person.height }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                        {% endfor %}
+                    {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="team-descr">{{ team.description|raw }}</p>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col col-lg-4 col-md-4 col-sm-4">
-                    <img class="photo" src="{{ team.getLogoWebPath }}" alt="{{ title }}">
-                </div>
-                <div class="col col-lg-8 col-md-8 col-sm-8">
-                    {% for person in roster.rosterPersons %}
-                        <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
-                            <div class="row player_names">
-                                <div class="col col-lg-2 col-md-2 col-sm-2">
-                                    <div class="team_player_number">
-                                        {{ person.id }}
-                                    </div>
-                                </div>
-                                <div class="col col-lg-10 col-md-10 col-sm-10">
-                                    <div class="team_player_name">
-                                        {{ person }}
-                                        <span class="glyphicon glyphicon-circle-arrow-right"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    {% endfor %}
-                    <hr/>
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-4 team-address">
+                        <ul>
+                            <li><span class="team-name">{{ team.name }}</span></li>
+                            {% if team.site != '' %}<li>{{ team.address }}</li>{% endif %}
+                            {% if team.site != '' %}<li><a href="tel: {{ team.site }}">{{ team.site }}</a></li>{% endif %}
+                            {% if team.fax != '' %}<li>{{ team.fax }}</li>{% endif %}
+                            {% if team.email != '' %}<li><a href="mailto: {{ team.email }}">{{ team.email }}</a></li>{% endif %}
+                            {% if team.site != '' %}<li><a href="{{ team.site }}">{{ team.site }}</a></li>{% endif %}
+                            {% if team.hall != '' %}<li>{{ team.hall }}</li>{% endif %}
+                        </ul>
+                    </div>
+                    <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-8 team-map">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
 
@@ -58,4 +101,23 @@
 
 
 
+{% endblock %}
+
+{% block scripts %}
+    <script>
+      function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+    </script>
 {% endblock %}

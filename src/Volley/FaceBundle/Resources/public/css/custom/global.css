@@ -1,4 +1,18 @@
 /* Global Styles */
+@font-face {
+    font-family: "Myriad Pro";
+    src: local("Myriad Pro"), url(../fonts/MyriadPro-Regular.otf);
+}
+@font-face {
+    font-family: "Myriad Pro Semibold";
+    src: local("Myriad Pro Semibold"), url(../fonts/MyriadPro-Semibold.otf);
+}
+
+@font-face {
+    font-family: "Myriad Pro Bold";
+    src: local("Myriad Pro Bold"), url(../fonts/MyriadPro-Bold.otf);
+}
+
 body {
     color: #333;
 }

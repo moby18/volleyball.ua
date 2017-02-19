@@ -154,6 +154,7 @@ gulp.task('script_ie', function () {
 
 gulp.task('fonts', function () {
     return gulp.src([
+        'src/Volley/FaceBundle/Resources/public/fonts/*',
         'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/fonts/*',
         'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/fonts/*'
     ])

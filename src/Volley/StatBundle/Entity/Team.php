@@ -479,10 +479,14 @@ class Team
 
     /**
      * @param mixed $logoImage
+     * @return Team
      */
     public function setLogoImage($logoImage)
     {
-        $this->logoImage = $logoImage;
+        if ($logoImage) {
+            $this->logoImage = $logoImage;
+        }
+        return $this;
     }
 
     /**
@@ -495,10 +499,14 @@ class Team
 
     /**
      * @param mixed $hallImage
+     * @return Team
      */
     public function setHallImage($hallImage)
     {
-        $this->hallImage = $hallImage;
+        if ($hallImage) {
+            $this->hallImage = $hallImage;
+        }
+        return $this;
     }
 
     /**
@@ -538,6 +546,20 @@ class Team
         return null === $this->image
             ? null
             : $this->getUploadRootDir() . '/' . $this->image;
+    }
+
+    public function getAbsolutePathLogo()
+    {
+        return null === $this->logoImage
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->logoImage;
+    }
+
+    public function getAbsolutePathHall()
+    {
+        return null === $this->hallImage
+            ? null
+            : $this->getUploadRootDir() . '/' . $this->hallImage;
     }
 
     public function getWebPath()
@@ -657,6 +679,8 @@ class Team
     public function removeFile()
     {
         @unlink($this->getAbsolutePath());
+        @unlink($this->getAbsolutePathLogo());
+        @unlink($this->getAbsolutePathHall());
     }
 
     function __toString()
