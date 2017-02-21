@@ -24,26 +24,26 @@
                         </div>
                         <div class="person-info">
                             <div class="person-top-info">
-                                <div class="team-person-number">
-                                    {{ person.id }}
-                                </div>
+                                {#<div class="team-person-number">#}
+                                    {#{{ person.id }}#}
+                                {#</div>#}
                                 <div class="team-person-name">
                                     <h1>{{ title }}</h1>
                                 </div>
                             </div>
 
                             <div class="person-middle-info">
-                                <div>{{ person.type == 'staff' ? person.title : person.type|trans }}</div>
-                                <div>{{ person.grade }}</div>
-                                <div>{{ person.position|trans }}</div>
+                                <div><strong>{{ person.type == 'staff' ? person.title : person.type|trans }}</strong></div>
+                                <div><strong>{{ person.grade }}</strong></div>
+                                <div><strong>{{ person.position|trans }}</strong></div>
                                 <br/>
                                 <div>Громадянство: {{ person.country }}</div>
                                 <div>Національність: {{ person.nationality }}</div>
                                 <div>Дата народження: {{ person.birthDate|date('d.m.Y') }}</div>
-                                <div>Зріст: {{ person.height }}</div>
-                                <div>Вага: {{ person.weight }}</div>
-                                <div>Висота удару: {{ person.spike }}</div>
-                                <div>Висота блоку: {{ person.block }}</div>
+                                <div>Зріст: {{ person.height ? person.height : '-' }} см</div>
+                                <div>Вага: {{ person.weight ? person.weight : '-' }} кг</div>
+                                <div>Висота удару: {{ person.spike ? person.spike : '-' }} см</div>
+                                <div>Висота блоку: {{ person.block ? person.block : '-' }} см</div>
                             </div>
                             <div class="person-bottom-info">
                             </div>
