@@ -549,6 +549,7 @@ footer .bottom-links ul li:hover a {
     height: 180px;
     background-color: green;
     float: left;
+    background-size: cover;
 }
 
 .person .person-container .person-image {
@@ -556,6 +557,7 @@ footer .bottom-links ul li:hover a {
     height: 270px;
     background-color: green;
     float: left;
+    background-size: cover;
 }
 
 .person-container .person-info {

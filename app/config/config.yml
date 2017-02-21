@@ -167,6 +167,27 @@ liip_imagine:
             quality: 85
             filters:
                 thumbnail: { size: [370, 240], mode: outbound }
+        team_roster:
+            quality: 90
+            filters:
+                relative_resize: { widen: 1170 }
+        team_hall:
+            quality: 90
+            filters:
+                relative_resize: { widen: 1170 }
+        team_logo:
+            quality: 100
+            filters:
+                thumbnail: { size: [100, 100], mode: inset }
+        team_player:
+            quality: 90
+            filters:
+                thumbnail: { size: [130, 180], mode: outbound }
+        player_image:
+            quality: 90
+            filters:
+                thumbnail: { size: [190, 270], mode: outbound }
+
 
 knp_paginator:
     page_range: 5                      # default page range used in pagination control
