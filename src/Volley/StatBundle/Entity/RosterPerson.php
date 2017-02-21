@@ -25,6 +25,13 @@ class RosterPerson
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="number", type="integer", nullable=false)
+     */
+    private $number;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Roster", inversedBy="roster_persons")
      * @ORM\JoinColumn(name="roster_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -48,6 +55,22 @@ class RosterPerson
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
     }
 
     /**

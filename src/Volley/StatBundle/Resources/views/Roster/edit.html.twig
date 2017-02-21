@@ -10,7 +10,7 @@
         <ul class="persons list-group list-inline"
             data-prototype="{{ form_widget(edit_form.roster_persons.vars.prototype)|e }}">
             {% for roster_person in edit_form.roster_persons %}
-                <li class="list-group-item list-unstyled">{{ form_row(roster_person.person) }}</li>
+                <li class="list-group-item list-unstyled">{{ form_row(roster_person.number) }}{{ form_row(roster_person.person) }}</li>
             {% endfor %}
         </ul>
     </div>

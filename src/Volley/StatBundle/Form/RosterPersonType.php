@@ -16,6 +16,7 @@ class RosterPersonType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('number')
             ->add('person',  Select2EntityType::class, [
                 'label' => false,
                 'multiple' => false,
