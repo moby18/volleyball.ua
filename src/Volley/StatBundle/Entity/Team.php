@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Volley\FaceBundle\Entity\Post;
 
 /**
  * Team
@@ -166,10 +167,16 @@ class Team
      **/
     protected $rounds;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\FaceBundle\Entity\Post",  mappedBy="teams")
+     **/
+    private $posts;
+
 
     function __construct()
     {
         $this->seasons = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
 
@@ -317,6 +324,40 @@ class Team
     public function removeRound(\Volley\StatBundle\Entity\Round $rounds)
     {
         $this->rounds->removeElement($rounds);
+    }
+
+    /**
+     * Add posts
+     *
+     * @param Post $posts
+     * @return Team
+     */
+    public function addPost(Post $posts)
+    {
+        $posts->addTeam($this);
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param Post $posts
+     */
+    public function removePost(Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 
     /**

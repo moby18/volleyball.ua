@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Volley\FaceBundle\Entity\Post;
 
 /**
  * Person
@@ -170,6 +171,11 @@ class Person implements \JsonSerializable
     private $roster_persons;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Volley\FaceBundle\Entity\Post",  mappedBy="persons")
+     **/
+    private $posts;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
@@ -310,6 +316,7 @@ class Person implements \JsonSerializable
     public function __construct()
     {
         $this->teams = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     /**
@@ -645,6 +652,40 @@ class Person implements \JsonSerializable
     public function getTeams()
     {
         return $this->teams;
+    }
+
+    /**
+     * Add posts
+     *
+     * @param Post $posts
+     * @return Person
+     */
+    public function addPost(Post $posts)
+    {
+        $posts->addPerson($this);
+        $this->posts[] = $posts;
+
+        return $this;
+    }
+
+    /**
+     * Remove posts
+     *
+     * @param Post $posts
+     */
+    public function removePost(Post $posts)
+    {
+        $this->posts->removeElement($posts);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 
     /**

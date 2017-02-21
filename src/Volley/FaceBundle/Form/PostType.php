@@ -92,6 +92,8 @@ class PostType extends AbstractType
             ->add('imageSource', null, [
                 'label' => 'Post Image Source'
             ])
+            ->add('teams')
+            ->add('persons')
         ;
     }
     

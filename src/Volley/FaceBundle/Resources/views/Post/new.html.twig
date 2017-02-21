@@ -12,6 +12,7 @@
             <li role="presentation" class="active"><a href="#main" aria-controls="main" role="tab" data-toggle="tab">Main</a>
             </li>
             <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+            <li role="presentation"><a href="#refs" aria-controls="meta" role="tab" data-toggle="tab">References</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -43,6 +44,11 @@
                 <br>
                 {{ form_row(form.metakey) }}
                 {{ form_row(form.metadescr) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="refs">
+                <br>
+                {{ form_row(form.teams) }}
+                {{ form_row(form.persons) }}
             </div>
             <div role="tabpanel" class="tab-pane" id="rest">
                 {{ form_row(form.ordering) }}

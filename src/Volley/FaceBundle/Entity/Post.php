@@ -2,11 +2,14 @@
 
 namespace Volley\FaceBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Volley\StatBundle\Entity\Person;
+use Volley\StatBundle\Entity\Team;
 use Volley\UserBundle\Entity\User;
 
 /**
@@ -232,6 +235,20 @@ class Post
     private $file;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Person", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_persons")
+     **/
+    private $persons;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_teams")
+     **/
+    protected $teams;
+
+
+    /**
      * Get file.
      *
      * @return UploadedFile
@@ -364,6 +381,8 @@ class Post
         $this->state = true;
         $this->slugUpdateble = true;
         $this->modified = new \DateTime();
+        $this->persons = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
 
@@ -991,5 +1010,73 @@ class Post
     public function setModified($modified)
     {
         $this->modified = $modified;
+    }
+
+    /**
+     * Add persons
+     *
+     * @param Person $persons
+     * @return Post
+     */
+    public function addPerson(Person $persons)
+    {
+        $persons->addPost($this); // synchronously updating inverse side
+        $this->persons[] = $persons;
+
+        return $this;
+    }
+
+    /**
+     * Remove persons
+     *
+     * @param Person $persons
+     */
+    public function removePerson(Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
+
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param Team $teams
+     * @return Post
+     */
+    public function addTeam(Team $teams)
+    {
+        $teams->addPost($this); // synchronously updating inverse side
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }
