@@ -20,7 +20,7 @@
                 <div class="col col-lg-8 col-md-8 col-sm-8">
                     <div class="person-container">
                         <div class="person-image" style="background-image: url({{ person.webPath | imagine_filter('player_image') }});">
-                            <img src="{{ person.webPath | imagine_filter('player_image') }}" alt="{{ person }}">
+                            {% if person.webPath %}<img src="{{ person.webPath | imagine_filter('player_image') }}" alt="{{ person }}">{% endif %}
                         </div>
                         <div class="person-info">
                             <div class="person-top-info">

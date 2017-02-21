@@ -20,7 +20,7 @@
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <div class="team-logo-container">
                         <div class="team-logo" style="background-image: url({{ team.getLogoWebPath | imagine_filter('team_logo') }}); ">
-                            <img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">
+                            {% if team.getLogoWebPath %}<img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">{% endif %}
                         </div>
                         <div class="team-name">
                             <h1>{{ team.name }}</h1>
@@ -44,7 +44,7 @@
                                     <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
                                         <div class="person-container">
                                             <div class="person-image" style="background-image: url({{ person.person.webPath | imagine_filter('team_player') }});">
-                                                <img src="{{ person.person.webPath | imagine_filter('team_player') }}" alt="{{ person.person }} {{ person.person.type == 'staff' ? person.person.title|lower : person.person.type|trans|lower }} команди {{ title }}">
+                                                {% if person.person.webPath %}<img src="{{ person.person.webPath | imagine_filter('team_player') }}" alt="{{ person.person }} {{ person.person.type == 'staff' ? person.person.title|lower : person.person.type|trans|lower }} команди {{ title }}">{% endif %}
                                             </div>
                                             <div class="person-info">
                                                 <div style="height: 50px;">
