@@ -1,14 +1,14 @@
 {% extends '::layout.html.twig' %}
 
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
-{% set title =  '"' ~ team.name ~ '"' ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' %}
-{#{% set meta_keywords = post.metakey %}#}
-{#{% set meta_description = post.metadescr %}#}
+{% set title =  team.name ~ ' '~ team.city ~ ', ' ~ team.country ~ '' %}
+{% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', ' ~ team.country ~ ', волейбол, склад команди, тренери, титули, турніри, адреса, новини'%}
+{% set meta_description = 'Сторінка волейбольної команди' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
 
 {% block content %}
     <div class="section team-upperline">
         <div class="container text-center">
-            <span class="team-title">КОМАНДИ</span>
+            <span class="team-title">ВОЛЕЙБОЛЬНІ КОМАНДИ</span>
         </div>
     </div>
 
@@ -54,6 +54,7 @@
                                                 </div>
 
                                                 <div class="person-middle-info">
+                                                    <div>{{ person.person.type == 'staff' ? person.person.title : person.person.type|trans }}</div>
                                                     <div>{{ person.person.grade }}</div>
                                                     <div>{{ person.person.position|trans }}</div>
                                                 </div>

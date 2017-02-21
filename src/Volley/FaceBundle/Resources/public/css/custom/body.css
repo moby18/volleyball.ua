@@ -589,6 +589,17 @@ footer .bottom-links ul li:hover a {
     float: left;
 }
 
+.person-container .team-person-name h1 {
+    font-family: "Myriad Pro";
+    font-size: 20px;
+    color: #1F1F2E;
+    display: block;
+    line-height: 46px;
+    font-weight: inherit;
+    height: 50px;
+    margin-bottom: 0;
+}
+
 .team .person-container .person-middle-info,
 .team .person-container .person-bottom-info {
     position: relative;
