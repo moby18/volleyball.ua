@@ -19,7 +19,9 @@
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <div class="team-logo-container">
-                        <div class="team-logo" style="background-image: url({{ team.getLogoWebPath | imagine_filter('team_logo') }}); "></div>
+                        <div class="team-logo" style="background-image: url({{ team.getLogoWebPath | imagine_filter('team_logo') }}); ">
+                            <img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">
+                        </div>
                         <div class="team-name">
                             <h1>{{ team.name }}</h1>
                             <h2>{{ team.city ~ ' ' ~ team.country }}</h2>
@@ -31,7 +33,7 @@
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath | imagine_filter('team_roster') }}"
-                         alt="{{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
+                         alt="Склад команди {{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
                 </div>
             </div>
 
@@ -41,7 +43,9 @@
                                 <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
                                         <div class="person-container">
-                                            <div class="person-image" style="background-image: url({{ person.person.webPath | imagine_filter('team_player') }});"></div>
+                                            <div class="person-image" style="background-image: url({{ person.person.webPath | imagine_filter('team_player') }});">
+                                                <img src="{{ person.person.webPath | imagine_filter('team_player') }}" alt="{{ person.person }} {{ person.person.type == 'staff' ? person.person.title|lower : person.person.type|trans|lower }} команди {{ title }}">
+                                            </div>
                                             <div class="person-info">
                                                 <div style="height: 50px;">
                                                     <div class="team-person-number">

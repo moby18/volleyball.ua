@@ -547,17 +547,28 @@ footer .bottom-links ul li:hover a {
 .team .person-container .person-image {
     width: 130px;
     height: 180px;
-    background-color: green;
+    background-color: grey;
     float: left;
     background-size: cover;
+}
+
+.team .person-container .person-image img {
+    width: 130px;
+    height: 180px;
 }
 
 .person .person-container .person-image {
     width: 190px;
     height: 270px;
-    background-color: green;
+    background-color: grey;
     float: left;
     background-size: cover;
+}
+
+.person .person-container .person-image img {
+    display: inline;
+    width: 190px;
+    height: 270px;
 }
 
 .person-container .person-info {
