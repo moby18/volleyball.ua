@@ -61,6 +61,13 @@ class TeamController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($address = $entity->getAddress()) {
+                $coords = self::getCoordinates($address);
+                $entity->setLat($coords['lat']);
+                $entity->setLng($coords['lng']);
+            }
+
             $em->persist($entity);
             $em->flush();
 
@@ -203,6 +210,12 @@ class TeamController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($address = $entity->getAddress()) {
+                $coords = self::getCoordinates($address);
+                $entity->setLat($coords['lat']);
+                $entity->setLng($coords['lng']);
+            }
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('stat_team_edit', array('id' => $id)));
@@ -255,5 +268,13 @@ class TeamController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    private function getCoordinates($address){
+        $address = str_replace(" ", "+", $address);
+        $url = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address);
+        $response = file_get_contents($url);
+        $json = json_decode($response,TRUE);
+        return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];
     }
 }

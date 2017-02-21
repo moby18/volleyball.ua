@@ -70,6 +70,20 @@ class Team
     private $address;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="lat", type="float", nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lng", type="float", nullable=true)
+     */
+    private $lng;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="phone", type="string", length=255, nullable=true)
@@ -362,6 +376,38 @@ class Team
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * @param float $lat
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    /**
+     * @param float $lng
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
     }
 
     /**

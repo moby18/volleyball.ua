@@ -37,6 +37,8 @@ class TeamType extends AbstractType
                 )
             )
             ->add('address')
+            ->add('lat')
+            ->add('lng')
             ->add('phone')
             ->add('fax')
             ->add('email')
