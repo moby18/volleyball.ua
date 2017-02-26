@@ -124,6 +124,13 @@ class SchoolPerson implements \JsonSerializable
     private $social;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="who_filled", type="string", nullable=true)
+     */
+    private $whoFilled;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="height", type="smallint", nullable=true)
@@ -553,6 +560,22 @@ class SchoolPerson implements \JsonSerializable
     public function setSocial($social)
     {
         $this->social = $social;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWhoFilled()
+    {
+        return $this->whoFilled;
+    }
+
+    /**
+     * @param string $whoFilled
+     */
+    public function setWhoFilled($whoFilled)
+    {
+        $this->whoFilled = $whoFilled;
     }
 
     /**

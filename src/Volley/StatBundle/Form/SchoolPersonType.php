@@ -76,6 +76,9 @@ class SchoolPersonType extends AbstractType
             ->add('social', null, [
                 'label' => "Сторінка в соц. мережах (або декілька через кому)"
             ])
+            ->add('whoFilled', null, [
+                'label' => "Іформація про того хто заповнює цю форму (ім'я, контактна інформація)"
+            ])
 //            ->add('height')
 //            ->add('weight')
 //            ->add('spike')
