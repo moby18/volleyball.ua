@@ -52,6 +52,9 @@ class SchoolPersonType extends AbstractType
 //                'choices' => SchoolPerson::TYPE
 //            ])
 //            ->add('title')
+            ->add('level', null, [
+                'label' => "Категорія"
+            ])
             ->add('grade', null, [
                 'label' => "Спотривне звання (якщо є)"
             ])

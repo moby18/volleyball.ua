@@ -179,6 +179,13 @@ class SchoolPerson implements \JsonSerializable
     private $grade;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="level", type="string", length=255, nullable=true)
+     */
+    private $level;
+
+    /**
      * @ORM\Column(name="descr", type="text", nullable=true)
      */
     private $description;
@@ -737,6 +744,22 @@ class SchoolPerson implements \JsonSerializable
     public function getGrade()
     {
         return $this->grade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param mixed $level
+     */
+    public function setLevel($level)
+    {
+        $this->level = $level;
     }
 
     /**
