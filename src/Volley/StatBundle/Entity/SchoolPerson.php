@@ -854,7 +854,7 @@ class SchoolPerson implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->lastName. ' ' . $this->middleName .' '. $this->firstName;
+        return $this->lastName. ' ' . $this->firstName .' '. $this->middleName;
     }
 
     public function jsonSerialize()
