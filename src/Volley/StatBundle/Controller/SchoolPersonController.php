@@ -49,6 +49,37 @@ class SchoolPersonController extends Controller
             'entities' => $pagination,
         ));
     }
+
+    /**
+     * Lists all SchoolPerson entities.
+     *
+     * @Route("school/person/list", name="stat_schoolperson_front")
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexFrontAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('person_page', 1));
+        $session->set('person_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:SchoolPerson')->createQueryBuilder('p')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            1000
+        );
+
+        return $this->render('VolleyStatBundle:SchoolPerson:indexFront.html.twig', array(
+            'entities' => $pagination,
+        ));
+    }
+
+
     /**
      * Creates a new SchoolPerson entity.
      *
