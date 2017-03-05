@@ -1,0 +1,125 @@
+{% extends '::layout.html.twig' %}
+
+{#{% set page = posts.currentPageNumber > 1 ? ' - Сторінка ' ~ posts.currentPageNumber : '' %}#}
+{#{% set pageNumber = posts.currentPageNumber %}#}
+{#{% set title = category.title %}#}
+{#{% set h1 = category.h1 %}#}
+{#{% set meta_keywords = category.keywords %}#}
+{#{% set meta_description = category.description %}#}
+
+{% if app.request.attributes.get('_route') == 'volley_face_search' %}
+    {% set h1 =  'search'|trans() ~ ': ' ~ app.request.query.get('s') %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = 'пошук, новини волейболу' %}
+    {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
+{#{% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}#}
+
+{% block content %}
+
+    <section>
+        <div id="map" style="width: 100%; height: 400px;"></div>
+    </section>
+
+    <div class="section">
+
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-12">
+
+                    <div class="row">
+                        <div class="col text-center">
+                            {#<h1 class="home-title" style="color: {{ color }}">{{ h1 ~ page|default('') }}</h1>#}
+                        </div>
+                    </div>
+
+                    {#{% if (posts|length > 0) %}#}
+                        {#<div class="row">#}
+                            {#{% for item in posts %}#}
+                                {#<div class="col-lg-6">#}
+                                    {#{% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}#}
+                                {#</div>#}
+                                {#{% if loop.index is even %}#}
+                                    {#<div style="clear: both"></div>#}
+                                {#{% endif %}#}
+                            {#{% endfor %}#}
+
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#<div class="pagination-container">#}
+                                {#{{ knp_pagination_render(posts) }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#{% else %}#}
+                        {#<p> {{ 'not_found'|trans({}) }}</p>#}
+                    {#{% endif %}#}
+
+                </div>
+
+                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+      function initMap() {
+        var center = {lat: {{ 50.4019514 }}, lng: {{ 30.3926091 }} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: center
+        });
+
+        var schools = {{ schools|json_encode|raw }};
+        console.log({{ schools|json_encode|raw }});
+        schools = schools.map(function(school) {
+          school.marker = new google.maps.Marker({
+            position: {lat: school.lat, lng: school.lng},
+            map: map
+          });
+          school.infowindow = new google.maps.InfoWindow({
+            content: "<div>првите</div>"
+          });
+          school.marker.addListener('mouseover', function() {
+            school.infowindow.open(map, school.marker);
+          });
+          school.marker.addListener('mouseout', function() {
+            school.infowindow.close();
+          });
+          return school;
+        });
+
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var school = schools[0];
+        setTimeout(function() {
+          var interval = setInterval(function() {
+            console.log(school);
+            school.infowindow.close();
+            school = schools[getRandomInt(0, schools.length)];
+            school.infowindow.open(map, school.marker);
+          }, 5000)
+        }, 2000);
+
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+    </script>
+{% endblock %}

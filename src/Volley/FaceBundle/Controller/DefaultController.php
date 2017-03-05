@@ -30,6 +30,40 @@ class DefaultController extends Controller
         return $this->render("VolleyFaceBundle:Default:robots.txt.twig", [], $response);
     }
 
+    /**
+     * Schools Route
+     *
+     * @param int $page
+     * @param Request $request
+     *
+     * @return string
+     *
+     * @Route("/school/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_school_pages")
+     * @Route("/school", defaults={"page" = 1}, name="volley_face_school")
+     * @Template()
+     */
+    public function schoolAction($page, Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $schools = $em->getRepository('VolleyStatBundle:School')->findAll();
+
+//        $paginator = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
+//            $page,
+//            20
+//        );
+//        if ($blog)
+//            $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
+//        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+//        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+
+        return $this->render('VolleyFaceBundle:Default:school.html.twig', array(
+            'schools' => $schools
+//            'posts' => $pagination,
+        ));
+    }
+
 
     /**
      * @Route("/tournamentTable", name="volley_face_tournament_table")

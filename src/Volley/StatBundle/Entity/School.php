@@ -15,7 +15,7 @@ use Volley\FaceBundle\Entity\Post;
  * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\SchoolRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class School
+class School implements \JsonSerializable
 {
     /**
      * @var integer
@@ -748,5 +748,11 @@ class School
         return $this->getName();
     }
 
-
+    function jsonSerialize()
+    {
+        return [
+            'lat' => $this->getLat(),
+            'lng' => $this->getLng(),
+        ];
+    }
 }
