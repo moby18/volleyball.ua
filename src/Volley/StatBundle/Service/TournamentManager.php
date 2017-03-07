@@ -6,6 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Entity\GameSet;
 use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Entity\RoundTeamBonus;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Tournament;
 
@@ -64,7 +65,10 @@ class TournamentManager
 
             $table = [];
             foreach ($teams as $team) {
-                $table[$team->getID()] = ['team' => $team, 'points' => 0, 'games' => 0, 'win' => 0, 'loss' => 0, 'win_sets' => 0, 'loss_sets' => 0, 'win_points' => 0, 'loss_points' => 0, 'score30' => 0, 'score31' => 0, 'score32' => 0, 'score23' => 0, 'score13' => 0, 'score03' => 0];
+                /** @var RoundTeamBonus $bonus */
+                $bonus = $em->getRepository('VolleyStatBundle:RoundTeamBonus')->findOneBy(['team'=>$team->getId(), 'round'=>$round->getId()]);
+                $bonus = $bonus ? $bonus->getBonus() : 0;
+                $table[$team->getID()] = ['team' => $team, 'points' => $bonus, 'games' => 0, 'win' => 0, 'loss' => 0, 'win_sets' => 0, 'loss_sets' => 0, 'win_points' => ($bonus > 0 ? $bonus : 0), 'loss_points' => ($bonus < 0 ? $bonus : 0), 'score30' => 0, 'score31' => 0, 'score32' => 0, 'score23' => 0, 'score13' => 0, 'score03' => 0];
             }
 
             /**

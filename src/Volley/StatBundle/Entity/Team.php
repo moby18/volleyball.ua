@@ -172,6 +172,11 @@ class Team
      **/
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Volley\StatBundle\Entity\RoundTeamBonus", mappedBy="team")
+     */
+    private $bonuses;
+
 
     function __construct()
     {
