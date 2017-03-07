@@ -3,6 +3,12 @@
 {% block body -%}
     <h1>Round edit</h1>
 
+    <h4>Round's bonuses:</h4>
+    <ul>
+        {% for bonus in bonuses %}
+            <li><a href="{{ path('stat_round_team_bonus_edit', {'id': bonus.id}) }}">{{ bonus.team }}:  {{ bonus.bonus }}</a></li>
+        {% endfor %}
+    </ul>
     <a href="{{ path('stat_round_team_bonus_new', {roundId: entity.id}) }}">Add Bonus</a>
 
     {{ form(edit_form) }}

@@ -152,11 +152,14 @@ class RoundController extends Controller
             throw $this->createNotFoundException('Unable to find Round entity.');
         }
 
+        $bonuses = $em->getRepository('VolleyStatBundle:RoundTeamBonus')->findBy(['round'=>$entity->getId()]);
+
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
+            'bonuses'     => $bonuses,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );

@@ -6,7 +6,7 @@
     {{ form(edit_form) }}
 
     <div class="btn-group" role="group" aria-label="">
-        <a href="{{ path('stat_round') }}" type="button"
+        <a href="{{ path('stat_round_edit', {'id': entity.round.id}) }}" type="button"
            class="btn btn-default">Back to the list</a>
     </div>
     <div class="pull-right">

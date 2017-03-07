@@ -236,7 +236,7 @@ class RoundTeamBonusController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('round'));
+        return $this->redirect($this->generateUrl('stat_round_edit', ['id'=>$entity->getRound()->getId()]));
     }
 
     /**
