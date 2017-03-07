@@ -64,6 +64,11 @@ class Round
      **/
     protected $teams;
 
+    /**
+     * @ORM\OneToMany(targetEntity="RoundTeamBonus", mappedBy="round")
+     */
+    protected $bonuses;
+
 
     /**
      * Get id
