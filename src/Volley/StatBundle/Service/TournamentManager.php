@@ -45,8 +45,6 @@ class TournamentManager
         /** @var Tournament $tournament */
         $tournament = $em->getRepository('VolleyStatBundle:Tournament')->find($tournamentId);
 
-        $teams = $season->getTeams();
-
         $tournamentRounds = [];
 
         /** @var Round $round */
@@ -61,6 +59,7 @@ class TournamentManager
         
         foreach ($rounds as $round) {
 
+            $teams = $round->getTeams();
             $games = $round->getGames();
 
             $table = [];
@@ -145,6 +144,7 @@ class TournamentManager
                 $row['k'] +=  ($row['loss_sets'] ? $row['win_sets'] / $row['loss_sets'] : $row['win_sets']) * 1000 + ($row['loss_points'] ? $row['win_points'] / $row['loss_points'] : $row['win_points']);
             }
 
+            // 3, 2, 1
             usort($table, function ($a, $b) {
                 return $this->cmp($b['k'], $a['k']);
             });
@@ -153,6 +153,11 @@ class TournamentManager
                 'round' => $round,
                 'table' => $table
             ];
+
+            // 3, 2, 1
+            usort($tournamentRounds, function ($a, $b) {
+                return $this->cmp($b['round']->getOrdering(), $a['round']->getOrdering());
+            });
         }
 
         return array(

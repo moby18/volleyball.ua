@@ -17,6 +17,9 @@
                 </div>
             </div>
             {% for round in rounds %}
+                <div class="row">
+                    <h4 class="text-center">{{ round.round.name }}</h4>
+                </div>
                 {% if season.tournamentTable %}
                 <div class="row">
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
