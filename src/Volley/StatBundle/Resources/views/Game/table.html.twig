@@ -12,7 +12,7 @@
                 {% for tour in date.tours %}
                     <tr>
                         <th colspan="100">
-                            <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) ~ '#' ~ tour.tour.ordering }}">
+                            <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) ~ '#' ~ tour.tour.round.ordering ~ '_' ~ tour.tour.ordering }}">
                                 {{ tour.tour.round.season.tournament.country.name }}
                                 - {{ tour.tour.round.season.tournament.name }}
                                 - {{ tour.tour.round.season.tournament.sex|trans }}
