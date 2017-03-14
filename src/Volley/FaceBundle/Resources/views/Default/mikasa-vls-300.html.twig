@@ -1,8 +1,8 @@
 {% extends '::layout.html.twig' %}
 
 {% set page_image = asset("uploads/products/mikasa-vls300/VLS300.png") %}
-{% set title = "Mikasa VLS300 мяч для пляжного волейбола" %}
-{% set meta_keywords = "мяч, mikasa, vls300, волейбол, пляжний, купить, Україна" %}
+{% set title = "Mikasa VLS300 - купить мяч для пляжного волейбола" %}
+{% set meta_keywords = "мяч, mikasa, vls300, купить, волейбол, пляжний, Україна" %}
 {% set meta_description = "Mikasa VLS 300 мячи для пляжного волейбола от volleyball.ua. Купить в Украине. Цена 1550 гривен." %}
 
 {% block content %}
@@ -24,7 +24,10 @@
 
             <div class="row">
                 <div class="col col-lg-8 col-md-12 col-sm-12">
-                    <h1>Mikasa VLS300 мяч для пляжного волейбола</h1>
+                    <img src="{{ asset("bundles/volleyface/images/market/mikasavls300-770.jpg") }}" width="100%" height="auto" alt="Mikasa VLS300 - купить мяч для пляжного волейбола">
+                </div>
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+                    <h1>Mikasa VLS300 - купить мяч для пляжного волейбола</h1>
 
                     {% if (submit) %}
                         <div class="alert alert-success alert-dismissible" role="alert">
@@ -35,7 +38,7 @@
                     {% endif %}
 
                     <div class="row">
-                        <div class="col col-lg-8 col-md-12 col-sm-12">
+                        <div class="col col-lg-12 col-md-12 col-sm-12">
                             <p><b>volleyball.ua</b> начинает продажу мячей для пляжного волейбола <b>Mikasa
                                     VLS300</b>. Одобреный
                                 FIVB мяч обьединяет в себе все последние технологии для удобной игры и превосходной
@@ -43,8 +46,13 @@
                                 пляжных
                                 соревнований Мирового Тура.</p>
                             <p>
-                            <h2>Описание:</h2>
-                            <ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-lg-8 col-md-12 col-sm-12">
+                            <h2>Характеристики:</h2>
+                            <ul style="list-style: circle; list-style-position: inside;">
                                 <li>Официальный мяч FIVB</li>
                                 <li>Мягкое комбинированное покрытие</li>
                                 <li>Улучшеная управляемость при передаче и ударе</li>
@@ -55,9 +63,9 @@
                             </ul>
                             </p>
                         </div>
-                        <div class="col col-lg-4 col-md-12 col-sm-12">
+                        <div class="col col-lg-4 hidden-md hidden-sm hidden-xs">
                             <img alt="{{ title }}" class="img-responsive"
-                                 src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">
+                                 src="{{ asset("bundles/volleyface/images/market/VLS300.png")}}">
                         </div>
                     </div>
 
