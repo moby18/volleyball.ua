@@ -1,7 +1,7 @@
 <header id="header" role="banner">
     <div class="collapse navbar-white" id="header-search-form">
         <div class="container">
-            <form class="navbar-form animated fadeInDown" action="{{ path('volley_face_search') }}">
+            <form class="navbar-form fadeInDown" action="{{ path('volley_face_search') }}">
                 <input type="search" id="s" name="s" value="{{ app.request.get('s','') }}" class="form-control" placeholder="{% trans %}search{% endtrans %}...">
                 {#<button type="submit" class="" title="Search"><i class="fa fa-search"></i></button>#}
             </form>
