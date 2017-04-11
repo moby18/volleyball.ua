@@ -1,0 +1,18 @@
+{% if persons|length %}
+<div class="row visible-lg visible-md visible-sm">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="section-title">
+                День народження
+            </div>
+        </div>
+    </div>
+    <div class="game-center-data">
+        {% for person in persons %}
+            <img class="img-responsive" src="{{ person.getWebPath }}"
+                 alt="{{ person.firstName ~ ' ' ~ person.middleName ~ ' ' ~ person.lastName}}">
+            {{ person.firstName ~ ' ' ~ person.middleName ~ ' ' ~ person.lastName}}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

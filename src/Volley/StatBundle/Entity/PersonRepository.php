@@ -4,6 +4,8 @@ namespace Volley\StatBundle\Entity;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
+use DoctrineExtensions\Query\Mysql\Month;
+use DoctrineExtensions\Query\Mysql\Day;
 
 class PersonRepository extends EntityRepository
 {
@@ -21,5 +23,25 @@ class PersonRepository extends EntityRepository
             ->setMaxResults(10)
             ->getQuery()->getResult();
 
+    }
+
+    function findByBirthdayDate(\DateTime $date = null)
+    {
+        $emConfig = $this->getEntityManager()->getConfiguration();
+        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
+        $emConfig->addCustomDatetimeFunction('DAY', 'DoctrineExtensions\Query\Mysql\Day');
+
+        $today = $date ? $date : new \DateTime();
+        $qb = $this->createQueryBuilder('p');
+        $query = $qb
+            ->andWhere('DAY(p.birthDate) = :day')
+            ->setParameter('day', $today->format('d'))
+            ->andWhere('MONTH(p.birthDate) = :month')
+            ->setParameter('month', $today->format('m'))
+            ->addOrderBy('p.firstName', 'ASC')
+            ->addOrderBy('p.middleName', 'ASC')
+            ->addOrderBy('p.lastName', 'ASC');
+
+        return $query->getQuery()->getResult();
     }
 }
