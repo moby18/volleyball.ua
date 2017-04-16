@@ -187,6 +187,13 @@ liip_imagine:
             quality: 90
             filters:
                 thumbnail: { size: [190, 270], mode: outbound }
+        player_birthday:
+            quality: 90
+            filters:
+                relative_resize: { widen: 370 }
+                crop:
+                  size: [ 370, 300 ]
+                  start: [ 0, 0 ]
 
 
 knp_paginator:

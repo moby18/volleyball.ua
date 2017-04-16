@@ -716,6 +716,85 @@ footer .bottom-links ul li:hover a {
     border-right: 5px solid black;
 }
 
+/* Player Birthday */
+
+.player-birthday {
+    margin-bottom: 15px;
+}
+
+.player-birthday .img-caption {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.player-birthday .img-caption img {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.player-birthday .img-caption:after {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: url('../bundles/volleyface/images/birthday.png') bottom center transparent;
+    z-index: 1;
+}
+.player-birthday .img-caption-text {
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    padding: 7px;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 500;
+    z-index: 2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.player-birthday .img-caption-text .firstName,
+.player-birthday .img-caption-text .lastName {
+    background-color: #0a98bc;
+    /*background-color: #262533;*/
+    color: #ffffff;
+    padding: 3px;
+    position: absolute;
+    font-weight: bold;
+    right: 10px;
+    -webkit-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    transform: rotate(-5deg);
+}
+
+.player-birthday .img-caption-text .firstName {
+    bottom: 56px;
+}
+.player-birthday .img-caption-text .lastName {
+    bottom: 20px;
+}
+.player-birthday .carousel .carousel-control {
+    border: 0;
+}
+.player-birthday .carousel .carousel-control:hover,
+.player-birthday .carousel .carousel-control:active,
+.player-birthday .carousel .carousel-control:focus {
+    background-color: transparent;
+}
+.player-birthday .carousel .carousel-control.left {
+    left: 10px;
+}
+.player-birthday .carousel .carousel-control.right {
+    right: 10px;
+}
+
 .section-main {
     padding: 0;
     background-color: #262626;
