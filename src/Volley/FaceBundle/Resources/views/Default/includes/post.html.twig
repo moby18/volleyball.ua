@@ -8,14 +8,14 @@
              alt="{{ item.title ~ ' ' ~ item.metakey }}">
     </a>
     <div class="news-info row">
-        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
+        <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-8">
             <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
             <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}"
                title="{{ item.category.name }}"
                style="color: {{ color }}">{{ item.category.name }}</a></span>
             {#<span class="news-author"> / {{ item.createdBy }}</span>#}
         </div>
-        <div class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-34">
             {% if item.videos %}
                 <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
                     <div class="icon-videos" title="{{ 'post-item.post-info.icon-videos'|trans({}) }}"></div>
@@ -24,6 +24,11 @@
             {% if item.images %}
                 <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
                     <div class="icon-images" title="{{ 'post-item.post-info.icon-images'|trans({}) }}"></div>
+                </a>
+            {% endif %}
+            {% if item.vu %}
+                <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
+                    <div class="icon-vu" title="{{ 'post-item.post-info.icon-vu'|trans({}) }}"></div>
                 </a>
             {% endif %}
         </div>

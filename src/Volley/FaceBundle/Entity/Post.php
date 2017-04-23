@@ -218,6 +218,13 @@ class Post
     private $translated;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vu", type="boolean")
+     */
+    private $vu;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -753,6 +760,22 @@ class Post
     public function setTranslated($translated)
     {
         $this->translated = $translated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVu()
+    {
+        return $this->vu;
+    }
+
+    /**
+     * @param bool $vu
+     */
+    public function setVu($vu)
+    {
+        $this->vu = $vu;
     }
 
     /**

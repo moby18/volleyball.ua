@@ -28,6 +28,11 @@ class Filter
     private $recommended;
 
     /**
+     * @var integer
+     */
+    private $vu;
+
+    /**
      * @var User
      */
     private $user;
@@ -42,12 +47,13 @@ class Filter
      */
     protected $form;
 
-    function __construct($category, $state, $featured, $recommended, $user, $search)
+    function __construct($category, $state, $featured, $recommended, $vu, $user, $search)
     {
         $this->category = $category;
         $this->state = $state;
         $this->featured = $featured;
         $this->recommended = $recommended;
+        $this->vu = $vu;
         $this->user = $user;
         $this->search = $search;
     }
@@ -114,6 +120,22 @@ class Filter
     public function setRecommended($recommended)
     {
         $this->recommended = $recommended;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVu()
+    {
+        return $this->vu;
+    }
+
+    /**
+     * @param int $vu
+     */
+    public function setVu($vu)
+    {
+        $this->vu = $vu;
     }
 
     /**
