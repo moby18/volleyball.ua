@@ -22,4 +22,24 @@ class TeamRepository extends EntityRepository
             ->orderBy('s.id','ASC')
             ->getQuery()->getResult();
     }
+
+    /**
+     * * Get team by query
+     *
+     * @param $q
+     * @return array
+     */
+    public function findByName($q)
+    {
+        $qb = $this->createQueryBuilder('t');
+        return $qb->select('t')
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->like('t.name', $qb->expr()->literal('%' . $q . '%'))
+            ))
+            ->orderBy('t.name', 'ASC')
+            ->setFirstResult(0)
+            ->setMaxResults(10)
+            ->getQuery()->getResult();
+
+    }
 }

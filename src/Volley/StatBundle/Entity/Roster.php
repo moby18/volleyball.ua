@@ -49,11 +49,17 @@ class Roster
      */
     protected $roster_persons;
 
+    /**
+     * @ORM\OneToMany(targetEntity="TeamSeason", mappedBy="roster", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $teams_seasons;
+
 
     function __construct()
     {
         $this->current = false;
         $this->roster_persons = new ArrayCollection();
+        $this->teams_seasons = new ArrayCollection();
     }
 
     /**

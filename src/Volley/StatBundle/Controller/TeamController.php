@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -115,6 +116,24 @@ class TeamController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Get Teams json
+     *
+     * @param Request $request
+
+     * @Route("/json", name="stat_team_json")
+     * @Method("GET")
+     *
+     * @return JsonResponse
+     */
+    public function getTeamsByNameAction(Request $request)
+    {
+        $q = $request->query->get('q',' ');
+        $em = $this->getDoctrine()->getManager();
+        $teams = $em->getRepository('VolleyStatBundle:Team')->findByName($q);
+        return JsonResponse::create($teams);
     }
 
     /**

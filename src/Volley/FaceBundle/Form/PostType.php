@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class PostType extends AbstractType
 {
@@ -96,9 +97,40 @@ class PostType extends AbstractType
             ->add('imageSource', null, [
                 'label' => 'Post Image Source'
             ])
-            ->add('teams')
-            ->add('persons')
-        ;
+//            ->add('teams')
+//            ->add('persons');
+            ->add('teams',  Select2EntityType::class, [
+                'label' => false,
+                'multiple' => true,
+                'remote_route' => 'stat_team_json',
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'primary_key' => 'id',
+                'minimum_input_length' => 2,
+                'page_limit' => 10,
+                'allow_clear' => true,
+                'delay' => 250,
+                'cache' => true,
+                'cache_timeout' => 60000, // if 'cache' is true
+                'language' => 'uk',
+                'placeholder' => "Введіть назву команди",
+                'attr' => ['width'=>'100%']
+            ])
+            ->add('persons',  Select2EntityType::class, [
+                'label' => false,
+                'multiple' => true,
+                'remote_route' => 'stat_person_json',
+                'class' => 'Volley\StatBundle\Entity\Person',
+                'primary_key' => 'id',
+                'minimum_input_length' => 2,
+                'page_limit' => 10,
+                'allow_clear' => true,
+                'delay' => 250,
+                'cache' => true,
+                'cache_timeout' => 60000, // if 'cache' is true
+                'language' => 'uk',
+                'placeholder' => "Введіть ім'я гравця, тренера або працівника команди",
+                'attr' => ['width'=>'100%']
+            ]);
     }
     
     /**

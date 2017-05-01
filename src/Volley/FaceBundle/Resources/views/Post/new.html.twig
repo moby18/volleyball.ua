@@ -72,10 +72,13 @@
 {% block scripts %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/post.js') }}"></script>
 {% endblock %}
 
 {% block styles %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/select2/dist/css/select2.min.css') }}" type="text/css"/>
 {% endblock %}

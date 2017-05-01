@@ -12,10 +12,11 @@ use Volley\FaceBundle\Entity\Post;
  * Team
  *
  * @ORM\Table(name="stat_team")
+ * @ORM\Entity
  * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TeamRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Team
+class Team implements \JsonSerializable
 {
     /**
      * @var integer
@@ -339,7 +340,6 @@ class Team
      */
     public function addPost(Post $posts)
     {
-        $posts->addTeam($this);
         $this->posts[] = $posts;
 
         return $this;
@@ -780,5 +780,11 @@ class Team
         return $this->getName();
     }
 
-
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'text' => $this->__toString()
+        ];
+    }
 }

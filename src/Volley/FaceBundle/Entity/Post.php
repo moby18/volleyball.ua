@@ -252,7 +252,7 @@ class Post
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="posts")
      * @ORM\JoinTable(name="posts_teams")
      **/
-    protected $teams;
+    private $teams;
 
 
     /**
