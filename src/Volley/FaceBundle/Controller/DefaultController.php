@@ -268,6 +268,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/advertising", name="volley_face_advertising")
+     * @Template()
+     */
+    public function advertisingAction()
+    {
+        return $this->render('VolleyFaceBundle:Default:advertising.html.twig', []);
+    }
+
+    /**
      * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
      * @Method("GET")
      * @Template()
