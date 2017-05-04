@@ -92,39 +92,66 @@
 
                     {#{% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}#}
 
-                    <div id="comments">
-                        <div class="" data-example-id="togglable-tabs">
-                            <ul class="nav nav-tabs" id="myComments" role="tablist">
-                                <li role="presentation" class="active"><a href="#vk" id="vk-tab" role="tab"
-                                                                          data-toggle="tab" aria-controls="vk"
-                                                                          aria-expanded="true">ВКонтакте</a></li>
-                                <li role="presentation" class=""><a href="#fb" role="tab" id="fb-tab"
-                                                                    data-toggle="tab" aria-controls="fb"
-                                                                    aria-expanded="false">Facebook</a></li>
-                            </ul>
-                            <div class="tab-content" id="myCommentsContent">
-                                <div class="tab-pane fade active in" role="tabpanel" id="vk"
-                                     aria-labelledby="vk-tab">
-                                    <!-- Put this div tag to the place, where the Comments block will be -->
-                                    <div id="vk_comments"></div>
-                                    <script type="text/javascript">
-                                        VK.Widgets.Comments("vk_comments", {
-                                            limit: 10,
-                                            width: "770",
-                                            attach: "*",
-                                            pageUrl: "{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
-                                        });
-                                    </script>
+                    <div class="row">
+                        <div>
+                            <div id="comments">
+                                <div class=""
+                                     data-example-id="togglable-tabs">
+                                    <ul class="nav nav-tabs"
+                                        id="myComments"
+                                        role="tablist">
+                                        <li role="presentation"
+                                            class="active">
+                                            <a href="#vk"
+                                               id="vk-tab"
+                                               role="tab"
+                                               data-toggle="tab"
+                                               aria-controls="vk"
+                                               aria-expanded="true">ВКонтакте</a>
+                                        </li>
+                                        <li role="presentation"
+                                            class=""><a
+                                                    href="#fb"
+                                                    role="tab"
+                                                    id="fb-tab"
+                                                    data-toggle="tab"
+                                                    aria-controls="fb"
+                                                    aria-expanded="false">Facebook</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content"
+                                         id="myCommentsContent">
+                                        <div class="tab-pane fade active in"
+                                             role="tabpanel"
+                                             id="vk"
+                                             aria-labelledby="vk-tab">
+                                            <!-- Put this div tag to the place, where the Comments block will be -->
+                                            <div id="vk_comments"></div>
+                                            <script type="text/javascript">
+                                              VK.Widgets.Comments('vk_comments', {
+                                                limit: 10,
+                                                width: '770',
+                                                attach: '*',
+                                                pageUrl: '{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}'
+                                              })
+                                            </script>
+                                        </div>
+                                        <div class="tab-pane fade"
+                                             role="tabpanel"
+                                             id="fb"
+                                             aria-labelledby="fb-tab">
+                                            <div class="fb-comments"
+                                                 data-href="{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
+                                                 data-width="770"
+                                                 data-numposts="5"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" role="tabpanel" id="fb" aria-labelledby="fb-tab">
-                                    <div class="fb-comments"
-                                         data-href="{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
-                                         data-width="770" data-numposts="5"></div>
-                                </div>
+
                             </div>
                         </div>
-
                     </div>
+
                 </div>
 
                 <div class="col col-lg-4 col-md-12 col-sm-12">
