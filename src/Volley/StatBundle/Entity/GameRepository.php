@@ -13,7 +13,6 @@ class GameRepository extends EntityRepository
         $query = $this->createQueryBuilder('g')
             ->innerJoin('g.season', 'season', Join::WITH, 'season.id = g.season')
             ->innerJoin('season.tournament', 'tournament', Join::WITH, 'tournament.id = season.tournament')
-            ->innerJoin('tournament.country', 'country', Join::WITH, 'country.id = tournament.country')
             ->innerJoin('g.tour', 'tour', Join::WITH, 'tour.id = g.tour')
             ->innerJoin('tour.round', 'round', Join::WITH, 'round.id = tour.round')
             //->innerJoin('g.homeTeam','homeTeam',Join::WITH,'homeTeam.id = g.homeTeam')
@@ -27,7 +26,8 @@ class GameRepository extends EntityRepository
             )->setParameter(1, $filter->getTeam());
         }
         if ($filter->getCountry()) {
-            $query->andWhere('country.id = ?2')
+            $query->innerJoin('tournament.country', 'country', Join::WITH, 'country.id = tournament.country')
+                ->andWhere('country.id = ?2')
                 ->setParameter(2, $filter->getCountry());
         }
         if ($filter->getTournament()) {
@@ -47,7 +47,6 @@ class GameRepository extends EntityRepository
                 ->setParameter(6, $filter->getTour());
         }
         return $query->getQuery();
-
     }
 
     function findDayGames(\DateTime $date = null)
