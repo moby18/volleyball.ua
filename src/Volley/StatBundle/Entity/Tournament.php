@@ -285,6 +285,6 @@ class Tournament
 
     function __toString()
     {
-        return $this->getCountry()->getName() . ' - ' . $this->getName() .' - '. $this->getSex();
+        return $this->getCountry() . ' - ' . $this->getName() .' - '. $this->getSex();
     }
 }

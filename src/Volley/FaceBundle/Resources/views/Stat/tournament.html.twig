@@ -44,7 +44,7 @@
                             <tr>
                                 <td class="text-center">{{ loop.index }}</td>
                                 {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
-                                <td><span class="text-nowrap">{{ '"' ~ row['team'].name ~ '" ' ~ row['team'].city}}</span></td>
+                                <td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>
                                 <td class="text-center">{{ row.games }}</td>
                                 <td class="text-center hidden-xs">{{ row.win }}</td>
                                 <td class="text-center hidden-xs">{{ row.loss }}</td>

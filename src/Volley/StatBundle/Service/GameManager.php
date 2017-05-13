@@ -52,7 +52,7 @@ class GameManager
             $tours = $this->doctrine->getRepository('VolleyStatBundle:Tour')->findByRounds($rounds);
         }
         if ($filter->getTournament()) {
-            $countries = $filter->getTournament()->getCountry();
+            $countries = [$filter->getTournament()->getCountry()];
             $tournaments = [$filter->getTournament()];
             $seasons = $this->doctrine->getRepository('VolleyStatBundle:Season')->findByTournaments($tournaments);
             $rounds = $this->doctrine->getRepository('VolleyStatBundle:Round')->findBySeasons($seasons);
