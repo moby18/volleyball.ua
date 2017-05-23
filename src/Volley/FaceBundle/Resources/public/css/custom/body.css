@@ -93,7 +93,9 @@
 
 .news-item .news-info .icon-images,
 .news-item .news-info .icon-videos,
-.news-item .news-info .icon-vu {
+.news-item .news-info .icon-vu,
+.news-item .news-info .icon-advert,
+.post .news-info .icon-advert {
     float: right;
     margin: 5px 0 5px 5px;
 }
@@ -120,6 +122,22 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+.post .news-info .icon-advert,
+.news-item .news-info .icon-advert {
+    display: inline-block;
+    height: 12px;
+    margin: 6px 0 6px 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 12px;
+    /*background-image: url('../bundles/volleyface/images/icon-vu.png');*/
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center center;*/
+}
+
+
 
 .underline {
     display: block;

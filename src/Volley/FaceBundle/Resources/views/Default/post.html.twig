@@ -58,6 +58,11 @@
                                 {#<br/>#}
                                 {#<span class="news-author ">{{ post.createdBy }}</span>#}
                             </span>
+                            {% if post.advert %}
+                                <a href="{{ path('volley_face_post',{'category_slug': post.category.slug,'post_slug': post.slug}) }}">
+                                    <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
+                                </a>
+                            {% endif %}
                         </div>
                         <span class="clearfix"></span>
                     </div>

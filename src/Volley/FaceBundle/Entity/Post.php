@@ -225,6 +225,13 @@ class Post
     private $vu;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="advert", type="boolean")
+     */
+    private $advert;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -776,6 +783,22 @@ class Post
     public function setVu($vu)
     {
         $this->vu = $vu;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdvert()
+    {
+        return $this->advert;
+    }
+
+    /**
+     * @param bool $advert
+     */
+    public function setAdvert($advert)
+    {
+        $this->advert = $advert;
     }
 
     /**

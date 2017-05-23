@@ -79,6 +79,10 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'VU', 'data-off' => "Not VU", 'data-onstyle' => 'info']
             ])
+            ->add('advert',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Advert', 'data-off' => "Not Advert", 'data-onstyle' => 'info']
+            ])
             ->add('language')
             ->add('category','entity', [
                 'class' => 'Volley\FaceBundle\Entity\Category',
