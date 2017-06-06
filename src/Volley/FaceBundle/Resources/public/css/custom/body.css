@@ -315,6 +315,15 @@
     margin: 0;
 }
 
+.social-links {
+    margin-bottom: 10px;
+}
+
+.social-links .social-icon {
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+
 /* Footer */
 footer {
     color: #fff;
