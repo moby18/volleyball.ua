@@ -1,0 +1,135 @@
+{% extends '::layout.html.twig' %}
+
+{% set page_image = app.request.getSchemeAndHttpHost() ~ ' ' %}
+{% set title = 'Реклама на Волейбол в Україні - volleyball.ua' %}
+{% set h1 = 'Advertising'|trans %}
+{% set meta_keywords = 'реклама, волейбол, волейбол в україні, контакти, зворотній звязов' %}
+{% set meta_description = 'Розмістити рекламу на веб-сайті Волейбол в Україні -  volleyball.ua' %}
+
+
+{% block content %}
+
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) return
+        js = d.createElement(s)
+        js.id = id
+        js.src = '//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850'
+        fjs.parentNode.insertBefore(js, fjs)
+      }(document, 'script', 'facebook-jssdk'))
+    </script>
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="home-title">{{ h1 }}</h1>
+                        </div>
+                    </div>
+
+                    <p>
+                        "Волейбол в Україні - volleyball.ua"
+                        займається пошуком партнера для
+                        розміщення реклами на нашому сайті
+                        та в соціальних мережах.
+                    </p>
+                    <p>
+                        <strong>Ми можемо запропонувати такі
+                            варіанти співпраці:</strong>
+                    <ul>
+                        <li>- розміщення рекламних посилань
+                            на
+                            сайт рекламодавця;
+                        </li>
+                        <li>- розміщення рекламних баннерів
+                            з
+                            посиланям на сайт рекламодавця;
+                        </li>
+                        <li>- розміщення посилань на
+                            волейбольну лінію на сайті
+                            букмекерської контори в нашому
+                            "Матч-Центрі";
+                        </li>
+                        <li>- підготовка спеціальних
+                            матеріалів та рубрик за
+                            підтримки рекламодавця, з
+                            атрибутикою та посиннями на сайт
+                            рекламодавця;
+                        </li>
+                        <li>- розмідення рекламного поста в
+                            соціальних мережах;
+                        </li>
+                    </ul>
+                    </p>
+                    <p>
+                        {#<strong>Вартість нашої#}
+                            {#пропозиції:</strong>#}
+                    {#<ul>#}
+                        {#<li>- від $0.10 за клік з переходом на#}
+                            {#сайт рекламодавця;#}
+                        {#</li>#}
+                        {#<li>- від $0.25 за 1000 показів#}
+                            {#сторінки з баннером#}
+                            {#рекламодавця;#}
+                        {#</li>#}
+                        {#<li>- від $0.50 за 1000 показів#}
+                            {#сторінки з матеріалом спецільно#}
+                            {#підготовленим за підтримки#}
+                            {#рекламодавця;#}
+                        {#</li>#}
+                        {#<li>- від $1 за 1000 показів#}
+                            {#реклами в соціальній мережі;#}
+                        {#</li>#}
+                    {#</ul>#}
+                    {#<br/>#}
+                    З питань реклами і
+                    співпраці звертайтесь на електронну
+                    адресу <a
+                            href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>.
+                    </p>
+
+                    <p>
+                        Приклади можливих рекламних місць:
+                    </p>
+                    <p>
+                        <img src="{{ asset('bundles/volleyface/images/banners/page_top.png') }}" width="100%" height="auto"/>
+                    </p>
+
+                    <p>
+                        <img src="{{ asset('bundles/volleyface/images/banners/page_inside.png') }}" class="img-responsive" />
+                    </p>
+
+                    <p>
+                        <img src="{{ asset('bundles/volleyface/images/banners/page_bottom.png') }}" class="img-responsive" />
+                    </p>
+
+                    <p>
+                        <img src="{{ asset('bundles/volleyface/images/banners/mobile.png') }}" class="img-responsive" />
+                    </p>
+
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>
+                </div>
+                <div class="col-lg-1 col-md-0 col-sm-0"></div>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
+                    {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

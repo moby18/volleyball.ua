@@ -87,6 +87,7 @@ class GameController extends Controller
             $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
             $filterForm = $this->createFilterForm($gameFilter);
             $filterForm->handleRequest($request);
+            $filterForm = $this->createFilterForm($gameFilter); // for recreate filter form according current submitted data
         }
 
         $session = $this->get('session');
@@ -104,7 +105,7 @@ class GameController extends Controller
     {
         $filterForm = $this
             ->createForm(new GameFilterType($gameFilter), $gameFilter, [
-                'action' => $this->generateUrl('stat_game_filter'),
+                'action' => $this->generateUrl('stat_game_filter') . 'fsfds/?page=1', // drop page to default 1 when filter is affected
                 'method' => 'POST',
             ])
             ->add('filter', 'submit', array('label' => 'Filter'))

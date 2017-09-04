@@ -47,8 +47,8 @@
         {#<meta name="theme-color" content="#1c1b29">#}
 
         <!-- Fonts -->
-        <link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}"
-              rel="stylesheet" type="text/css">
+        {#<link href="{{ asset('bundles/volleyface/bower_components/components-font-awesome/css/font-awesome.min.css') }}"#}
+              {#rel="stylesheet" type="text/css">#}
 
         {% block facebook_meta %}
             <meta property="og:site_name" content="{{ setting.siteName|default('Волейбол в Україні - volleyball.ua') }}"/>
@@ -83,17 +83,17 @@
 
     <!-- Bootstrap Core CSS -->
     {% block styles %}
-        <link href="{{ asset('css/style.css') }}?v=10" rel="stylesheet" type='text/css'>
+        <link href="{{ asset('css/style.css') }}?v=14" rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
         <link href="{{ asset(' css/style_ie.css') }}" rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
     {% block head_scripts %}
-        <script src="{{ asset('js/script_header.js') }}?v=10" type="text/javascript"></script>
+        {#<script src="{{ asset('js/script_header.js') }}?v=14" type="text/javascript"></script>#}
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-        <script src="{{ asset('js/script_ie.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/script_ie.js') }}" type="text/javascript" async defer></script>
         <![endif]-->
 
         <!-- Advert page Level advertising -->
@@ -313,16 +313,22 @@
 <!-- /.container -->
 
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=10"></script>
+    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=14"></script>
 
-    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=10" ></script>
+    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=14" async defer></script>
+
+    <script>
+      jQuery("#birthdayCarousel").carousel({
+        interval: 5000
+      });
+    </script>
 {% endblock %}
 
 <!-- Modal social -->
 {% include 'VolleyFaceBundle:Default/includes:modal_social.html.twig' with {} %}
 
 <!-- Modal advertising -->
-{% include 'VolleyFaceBundle:Default/includes:onmediads.html.twig' with {} %}
+{#{% include 'VolleyFaceBundle:Default/includes:onmediads.html.twig' with {} %}#}
 
 </body>
 </html>

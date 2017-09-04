@@ -44,7 +44,6 @@
                                 class="img-caption-text">{{ post.imageDescr ? post.imageDescr : '' }} {{ post.imageSource ? ' / ' ~ post.imageSource : '' }}</figcaption>
                     </figure>
 
-
                     <div class="news-info row">
                         <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
             <span class="news-date">{{ post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
@@ -59,9 +58,16 @@
                                 {#<br/>#}
                                 {#<span class="news-author ">{{ post.createdBy }}</span>#}
                             </span>
+                            {% if post.advert %}
+                                <a href="{{ path('volley_face_post',{'category_slug': post.category.slug,'post_slug': post.slug}) }}">
+                                    <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
+                                </a>
+                            {% endif %}
                         </div>
                         <span class="clearfix"></span>
                     </div>
+
+                    {% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}
 
                     <div class="post-content">
                         <p>
@@ -87,43 +93,95 @@
                         {% endautoescape %}
                     </p>
 
+                    <div class="social-links">
+                        <div>Наші сторінки в соціальних мережах:</div>
+                        <a href="https://www.facebook.com/volleyballua" target="_blank"
+                           class="social-icon icon-facebook" title="Facebook">
+                            <i class="fa fa-facebook"></i> facebook.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://vk.com/volleyballua" target="_blank" class="social-icon icon-vk" title="VK">
+                            <i class="fa fa-vk"></i> vk.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://twitter.com/volleyballua" target="_blank" class="social-icon icon-twitter"
+                           title="Twitter">
+                            <i class="fa fa-twitter"></i> twitter.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://instagram.com/volleyball.ua" target="_blank" class="social-icon icon-twitter"
+                           title="Instagram">
+                            <i class="fa fa-instagram"></i> instagram.com/volleyball.ua
+                        </a>
+                        <br/>
+                        <a href="https://plus.google.com/+VolleyballUa" target="_blank"
+                           class="social-icon icon-google-plus" title="Google Plus">
+                            <i class="fa fa-google-plus"></i> plus.google.com/+VolleyballUa
+                        </a>
+                    </div>
+
+
                     {% include '@VolleyFace/Social/uptolike.html.twig' %}
 
-                    {% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}
+                    <br/>{#{% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}#}
 
-                    <div id="comments">
-                        <div class="" data-example-id="togglable-tabs">
-                            <ul class="nav nav-tabs" id="myComments" role="tablist">
-                                <li role="presentation" class="active"><a href="#vk" id="vk-tab" role="tab"
-                                                                          data-toggle="tab" aria-controls="vk"
-                                                                          aria-expanded="true">ВКонтакте</a></li>
-                                <li role="presentation" class=""><a href="#fb" role="tab" id="fb-tab"
-                                                                    data-toggle="tab" aria-controls="fb"
-                                                                    aria-expanded="false">Facebook</a></li>
-                            </ul>
-                            <div class="tab-content" id="myCommentsContent">
-                                <div class="tab-pane fade active in" role="tabpanel" id="vk"
-                                     aria-labelledby="vk-tab">
-                                    <!-- Put this div tag to the place, where the Comments block will be -->
-                                    <div id="vk_comments"></div>
-                                    <script type="text/javascript">
-                                        VK.Widgets.Comments("vk_comments", {
-                                            limit: 10,
-                                            width: "770",
-                                            attach: "*",
-                                            pageUrl: "{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
-                                        });
-                                    </script>
-                                </div>
-                                <div class="tab-pane fade" role="tabpanel" id="fb" aria-labelledby="fb-tab">
-                                    <div class="fb-comments"
-                                         data-href="{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"
-                                         data-width="770" data-numposts="5"></div>
-                                </div>
-                            </div>
-                        </div>
+                    {#<div id="comments"#}
+                         {#class="visible-lg visible-md visible-sm">#}
+                        {#<div class=""#}
+                             {#data-example-id="togglable-tabs">#}
+                            {#<ul class="nav nav-tabs"#}
+                                {#id="myComments"#}
+                                {#role="tablist">#}
+                                {#<li role="presentation"#}
+                                    {#class="active">#}
+                                    {#<a href="#vk"#}
+                                       {#id="vk-tab"#}
+                                       {#role="tab"#}
+                                       {#data-toggle="tab"#}
+                                       {#aria-controls="vk"#}
+                                       {#aria-expanded="true">ВКонтакте</a>#}
+                                {#</li>#}
+                                {#<li role="presentation"#}
+                                    {#class=""><a#}
+                                            {#href="#fb"#}
+                                            {#role="tab"#}
+                                            {#id="fb-tab"#}
+                                            {#data-toggle="tab"#}
+                                            {#aria-controls="fb"#}
+                                            {#aria-expanded="false">Facebook</a>#}
+                                {#</li>#}
+                            {#</ul>#}
+                            {#<div class="tab-content"#}
+                                 {#id="myCommentsContent">#}
+                                {#<div class="tab-pane fade active in"#}
+                                     {#role="tabpanel"#}
+                                     {#id="vk"#}
+                                     {#aria-labelledby="vk-tab">#}
+                                    {#<!-- Put this div tag to the place, where the Comments block will be -->#}
+                                    {#<div id="vk_comments"></div>#}
+                                    {#<script type="text/javascript">#}
+                                      {#VK.Widgets.Comments('vk_comments', {#}
+                                        {#limit: 10,#}
+                                        {#width: '770',#}
+                                        {#attach: '*',#}
+                                        {#pageUrl: '{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}'#}
+                                      {#})#}
+                                    {#</script>#}
+                                {#</div>#}
+                                {#<div class="tab-pane fade"#}
+                                     {#role="tabpanel"#}
+                                     {#id="fb"#}
+                                     {#aria-labelledby="fb-tab">#}
+                                    {#<div class="fb-comments"#}
+                                         {#data-href="{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"#}
+                                         {#data-width="770"#}
+                                         {#data-numposts="5"></div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
 
-                    </div>
+                    {#</div>#}
+
                 </div>
 
                 <div class="col col-lg-4 col-md-12 col-sm-12">
@@ -147,13 +205,13 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-lg-12" style="padding-top: 15px;">
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12" style="padding-top: 15px;">#}
                                 {#<div class="section-title">#}
                                     {#{{ 'advert'|trans({}) }}#}
                                 {#</div>#}
-                            </div>
-                        </div>
+                            {#</div>#}
+                        {#</div>#}
                         <div class="row">
                             <div class="col-lg-12">
                                 {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col.html.twig' %}
@@ -163,6 +221,23 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12" style="padding-top: 15px;">
+                                <div class="section-title">
+                                    {{ 'advert'|trans({}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% include '@VolleyFace/Default/includes/mikasa-vls300.html.twig' %}
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
 
                     {% if popularPosts|length %}
                         <div class="row">
@@ -209,11 +284,10 @@
 {% block head_scripts %}
     {{ parent() }}
     <!-- Put this script tag to the <head> of your page -->
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?127"></script>
-
-    <script type="text/javascript">
-        VK.init({apiId: 4319865, onlyWidgets: true});
-    </script>
+    {#<script type="text/javascript" src="//vk.com/js/api/openapi.js?127"></script>#}
+    {#<script type="text/javascript">#}
+        {#VK.init({apiId: 4319865, onlyWidgets: true});#}
+    {#</script>#}
 {% endblock %}
 
 {% block scripts %}

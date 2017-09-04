@@ -8,3 +8,8 @@ services:
             class: Volley\StatBundle\Service\GameManager
             arguments:
                 - @doctrine
+
+    volley_stat.person.manager:
+            class: Volley\StatBundle\Service\PersonManager
+            arguments:
+                - @doctrine

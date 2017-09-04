@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
-var cleanCSS = require('gulp-clean-css');
+var minifyCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
@@ -10,7 +10,8 @@ var shell = require('gulp-shell');
 gulp.task('style', function () {
     var source = [
         // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
-        'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
         // 'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
         // 'src/Volley/FaceBundle/Resources/public/css/animations.css',
@@ -24,7 +25,7 @@ gulp.task('style', function () {
     gulp.src(source)
         // .pipe(sourcemaps.init())
         .pipe(concat('style.css'))
-        .pipe(cleanCSS())
+        .pipe(minifyCSS({level: {1: {specialComments: 0}}}))
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
@@ -40,7 +41,7 @@ gulp.task('style_admin', function () {
     gulp.src(source)
         // .pipe(sourcemaps.init())
         .pipe(concat('style_admin.css'))
-        .pipe(cleanCSS())
+        .pipe(minifyCSS({level: {1: {specialComments: 0}}}))
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
@@ -52,16 +53,16 @@ gulp.task('style_ie', function () {
     gulp.src(source)
         // .pipe(sourcemaps.init())
         .pipe(concat('style_ie.css'))
-        .pipe(cleanCSS())
+        .pipe(minifyCSS())
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
 });
 
 gulp.task('script_header', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/js/boss/analytics.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/analytics.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/queryloader2.min.js',
     ];
     gulp.src(source)
@@ -75,10 +76,12 @@ gulp.task('script_header', function () {
 
 gulp.task('script_footer', function () {
     var source = [
+        'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
+        'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/bootstrap.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/jquery.hoverIntent.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/jquery.nicescroll.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.nicescroll.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/waypoints.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/waypoints-sticky.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.debouncedresize.js',
@@ -86,8 +89,8 @@ gulp.task('script_footer', function () {
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jflickrfeed.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.tweet.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.infinitescroll.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/owl.carousel.min.js',
         'src/Volley/FaceBundle/Resources/public/bower_components/jquery.cookie/jquery.cookie.js',

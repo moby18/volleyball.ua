@@ -796,7 +796,7 @@
             })
         },
         parallax: function () {
-            this.mobile || "object" != typeof skrollr || skrollr.init({forceHeight: !1}), this.mobile && a(".parallax, .parallax-fixed").css("background-attachment", "initial")
+            // this.mobile || "object" != typeof skrollr || skrollr.init({forceHeight: !1}), this.mobile && a(".parallax, .parallax-fixed").css("background-attachment", "initial")
         },
         isotopeActivate: function () {
             if (a.fn.isotope) {

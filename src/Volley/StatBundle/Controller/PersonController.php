@@ -275,4 +275,16 @@ class PersonController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * * Game table
+     *
+     * @Route("/birthday", name="stat_person_birthday")
+     * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function birthdayAction()
+    {
+        return $this->render('VolleyStatBundle:Person:birthday.html.twig', $this->get('volley_stat.person.manager')->getBirthdayPersons());
+    }
 }

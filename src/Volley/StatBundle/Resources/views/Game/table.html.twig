@@ -13,12 +13,12 @@
                     <tr>
                         <th colspan="100">
                             <a href="{{ path('stat_tournament_page', {'season_id': tour.tour.round.season.id, 'tournament_id': tour.tour.round.season.tournament.id}) ~ '#' ~ tour.tour.round.ordering ~ '_' ~ tour.tour.ordering }}">
-                                {{ tour.tour.round.season.tournament.country.name }}
-                                - {{ tour.tour.round.season.tournament.name }}
-                                - {{ tour.tour.round.season.tournament.sex|trans }}
+                                {{ (tour.tour.round.season.tournament.country ? tour.tour.round.season.tournament.country ~ ' - ' : '')  }}
+                                {{ tour.tour.round.season.tournament.name ~ ' - ' }}
+                                {{ tour.tour.round.season.tournament.sex|trans ~ ' - ' }}
                                 {# - {{ tour.tour.round.season.name }} #}
                                 {#- {{ tour.tour.round.name }}#}
-                                - {{ tour.tour.name }}
+                                {{ tour.tour.name }}
                             </a>
                         </th>
                     </tr>

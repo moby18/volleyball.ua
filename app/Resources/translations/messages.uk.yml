@@ -8,12 +8,15 @@ user:
 News: Новини
 Tournaments: Турніри
 Contact Us: Контакти
+Advertising: Реклама
 
 # Texts
 post-item:
   post-info:
     icon-images: Фото всередині
     icon-videos: Відео всередині
+    icon-vu: volleyball.ua
+    icon-advert: Реклама
     icon-hits: Переглядів
     source: Джерело
 

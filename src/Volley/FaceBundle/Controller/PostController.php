@@ -37,6 +37,7 @@ class PostController extends Controller
             $stateFilter = 12;
             $featuredFilter = 12;
             $recommendedFilter = 12;
+            $vuFilter = 12;
             $userFilter = null;
             $searchFilter = '';
             $page = 1;
@@ -45,6 +46,7 @@ class PostController extends Controller
             $stateFilter = $request->request->get('state', $session->get('stateFilter', 12));
             $featuredFilter = $request->request->get('featured', $session->get('featuredFilter', 12));
             $recommendedFilter = $request->request->get('recommended', $session->get('recommendedFilter', 12));
+            $vuFilter = $request->request->get('vu', $session->get('vuFilter', 12));
             $userFilter = $request->request->get('user', $session->get('userFilter', null));
             $searchFilter = $request->request->get('search', $session->get('searchFilter', ''));
             if ($session->get('stateFilter') != $stateFilter || $session->get('searchFilter') != $searchFilter || $session->get('featuredFilter') != $featuredFilter || $session->get('recommendedFilter') != $recommendedFilter || $session->get('categoryFilter') != $categoryFilter)
@@ -57,11 +59,12 @@ class PostController extends Controller
         $session->set('stateFilter', $stateFilter);
         $session->set('featuredFilter', $featuredFilter);
         $session->set('recommendedFilter', $recommendedFilter);
+        $session->set('vuFilter', $vuFilter);
         $session->set('userFilter', $userFilter);
         $session->set('searchFilter', $searchFilter);
         $session->set('page', $page);
 
-        $filter = new Filter($categoryFilter ? $em->getRepository('VolleyFaceBundle:Category')->find($categoryFilter) : null, $stateFilter, $featuredFilter, $recommendedFilter, $userFilter ? $em->getRepository('VolleyUserBundle:User')->find($userFilter) : null, $searchFilter);
+        $filter = new Filter($categoryFilter ? $em->getRepository('VolleyFaceBundle:Category')->find($categoryFilter) : null, $stateFilter, $featuredFilter, $recommendedFilter, $vuFilter,$userFilter ? $em->getRepository('VolleyUserBundle:User')->find($userFilter) : null, $searchFilter);
         $filterForm = $this->createForm(new FilterType(), $filter);
 
         $query = $em->getRepository('VolleyFaceBundle:Post')
@@ -70,6 +73,7 @@ class PostController extends Controller
                 $stateFilter,
                 $featuredFilter,
                 $recommendedFilter,
+                $vuFilter,
                 $userFilter,
                 $searchFilter
             );

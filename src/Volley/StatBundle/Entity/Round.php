@@ -284,6 +284,6 @@ class Round
         $season = $this->getSeason();
         $tournament = $season->getTournament();
         $country = $tournament->getCountry();
-        return $country->getName() . ' - ' . $tournament->getName() . ' - ' . $tournament->getSex() . ' - ' . $season->getName() . ' - ' . $this->getName();
+        return $country . ' - ' . $tournament->getName() . ' - ' . $tournament->getSex() . ' - ' . $season->getName() . ' - ' . $this->getName();
     }
 }

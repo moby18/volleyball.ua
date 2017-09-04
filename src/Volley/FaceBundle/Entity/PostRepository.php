@@ -105,7 +105,7 @@ class PostRepository extends EntityRepository
             ->execute();
     }
 
-    public function findAllPosts($categoryFilter = null, $stateFilter = 12, $featuredFilter = 12, $recommendedFilter = 12, $userFilter = null, $searchFilter = "")
+    public function findAllPosts($categoryFilter = null, $stateFilter = 12, $featuredFilter = 12, $recommendedFilter = 12, $vuFilter = 12, $userFilter = null, $searchFilter = "")
     {
         $qb = $this->createQueryBuilder('p');
         $qb->select('p')
@@ -120,6 +120,8 @@ class PostRepository extends EntityRepository
             $qb->andWhere('p.createdBy = ?4')->setParameter(4, $userFilter);
         if ($recommendedFilter < 12)
             $qb->andWhere('p.recommended = ?5')->setParameter(5, $recommendedFilter);
+        if ($vuFilter < 12)
+            $qb->andWhere('p.vu = ?6')->setParameter(6, $vuFilter);
         if ($searchFilter != "")
             $qb->andWhere($qb->expr()->like('p.title', $qb->expr()->literal('%' . $searchFilter . '%')));
 

@@ -218,6 +218,20 @@ class Post
     private $translated;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vu", type="boolean")
+     */
+    private $vu;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="advert", type="boolean")
+     */
+    private $advert;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -245,7 +259,7 @@ class Post
      * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="posts")
      * @ORM\JoinTable(name="posts_teams")
      **/
-    protected $teams;
+    private $teams;
 
 
     /**
@@ -753,6 +767,38 @@ class Post
     public function setTranslated($translated)
     {
         $this->translated = $translated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVu()
+    {
+        return $this->vu;
+    }
+
+    /**
+     * @param bool $vu
+     */
+    public function setVu($vu)
+    {
+        $this->vu = $vu;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdvert()
+    {
+        return $this->advert;
+    }
+
+    /**
+     * @param bool $advert
+     */
+    public function setAdvert($advert)
+    {
+        $this->advert = $advert;
     }
 
     /**

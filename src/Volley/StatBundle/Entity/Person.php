@@ -662,7 +662,6 @@ class Person implements \JsonSerializable
      */
     public function addPost(Post $posts)
     {
-        $posts->addPerson($this);
         $this->posts[] = $posts;
 
         return $this;

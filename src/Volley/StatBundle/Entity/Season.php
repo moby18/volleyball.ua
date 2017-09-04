@@ -400,6 +400,6 @@ class Season
 
     function __toString()
     {
-        return $this->getTournament()->getCountry()->getName() . ' - ' . $this->getTournament()->getName() .' - ' . $this->getTournament()->getSex(). ' - ' . $this->getName();
+        return $this->getTournament()->getCountry() . ' - ' . $this->getTournament()->getName() .' - ' . $this->getTournament()->getSex(). ' - ' . $this->getName();
     }
 }
