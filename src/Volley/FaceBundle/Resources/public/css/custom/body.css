@@ -926,14 +926,14 @@ html {
 }
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 430px;
+    margin-bottom: 480px;
 }
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 430px;
+    height: 480px;
     background-color: #000000;
     background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
     background-repeat: repeat;
@@ -941,10 +941,10 @@ body {
 
 @media (max-width: 767px) {
     body {
-        margin-bottom: 1065px;
+        margin-bottom: 1255px;
     }
     .footer {
-        height: 1065px;
+        height: 1255px;
     }
 }
 @media (width: 768px) {
