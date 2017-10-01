@@ -5,4 +5,4 @@ setting_edit:
 setting_update:
     path:  /{id}/update
     defaults: { _controller: "VolleyFaceBundle:Setting:update" }
-    requirements: { _method: post|put }
+    requirements: { methods: post|put }

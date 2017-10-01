@@ -1,34 +1,34 @@
 post:
-    pattern:  /
+    path:  /
     defaults: { _controller: "VolleyFaceBundle:Post:index" }
 
 post_show:
-    pattern:  /{id}/show
+    path:  /{id}/show
     defaults: { _controller: "VolleyFaceBundle:Post:show" }
 
 post_preview:
-    pattern:  /{id}/preview
+    path:  /{id}/preview
     defaults: { _controller: "VolleyFaceBundle:Post:preview" }
 
 post_new:
-    pattern:  /new
+    path:  /new
     defaults: { _controller: "VolleyFaceBundle:Post:new" }
 
 post_create:
-    pattern:  /create
+    path:  /create
     defaults: { _controller: "VolleyFaceBundle:Post:create" }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 post_edit:
-    pattern:  /{id}/edit
+    path:  /{id}/edit
     defaults: { _controller: "VolleyFaceBundle:Post:edit" }
 
 post_update:
-    pattern:  /{id}/update
+    path:  /{id}/update
     defaults: { _controller: "VolleyFaceBundle:Post:update" }
-    requirements: { _method: post|put }
+    requirements: { methods: post|put }
 
 post_delete:
-    pattern:  /{id}/delete
+    path:  /{id}/delete
     defaults: { _controller: "VolleyFaceBundle:Post:delete" }
-    requirements: { _method: post|delete }
+    requirements: { methods: post|delete }

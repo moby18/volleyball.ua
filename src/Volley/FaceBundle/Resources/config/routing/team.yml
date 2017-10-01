@@ -1,30 +1,30 @@
 team:
-    pattern:  /
+    path:  /
     defaults: { _controller: "VolleyFaceBundle:Team:index" }
 
 team_show:
-    pattern:  /{id}/show
+    path:  /{id}/show
     defaults: { _controller: "VolleyFaceBundle:Team:show" }
 
 team_new:
-    pattern:  /new
+    path:  /new
     defaults: { _controller: "VolleyFaceBundle:Team:new" }
 
 team_create:
-    pattern:  /create
+    path:  /create
     defaults: { _controller: "VolleyFaceBundle:Team:create" }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 team_edit:
-    pattern:  /{id}/edit
+    path:  /{id}/edit
     defaults: { _controller: "VolleyFaceBundle:Team:edit" }
 
 team_update:
-    pattern:  /{id}/update
+    path:  /{id}/update
     defaults: { _controller: "VolleyFaceBundle:Team:update" }
-    requirements: { _method: post|put }
+    requirements: { methods: post|put }
 
 team_delete:
-    pattern:  /{id}/delete
+    path:  /{id}/delete
     defaults: { _controller: "VolleyFaceBundle:Team:delete" }
-    requirements: { _method: post|delete }
+    requirements: { methods: post|delete }
