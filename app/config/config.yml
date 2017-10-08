@@ -32,14 +32,15 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
+#    form:
+#        resources: ['bootstrap_3_layout.html.twig']
     globals:
         default_category_color: "#888888"
         fb_app_id: %fb_app_id%
         ga_id: %ga_id%
         google_api_key: %google_api_key%
     form_themes:
+        - 'bootstrap_3_layout.html.twig'
         - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
 
 
@@ -76,6 +77,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Volley\UserBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
 
 doctrine_migrations:
     dir_name: %kernel.root_dir%/DoctrineMigrations
@@ -209,5 +213,5 @@ knp_paginator:
 
 presta_sitemap:
     timetolive: 3600
-    dumper_base_url: "http://www.volleyball.ua/"
+    #dumper_base_url: "http://www.volleyball.ua/"
     route_annotation_listener: false

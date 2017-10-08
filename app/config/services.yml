@@ -9,5 +9,5 @@ services:
 
     my.sitemap.listener:
             class: %volley.sitemap.listener.class%
-            arguments: [@router, @doctrine]
+            arguments: ['@router', '@doctrine']
             tags: [{name: "presta.sitemap.listener"}]
