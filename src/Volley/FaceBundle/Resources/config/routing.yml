@@ -44,6 +44,6 @@ VolleyFaceBundle_admin_slide:
     type:     annotation
 
 volley_face_default:
-    resource: "Volley\FaceBundle\Controller\DefaultController"
+    resource: "@VolleyFaceBundle/Controller/DefaultController.php"
     type: annotation
     prefix:   /

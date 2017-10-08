@@ -16,7 +16,7 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
-        engines: ['twig']
+        engines: ["twig"]
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -33,15 +33,15 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 #    form:
-#        resources: ['bootstrap_3_layout.html.twig']
+#        resources: ["bootstrap_3_layout.html.twig"]
     globals:
         default_category_color: "#888888"
-        fb_app_id: %fb_app_id%
-        ga_id: %ga_id%
-        google_api_key: %google_api_key%
+        fb_app_id: "%fb_app_id%"
+        ga_id: "%ga_id%"
+        google_api_key: "%google_api_key%"
     form_themes:
-        - 'bootstrap_3_layout.html.twig'
-        - 'TetranzSelect2EntityBundle:Form:fields.html.twig'
+        - "bootstrap_3_layout.html.twig"
+        - "TetranzSelect2EntityBundle:Form:fields.html.twig"
 
 
 # Doctrine Configuration
@@ -65,16 +65,16 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
-    username:  '%mailer_user%'
-    password:  '%mailer_password%'
+    transport: "%mailer_transport%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
     menu: ~  # enables twig helpers for menu
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm # other valid values are "mongodb", "couchdb" and "propel"
     firewall_name: main
     user_class: Volley\UserBundle\Entity\User
     from_email:
@@ -82,7 +82,7 @@ fos_user:
         sender_name: "%mailer_user%"
 
 doctrine_migrations:
-    dir_name: %kernel.root_dir%/DoctrineMigrations
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
@@ -91,9 +91,9 @@ stfalcon_tinymce:
     include_jquery: true
     tinymce_jquery: true
     selector: ".tinymce"
-    base_url: %base_url% # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
+    base_url: "%base_url%" # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
     # Get current language from the parameters.ini
-    language: %locale%
+    language: "%locale%"
     # Custom buttons
     tinymce_buttons:
         stfalcon: # Id of the first button
@@ -116,8 +116,8 @@ stfalcon_tinymce:
             toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example | moxiemanager"
             image_advtab: true
             templates:
-               - {title: 'Test template 1', content: 'Test 1'}
-               - {title: 'Test template 2', content: 'Test 2'}
+               - {title: "Test template 1", content: "Test 1"}
+               - {title: "Test template 2", content: "Test 2"}
         # BBCode tag compatible theme (see http://www.bbcode.org/reference.php)
         bbcode:
              plugins: ["bbcode, code, link, preview"]
