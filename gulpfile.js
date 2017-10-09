@@ -10,17 +10,17 @@ var shell = require('gulp-shell');
 gulp.task('style', function () {
     var source = [
         // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
-        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/components-font-awesome/css/font-awesome.min.css',
         // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
-        // 'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
+        // 'node_modules/bootstrap/dist/css/bootstrap.css',
         // 'src/Volley/FaceBundle/Resources/public/css/animations.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/style.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
-        'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/assets/owl.carousel.min.css',
+        'node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
     ];
     gulp.src(source)
         // .pipe(sourcemaps.init())
@@ -32,10 +32,10 @@ gulp.task('style', function () {
 
 gulp.task('style_admin', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css',
+        'node_modules/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css',
-        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css',
+        'node_modules/components-font-awesome/css/font-awesome.min.css',
         'src/Volley/FaceBundle/Resources/public/css/admin/styles.css'
     ];
     gulp.src(source)
@@ -92,8 +92,8 @@ gulp.task('script_footer', function () {
         // 'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/owl.carousel/dist/owl.carousel.min.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/jquery.cookie/jquery.cookie.js',
+        'node_modules/owl.carousel/dist/owl.carousel.min.js',
+        'node_modules/jquery.cookie/jquery.cookie.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
     ];
     gulp.src(source)
@@ -112,11 +112,11 @@ gulp.task('script', function () {
 
 gulp.task('script_admin', function () {
     var source = [
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/jquery/dist/jquery.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.js',
+        'node_modules/jquery/dist/jquery.min.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/slide.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/game.js',
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js',
+        'node_modules/bootstrap-toggle/js/bootstrap-toggle.min.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -158,8 +158,8 @@ gulp.task('script_ie', function () {
 gulp.task('fonts', function () {
     return gulp.src([
         'src/Volley/FaceBundle/Resources/public/fonts/*',
-        'src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/fonts/*',
-        'src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/fonts/*'
+        'node_modules/bootstrap/dist/fonts/*',
+        'node_modules/components-font-awesome/fonts/*'
     ])
         .pipe(gulp.dest('web/fonts/'))
 });
