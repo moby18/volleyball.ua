@@ -4,6 +4,8 @@ namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Volley\StatBundle\Entity\Person;
@@ -28,7 +30,7 @@ class PersonType extends AbstractType
             ->add('lastName')
             ->add('slug')
             ->add('country')
-            ->add('birthDate', 'date', array(
+            ->add('birthDate', DateType::class, array(
                     'years' => range(1950, 2016),
                     'format' => 'dd-MMM-yyyy'
                 )
@@ -51,7 +53,7 @@ class PersonType extends AbstractType
             ->add('weight')
             ->add('spike')
             ->add('block')
-            ->add('description', 'textarea', [
+            ->add('description', TextareaType::class, [
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced' // simple, advanced, bbcode

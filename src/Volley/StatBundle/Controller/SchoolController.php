@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -89,12 +90,12 @@ class SchoolController extends Controller
      */
     private function createCreateForm(School $entity)
     {
-        $form = $this->createForm(new SchoolType(), $entity, array(
+        $form = $this->createForm(SchoolType::class, $entity, array(
             'action' => $this->generateUrl('stat_school_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -179,12 +180,12 @@ class SchoolController extends Controller
     */
     private function createEditForm(School $entity)
     {
-        $form = $this->createForm(new SchoolType(), $entity, array(
+        $form = $this->createForm(SchoolType::class, $entity, array(
             'action' => $this->generateUrl('stat_school_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -265,7 +266,7 @@ class SchoolController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_school_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

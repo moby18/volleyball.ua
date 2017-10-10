@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -65,7 +66,7 @@ class PostController extends Controller
         $session->set('page', $page);
 
         $filter = new Filter($categoryFilter ? $em->getRepository('VolleyFaceBundle:Category')->find($categoryFilter) : null, $stateFilter, $featuredFilter, $recommendedFilter, $vuFilter,$userFilter ? $em->getRepository('VolleyUserBundle:User')->find($userFilter) : null, $searchFilter);
-        $filterForm = $this->createForm(new FilterType(), $filter);
+        $filterForm = $this->createForm(FilterType::class, $filter);
 
         $query = $em->getRepository('VolleyFaceBundle:Post')
             ->findAllPosts(
@@ -142,12 +143,12 @@ class PostController extends Controller
      */
     private function createCreateForm(Post $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(PostType::class, $entity, array(
             'action' => $this->generateUrl('post_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -243,12 +244,12 @@ class PostController extends Controller
      */
     private function createEditForm(Post $entity)
     {
-        $form = $this->createForm(new PostType(), $entity, array(
+        $form = $this->createForm(PostType::class, $entity, array(
             'action' => $this->generateUrl('post_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -312,7 +313,7 @@ class PostController extends Controller
 
         $targetDir = rtrim(__DIR__ . '/../../../../web', '/');
         $dumper = $this->get('presta_sitemap.dumper');
-        $baseUrl = $this->getParameter('presta_sitemap.dumper_base_url');
+        $baseUrl = $this->getParameter('base_url');
         $baseUrl = rtrim($baseUrl, '/') . '/';
         $options = array('gzip' => false, 'section' => 'posts');
         $dumper->dump($targetDir, $baseUrl, null, $options);
@@ -366,7 +367,7 @@ class PostController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('post_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm();
     }
 }

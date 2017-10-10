@@ -4,6 +4,7 @@ namespace Volley\StatBundle\Controller;
 
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -145,12 +146,12 @@ class SchoolPersonController extends Controller
     */
     private function createCreateForm(SchoolPerson $entity)
     {
-        $form = $this->createForm(new SchoolPersonType(), $entity, array(
+        $form = $this->createForm(SchoolPersonType::class, $entity, array(
             'action' => $this->generateUrl('stat_schoolperson_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Додати'));
+        $form->add('submit', SubmitType::class, array('label' => 'Додати'));
 
         return $form;
     }
@@ -164,12 +165,12 @@ class SchoolPersonController extends Controller
      */
     private function createCreateFormFront(SchoolPerson $entity)
     {
-        $form = $this->createForm(new SchoolPersonType(), $entity, array(
+        $form = $this->createForm(SchoolPersonType::class, $entity, array(
             'action' => $this->generateUrl('stat_schoolperson_front_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Додати'));
+        $form->add('submit', SubmitType::class, array('label' => 'Додати'));
 
         return $form;
     }
@@ -288,12 +289,12 @@ class SchoolPersonController extends Controller
     */
     private function createEditForm(SchoolPerson $entity)
     {
-        $form = $this->createForm(new SchoolPersonType(), $entity, array(
+        $form = $this->createForm(SchoolPersonType::class, $entity, array(
             'action' => $this->generateUrl('stat_schoolperson_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -368,7 +369,7 @@ class SchoolPersonController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_schoolperson_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

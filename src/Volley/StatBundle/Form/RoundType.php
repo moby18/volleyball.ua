@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -25,7 +26,7 @@ class RoundType extends AbstractType
                 ->add('ordering')
                 ->add('type')
                 ->add('season')
-                ->add('teams', 'entity', [
+                ->add('teams', EntityType::class, [
                     'class' => 'Volley\StatBundle\Entity\Team',
                     'required' => false,
                     'expanded' => false,

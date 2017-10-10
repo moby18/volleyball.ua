@@ -3,6 +3,7 @@
 namespace Volley\FaceBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -27,7 +28,7 @@ class PurchaseType extends AbstractType
                 'label' => 'Email',
                 'required' => false
             ])
-            ->add('comment', 'textarea', [
+            ->add('comment', TextareaType::class, [
                 'label' => 'Комментарий',
                 'required' => false
             ])

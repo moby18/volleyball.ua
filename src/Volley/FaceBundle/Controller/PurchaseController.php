@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -63,12 +64,12 @@ class PurchaseController extends Controller
      */
     private function createCreateForm(Purchase $entity)
     {
-        $form = $this->createForm(new PurchaseType(), $entity, array(
+        $form = $this->createForm( PurchaseType::class, $entity, array(
             'action' => $this->generateUrl('admin_round_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -142,12 +143,12 @@ class PurchaseController extends Controller
      */
     private function createEditForm(Purchase $entity)
     {
-        $form = $this->createForm(new PurchaseType(), $entity, array(
+        $form = $this->createForm(PurchaseType::class, $entity, array(
             'action' => $this->generateUrl('admin_round_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -219,20 +220,20 @@ class PurchaseController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_round_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm();
     }
 
     public function buyAction()
     {
         $entity = new Purchase();
-        $form = $this->createForm(new PurchaseType(), $entity, array(
+        $form = $this->createForm(PurchaseType::class, $entity, array(
             'action' => $this->generateUrl('volley_face_mikasa_vls300_buy'),
             'method' => 'POST',
             'attr' => ['class' => ' dfgfd']
         ));
 
-        $form->add('submit', 'submit', array('label' => 'ХОЧУ КУПИТЬ!', 'attr'=> ['class' => 'btn btn-lg btn-success btn-block']));
+        $form->add('submit', SubmitType::class, array('label' => 'ХОЧУ КУПИТЬ!', 'attr'=> ['class' => 'btn btn-lg btn-success btn-block']));
 
         return $this->render('VolleyFaceBundle:Purchase:buy.html.twig', array(
             'entity' => $entity,

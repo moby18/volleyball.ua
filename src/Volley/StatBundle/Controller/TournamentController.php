@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -87,12 +88,12 @@ class TournamentController extends Controller
      */
     private function createCreateForm(Tournament $entity)
     {
-        $form = $this->createForm(new TournamentType(), $entity, array(
+        $form = $this->createForm(TournamentType::class, $entity, array(
             'action' => $this->generateUrl('stat_tournament_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -176,12 +177,12 @@ class TournamentController extends Controller
      */
     private function createEditForm(Tournament $entity)
     {
-        $form = $this->createForm(new TournamentType(), $entity, array(
+        $form = $this->createForm(TournamentType::class, $entity, array(
             'action' => $this->generateUrl('stat_tournament_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -258,7 +259,7 @@ class TournamentController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_tournament_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm();
     }
 

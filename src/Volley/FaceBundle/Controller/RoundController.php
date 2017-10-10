@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -62,12 +63,12 @@ class RoundController extends Controller
     */
     private function createCreateForm(Round $entity)
     {
-        $form = $this->createForm(new RoundType(), $entity, array(
+        $form = $this->createForm(RoundType::class, $entity, array(
             'action' => $this->generateUrl('admin_round_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -141,12 +142,12 @@ class RoundController extends Controller
     */
     private function createEditForm(Round $entity)
     {
-        $form = $this->createForm(new RoundType(), $entity, array(
+        $form = $this->createForm(RoundType::class, $entity, array(
             'action' => $this->generateUrl('admin_round_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -216,7 +217,7 @@ class RoundController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('admin_round_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

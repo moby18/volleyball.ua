@@ -26,3 +26,6 @@ parameters:
     recommended_post_count: 5
 
     google_api_key: ~
+
+    router.request_context.host:   www.volleyball.ua
+    router.request_context.scheme: http

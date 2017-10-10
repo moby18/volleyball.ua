@@ -2,13 +2,10 @@
 
 namespace Volley\StatBundle\Form;
 
-use Assetic\Asset\BaseAsset;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Volley\StatBundle\Entity\RoundRepository;
 use Volley\StatBundle\Entity\SeasonRepository;
@@ -20,45 +17,26 @@ use Volley\StatBundle\Form\Model\GameFilter;
 class GameFilterType extends AbstractType
 {
     /**
-     * @var Request
-     */
-    private $request;
-
-    /**
-     * @var GameFilter
-     */
-    private $gameFilter;
-
-    /**
-     * GameFilterType constructor.
-     *
-     * @param GameFilter $gameFilter
-     */
-    public function __construct(GameFilter $gameFilter)
-    {
-        $this->gameFilter = $gameFilter;
-    }
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $gameFilter = $this->gameFilter;
+        /** @var GameFilter $gameFilter */
+        $gameFilter = $options['gameFilter'];
         $builder
-            ->add('country', 'entity', [
+            ->add('country', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Country',
                 'label' => false,
-                'empty_value' => ' - Country - ',
+                'placeholder' => ' - Country - ',
                 'empty_data' => null,
                 'required' => false,
                 'attr'=>["onchange"=>"this.form.submit()"]
             ])
-            ->add('tournament', 'entity', [
+            ->add('tournament', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Tournament',
                 'label' => false,
-                'empty_value' => ' - Tournament - ',
+                'placeholder' => ' - Tournament - ',
                 'empty_data' => null,
                 'required' => false,
                 'query_builder' => function (TournamentRepository $repository) use ($gameFilter) {
@@ -73,10 +51,10 @@ class GameFilterType extends AbstractType
                 },
                 'attr'=>["onchange"=>"this.form.submit()"]
             ])
-            ->add('season', 'entity', [
+            ->add('season', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Season',
                 'label' => false,
-                'empty_value' => ' - Season - ',
+                'placeholder' => ' - Season - ',
                 'empty_data' => null,
                 'required' => false,
                 'query_builder' => function (SeasonRepository $repository) use ($gameFilter) {
@@ -96,10 +74,10 @@ class GameFilterType extends AbstractType
                 },
                 'attr'=>["onchange"=>"this.form.submit()"]
             ])
-            ->add('round', 'entity', [
+            ->add('round', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Round',
                 'label' => false,
-                'empty_value' => ' - Round - ',
+                'placeholder' => ' - Round - ',
                 'empty_data' => null,
                 'required' => false,
                 'query_builder' => function (RoundRepository $repository) use ($gameFilter) {
@@ -119,10 +97,10 @@ class GameFilterType extends AbstractType
                 },
                 'attr'=>["onchange"=>"this.form.submit()"]
             ])
-            ->add('tour', 'entity', [
+            ->add('tour', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Tour',
                 'label' => false,
-                'empty_value' => ' - Tour - ',
+                'placeholder' => ' - Tour - ',
                 'empty_data' => null,
                 'required' => false,
                 'query_builder' => function (TourRepository $repository) use ($gameFilter) {
@@ -147,10 +125,10 @@ class GameFilterType extends AbstractType
                 },
                 'attr'=>["onchange"=>"this.form.submit()"]
             ])
-            ->add('team', 'entity', [
+            ->add('team', EntityType::class, [
                 'class' => 'Volley\StatBundle\Entity\Team',
                 'label' => false,
-                'empty_value' => ' - Team - ',
+                'placeholder' => ' - Team - ',
                 'empty_data' => null,
                 'required' => false,
                 'query_builder' => function (TeamRepository $repository) use ($gameFilter) {
@@ -192,13 +170,6 @@ class GameFilterType extends AbstractType
             'attr' => ['class' => 'form-inline'],
             'csrf_protection' => false
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'filter';
+        $resolver->setRequired('gameFilter');
     }
 }

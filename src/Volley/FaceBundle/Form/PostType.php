@@ -3,9 +3,12 @@
 namespace Volley\FaceBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -25,10 +28,10 @@ class PostType extends AbstractType
                 'label' => false,
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Slug Update', 'data-off' => 'Slug Manual', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
             ])
-            ->add('content', 'textarea', [
+            ->add('content', TextareaType::class, [
                 'label' => 'Short content'
             ])
-            ->add('text', 'textarea', [
+            ->add('text', TextareaType::class, [
                 'label' => 'Full text',
                 'attr' => array(
                     'class' => 'tinymce',
@@ -40,7 +43,7 @@ class PostType extends AbstractType
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Published', 'data-off' => 'Unpublished', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
             ])
 //            ->add('created')
-            ->add('published', 'datetime', [
+            ->add('published', DateTimeType::class, [
                 'widget' => 'single_text',
 //                'widget' => 'choice',
                 'format' => 'yyyy-MM-dd HH:mm:ss',
@@ -84,7 +87,7 @@ class PostType extends AbstractType
                 'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Advert', 'data-off' => "Not Advert", 'data-onstyle' => 'info']
             ])
             ->add('language')
-            ->add('category','entity', [
+            ->add('category',EntityType::class, [
                 'class' => 'Volley\FaceBundle\Entity\Category',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')

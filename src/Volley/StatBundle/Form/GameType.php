@@ -2,42 +2,30 @@
 
 namespace Volley\StatBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Entity\TeamRepository;
 
 class GameType extends AbstractType
 {
     /**
-     * @var Game
-     */
-    private $game;
-
-    /**
-     * @param Game $game
-     *
-     * GameType constructor.
-     */
-    public function __construct(Game $game)
-    {
-        $this->game = $game;
-    }
-
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $game = $this->game;
+        /** @var Game $game */
+        $game = $options['game'];
         $builder
             ->add('number')
             ->add('season')
             ->add('round')
             ->add('tour')
-            ->add('homeTeam','entity',[
+            ->add('homeTeam',EntityType::class,[
                 'class' => 'Volley\StatBundle\Entity\Team',
                 'query_builder' =>  function (TeamRepository $repository) use ($game) {
                     $query = $repository->createQueryBuilder('t')
@@ -51,7 +39,7 @@ class GameType extends AbstractType
                     return $query;
                 }
             ])
-            ->add('awayTeam','entity',[
+            ->add('awayTeam',EntityType::class,[
                 'class' => 'Volley\StatBundle\Entity\Team',
                 'query_builder' =>  function (TeamRepository $repository) use ($game) {
                     $query = $repository->createQueryBuilder('t')
@@ -73,7 +61,7 @@ class GameType extends AbstractType
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
-            ->add('date', 'datetime', [
+            ->add('date', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'YYYY-MM-dd HH:mm:ss',
                 'required' => true])
@@ -81,15 +69,16 @@ class GameType extends AbstractType
             ->add('links', 'collection', array('type' => new GameLinkType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Volley\StatBundle\Entity\Game'
         ));
+        $resolver->setRequired('game');
     }
 
     /**

@@ -80,7 +80,7 @@ class GameController extends Controller
      */
     public function filterAction(Request $request)
     {
-        if (array_key_exists('clear', $request->request->get('filter'))) {
+        if (array_key_exists('clear', $request->request->get('game_filter'))) {
             $gameFilter = new GameFilter();
             $filterForm = $this->createFilterForm($gameFilter);
         } else {
@@ -104,12 +104,13 @@ class GameController extends Controller
     private function createFilterForm($gameFilter)
     {
         $filterForm = $this
-            ->createForm(new GameFilterType($gameFilter), $gameFilter, [
+            ->createForm(GameFilterType::class, $gameFilter, [
+                'gameFilter' => $gameFilter,
                 'action' => $this->generateUrl('stat_game_filter') . 'fsfds/?page=1', // drop page to default 1 when filter is affected
                 'method' => 'POST',
             ])
-            ->add('filter', 'submit', array('label' => 'Filter'))
-            ->add('clear', 'submit', array('label' => 'Clear'));
+            ->add('game_filter', SubmitType::class, array('label' => 'Filter'))
+            ->add('clear', SubmitType::class, array('label' => 'Clear'));
         return $filterForm;
     }
 
@@ -170,12 +171,13 @@ class GameController extends Controller
      */
     private function createCreateForm(Game $entity)
     {
-        $form = $this->createForm(new GameType($entity), $entity, array(
+        $form = $this->createForm(GameType::class, $entity, array(
+            'game' => $entity,
             'action' => $this->generateUrl('stat_game_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -289,12 +291,13 @@ class GameController extends Controller
      */
     private function createEditForm(Game $entity)
     {
-        $form = $this->createForm(new GameType($entity), $entity, array(
+        $form = $this->createForm(GameType::class, $entity, array(
+            'game' => $entity,
             'action' => $this->generateUrl('stat_game_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -378,7 +381,7 @@ class GameController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_game_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm();
     }
 

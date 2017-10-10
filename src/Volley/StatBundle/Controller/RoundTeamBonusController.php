@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -82,12 +83,12 @@ class RoundTeamBonusController extends Controller
      */
     private function createCreateForm(RoundTeamBonus $entity)
     {
-        $form = $this->createForm(new RoundTeamBonusType(), $entity, array(
+        $form = $this->createForm(RoundTeamBonusType::class, $entity, array(
             'action' => $this->generateUrl('stat_round_team_bonus_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -171,12 +172,12 @@ class RoundTeamBonusController extends Controller
     */
     private function createEditForm(RoundTeamBonus $entity)
     {
-        $form = $this->createForm(new RoundTeamBonusType(), $entity, array(
+        $form = $this->createForm(RoundTeamBonusType::class, $entity, array(
             'action' => $this->generateUrl('stat_round_team_bonus_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -251,7 +252,7 @@ class RoundTeamBonusController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_round_team_bonus_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

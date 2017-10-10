@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -77,12 +78,12 @@ class RosterController extends Controller
      */
     private function createCreateForm(Roster $entity)
     {
-        $form = $this->createForm(new RosterType(), $entity, array(
+        $form = $this->createForm(RosterType::class, $entity, array(
             'action' => $this->generateUrl('stat_team_roster_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -173,12 +174,12 @@ class RosterController extends Controller
     */
     private function createEditForm(Roster $entity)
     {
-        $form = $this->createForm(new RosterType(), $entity, array(
+        $form = $this->createForm(RosterType::class, $entity, array(
             'action' => $this->generateUrl('stat_team_roster_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -253,7 +254,7 @@ class RosterController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_team_roster_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

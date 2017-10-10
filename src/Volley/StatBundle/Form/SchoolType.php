@@ -3,6 +3,8 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,22 +30,22 @@ class SchoolType extends AbstractType
             ->add('site')
             ->add('hall')
             ->add('country')
-            ->add('image', 'file', array(
+            ->add('image', FileType::class, array(
                     'data_class' => null,
                     'required' => false
                 )
             )
-            ->add('logoImage', 'file', array(
+            ->add('logoImage', FileType::class, array(
                     'data_class' => null,
                     'required' => false
                 )
             )
-            ->add('hallImage', 'file', array(
+            ->add('hallImage', FileType::class, array(
                     'data_class' => null,
                     'required' => false
                 )
             )
-            ->add('description', 'textarea', [
+            ->add('description', TextareaType::class, [
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced' // simple, advanced, bbcode

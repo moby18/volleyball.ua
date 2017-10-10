@@ -3,6 +3,7 @@
 namespace Volley\FaceBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -18,7 +19,7 @@ class PlayerType extends AbstractType
             ->add('firstName')
             ->add('middleName')
             ->add('lastName')
-            ->add('birthDate','date', array(
+            ->add('birthDate',DateType::class, array(
                 'years' => range(1950,2014))
             )
             ->add('height')

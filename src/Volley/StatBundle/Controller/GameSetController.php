@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -71,12 +72,12 @@ class GameSetController extends Controller
      */
     private function createCreateForm(GameSet $entity)
     {
-        $form = $this->createForm(new GameSetType(), $entity, array(
+        $form = $this->createForm(GameSetType::class, $entity, array(
             'action' => $this->generateUrl('gameset_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +161,12 @@ class GameSetController extends Controller
     */
     private function createEditForm(GameSet $entity)
     {
-        $form = $this->createForm(new GameSetType(), $entity, array(
+        $form = $this->createForm(GameSetType::class, $entity, array(
             'action' => $this->generateUrl('gameset_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class GameSetController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('gameset_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

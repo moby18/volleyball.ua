@@ -4,6 +4,7 @@ namespace Volley\FaceBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -294,8 +295,8 @@ class DefaultController extends Controller
     public function buyMikasaVls300Action(Request $request)
     {
         $entity = new Purchase();
-        $form = $this->createForm(new PurchaseType(), $entity, array());
-        $form->add('submit', 'submit', []);
+        $form = $this->createForm(PurchaseType::class, $entity, array());
+        $form->add('submit', SubmitType::class, []);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

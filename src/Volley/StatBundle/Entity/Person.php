@@ -572,7 +572,7 @@ class Person implements \JsonSerializable
      */
     public function getPosition()
     {
-        return self::POSITIONS[$this->position];
+        return $this->position ? self::POSITIONS[$this->position] : '';
     }
 
     /**
