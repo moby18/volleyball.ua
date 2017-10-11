@@ -21,19 +21,19 @@ use Volley\FaceBundle\Entity\Post;
 class SchoolPerson implements \JsonSerializable
 {
     const SEX = [
-        'men' => 'Чоловік',
-        'woman' => 'Жінка'
+        'Чоловік' => 'men',
+        'Жінка' => 'woman'
     ];
 
     const SEX_YOUNG = [
-        'men' => 'Хлопці',
-        'woman' => 'Дівчата'
+        'Хлопці' => 'men',
+        'Дівчата' => 'woman'
     ];
 
     const TYPE = [
-        'player' => 'Player',
-        'coach' => 'Coach',
-        'staff' => 'Staff'
+        'Player' => 'player',
+        'Coach' => 'coach',
+        'Staff' => 'staff'
     ];
 
     /**

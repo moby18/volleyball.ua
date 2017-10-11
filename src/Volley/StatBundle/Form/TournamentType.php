@@ -20,7 +20,7 @@ class TournamentType extends AbstractType
             ->add('name')
             ->add('sex', ChoiceType::class, [
                 'choices' => [
-                    'No' => null,
+                    null  => 'No',
                     Tournament::MAN => 'Man',
                     Tournament::WOMAN => 'Woman',
                 ]

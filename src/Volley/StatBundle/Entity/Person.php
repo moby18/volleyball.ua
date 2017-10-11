@@ -21,22 +21,22 @@ use Volley\FaceBundle\Entity\Post;
 class Person implements \JsonSerializable
 {
     const POSITIONS = [
-        'setter' => 'Setter',
-        'middle_blocker' => 'Middle Blocker',
-        'opposite' => 'Opposite',
-        'outside_hitter' => 'Outside Hitter',
-        'libero' => 'Libero'
+        'Setter' => 'setter',
+        'Middle Blocker' => 'middle_blocker',
+        'Opposite' => 'opposite',
+        'Outside Hitter' => 'outside_hitter',
+        'Libero' => 'libero'
     ];
 
     const SEX = [
-        'men' => 'Men',
-        'woman' => 'Woman'
+        'Men' => 'men',
+        'Woman' => 'woman'
     ];
 
     const TYPE = [
-        'player' => 'Player',
-        'coach' => 'Coach',
-        'staff' => 'Staff'
+        'Player' => 'player',
+        'Coach' => 'coach',
+        'Staff' => 'staff'
     ];
 
     /**
@@ -572,7 +572,7 @@ class Person implements \JsonSerializable
      */
     public function getPosition()
     {
-        return $this->position ? self::POSITIONS[$this->position] : '';
+        return $this->position;
     }
 
     /**

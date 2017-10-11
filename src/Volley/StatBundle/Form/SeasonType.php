@@ -26,8 +26,8 @@ class SeasonType extends AbstractType
             ])
             ->add('standingSystem',ChoiceType::class, [
                 'choices'  => array(
-                    Season::STANDING_SYSTEM_POINTS => 'Points',
-                    Season::STANDING_SYSTEM_WINS => 'Wins'
+                    'Points' => Season::STANDING_SYSTEM_POINTS,
+                    'Wins' => Season::STANDING_SYSTEM_WINS
                 ),
             ])
             ->add('tournamentTable', null, [

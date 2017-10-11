@@ -54,8 +54,10 @@ class TournamentManager
         }
         if ($round)
             $rounds = [$round];
-        else
+        elseif ($season)
             $rounds = $season->getRounds();
+        else
+            $rounds = [];
         
         foreach ($rounds as $round) {
 
@@ -74,63 +76,65 @@ class TournamentManager
              * @var Game $game
              */
             foreach ($games as $game) {
-
                 if (!$game->getPlayed())
                     continue;
 
                 if ($game->getHomeTeam()) {
                     $homeTeamId = $game->getHomeTeam()->getId();
-                    $table[$homeTeamId]['games'] += 1;
+                    if (count($table)) $table[$homeTeamId]['games'] += 1;
                 } else
                     $homeTeamId = 0;
                 if ($game->getAwayTeam()) {
                     $awayTeamId = $game->getAwayTeam()->getId();
-                    $table[$awayTeamId]['games'] += 1;
+                    if (count($table)) $table[$awayTeamId]['games'] += 1;
                 } else
                     $awayTeamId = 0;
 
                 $homeTeamSets = $game->getScoreSetHome();
                 $awayTeamSets = $game->getScoreSetAway();
 
-                if ($homeTeamId) $table[$homeTeamId]['win_sets'] += $homeTeamSets;
-                if ($homeTeamId) $table[$homeTeamId]['loss_sets'] += $awayTeamSets;
-                if ($awayTeamId) $table[$awayTeamId]['win_sets'] += $awayTeamSets;
-                if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $homeTeamSets;
+                if (count($table)) {
 
-                if ($homeTeamSets > $awayTeamSets) {
-                    $table[$awayTeamId]['score' . $awayTeamSets . '3'] += 1;
-                    $table[$homeTeamId]['score3' . $awayTeamSets] += 1;
+                    if ($homeTeamId) $table[$homeTeamId]['win_sets'] += $homeTeamSets;
+                    if ($homeTeamId) $table[$homeTeamId]['loss_sets'] += $awayTeamSets;
+                    if ($awayTeamId) $table[$awayTeamId]['win_sets'] += $awayTeamSets;
+                    if ($awayTeamId) $table[$awayTeamId]['loss_sets'] += $homeTeamSets;
 
-                    if ($homeTeamId) $table[$homeTeamId]['win'] += 1;
-                    if ($awayTeamId) $table[$awayTeamId]['loss'] += 1;
-                    if ($homeTeamSets - $awayTeamSets >= 2) {
-                        if ($homeTeamId) $table[$homeTeamId]['points'] += 3;
-                        if ($awayTeamId) $table[$awayTeamId]['points'] += 0;
+                    if ($homeTeamSets > $awayTeamSets) {
+                        $table[$awayTeamId]['score' . $awayTeamSets . '3'] += 1;
+                        $table[$homeTeamId]['score3' . $awayTeamSets] += 1;
+
+                        if ($homeTeamId) $table[$homeTeamId]['win'] += 1;
+                        if ($awayTeamId) $table[$awayTeamId]['loss'] += 1;
+                        if ($homeTeamSets - $awayTeamSets >= 2) {
+                            if ($homeTeamId) $table[$homeTeamId]['points'] += 3;
+                            if ($awayTeamId) $table[$awayTeamId]['points'] += 0;
+                        } else {
+                            if ($homeTeamId) $table[$homeTeamId]['points'] += 2;
+                            if ($awayTeamId) $table[$awayTeamId]['points'] += 1;
+                        }
                     } else {
-                        if ($homeTeamId) $table[$homeTeamId]['points'] += 2;
-                        if ($awayTeamId) $table[$awayTeamId]['points'] += 1;
-                    }
-                } else {
-                    $table[$homeTeamId]['score' . $homeTeamSets . '3'] += 1;
-                    $table[$awayTeamId]['score3' . $homeTeamSets] += 1;
+                        $table[$homeTeamId]['score' . $homeTeamSets . '3'] += 1;
+                        $table[$awayTeamId]['score3' . $homeTeamSets] += 1;
 
-                    if ($homeTeamId) $table[$homeTeamId]['loss'] += 1;
-                    if ($awayTeamId) $table[$awayTeamId]['win'] += 1;
-                    if ($awayTeamSets - $homeTeamSets >= 2) {
-                        if ($homeTeamId) $table[$homeTeamId]['points'] += 0;
-                        if ($awayTeamId) $table[$awayTeamId]['points'] += 3;
-                    } else {
-                        if ($homeTeamId) $table[$homeTeamId]['points'] += 1;
-                        if ($awayTeamId) $table[$awayTeamId]['points'] += 2;
+                        if ($homeTeamId) $table[$homeTeamId]['loss'] += 1;
+                        if ($awayTeamId) $table[$awayTeamId]['win'] += 1;
+                        if ($awayTeamSets - $homeTeamSets >= 2) {
+                            if ($homeTeamId) $table[$homeTeamId]['points'] += 0;
+                            if ($awayTeamId) $table[$awayTeamId]['points'] += 3;
+                        } else {
+                            if ($homeTeamId) $table[$homeTeamId]['points'] += 1;
+                            if ($awayTeamId) $table[$awayTeamId]['points'] += 2;
+                        }
                     }
-                }
 
-                /** @var GameSet $set */
-                foreach ($game->getSets() as $set) {
-                    if ($homeTeamId) $table[$homeTeamId]['win_points'] += $set->getScoreSetHome();
-                    if ($homeTeamId) $table[$homeTeamId]['loss_points'] += $set->getScoreSetAway();
-                    if ($awayTeamId) $table[$awayTeamId]['win_points'] += $set->getScoreSetAway();
-                    if ($awayTeamId) $table[$awayTeamId]['loss_points'] += $set->getScoreSetHome();
+                    /** @var GameSet $set */
+                    foreach ($game->getSets() as $set) {
+                        if ($homeTeamId) $table[$homeTeamId]['win_points'] += $set->getScoreSetHome();
+                        if ($homeTeamId) $table[$homeTeamId]['loss_points'] += $set->getScoreSetAway();
+                        if ($awayTeamId) $table[$awayTeamId]['win_points'] += $set->getScoreSetAway();
+                        if ($awayTeamId) $table[$awayTeamId]['loss_points'] += $set->getScoreSetHome();
+                    }
                 }
             }
 
