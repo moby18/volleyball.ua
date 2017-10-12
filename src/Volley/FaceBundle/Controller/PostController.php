@@ -45,13 +45,13 @@ class PostController extends Controller
         } else {
             $filterParams = $request->request->get('filter', []);
 
-            $categoryFilter = $filterParams['category'] ? $filterParams['category'] : $session->get('categoryFilter', null);
-            $stateFilter = $filterParams['state'] ? $filterParams['state'] : $session->get('stateFilter', 12);
-            $featuredFilter = $filterParams['featured'] ? $filterParams['featured'] : $session->get('featuredFilter', 12);
-            $recommendedFilter = $filterParams['recommended'] ? $filterParams['recommended'] : $session->get('recommendedFilter', 12);
-            $vuFilter = $filterParams['vu'] ? $filterParams['vu'] : $session->get('vuFilter', 12);
-            $userFilter = $filterParams['user'] ? $filterParams['user'] : $session->get('userFilter', null);
-            $searchFilter = $filterParams['search'] ? $filterParams['search'] : $session->get('searchFilter', '');
+            $categoryFilter = array_key_exists('category',$filterParams) ? $filterParams['category'] : $session->get('categoryFilter', null);
+            $stateFilter = array_key_exists('state',$filterParams) ? $filterParams['state'] : $session->get('stateFilter', 12);
+            $featuredFilter = array_key_exists('featured',$filterParams) ? $filterParams['featured'] : $session->get('featuredFilter', 12);
+            $recommendedFilter = array_key_exists('recommended',$filterParams) ? $filterParams['recommended'] : $session->get('recommendedFilter', 12);
+            $vuFilter = array_key_exists('vu',$filterParams) ? $filterParams['vu'] : $session->get('vuFilter', 12);
+            $userFilter = array_key_exists('user',$filterParams) ? $filterParams['user'] : $session->get('userFilter', null);
+            $searchFilter = array_key_exists('search',$filterParams) ? $filterParams['search'] : $session->get('searchFilter', '');
             if ($session->get('stateFilter') != $stateFilter || $session->get('searchFilter') != $searchFilter || $session->get('featuredFilter') != $featuredFilter || $session->get('recommendedFilter') != $recommendedFilter || $session->get('categoryFilter') != $categoryFilter)
                 $page = 1;
             else
