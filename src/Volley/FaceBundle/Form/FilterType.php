@@ -23,36 +23,36 @@ class FilterType extends AbstractType
                 'required' => false
             ])
             ->add('state', ChoiceType::class, [
-                'choices' => [12 => "All", 0 => 'Unpublished', 1 => 'Published'],
+                'choices' => ['All' => 12, 'Unpublished' => 0, 'Published' => 1],
                 'label' => 'Filter',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'empty_data' => false
+                'placeholder' => false
             ])
             ->add('featured', ChoiceType::class, [
-                'choices' => [12 => "All", 0 => 'None Featured', 1 => 'Featured'],
+                'choices' => ['All' => 12, 'None Featured' => 0 , 'Featured' => 1],
                 'label' => 'Filter',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'empty_data' => false
+                'placeholder' => false
             ])
             ->add('recommended', ChoiceType::class, [
-                'choices' => [12 => "All", 0 => 'None Recommended', 1 => 'Recommended'],
+                'choices' => ['All' => 12, 'None Recommended' => 0, 'Recommended' => 1],
                 'label' => 'Filter',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'empty_data' => false
+                'placeholder' => false
             ])
             ->add('vu', ChoiceType::class, [
-                'choices' => [12 => "All", 0 => 'None VU', 1 => 'VU'],
+                'choices' => ['All' => 12, 'None VU' => 0, 'VU' => 1],
                 'label' => 'Filter',
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'empty_data' => false
+                'placeholder' => false
             ])
             ->add('user',EntityType::class, [
                 'class' => 'Volley\UserBundle\Entity\User',
@@ -70,13 +70,5 @@ class FilterType extends AbstractType
             'data_class' => 'Volley\FaceBundle\Form\Model\Filter',
             'csrf_protection' => false
         ));
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return '';
     }
 }

@@ -3,6 +3,7 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,7 +19,7 @@ class RosterType extends AbstractType
             ->add('name')
             ->add('team')
             ->add('current')
-            ->add('roster_persons', 'collection', array('type' => new RosterPersonType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('roster_persons', CollectionType::class, array('entry_type' => RosterPersonType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
     

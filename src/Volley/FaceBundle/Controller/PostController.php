@@ -43,13 +43,15 @@ class PostController extends Controller
             $searchFilter = '';
             $page = 1;
         } else {
-            $categoryFilter = $request->request->get('category', $session->get('categoryFilter', null));
-            $stateFilter = $request->request->get('state', $session->get('stateFilter', 12));
-            $featuredFilter = $request->request->get('featured', $session->get('featuredFilter', 12));
-            $recommendedFilter = $request->request->get('recommended', $session->get('recommendedFilter', 12));
-            $vuFilter = $request->request->get('vu', $session->get('vuFilter', 12));
-            $userFilter = $request->request->get('user', $session->get('userFilter', null));
-            $searchFilter = $request->request->get('search', $session->get('searchFilter', ''));
+            $filterParams = $request->request->get('filter', []);
+
+            $categoryFilter = $filterParams['category'] ? $filterParams['category'] : $session->get('categoryFilter', null);
+            $stateFilter = $filterParams['state'] ? $filterParams['state'] : $session->get('stateFilter', 12);
+            $featuredFilter = $filterParams['featured'] ? $filterParams['featured'] : $session->get('featuredFilter', 12);
+            $recommendedFilter = $filterParams['recommended'] ? $filterParams['recommended'] : $session->get('recommendedFilter', 12);
+            $vuFilter = $filterParams['vu'] ? $filterParams['vu'] : $session->get('vuFilter', 12);
+            $userFilter = $filterParams['user'] ? $filterParams['user'] : $session->get('userFilter', null);
+            $searchFilter = $filterParams['search'] ? $filterParams['search'] : $session->get('searchFilter', '');
             if ($session->get('stateFilter') != $stateFilter || $session->get('searchFilter') != $searchFilter || $session->get('featuredFilter') != $featuredFilter || $session->get('recommendedFilter') != $recommendedFilter || $session->get('categoryFilter') != $categoryFilter)
                 $page = 1;
             else

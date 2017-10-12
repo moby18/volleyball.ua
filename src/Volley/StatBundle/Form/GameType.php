@@ -4,7 +4,9 @@ namespace Volley\StatBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Volley\StatBundle\Entity\Game;
@@ -57,7 +59,7 @@ class GameType extends AbstractType
             ->add('duration')
             ->add('homeTeamEmpty')
             ->add('awayTeamEmpty')
-            ->add('score','hidden',[])
+            ->add('score',HiddenType::class,[])
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
@@ -65,8 +67,8 @@ class GameType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'YYYY-MM-dd HH:mm:ss',
                 'required' => true])
-            ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
-            ->add('links', 'collection', array('type' => new GameLinkType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('sets', CollectionType::class, array('entry_type' => GameSetType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('links', CollectionType::class, array('entry_type' => GameLinkType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
 
