@@ -20,7 +20,8 @@ class FilterType extends AbstractType
         $builder
             ->add('category',EntityType::class, [
                 'class' => 'Volley\FaceBundle\Entity\Category',
-                'required' => false
+                'required' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('state', ChoiceType::class, [
                 'choices' => ['All' => 12, 'Unpublished' => 0, 'Published' => 1],
@@ -28,7 +29,8 @@ class FilterType extends AbstractType
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'placeholder' => false
+                'placeholder' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('featured', ChoiceType::class, [
                 'choices' => ['All' => 12, 'None Featured' => 0 , 'Featured' => 1],
@@ -36,7 +38,8 @@ class FilterType extends AbstractType
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'placeholder' => false
+                'placeholder' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('recommended', ChoiceType::class, [
                 'choices' => ['All' => 12, 'None Recommended' => 0, 'Recommended' => 1],
@@ -52,11 +55,13 @@ class FilterType extends AbstractType
                 'required' => false,
                 'multiple' => false,
                 'expanded' => false,
-                'placeholder' => false
+                'placeholder' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('user',EntityType::class, [
                 'class' => 'Volley\UserBundle\Entity\User',
-                'required' => false
+                'required' => false,
+                'attr'=>["onchange"=>"this.form.submit()"]
             ])
             ->add('search', TextType::class, ['required' => false, 'label' => 'Search']);
     }

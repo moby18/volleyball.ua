@@ -3,6 +3,14 @@
 {% block body -%}
     <h1>Slide list</h1>
 
+    <div>
+        <a type="button"
+           class="btn btn-success" href="{{ path('slide_new') }}">
+            Create a new entry
+        </a>
+    </div>
+    <div class="clearfix"></div>
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -39,12 +47,5 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-
-    <div>
-        <a type="button"
-           class="btn btn-success" href="{{ path('slide_new') }}">
-            Create a new entry
-        </a>
     </div>
 {% endblock %}

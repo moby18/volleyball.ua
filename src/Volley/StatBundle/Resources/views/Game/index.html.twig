@@ -2,12 +2,14 @@
 
 {% block body -%}
     <h1>Game list</h1>
+
     <div class="pull-right">
         <a type="button"
            class="btn btn-success" href="{{ path('stat_game_new') }}">
             Create a new entry
         </a>
     </div>
+    <div class="clearfix"></div>
 
 
     <form class="form-inline filter" action="{{ path('stat_game_filter') ~ '?page=1' }}" method="POST">
@@ -74,10 +76,12 @@
             </tfoot>
         </table>
     </div>
+
     <div class="pull-right">
         <a type="button"
            class="btn btn-success" href="{{ path('stat_game_new') }}">
             Create a new entry
         </a>
     </div>
+
 {% endblock %}
