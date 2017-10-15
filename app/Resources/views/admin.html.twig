@@ -53,19 +53,15 @@
                 <li><a href="{{ path("post") }}">Posts</a></li>
             </ul>
             {% if is_granted('ROLE_SUPER_ADMIN') %}
-            <ul class="nav nav-sidebar">
-                <li><a href="{{ path("player") }}">Players</a></li>
-                <li><a href="{{ path("season") }}">Seasons</a></li>
-                <li><a href="{{ path("tournament") }}">Tournaments</a></li>
-                <li><a href="{{ path("team") }}">Teams</a></li>
-                <li><a href="{{ path("admin_round") }}">Rounds</a></li>
-                <li><a href="{{ path("game") }}">Games</a></li>
-            </ul>
+            {#<ul class="nav nav-sidebar">#}
+                {#<li><a href="{{ path("player") }}">Players</a></li>#}
+                {#<li><a href="{{ path("season") }}">Seasons</a></li>#}
+                {#<li><a href="{{ path("tournament") }}">Tournaments</a></li>#}
+                {#<li><a href="{{ path("team") }}">Teams</a></li>#}
+                {#<li><a href="{{ path("admin_round") }}">Rounds</a></li>#}
+                {#<li><a href="{{ path("game") }}">Games</a></li>#}
+            {#</ul>#}
             {% endif %}
-            <ul class="nav nav-sidebar">
-                <li><a href="{{ path("stat_school") }}">Schools</a></li>
-                <li><a href="{{ path("stat_schoolperson") }}">Trainers</a></li>
-            </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="{{ path("stat_country") }}">Countries</a></li>
                 <li><a href="{{ path("stat_tournament") }}">Tournaments</a></li>
@@ -75,6 +71,10 @@
                 <li><a href="{{ path("stat_game") }}">Games</a></li>
                 <li><a href="{{ path("stat_team") }}">Teams</a></li>
                 <li><a href="{{ path("stat_person") }}">Players</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="{{ path("stat_school") }}">Schools</a></li>
+                <li><a href="{{ path("stat_schoolperson") }}">Trainers</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
