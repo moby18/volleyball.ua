@@ -5,21 +5,22 @@
 
     <div class="pull-right">
         <a type="button"
-           class="btn btn-success" href="{{ path('stat_game_new') }}">
+           class="btn btn-success"
+           href="{{ path('stat_game_new') }}">
             Create a new entry
         </a>
     </div>
     <div class="clearfix"></div>
 
 
-    <form class="form-inline filter" action="{{ path('stat_game_filter') ~ '?page=1' }}" method="POST">
+    <form class="form-inline filter"
+          action="{{ path('stat_game_filter') ~ '?page=1' }}"
+          method="POST">
         <div class="form-group">
             {{ form_start(filter) }}
             {{ form_widget(filter) }}
             {{ form_end(filter) }}
-            {#<button type="submit" class="btn">Filter</button>#}
         </div>
-
     </form>
 
     <div class="table-responsive">
@@ -43,7 +44,9 @@
                 {% set winnerTeamA = (entity.scoreSetHome > entity.scoreSetAway) %}
                 {% set winnerTeamB = (entity.scoreSetHome < entity.scoreSetAway) %}
                 <tr>
-                    <td><a href="{{ path('stat_game_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>
+                        <a href="{{ path('stat_game_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+                    </td>
                     <td>{{ entity.number }}</td>
                     <td>{{ entity.tour }}</td>
                     <td>{{ winnerTeamA ? "<strong>" : "" }}{{ entity.homeTeam }}{{ winnerTeamA ? "</strong>" : "" }}</td>
@@ -53,12 +56,16 @@
                     <td>{{ entity.played }}</td>
                     <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td class="col-md-2 col-lg-2 col-sm-2">
-                        <div class="btn-group pull-right" role="group" aria-label="">
+                        <div class="btn-group pull-right"
+                             role="group" aria-label="">
                             {#<a href="{{ path('stat_game_show', { 'id': entity.id }) }}" type="button"#}
                             {#class="btn btn-default">show</a>#}
-                            <a href="{{ path('stat_game_dubl', { 'id': entity.id }) }}" type="button" onclick="return confirm('Are you sure you want dublicate entity?')"
+                            <a href="{{ path('stat_game_dubl', { 'id': entity.id }) }}"
+                               type="button"
+                               onclick="return confirm('Are you sure you want dublicate entity?')"
                                class="btn btn-default">dublicate</a>
-                            <a href="{{ path('stat_game_edit', { 'id': entity.id }) }}" type="button"
+                            <a href="{{ path('stat_game_edit', { 'id': entity.id }) }}"
+                               type="button"
                                class="btn btn-default">edit</a>
                         </div>
                     </td>
@@ -79,7 +86,8 @@
 
     <div class="pull-right">
         <a type="button"
-           class="btn btn-success" href="{{ path('stat_game_new') }}">
+           class="btn btn-success"
+           href="{{ path('stat_game_new') }}">
             Create a new entry
         </a>
     </div>

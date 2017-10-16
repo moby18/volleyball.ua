@@ -2,13 +2,13 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Tour;
+use Volley\StatBundle\Form\GameFilterType;
+use Volley\StatBundle\Form\Model\GameFilter;
 use Volley\StatBundle\Form\TourType;
 
 /**
@@ -18,6 +18,30 @@ use Volley\StatBundle\Form\TourType;
  */
 class TourController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return PaginationInterface
+     */
+    private function getPagination(Request $request, $gameFilter)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('tour_page', 1));
+        $session->set('tour_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Tour')->findByFilter($gameFilter);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
+
+        return $pagination;
+    }
 
     /**
      * Lists all Tour entities.
@@ -28,29 +52,74 @@ class TourController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
+        $filterForm = $this->createFilterForm($gameFilter);
 
-        $session = $request->getSession();
-        $page = $request->query->get('page', $session->get('tour_page', 1));
-        $session->set('tour_page', $page);
-
-        $query = $em->getRepository('VolleyStatBundle:Tour')->createQueryBuilder('t')
-            ->addOrderBy('t.season', 'ASC')
-            ->addOrderBy('t.round', 'ASC')
-            ->addOrderBy('t.id', 'ASC')
-            ->getQuery();
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $page,
-            20
-        );
+        $pagination = self::getPagination($request, $gameFilter);
 
         return array(
             'entities' => $pagination,
+            'filter' => $filterForm->createView()
         );
     }
+
+    /**
+     * Lists all Game entities.
+     * @param Request $request
+     * @return array
+     *
+     * @Route("/", name="stat_tour_filter")
+     * @Method("POST")
+     * @Template("VolleyStatBundle:Tour:index.html.twig")
+     */
+    public function filterAction(Request $request)
+    {
+        if (array_key_exists('clear', $request->request->get('game_filter'))) {
+            $gameFilter = new GameFilter();
+            $filterForm = $this->createFilterForm($gameFilter);
+        } else {
+            $gameFilter = $this->mergeGameFilterWithSession(new GameFilter());
+            $filterForm = $this->createFilterForm($gameFilter);
+            $filterForm->handleRequest($request);
+            $filterForm = $this->createFilterForm($gameFilter); // for recreate filter form according current submitted data
+        }
+
+        $session = $this->get('session');
+        $session->set('tourFilter', $gameFilter);
+
+        $pagination = self::getPagination($request, $gameFilter);
+
+        return array(
+            'entities' => $pagination,
+            'filter' => $filterForm->createView()
+        );
+    }
+
+    private function createFilterForm($gameFilter)
+    {
+        $filterForm = $this
+            ->createForm(GameFilterType::class, $gameFilter, [
+                'gameFilter' => $gameFilter,
+                'action' => $this->generateUrl('stat_tour_filter') . '/?page=1', // drop page to default 1 when filter is affected
+                'method' => 'POST',
+            ])
+            ->add('tour_filter', SubmitType::class, array('label' => 'Filter'))
+            ->add('clear', SubmitType::class, array('label' => 'Clear'));
+        return $filterForm;
+    }
+
+    private function mergeGameFilterWithSession(GameFilter $gameFilter)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->get('session');
+        $sessionGameFilter = $session->get('tourFilter', new GameFilter());
+        $gameFilter->setCountry($sessionGameFilter->getCountry() ? $em->getRepository('VolleyStatBundle:Country')->find($sessionGameFilter->getCountry()->getId()) : null);
+        $gameFilter->setTournament($sessionGameFilter->getTournament() ? $em->getRepository('VolleyStatBundle:Tournament')->find($sessionGameFilter->getTournament()->getId()) : null);
+        $gameFilter->setSeason($sessionGameFilter->getSeason() ? $em->getRepository('VolleyStatBundle:Season')->find($sessionGameFilter->getSeason()->getId()) : null);
+        $gameFilter->setRound($sessionGameFilter->getRound() ? $em->getRepository('VolleyStatBundle:Round')->find($sessionGameFilter->getRound()->getId()) : null);
+        return $gameFilter;
+    }
+
     /**
      * Creates a new Tour entity.
      *
@@ -74,7 +143,7 @@ class TourController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -107,11 +176,11 @@ class TourController extends Controller
     public function newAction()
     {
         $entity = new Tour();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -135,7 +204,7 @@ class TourController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -161,19 +230,19 @@ class TourController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Tour entity.
-    *
-    * @param Tour $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Tour entity.
+     *
+     * @param Tour $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Tour $entity)
     {
         $form = $this->createForm(TourType::class, $entity, array(
@@ -185,6 +254,7 @@ class TourController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Tour entity.
      *
@@ -213,11 +283,12 @@ class TourController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Tour entity.
      *
@@ -257,7 +328,6 @@ class TourController extends Controller
             ->setAction($this->generateUrl('stat_tour_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
