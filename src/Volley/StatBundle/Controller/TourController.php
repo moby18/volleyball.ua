@@ -3,9 +3,12 @@
 namespace Volley\StatBundle\Controller;
 
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Tour;
 use Volley\StatBundle\Form\GameFilterType;
 use Volley\StatBundle\Form\Model\GameFilter;
@@ -23,8 +26,7 @@ class TourController extends Controller
      *
      * @return PaginationInterface
      */
-    private function getPagination(Request $request, $gameFilter)
-    {
+    private function getPagination(Request $request, $gameFilter) {
         $em = $this->getDoctrine()->getManager();
 
         $session = $request->getSession();
@@ -143,7 +145,7 @@ class TourController extends Controller
 
         return array(
             'entity' => $entity,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         );
     }
 
@@ -176,11 +178,11 @@ class TourController extends Controller
     public function newAction()
     {
         $entity = new Tour();
-        $form = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         );
     }
 
@@ -204,7 +206,7 @@ class TourController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -230,19 +232,19 @@ class TourController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Creates a form to edit a Tour entity.
-     *
-     * @param Tour $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
+    * Creates a form to edit a Tour entity.
+    *
+    * @param Tour $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
     private function createEditForm(Tour $entity)
     {
         $form = $this->createForm(TourType::class, $entity, array(
@@ -254,7 +256,6 @@ class TourController extends Controller
 
         return $form;
     }
-
     /**
      * Edits an existing Tour entity.
      *
@@ -283,12 +284,11 @@ class TourController extends Controller
         }
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
-
     /**
      * Deletes a Tour entity.
      *
@@ -328,6 +328,7 @@ class TourController extends Controller
             ->setAction($this->generateUrl('stat_tour_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, array('label' => 'Delete'))
-            ->getForm();
+            ->getForm()
+        ;
     }
 }

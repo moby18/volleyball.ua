@@ -3,13 +3,18 @@
 namespace Volley\StatBundle\Controller;
 
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Knp\Component\Pager\Paginator;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
-use Volley\StatBundle\Form\GameFilterType;
 use Volley\StatBundle\Form\GameType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Volley\StatBundle\Form\Model\GameFilter;
+use Volley\StatBundle\Form\GameFilterType;
 
 
 /**
@@ -24,8 +29,7 @@ class GameController extends Controller
      *
      * @return PaginationInterface
      */
-    private function getPagination(Request $request, $gameFilter)
-    {
+    private function getPagination(Request $request, $gameFilter) {
         $em = $this->getDoctrine()->getManager();
 
         $session = $request->getSession();
@@ -193,7 +197,7 @@ class GameController extends Controller
         /** @var Game $entity */
         $entity = new Game();
         $date = new \DateTime();
-        $entity->setDate($date->setTime(18, 0, 0));
+        $entity->setDate($date->setTime(18,0,0));
         $entity->setSeason($gameFilter->getSeason());
         $entity->setTour($gameFilter->getTour());
         $entity->setRound($gameFilter->getRound());
@@ -218,7 +222,7 @@ class GameController extends Controller
         $em = $this->getDoctrine()->getManager();
         /** @var Game $clone */
         $clone = clone $game;
-        $clone->setNumber($clone->getNumber() + 1);
+        $clone->setNumber($clone->getNumber()+1);
         $em->detach($clone);
         $em->persist($clone);
         $em->flush();
