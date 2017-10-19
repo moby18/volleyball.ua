@@ -2,9 +2,16 @@
 
 namespace Volley\FaceBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
 class PostType extends AbstractType
 {
@@ -16,40 +23,127 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title')
-//            ->add('slug')
-            ->add('content', 'textarea', array())
-            ->add('text', 'textarea', array(
+            ->add('slug')
+            ->add('slugUpdateble',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Slug Update', 'data-off' => 'Slug Manual', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Short content'
+            ])
+            ->add('text', TextareaType::class, [
+                'label' => 'Full text',
                 'attr' => array(
                     'class' => 'tinymce',
                     'data-theme' => 'advanced' // simple, advanced, bbcode
-                ), 'required'=>false))
-            ->add('state')
+                ), 'required'=>false
+            ])
+            ->add('state',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Published', 'data-off' => 'Unpublished', 'data-onstyle' => 'success', 'data-offstyle'=> 'danger']
+            ])
 //            ->add('created')
-            ->add('published', 'datetime', [
+            ->add('published', DateTimeType::class, [
                 'widget' => 'single_text',
 //                'widget' => 'choice',
-//                'format' => 'YYYY-MM-dd hh:mm:ss',
+                'format' => 'yyyy-MM-dd HH:mm:ss',
                 'required' => true])
 //            ->add('content')
             ->add('createdBy')
             ->add('modifiedBy')
-            ->add('source')
+            ->add('sourceName')
+            ->add('sourceLink')
             ->add('ordering')
             ->add('metakey')
             ->add('metadescr')
             ->add('hits')
 //            ->add('metadata')
-            ->add('featured')
+            ->add('featured',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Featured', 'data-off' => 'Not Featured', 'data-onstyle' => 'info']
+            ])
+            ->add('recommended',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Recommended', 'data-off' => 'Not Recommended', 'data-onstyle' => 'info']
+            ])
+            ->add('images',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Images', 'data-off' => 'No Images', 'data-onstyle' => 'info']
+            ])
+            ->add('videos',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Videos', 'data-off' => 'No Videos', 'data-onstyle' => 'info']
+            ])
+            ->add('translated',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Translated', 'data-off' => "Not translated", 'data-onstyle' => 'info']
+            ])
+            ->add('vu',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'VU', 'data-off' => "Not VU", 'data-onstyle' => 'info']
+            ])
+            ->add('advert',null,[
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => 'Advert', 'data-off' => "Not Advert", 'data-onstyle' => 'info']
+            ])
             ->add('language')
-            ->add('category')
-            ->add('file')
-        ;
+            ->add('category',EntityType::class, [
+                'class' => 'Volley\FaceBundle\Entity\Category',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+//                        ->select('c.id, c.name')
+                        ->orderBy('c.lft', 'ASC');
+                }
+            ])
+            ->add('file', null, [
+                'label' => 'Post Image (width>=760 and height>=400px)'
+            ])
+            ->add('imageDescr', null, [
+                'label' => 'Post Image Description'
+            ])
+            ->add('imageSource', null, [
+                'label' => 'Post Image Source'
+            ])
+//            ->add('teams')
+//            ->add('persons');
+            ->add('teams',  Select2EntityType::class, [
+                'label' => false,
+                'multiple' => true,
+                'remote_route' => 'stat_team_json',
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'primary_key' => 'id',
+                'minimum_input_length' => 2,
+                'page_limit' => 10,
+                'allow_clear' => true,
+                'delay' => 250,
+                'cache' => true,
+                'cache_timeout' => 60000, // if 'cache' is true
+                'language' => 'uk',
+                'placeholder' => "Введіть назву команди",
+                'attr' => ['width'=>'100%']
+            ])
+            ->add('persons',  Select2EntityType::class, [
+                'label' => false,
+                'multiple' => true,
+                'remote_route' => 'stat_person_json',
+                'class' => 'Volley\StatBundle\Entity\Person',
+                'primary_key' => 'id',
+                'minimum_input_length' => 2,
+                'page_limit' => 10,
+                'allow_clear' => true,
+                'delay' => 250,
+                'cache' => true,
+                'cache_timeout' => 60000, // if 'cache' is true
+                'language' => 'uk',
+                'placeholder' => "Введіть ім'я гравця, тренера або працівника команди",
+                'attr' => ['width'=>'100%']
+            ]);
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Volley\FaceBundle\Entity\Post'

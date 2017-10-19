@@ -6,3 +6,23 @@
     background-repeat: no-repeat;
     background-position: left;
 }
+
+/* Team Seasons */
+ul.persons li {
+    padding: 5px;
+}
+ul.persons > li.list-group-item > div {
+    margin: 0;
+    display: inline-block;
+}
+ul.persons li div.form-group {
+    margin: 0 15px 0 0;
+    display: inline-block;
+}
+ul.persons li.list-group-item {
+    margin-bottom: 0;
+}
+ul.persons li {
+    display: block;
+    border: 0;
+}

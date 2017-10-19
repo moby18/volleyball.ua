@@ -16,7 +16,7 @@ framework:
     csrf_protection: ~
     validation:      { enable_annotations: true }
     templating:
-        engines: ['twig']
+        engines: ["twig"]
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
@@ -24,6 +24,7 @@ framework:
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
+        cookie_lifetime: 604800
     fragments:       ~
     http_method_override: true
 
@@ -31,81 +32,17 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources: ['bootstrap_3_layout.html.twig']
-        # resources: ['bootstrap_3_horizontal_layout.html.twig']
+#    form:
+#        resources: ["bootstrap_3_layout.html.twig"]
+    globals:
+        default_category_color: "#888888"
+        fb_app_id: "%fb_app_id%"
+        ga_id: "%ga_id%"
+        google_api_key: "%google_api_key%"
+    form_themes:
+        - "bootstrap_3_layout.html.twig"
+        - "TetranzSelect2EntityBundle:Form:fields.html.twig"
 
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ VolleyFaceBundle,FOSUserBundle]
-    filters:
-        uglifycss:
-            bin: %uglifycss_path%
-        uglifyjs:
-            bin: %uglifyjs_path%
-    assets:
-        jquery:
-            inputs:
-                - %kernel.root_dir%/../vendor/frameworks/jquery/jquery.js
-        datetimepicker_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/jquery.datetimepicker.js
-        datetimepicker_css:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/jquery.datetimepicker.css
-        bootstrap_css:
-            inputs:
-#                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.css
-        bootstrap_js:
-            inputs:
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
-                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
-        volley_css:
-            inputs:
-                - @bootstrap_css
-#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/styles.css
-#                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/bower_components/components-font-awesome/css/font-awesome.css
-            filters:
-                - ?uglifycss
-        volley_css_ie:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/ie.css
-            filters:
-                - ?uglifycss
-        volley_admin_css:
-            inputs:
-                - @bootstrap_css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/dashboard.css
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/css/admin/styles.css
-            filters:
-                - ?uglifycss
-        volley_header_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/html5shiv.js
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/respond.min.js
-            filters:
-                - ?uglifyjs
-        volley_carousel_js:
-            inputs:
-                - %kernel.root_dir%/../src/Volley/FaceBundle/Resources/public/js/carousel.js
-        volley_footer_js:
-            inputs:
-                - @jquery
-                - @bootstrap_js
-                - @volley_carousel_js
 
 # Doctrine Configuration
 doctrine:
@@ -116,7 +53,7 @@ doctrine:
         dbname:   "%database_name%"
         user:     "%database_user%"
         password: "%database_password%"
-        charset:  UTF8
+        charset:  utf8mb4
         # if using pdo_sqlite as your database driver, add the path in parameters.yml
         # e.g. database_path: "%kernel.root_dir%/data/data.db3"
         # path:     "%database_path%"
@@ -129,29 +66,23 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
-    host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory }
-
-assetic:
-    filters:
-        less:
-            node: C:\Program Files\nodejs\node.exe
-            node_paths: [c:\Program Files\nodejs\node_modules]
-            apply_to: "\.less$"
 
 mopa_bootstrap:
     form: ~  # Adds twig form theme  support
     menu: ~  # enables twig helpers for menu
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm # other valid values are "mongodb", "couchdb" and "propel"
     firewall_name: main
     user_class: Volley\UserBundle\Entity\User
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
 
 doctrine_migrations:
-    dir_name: %kernel.root_dir%/DoctrineMigrations
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
@@ -160,9 +91,9 @@ stfalcon_tinymce:
     include_jquery: true
     tinymce_jquery: true
     selector: ".tinymce"
-    base_url: %base_url% # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
+    base_url: "%base_url%" # this parameter may be included if you need to override the assets_base_urls for your template engine (to override a CDN base url)
     # Get current language from the parameters.ini
-    language: %locale%
+    language: "%locale%"
     # Custom buttons
     tinymce_buttons:
         stfalcon: # Id of the first button
@@ -185,8 +116,8 @@ stfalcon_tinymce:
             toolbar2: "print preview media | forecolor backcolor emoticons | stfalcon | example | moxiemanager"
             image_advtab: true
             templates:
-               - {title: 'Test template 1', content: 'Test 1'}
-               - {title: 'Test template 2', content: 'Test 2'}
+               - {title: "Test template 1", content: "Test 1"}
+               - {title: "Test template 2", content: "Test 2"}
         # BBCode tag compatible theme (see http://www.bbcode.org/reference.php)
         bbcode:
              plugins: ["bbcode, code, link, preview"]
@@ -210,6 +141,7 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             softdeleteable: true
+            tree: true
 
 liip_imagine:
     resolvers:
@@ -217,10 +149,72 @@ liip_imagine:
           web_path: ~
     filter_sets:
         cache: ~
-        carousel:
+        main_pic:
+            quality: 80
+            filters:
+#                thumbnail: { size: [555, 350], mode: outbound }
+                relative_resize: { widen: 555 }
+        main_thumb:
+            quality: 80
+            filters:
+                thumbnail: { size: [278, 175], mode: outbound }
+        post_pic:
+            quality: 90
+            filters:
+#                thumbnail: { size: [760, 480], mode: outbound }
+                relative_resize: { widen: 760 }
+        post_pic_fb:
             quality: 100
             filters:
-                thumbnail: { size: [760, 350], mode: outbound }
+                thumbnail: { size: [760, 400], mode: outbound }
+        blog_post:
+            quality: 85
+            filters:
+                thumbnail: { size: [370, 240], mode: outbound }
+        team_roster:
+            quality: 90
+            filters:
+                relative_resize: { widen: 1170 }
+        team_hall:
+            quality: 90
+            filters:
+                relative_resize: { widen: 1170 }
+        team_logo:
+            quality: 100
+            filters:
+                thumbnail: { size: [100, 100], mode: inset }
+        team_player:
+            quality: 90
+            filters:
+                thumbnail: { size: [130, 180], mode: outbound }
+        player_image:
+            quality: 90
+            filters:
+                thumbnail: { size: [190, 270], mode: outbound }
+        player_birthday:
+            quality: 90
+            filters:
+                relative_resize: { widen: 370 }
+                crop:
+                  size: [ 370, 300 ]
+                  start: [ 0, 0 ]
+
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: VolleyFaceBundle:Default/pagination:pagination.html.twig    # sliding pagination controls template
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+presta_sitemap:
+    timetolive: 3600
+    #dumper_base_url: "http://www.volleyball.ua/"
+    route_annotation_listener: false
 
 oneup_uploader:
     mappings:

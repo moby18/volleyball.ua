@@ -1,0 +1,53 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+<h1>School list</h1>
+
+<div class="pull-right">
+    <a type="button"
+       class="btn btn-success" href="{{ path('stat_school_new') }}">
+        Create a new entry
+    </a>
+</div>
+<div class="clearfix"></div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover .table-condensed">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Short Name</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('stat_school_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.shortName }}</td>
+                <td>{{ entity.city }}</td>
+                <td class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="btn-group pull-right" role="group" aria-label="">
+                        {#<a href="{{ path('stat_school_show', { 'id': entity.id }) }}" type="button"#}
+                        {#class="btn btn-default">show</a>#}
+                        <a href="{{ path('stat_school_edit', { 'id': entity.id }) }}" type="button"
+                           class="btn btn-default">edit</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="100">
+                <div class="navigation">
+                    {{ knp_pagination_render(entities) }}
+                </div>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+    {% endblock %}

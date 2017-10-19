@@ -1,32 +1,277 @@
 {% extends '::layout.html.twig' %}
 
-{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath | imagine_filter(thumbnail) }} %}#}
+{% set page_image = post.getWebPath | imagine_filter('post_pic_fb') %}
 {% set title = post.title %}
+{% set meta_keywords = post.metakey %}
+{% set meta_description = post.metadescr %}
+
+{% set color = post.category.color ? post.category.color : post.category.parent and post.category.parent.color ? post.category.parent.color : post.category.parent and post.category.parent.parent and post.category.parent.parent.color ? post.category.parent.parent.color : default_category_color %}
 
 {% block content %}
+
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <div class="section post">
 
         <div class="container">
 
-            <div class="pull-left" style="width: 760px;">
-                <a href="{{ path('volley_face_post',{'post_id': post.id}) }}">
-                    <h1>{{ post.title }}</h1>
-                </a>
-                {#<a href="{{ path('volley_face_post',{'post_id': post.id}) }}">#}
-                    {#<img class="img-responsive" src="{{ post.getWebPath }}">#}
-                {#</a>#}
+            <div class="row">
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+                    <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
+                        <h1>{{ post.title }}</h1>
+                    </a>
+                    <div class="news-info row">
+                        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                            <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye"
+                                                                                             aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
+                        </div>
+                    </div>
 
-                <span class="news-info">{{ post.created|date('d/m/Y H:i') ~ ' | ' ~ post.createdBy }}</span
-                <p>
-                    {% autoescape %}
-                    {{ post.content|raw }}
-                    {{ post.text|raw }}
-                    {% endautoescape %}
-                </p>
+                    <figure class="img-caption">
+                        <img class="img-responsive" src="{{ post.getWebPath | imagine_filter('post_pic') }}"
+                             alt="{{ post.imageDescr ~ ' ' ~ post.title }}">
+                        <figcaption
+                                class="img-caption-text">{{ post.imageDescr ? post.imageDescr : '' }} {{ post.imageSource ? ' / ' ~ post.imageSource : '' }}</figcaption>
+                    </figure>
 
-                {% include '@VolleyFace/Social/uptolike.html.twig' %}
+                    <div class="news-info row">
+                        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
+            <span class="news-date">{{ post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
+            <a href="{{ path('volley_face_blog',{'category_slug': post.category.slug}) }}"
+               title="{{ post.category.name }}"
+               style="color: {{ color }}">{{ post.category.name }}</a></span>
+
+                        </div>
+                        <div class="col col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <span class="pull-right">
+                                {#<span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>#}
+                                {#<br/>#}
+                                {#<span class="news-author ">{{ post.createdBy }}</span>#}
+                            </span>
+                            {% if post.advert %}
+                                <a href="{{ path('volley_face_post',{'category_slug': post.category.slug,'post_slug': post.slug}) }}">
+                                    <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <span class="clearfix"></span>
+                    </div>
+
+                    {% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}
+
+                    <div class="post-content">
+                        <p>
+                            <b>{{ post.content|raw }}</b>
+                        </p>
+                        <p>
+                            {% autoescape %}
+                                {{ post.text|raw }}
+                            {% endautoescape %}
+                        </p>
+                    </div>
+                    <p>
+                        {% autoescape %}
+                            {% if (post.sourceName|trim != '' or post.sourceLink|trim != '') %}
+                                {{ 'post-item.post-info.source'|trans({}) }}:
+                                {% if post.sourceLink|trim == '' %}
+                                    {{ post.sourceName }}
+                                {% else %}
+                                    <a href="{{ post.sourceLink }}"
+                                       title="{{ post.sourceName ? post.sourceName : post.sourceLink }}">{{ post.sourceName ? post.sourceName : post.sourceLink }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endautoescape %}
+                    </p>
+
+                    <div class="social-links">
+                        <div>Наші сторінки в соціальних мережах:</div>
+                        <a href="https://www.facebook.com/volleyballua" target="_blank"
+                           class="social-icon icon-facebook" title="Facebook">
+                            <i class="fa fa-facebook"></i> facebook.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://vk.com/volleyballua" target="_blank" class="social-icon icon-vk" title="VK">
+                            <i class="fa fa-vk"></i> vk.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://twitter.com/volleyballua" target="_blank" class="social-icon icon-twitter"
+                           title="Twitter">
+                            <i class="fa fa-twitter"></i> twitter.com/volleyballua
+                        </a>
+                        <br/>
+                        <a href="https://instagram.com/volleyball.ua" target="_blank" class="social-icon icon-twitter"
+                           title="Instagram">
+                            <i class="fa fa-instagram"></i> instagram.com/volleyball.ua
+                        </a>
+                        <br/>
+                        <a href="https://plus.google.com/+VolleyballUa" target="_blank"
+                           class="social-icon icon-google-plus" title="Google Plus">
+                            <i class="fa fa-google-plus"></i> plus.google.com/+VolleyballUa
+                        </a>
+                    </div>
+
+
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>{#{% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}#}
+
+                    {#<div id="comments"#}
+                         {#class="visible-lg visible-md visible-sm">#}
+                        {#<div class=""#}
+                             {#data-example-id="togglable-tabs">#}
+                            {#<ul class="nav nav-tabs"#}
+                                {#id="myComments"#}
+                                {#role="tablist">#}
+                                {#<li role="presentation"#}
+                                    {#class="active">#}
+                                    {#<a href="#vk"#}
+                                       {#id="vk-tab"#}
+                                       {#role="tab"#}
+                                       {#data-toggle="tab"#}
+                                       {#aria-controls="vk"#}
+                                       {#aria-expanded="true">ВКонтакте</a>#}
+                                {#</li>#}
+                                {#<li role="presentation"#}
+                                    {#class=""><a#}
+                                            {#href="#fb"#}
+                                            {#role="tab"#}
+                                            {#id="fb-tab"#}
+                                            {#data-toggle="tab"#}
+                                            {#aria-controls="fb"#}
+                                            {#aria-expanded="false">Facebook</a>#}
+                                {#</li>#}
+                            {#</ul>#}
+                            {#<div class="tab-content"#}
+                                 {#id="myCommentsContent">#}
+                                {#<div class="tab-pane fade active in"#}
+                                     {#role="tabpanel"#}
+                                     {#id="vk"#}
+                                     {#aria-labelledby="vk-tab">#}
+                                    {#<!-- Put this div tag to the place, where the Comments block will be -->#}
+                                    {#<div id="vk_comments"></div>#}
+                                    {#<script type="text/javascript">#}
+                                      {#VK.Widgets.Comments('vk_comments', {#}
+                                        {#limit: 10,#}
+                                        {#width: '770',#}
+                                        {#attach: '*',#}
+                                        {#pageUrl: '{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}'#}
+                                      {#})#}
+                                    {#</script>#}
+                                {#</div>#}
+                                {#<div class="tab-pane fade"#}
+                                     {#role="tabpanel"#}
+                                     {#id="fb"#}
+                                     {#aria-labelledby="fb-tab">#}
+                                    {#<div class="fb-comments"#}
+                                         {#data-href="{{ url('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}"#}
+                                         {#data-width="770"#}
+                                         {#data-numposts="5"></div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+
+                    {#</div>#}
+
+                </div>
+
+                <div class="col col-lg-4 col-md-12 col-sm-12">
+                {#{% if recommendedPosts|length %}#}
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12">#}
+                                {#<div class="section-title">#}
+                                    {#{{ 'recommended-section-in-category'|trans({}) }}#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#{% for item in recommendedPosts %}#}
+                                {#<div class="col-lg-12">#}
+                                    {#{% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'recommended': true} %}#}
+                                {#</div>#}
+                                {#<div style="clear: both"></div>#}
+                            {#{% endfor %}#}
+                        {#</div>#}
+                {#{% endif %}#}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12" style="padding-top: 15px;">#}
+                                {#<div class="section-title">#}
+                                    {#{{ 'advert'|trans({}) }}#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col.html.twig' %}
+                            </div>
+                            <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {#<div class="row">#}
+                    {#<div class="col-lg-12">#}
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12" style="padding-top: 15px;">#}
+                                {#<div class="section-title">#}
+                                    {#{{ 'advert'|trans({}) }}#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12">#}
+                                {#{% include '@VolleyFace/Default/includes/mikasa-vls300.html.twig' %}#}
+                            {#</div>#}
+                            {#<div style="clear: both"></div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+                    {% if popularPosts|length %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    {{ 'popular-section-in-category'|trans({}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for item in popularPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
+                        {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
+                        {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
+                        <p></p>
+                        {#<a href="{{ path('volley_face_mikasa_vls300') }}" title="Mikasa VLS300 мяч для пляжного волейбола">#}
+                        {#<div class="row">#}
+                        {#<div class="col-lg-12 col-md-12 col-sm-12 text-center">#}
+                        {#<p>#}
+                        {#<img alt="Mikasa VLS300 мяч для пляжного волейбола" class="img-responsive"#}
+                        {#src="{{ asset("uploads/products/mikasa-vls300/VLS300.png") }}">#}
+                        {#</p>#}
+                        {#</div>#}
+                        {#</div>#}
+                        {#</a>#}
+                {% endif %}
+                </div>
             </div>
+
 
         </div>
         <!-- /.container -->
@@ -34,6 +279,17 @@
     </div>
     <!-- /.section -->
 
+{% endblock %}
 
+{% block head_scripts %}
+    {{ parent() }}
+    <!-- Put this script tag to the <head> of your page -->
+    {#<script type="text/javascript" src="//vk.com/js/api/openapi.js?127"></script>#}
+    {#<script type="text/javascript">#}
+        {#VK.init({apiId: 4319865, onlyWidgets: true});#}
+    {#</script>#}
+{% endblock %}
 
+{% block scripts %}
+    {{ parent() }}
 {% endblock %}

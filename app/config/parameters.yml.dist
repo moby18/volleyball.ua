@@ -11,15 +11,24 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
-    locale:            en
+    locale:            ru
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    base_url:           ~
-
-    use_assetic_controller: true
+    base_url:          "http://www.volleyball.ua/"
 
     uglifycss_path: %kernel.root_dir%/../node_modules/.bin/uglifycss
     uglifyjs_path: %kernel.root_dir%/../node_modules/.bin/uglifyjs
+
+    fb_app_id:          ~
+    ga_id:              ~
+
+    popular_post_count: 5
+    recommended_post_count: 5
+
+    google_api_key: ~
+
+    router.request_context.host:   www.volleyball.ua
+    router.request_context.scheme: http
 
     facebook_client_id: ~
     facebook_client_secret: ~

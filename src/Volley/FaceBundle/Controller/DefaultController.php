@@ -4,14 +4,68 @@ namespace Volley\FaceBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Volley\FaceBundle\Entity\Category;
+use Volley\FaceBundle\Entity\Post;
+use Volley\FaceBundle\Entity\Purchase;
+use Volley\FaceBundle\Form\PurchaseType;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/robots.txt", name="volley_face_robots")
+     * @Template("VolleyFaceBundle:Default:robots.txt.twig")
+     */
+    public function robotsAction()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/plain');
+        return $this->render("VolleyFaceBundle:Default:robots.txt.twig", [], $response);
+    }
+
+    /**
+     * Schools Route
+     *
+     * @param int $page
+     * @param Request $request
+     *
+     * @return string
+     *
+     * @Route("/school/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_school_pages")
+     * @Route("/school", defaults={"page" = 1}, name="volley_face_school")
+     * @Template()
+     */
+    public function schoolAction($page, Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $schools = $em->getRepository('VolleyStatBundle:School')->findAll();
+
+//        $paginator = $this->get('knp_paginator');
+//        $pagination = $paginator->paginate(
+//            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
+//            $page,
+//            20
+//        );
+//        if ($blog)
+//            $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
+//        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+//        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+
+        return $this->render('VolleyFaceBundle:Default:school.html.twig', array(
+            'schools' => $schools
+//            'posts' => $pagination,
+        ));
+    }
+
+
     /**
      * @Route("/tournamentTable", name="volley_face_tournament_table")
      * @Template()
@@ -50,14 +104,12 @@ class DefaultController extends Controller
             if ($game->getHomeTeam()) {
                 $homeTeamId = $game->getHomeTeam()->getId();
                 $table[$homeTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $homeTeamId = 0;
             if ($game->getAwayTeam()) {
                 $awayTeamId = $game->getAwayTeam()->getId();
                 $table[$awayTeamId]['games'] += 1;
-            }
-            else
+            } else
                 $awayTeamId = 0;
 
             $homeTeamSets = $game->getScoreSetHome();
@@ -105,23 +157,41 @@ class DefaultController extends Controller
     }
 
     /**
+     * Paginated home page
+     *
+     * @param int $page
+     * @param int $home
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/", name="volley_web_homepage")
+     *
+     * @return array
+     * @Route("/page/{page}", defaults={"home" = 0}, requirements={"page": "\d+"}, name="volley_web_homepage_pages")
+     * @Route("/", defaults={"page" = 1, "home" = 1}, name="volley_web_homepage")
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction($page, $home, Request $request)
     {
+
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         // slides
-        $slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([],null,3);
+        //$slides = $em->getRepository('VolleyFaceBundle:Slide')->findBy([], null, 5);
+        $slides = [];
         // news
-        $news = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => 1), array('id' => 'DESC'));
-        return $this->render('VolleyWebBundle:Default:index.html.twig', [
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
+        $posts = $this->get('knp_paginator')->paginate(
+            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
+            $page,
+            20
+        );
+        if ($home)
+            $posts->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
+
+        return [
             'slides' => $slides,
-            'news' => $news
-        ]);
+            'news' => $posts,
+            'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count')),
+            'recommendedPosts' => $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'))
+        ];
     }
 
     /**
@@ -154,23 +224,23 @@ class DefaultController extends Controller
      * @Route("/team/{team_id}", name="volley_face_team")
      * @Template()
      */
-    public function teamAction($team_id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        // team
-        $teamID = $team_id;
-        $team = $em->getRepository('VolleyFaceBundle:Team')->find($teamID);
-
-        // players
-        $players[] = $team->getPlayerOne();
-        $players[] = $team->getPlayerTwo();
-
-        return $this->render('VolleyFaceBundle:Default:team.html.twig', array(
-            'team' => $team,
-            'players' => $players
-        ));
-    }
+//    public function teamAction($team_id)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        // team
+//        $teamID = $team_id;
+//        $team = $em->getRepository('VolleyFaceBundle:Team')->find($teamID);
+//
+//        // players
+//        $players[] = $team->getPlayerOne();
+//        $players[] = $team->getPlayerTwo();
+//
+//        return $this->render('VolleyFaceBundle:Default:team.html.twig', array(
+//            'team' => $team,
+//            'players' => $players
+//        ));
+//    }
 
     /**
      * @Route("/player/{player_id}", name="volley_face_player")
@@ -190,45 +260,179 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/post/{post_id}", name="volley_face_post")
+     * @Route("/contacts", name="volley_face_contacts")
      * @Template()
      */
-    public function postAction($post_id)
+    public function contactsAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        // post
-        $post = $em->getRepository('VolleyFaceBundle:Post')->find($post_id);
-
-        return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
-            'post' => $post
-        ));
+        return $this->render('VolleyFaceBundle:Default:contacts.html.twig', []);
     }
 
     /**
-     * @Route("/blog/{category_id}", name="volley_face_blog")
+     * @Route("/advertising", name="volley_face_advertising")
      * @Template()
      */
-    public function blogAction($category_id)
+    public function advertisingAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        return $this->render('VolleyFaceBundle:Default:advertising.html.twig', []);
+    }
 
-        // post
-        $posts = $em->getRepository('VolleyFaceBundle:Post')->findBy(array('category' => $category_id), array('id' => 'DESC'));
+    /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
+     * @Method("GET")
+     * @Template()
+     */
+    public function mikasaVls300Action()
+    {
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>false]);
+    }
+
+    /**
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy")
+     * @Method("POST")
+     * @Template()
+     */
+    public function buyMikasaVls300Action(Request $request)
+    {
+        $entity = new Purchase();
+        $form = $this->createForm(PurchaseType::class, $entity, array());
+        $form->add('submit', SubmitType::class, []);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+        }
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Mikasa VLS300 - BUY')
+            ->setFrom('moby.ekreative@gmail.com')
+            ->setTo('volleyball.ua@gmail.com')
+            ->setBody(
+                $this->renderView(
+                    'VolleyFaceBundle:Email:order.html.twig',
+                    [
+                        'name' => $entity->getName(),
+                        'phone' => $entity->getPhone(),
+                        'email' => $entity->getEmail(),
+                        'comments' => $entity->getComment(),
+                    ]
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+
+        return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>true]);
+    }
+
+    /**
+     * * Deletes a Tournament entity.
+     *
+     * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
+     * @Method("GET")
+     * @param int $season_id
+     * @param int $tournament_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($season_id, $tournament_id)
+    {
+        return $this->render('VolleyFaceBundle:Stat:tournament.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($season_id, $tournament_id));
+    }
+
+    /**
+     * Search Route - should be at the bottom of routes list
+     *
+     * @param Request $request
+     *
+     * @return string
+     *
+     * @Route("/search", name="volley_face_search")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $em->getRepository('VolleyFaceBundle:Post')->search($request->query->get('s', '')),
+            $request->query->getInt('page', 1),
+            20
+        );
+        $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
-            'posts' => $posts
+            'category' => $category,
+            'posts' => $pagination,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
         ));
     }
 
     /**
-     * @Route("/zayavka", name="volley_face_zayavka")
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @param Category $category
+     * @param Post $post
+     *
+     * @return string
+     *
+     * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}, "repository_method" = "findWithOptions", "map_method_signature" = true})
      * @Template()
      */
-    public function zayavkaAction()
+    public function postAction(Category $category, Post $post)
     {
+        $em = $this->getDoctrine()->getManager();
+        $post->setHits($post->getHits() + 1);
+        $em->flush();
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->getParameter('recommended_post_count'));
 
-        return $this->render('VolleyFaceBundle:Default:zayavka.html.twig', array());
+        return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
+            'category' => $category,
+            'post' => $post,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
+        ));
     }
 
+    /**
+     * Blog Route - should be at the bottom of routes list
+     *
+     * @param Category $category
+     * @param int $page
+     * @param int $blog
+     * @param Request $request
+     *
+     * @return string
+     *
+     * @Route("/{category_slug}/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_blog_pages")
+     * @Route("/{category_slug}/", defaults={"page" = 1, "blog" = 1}, name="volley_face_blog")
+     * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
+     * @Template()
+     */
+    public function blogAction(Category $category, $page, $blog, Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $em->getRepository('VolleyFaceBundle:Post')->findByCategoryQuery($category),
+            $page,
+            20
+        );
+        if ($blog)
+            $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
+        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+
+        return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
+            'category' => $category,
+            'posts' => $pagination,
+            'popularPosts' => $popularPosts,
+            'recommendedPosts' => $recommendedPosts
+        ));
+    }
 }

@@ -1,0 +1,67 @@
+{% extends '::layout.html.twig' %}
+
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{% set title =  person.firstName ~ (person.middleName is not empty ? ' ' ~ person.middleName : '') ~ ' ' ~ person.lastName %}
+{% set meta_keywords = title ~ ', волейбол, профайл, дата народження, зріст, вага, команда' %}
+{% set meta_description = person.type|trans ~ ' ' ~ title ~ ' на Волейбол в Україні - volleyball.ua' %}
+
+{% block content %}
+    <div class="section team-upperline">
+        <div class="container text-center">
+            <span class="team-title">ВОЛЕЙБОЛЬНІ ПРОФАЙЛИ</span>
+        </div>
+    </div>
+
+    <div class="section person">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-8 col-sm-8">
+                    <div class="person-container">
+                        <div class="person-image">
+                            {% if person.webPath %}<img src="{{ person.webPath | imagine_filter('player_image') }}" alt="{{ person }}">{% endif %}
+                        </div>
+                        <div class="person-info">
+                            <div class="person-top-info">
+                                {#<div class="team-person-number">#}
+                                    {#{{ person.id }}#}
+                                {#</div>#}
+                                <div class="team-person-name">
+                                    <h1>{{ title }}</h1>
+                                </div>
+                            </div>
+
+                            <div class="person-middle-info">
+                                <div><strong>{{ person.type == 'staff' ? person.title : person.type|trans }}</strong></div>
+                                <div><strong>{{ person.grade }}</strong></div>
+                                <div><strong>{{ person.position|trans }}</strong></div>
+                                <br/>
+                                <div>Громадянство: {{ person.country }}</div>
+                                <div>Національність: {{ person.nationality }}</div>
+                                <div>Дата народження: {{ person.birthDate|date('d.m.Y') }}</div>
+                                <div>Зріст: {{ person.height ? person.height : '-' }} см</div>
+                                <div>Вага: {{ person.weight ? person.weight : '-' }} кг</div>
+                                <div>Висота удару: {{ person.spike ? person.spike : '-' }} см</div>
+                                <div>Висота блоку: {{ person.block ? person.block : '-' }} см</div>
+                            </div>
+                            <div class="person-bottom-info">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-lg-4 col-md-4 col-sm-4">
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

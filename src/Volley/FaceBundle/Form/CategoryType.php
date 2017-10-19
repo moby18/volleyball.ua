@@ -4,7 +4,7 @@ namespace Volley\FaceBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CategoryType extends AbstractType
 {
@@ -16,15 +16,32 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
+            ->add('slug',null, [
+                'required' => false
+            ])
+            ->add('color',null, [
+                'required' => false
+            ])
+            ->add('title',null, [
+                'required' => false
+            ])
+            ->add('h1',null, [
+                'required' => false
+            ])
+            ->add('keywords',null, [
+                'required' => false
+            ])
+            ->add('description',null, [
+                'required' => false
+            ])
             ->add('parent')
         ;
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Volley\FaceBundle\Entity\Category'

@@ -3,14 +3,41 @@
 {% block body -%}
     <h1>Team edit</h1>
 
-    {{ form(edit_form) }}
+    {% for team_season in entity.teamsSeasons %}
+        <p><a href="{{ path('stat_team_season_edit',{'id': team_season.id}) }}">{{ team_season }}</a></p>
+    {% endfor %}
+    <p><a class="btn btn-default" href="{{ path('stat_team_season_new',{'team_id': entity.id}) }}">Add team season</a></p>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('stat_team') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    {% for team_roster in entity.teamsRosters %}
+        <p><a href="{{ path('stat_team_roster_edit',{'id': team_roster.id}) }}">{{ team_roster }}</a> {{ team_roster.current ?  '<span class="glyphicon glyphicon-star" aria-hidden="true"></span>' : '' }}</p>
+    {% endfor %}
+    <p><a class="btn btn-default" href="{{ path('stat_team_roster_new',{'team_id': entity.id}) }}">Add team roster</a></p>
+
+    {#{{ form(edit_form) }}#}
+
+    {{ form_start(edit_form) }}
+    {{ form_errors(edit_form) }}
+
+    {{ form_row(edit_form.name) }}
+    {{ form_row(edit_form.slug, { 'attr': {'disabled': 'disabled'}}) }}
+    {{ form_row(edit_form.shortName) }}
+    {{ form_row(edit_form.city) }}
+    {{ form_row(edit_form.country) }}
+
+    {% if entity.image %}<a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.image) }}
+    {% if entity.logoImage %}<a href="{{ entity.getLogoWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getLogoWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.logoImage) }}
+    {% if entity.hallImage %}<a href="{{ entity.getHallWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getHallWebPath }}"></a>{% endif %}
+    {{ form_row(edit_form.hallImage) }}
+
+    {{ form_end(edit_form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_team') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
 {% endblock %}

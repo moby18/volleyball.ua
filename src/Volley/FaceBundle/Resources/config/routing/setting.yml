@@ -1,0 +1,8 @@
+setting_edit:
+    path:  /{id}/edit
+    defaults: { _controller: "VolleyFaceBundle:Setting:edit" }
+
+setting_update:
+    path:  /{id}/update
+    defaults: { _controller: "VolleyFaceBundle:Setting:update" }
+    requirements: { methods: post|put }

@@ -1,26 +1,21 @@
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
+
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
-
-oneup_uploader:
-    resource: .
-    type: uploader
-
-volley_web:
-    resource: "@VolleyWebBundle/Resources/config/routing.yml"
-    prefix:   /
 
 volley_stat:
     resource: "@VolleyStatBundle/Controller/"
     type:     annotation
-    prefix:   /admin/stat
+    prefix:   /
 
 volley_user:
     resource: "@VolleyUserBundle/Resources/config/routing.yml"
     prefix:   /
 
-volley_face:
-    resource: "@VolleyFaceBundle/Resources/config/routing.yml"
-    prefix:   /
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
@@ -48,6 +43,10 @@ vkontakte_check:
     pattern: /login/check-vkontakte
 vkontakte_login:
     pattern: /connect/vkontakte
+
+volley_face:
+    resource: "@VolleyFaceBundle/Resources/config/routing.yml"
+    prefix:   /
 
 #fos_user_security:
 #    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

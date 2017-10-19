@@ -2,11 +2,15 @@
 
 namespace Volley\FaceBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Volley\StatBundle\Entity\Person;
+use Volley\StatBundle\Entity\Team;
+use Volley\UserBundle\Entity\User;
 
 /**
  * Post
@@ -37,15 +41,22 @@ class Post
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"title","id"},updatable=true)
-     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Gedmo\Slug(fields={"id","title"}, updatable=false)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true, nullable=true)
      */
     private $slug;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="slug_updateble", type="boolean", options={"default" : true})
+     */
+    private $slugUpdateble;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="text", type="text", nullable=true)
      */
     private $text;
 
@@ -84,30 +95,57 @@ class Post
     private $published;
 
     /**
+     * @var /DateTime
+     *
+     * @Doctrine\ORM\Mapping\Column(type="datetime")
+     */
+    private $modified;
+
+    /**
      * @Doctrine\ORM\Mapping\Column(type="text")
      */
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="created_by", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="posts")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
+     **/
     private $createdBy;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="modified_by", type="string", length=255, nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="\Volley\UserBundle\Entity\User", inversedBy="modified_posts")
+     * @ORM\JoinColumn(name="modified_by", referencedColumnName="id")
+     **/
     private $modifiedBy;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image_descr", type="string", length=255, nullable=true)
      */
-    private $source;
+    private $imageDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_source", type="string", length=255, nullable=true)
+     */
+    private $imageSource;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source_name", type="string", length=255, nullable=true)
+     */
+    private $sourceName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source_link", type="string", length=255, nullable=true)
+     * @Assert\Url()
+     */
+    private $sourceLink;
 
     /**
      * @var string
@@ -126,7 +164,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="metadescr", type="string", length=255, nullable=true)
+     * @ORM\Column(name="metadescr", type="string", length=255, nullable=false)
      */
     private $metadescr;
 
@@ -152,6 +190,48 @@ class Post
     private $featured;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="recommended", type="boolean", nullable=true)
+     */
+    private $recommended;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="images", type="boolean")
+     */
+    private $images;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="videos", type="boolean")
+     */
+    private $videos;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="translated", type="boolean")
+     */
+    private $translated;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="vu", type="boolean")
+     */
+    private $vu;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="advert", type="boolean")
+     */
+    private $advert;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=255, nullable=true)
@@ -169,6 +249,20 @@ class Post
     private $file;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Person", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_persons")
+     **/
+    private $persons;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Volley\StatBundle\Entity\Team", inversedBy="posts")
+     * @ORM\JoinTable(name="posts_teams")
+     **/
+    private $teams;
+
+
+    /**
      * Get file.
      *
      * @return UploadedFile
@@ -181,7 +275,7 @@ class Post
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('file', new Assert\File(array(
-            'maxSize' => 6000000,
+            'maxSize' => 8000000,
         )));
     }
 
@@ -299,6 +393,10 @@ class Post
     function __construct()
     {
         $this->state = true;
+        $this->slugUpdateble = true;
+        $this->modified = new \DateTime();
+        $this->persons = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
 
@@ -333,29 +431,6 @@ class Post
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set alias
-     *
-     * @param string $alias
-     * @return Post
-     */
-    public function setAlias($alias)
-    {
-        $this->alias = $alias;
-
-        return $this;
-    }
-
-    /**
-     * Get alias
-     *
-     * @return string 
-     */
-    public function getAlias()
-    {
-        return $this->alias;
     }
 
     /**
@@ -430,7 +505,7 @@ class Post
     /**
      * Set createdBy
      *
-     * @param string $createdBy
+     * @param User $createdBy
      * @return Post
      */
     public function setCreatedBy($createdBy)
@@ -443,7 +518,7 @@ class Post
     /**
      * Get createdBy
      *
-     * @return string 
+     * @return User
      */
     public function getCreatedBy()
     {
@@ -451,9 +526,15 @@ class Post
     }
 
     /**
-     * Set modifiedBy
-     *
-     * @param string $modifiedBy
+     * @return User
+     */
+    public function getModifiedBy()
+    {
+        return $this->modifiedBy;
+    }
+
+    /**
+     * @param mixed $modifiedBy
      * @return Post
      */
     public function setModifiedBy($modifiedBy)
@@ -461,16 +542,6 @@ class Post
         $this->modifiedBy = $modifiedBy;
 
         return $this;
-    }
-
-    /**
-     * Get modifiedBy
-     *
-     * @return string 
-     */
-    public function getModifiedBy()
-    {
-        return $this->modifiedBy;
     }
 
     /**
@@ -635,6 +706,102 @@ class Post
     }
 
     /**
+     * @return boolean
+     */
+    public function isRecommended()
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * @param boolean $recommended
+     */
+    public function setRecommended($recommended)
+    {
+        $this->recommended = $recommended;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param boolean $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param boolean $videos
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isTranslated()
+    {
+        return $this->translated;
+    }
+
+    /**
+     * @param boolean $translated
+     */
+    public function setTranslated($translated)
+    {
+        $this->translated = $translated;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isVu()
+    {
+        return $this->vu;
+    }
+
+    /**
+     * @param bool $vu
+     */
+    public function setVu($vu)
+    {
+        $this->vu = $vu;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdvert()
+    {
+        return $this->advert;
+    }
+
+    /**
+     * @param bool $advert
+     */
+    public function setAdvert($advert)
+    {
+        $this->advert = $advert;
+    }
+
+    /**
      * Set language
      *
      * @param string $language
@@ -678,6 +845,22 @@ class Post
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSlugUpdateble()
+    {
+        return $this->slugUpdateble;
+    }
+
+    /**
+     * @param boolean $slugUpdateble
+     */
+    public function setSlugUpdateble($slugUpdateble)
+    {
+        $this->slugUpdateble = $slugUpdateble;
     }
 
     /**
@@ -793,5 +976,153 @@ class Post
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageDescr()
+    {
+        return $this->imageDescr;
+    }
+
+    /**
+     * @param string $imageDescr
+     */
+    public function setImageDescr($imageDescr)
+    {
+        $this->imageDescr = $imageDescr;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageSource()
+    {
+        return $this->imageSource;
+    }
+
+    /**
+     * @param string $imageSource
+     */
+    public function setImageSource($imageSource)
+    {
+        $this->imageSource = $imageSource;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceName()
+    {
+        return $this->sourceName;
+    }
+
+    /**
+     * @param string $sourceName
+     */
+    public function setSourceName($sourceName)
+    {
+        $this->sourceName = $sourceName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceLink()
+    {
+        return $this->sourceLink;
+    }
+
+    /**
+     * @param string $sourceLink
+     */
+    public function setSourceLink($sourceLink)
+    {
+        $this->sourceLink = $sourceLink;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+    /**
+     * @param mixed $modified
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
+    }
+
+    /**
+     * Add persons
+     *
+     * @param Person $persons
+     * @return Post
+     */
+    public function addPerson(Person $persons)
+    {
+        $persons->addPost($this); // synchronously updating inverse side
+        $this->persons[] = $persons;
+
+        return $this;
+    }
+
+    /**
+     * Remove persons
+     *
+     * @param Person $persons
+     */
+    public function removePerson(Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
+
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param Team $teams
+     * @return Post
+     */
+    public function addTeam(Team $teams)
+    {
+        $teams->addPost($this); // synchronously updating inverse side
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

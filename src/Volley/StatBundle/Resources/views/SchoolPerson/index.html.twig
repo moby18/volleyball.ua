@@ -1,0 +1,75 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1 class="page-header">Player list</h1>
+    {#<h2 class="sub-header">Section title</h2>#}
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Middlename</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Spike</th>
+                <th>Block</th>
+                <th>Nationality</th>
+                <th>Position</th>
+                <th>Number</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('stat_person_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.firstName }}</td>
+                    <td>{{ entity.middleName }}</td>
+                    <td>{{ entity.lastName }}</td>
+                    <td>{% if entity.birthDate %}{{ entity.birthDate|date('d/m/Y') }}{% endif %}</td>
+                    <td>{{ entity.height }}</td>
+                    <td>{{ entity.weight }}</td>
+                    <td>{{ entity.spike }}</td>
+                    <td>{{ entity.block }}</td>
+                    <td>{{ entity.nationality }}</td>
+                    <td>{{ entity.position }}</td>
+                    <td>{{ entity.number }}</td>
+                    <td>{{ entity.grade }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('stat_person_show', { 'id': entity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('stat_person_edit', { 'id': entity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="100">
+                    <div class="navigation">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <ul>
+        <li>
+            <a href="{{ path('stat_person_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}

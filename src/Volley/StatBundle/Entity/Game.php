@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Game
  *
  * @ORM\Table(name="stat_game")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\GameRepository")
  */
 class Game
 {
@@ -106,6 +106,12 @@ class Game
     protected $tour;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Round", inversedBy="games")
+     * @ORM\JoinColumn(name="roundId", referencedColumnName="id")
+     */
+    protected $round;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="games")
      * @ORM\JoinColumn(name="seasonId", referencedColumnName="id")
      */
@@ -115,6 +121,20 @@ class Game
      * @ORM\OneToMany(targetEntity="GameSet", mappedBy="game", cascade={"persist"}, orphanRemoval=true)
      */
     protected $sets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="GameLink", mappedBy="game", cascade={"persist"}, orphanRemoval=true)
+     */
+    protected $links;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->links = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -411,7 +431,8 @@ class Game
     public function setTour(\Volley\StatBundle\Entity\Tour $tour = null)
     {
         $this->tour = $tour;
-        $this->season = $tour->getSeason();
+        if ($this->tour && $this->tour->getSeason())
+            $this->setSeason($tour->getSeason());
 
         return $this;
     }
@@ -424,13 +445,6 @@ class Game
     public function getTour()
     {
         return $this->tour;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -468,6 +482,40 @@ class Game
     }
 
     /**
+     * Add links
+     *
+     * @param \Volley\StatBundle\Entity\GameLink $links
+     * @return Game
+     */
+    public function addLink(\Volley\StatBundle\Entity\GameLink $links)
+    {
+        $this->links[] = $links;
+        $links->setGame($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove links
+     *
+     * @param \Volley\StatBundle\Entity\GameLink $links
+     */
+    public function removeLink(\Volley\StatBundle\Entity\GameLink $links)
+    {
+        $this->links->removeElement($links);
+    }
+
+    /**
+     * Get links
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLinks()
+    {
+        return $this->links;
+    }
+
+    /**
      * @return mixed
      */
     public function getSeason()
@@ -480,7 +528,27 @@ class Game
      */
     public function setSeason($season)
     {
-        if ($season)
-            $this->season = $season;
+        $this->season = $season;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRound()
+    {
+        return $this->round;
+    }
+
+    /**
+     * @param mixed $round
+     */
+    public function setRound($round)
+    {
+        $this->round = $round;
+    }
+
+    public function __clone() {
+        $this->id = null;
+        $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }

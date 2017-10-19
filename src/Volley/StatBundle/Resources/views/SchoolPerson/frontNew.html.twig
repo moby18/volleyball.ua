@@ -1,0 +1,37 @@
+{% extends '::layout.html.twig' %}
+
+{% block content -%}
+    <section>
+        <div class="container">
+            <div class="row">
+
+                {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{type}} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="col" style="padding-left: 40px; padding-right: 40px;">
+                    <h1 class="page-header">Додати тренера</h1>
+                    <p>Більшість інформації не є обовязковою для заповнення. Але чим більше буде заповнено, тим краще.</p>
+                    <p><a target="_blank" href="{{ path('stat_schoolperson_front') }}">Переглянути список доданих тренерів</a></p>
+
+                        {{ form_start(form) }}
+                        {#{{ form_row(form.slug, { 'attr': {'disabled': 'disabled'}}) }}#}
+                        {{ form_errors(form) }}
+
+                        {% if entity.path %}<a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>{% endif %}
+                        {{ form_row(form.file) }}
+
+                        {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}

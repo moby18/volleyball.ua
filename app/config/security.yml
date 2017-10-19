@@ -8,6 +8,13 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
+#    providers:
+#        in_memory:
+#            memory:
+#                users:
+#                    user:  { password: userpass, roles: [ "ROLE_USER" ] }
+#                    admin: { password: adminpass, roles: [ "ROLE_ADMIN" ] }
+
     providers:
             volley_user_provider:
                 entity:
@@ -52,4 +59,5 @@ security:
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/admin/(player|season|tournament|team|round|team), roles: ROLE_SUPER_ADMIN }
          - { path: ^/admin/, role: ROLE_ADMIN }

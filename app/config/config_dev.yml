@@ -6,6 +6,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
         strict_requirements: true
     profiler: { only_exceptions: false }
+    default_locale:  en
 
 web_profiler:
     toolbar: true
@@ -14,23 +15,7 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level:  debug
-        console:
-            type:   console
-            bubble: false
-        # uncomment to get logging in your browser
-        # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type:   firephp
-        #    level:  info
-        #chromephp:
-        #    type:   chromephp
-        #    level:  info
-
-assetic:
-    use_controller: false
-
-#swiftmailer:
-#    delivery_address: me@example.com
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+            channels: ["!event"]

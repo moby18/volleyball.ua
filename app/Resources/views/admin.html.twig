@@ -2,25 +2,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE]> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="volleyball.ua@gmail.com">
+
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('bundles/volleyface/images/favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('bundles/volleyface/images/favicon.ico') }}"> {# should be png #}
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('bundles/volleyface/images/favicon.ico') }}"> {# should be png #}
 
     <title>{{ title|default('Manage') }}</title>
 
     {% block styles %}
-        {% stylesheets '@volley_admin_css' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}?v=1" type="text/css"/>
     {% endblock %}
 
     {{ tinymce_init() }}
-
-    <link href="{{ asset('bundles/volleyface/images/favicon.ico') }}" rel="shortcut icon">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -39,9 +39,6 @@
                 <li><a target="_blank" href="{{ path("volley_web_homepage") }}">Front Page</a></li>
                 <li><a href="{{ path("logout") }}">Logout</a></li>
             </ul>
-            {#<form class="navbar-form navbar-right">#}
-                {#<input type="text" class="form-control" placeholder="Search...">#}
-            {#</form>#}
         </div>
     </div>
 </div>
@@ -50,26 +47,34 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
+                <li><a href="{{ path("setting_edit",{'id':1}) }}">Settings</a></li>
                 <li><a href="{{ path("slide") }}">Sliders</a></li>
                 <li><a href="{{ path("category") }}">Categories</a></li>
                 <li><a href="{{ path("post") }}">Posts</a></li>
             </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="{{ path("player") }}">Players</a></li>
-                <li><a href="{{ path("season") }}">Seasons</a></li>
-                <li><a href="{{ path("tournament") }}">Tournaments</a></li>
-                <li><a href="{{ path("team") }}">Teams</a></li>
-                <li><a href="{{ path("admin_round") }}">Rounds</a></li>
-                <li><a href="{{ path("game") }}">Games</a></li>
-            </ul>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {#<ul class="nav nav-sidebar">#}
+                {#<li><a href="{{ path("player") }}">Players</a></li>#}
+                {#<li><a href="{{ path("season") }}">Seasons</a></li>#}
+                {#<li><a href="{{ path("tournament") }}">Tournaments</a></li>#}
+                {#<li><a href="{{ path("team") }}">Teams</a></li>#}
+                {#<li><a href="{{ path("admin_round") }}">Rounds</a></li>#}
+                {#<li><a href="{{ path("game") }}">Games</a></li>#}
+            {#</ul>#}
+            {% endif %}
             <ul class="nav nav-sidebar">
                 <li><a href="{{ path("stat_country") }}">Countries</a></li>
                 <li><a href="{{ path("stat_tournament") }}">Tournaments</a></li>
                 <li><a href="{{ path("stat_season") }}">Seasons</a></li>
                 <li><a href="{{ path("stat_round") }}">Rounds</a></li>
                 <li><a href="{{ path("stat_tour") }}">Tours</a></li>
-                <li><a href="{{ path("stat_team") }}">Teams</a></li>
                 <li><a href="{{ path("stat_game") }}">Games</a></li>
+                <li><a href="{{ path("stat_team") }}">Teams</a></li>
+                <li><a href="{{ path("stat_person") }}">Players</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="{{ path("stat_school") }}">Schools</a></li>
+                <li><a href="{{ path("stat_schoolperson") }}">Trainers</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -82,9 +87,7 @@
 </div>
 
 {% block scripts %}
-    {% javascripts '@bootstrap_js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script  type="text/javascript" src="{{ asset('js/script_admin.js') }}"></script>
 {% endblock %}
 
 </body>

@@ -1,16 +1,23 @@
-{% extends '::base.html.twig' %}
+{% extends '::admin.html.twig' %}
 
 {% block body -%}
     <h1>Round edit</h1>
 
+    <h4>Round's bonuses:</h4>
+    <ul>
+        {% for bonus in bonuses %}
+            <li><a href="{{ path('stat_round_team_bonus_edit', {'id': bonus.id}) }}">{{ bonus.team }}:  {{ bonus.bonus }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('stat_round_team_bonus_new', {roundId: entity.id}) }}">Add Bonus</a>
+
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('stat_round') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_round') }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
 {% endblock %}

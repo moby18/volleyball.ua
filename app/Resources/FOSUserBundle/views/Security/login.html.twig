@@ -1,62 +1,42 @@
 {% extends "::base.html.twig" %}
 
 {% block stylesheets %}
-    {% stylesheets '@volley_admin_css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}" type="text/css"/>
 
-    <style>
+    <style type="text/css">
         body {
             background: #eee !important;
         }
-
-        .wrapper {
-            margin-top: 80px;
-            margin-bottom: 80px;
-        }
-
         .form-signin {
             max-width: 380px;
             padding: 15px 35px 45px;
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid rgba(0, 0, 0, 0.1);
-
+        }
         .form-signin-heading,
         .checkbox {
             margin-bottom: 30px;
         }
-
         .checkbox {
             font-weight: normal;
         }
-
         .form-control {
             position: relative;
             font-size: 16px;
             height: auto;
             padding: 10px;
-        @include box-sizing(border-box);
-
-        &
-        :focus {
-            z-index: 2;
         }
-
-        }
-
         input[type="text"] {
             margin-bottom: -1px;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
-
         input[type="password"] {
             margin-bottom: 20px;
             border-top-left-radius: 0;
             border-top-right-radius: 0;
-        }
-
         }
     </style>
 {% endblock %}
@@ -74,16 +54,20 @@
 
             <h2 class="form-signin-heading">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h2>
             <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-            <input type="text" id="inputEmail" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}" required="true"
+            <input type="text" id="inputEmail" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}"
+                   required="true"
                    autofocus="" name="_username">
+            <br>
             <label for="inputPassword"
                    class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}" required="true" name="_password">
+            <input type="password" id="inputPassword" class="form-control"
+                   placeholder="{{ 'user.admin.email'|trans({}) }}" required="true" name="_password">
 
             <div class="checkbox">
                 <label>
                     <input type="checkbox"
-                           value="on" id="remember_me" name="_remember_me"> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                           value="on" id="remember_me"
+                           name="_remember_me"> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit"

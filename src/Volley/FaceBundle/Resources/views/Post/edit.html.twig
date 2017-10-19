@@ -14,25 +14,55 @@
             <li role="presentation" class="active"><a href="#main" aria-controls="main" role="tab" data-toggle="tab">Main</a>
             </li>
             <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">Meta</a></li>
+            <li role="presentation"><a href="#refs" aria-controls="meta" role="tab" data-toggle="tab">References</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="main">
                 <br>
+
+                <div class="form-group">
+                    <label class="control-label required" for="volley_bundle_facebundle_post_url">Full URL</label>
+                    <input
+                            type="text" id="volley_bundle_facebundle_post_url"
+                            name="volley_bundle_facebundle_post[url]" required="required" maxlength="255"
+                            class="form-control"
+                            value="{{ url('volley_face_post',{'category_slug': entity.category.slug, 'post_slug': entity.slug }) }}"
+                            disabled="disabled" >
+                </div>
                 {{ form_row(edit_form.category) }}
                 {{ form_row(edit_form.title) }}
+                {{ form_row(edit_form.slug) }}
+                {{ form_row(edit_form.slugUpdateble) }}
+
                 {{ form_row(edit_form.file) }}
+                <a href="{{ entity.getWebPath }}" target="_blank"><img style="width: 100px; height: auto;" src="{{ entity.getWebPath }}"></a>
+                {{ form_row(edit_form.imageDescr) }}
+                {{ form_row(edit_form.imageSource) }}
+
                 {{ form_row(edit_form.content) }}
                 {{ form_row(edit_form.text) }}
-                {{ form_row(edit_form.state) }}
                 {{ form_row(edit_form.published) }}
-                {{ form_row(edit_form.source) }}
+                {{ form_row(edit_form.sourceName) }}
+                {{ form_row(edit_form.sourceLink) }}
+                {{ form_row(edit_form.state) }}
                 {{ form_row(edit_form.featured) }}
+
+                {{ form_row(edit_form.recommended) }}
+                {{ form_row(edit_form.images) }}
+                {{ form_row(edit_form.videos) }}
+                {{ form_row(edit_form.translated) }}
+                {{ form_row(edit_form.vu) }}
             </div>
             <div role="tabpanel" class="tab-pane" id="meta">
                 <br>
                 {{ form_row(edit_form.metakey) }}
                 {{ form_row(edit_form.metadescr) }}
+            </div>
+            <div role="tabpanel" class="tab-pane" id="refs">
+                <br>
+                {{ form_row(edit_form.teams) }}
+                {{ form_row(edit_form.persons) }}
             </div>
             <div role="tabpanel" class="tab-pane" id="rest">
                 {{ form_row(edit_form.ordering) }}
@@ -60,14 +90,14 @@
 
 {% block scripts %}
     {{ parent() }}
-    {% javascripts '@jquery' '@datetimepicker_js' '@VolleyFaceBundle/Resources/public/js/post.js' filter='' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/jquery.datetimepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('bundles/tetranzselect2entity/js/select2entity.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/post.js') }}"></script>
 {% endblock %}
 
 {% block styles %}
     {{ parent() }}
-    {% stylesheets '@datetimepicker_css' filter='' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/jquery.datetimepicker.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/select2/dist/css/select2.min.css') }}" type="text/css"/>
 {% endblock %}

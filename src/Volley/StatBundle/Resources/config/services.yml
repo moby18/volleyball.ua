@@ -1,0 +1,15 @@
+services:
+    volley_stat.tournament.manager:
+        class: Volley\StatBundle\Service\TournamentManager
+        arguments:
+            - '@doctrine'
+
+    volley_stat.game.manager:
+        class: Volley\StatBundle\Service\GameManager
+        arguments:
+            - '@doctrine'
+
+    volley_stat.person.manager:
+        class: Volley\StatBundle\Service\PersonManager
+        arguments:
+            - '@doctrine'

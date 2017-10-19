@@ -5,3 +5,12 @@ services:
 #    volley_face.example:
 #        class: %volley_face.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    app.twig_extemsion:
+        class: Volley\FaceBundle\Twig\AppExtension
+        arguments:
+            - "@form.factory"
+            - "@router"
+            - "@doctrine"
+        tags:
+          - { name: twig.extension}

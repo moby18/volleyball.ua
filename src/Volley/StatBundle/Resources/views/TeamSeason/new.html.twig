@@ -1,0 +1,18 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Team creation</h1>
+
+    {{ form_start(form) }}
+
+    {{ form_end(form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_team_edit',{'id': entity.team.id}) }}" type="button"
+           class="btn btn-default">Back to the team {{ entity.team.name }}</a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock %}

@@ -2,9 +2,15 @@
 
 namespace Volley\StatBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\TeamRepository;
 
 class GameType extends AbstractType
 {
@@ -14,33 +20,67 @@ class GameType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Game $game */
+        $game = $options['game'];
         $builder
             ->add('number')
-            ->add('name')
+            ->add('season')
+            ->add('round')
+            ->add('tour')
+            ->add('homeTeam',EntityType::class,[
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'query_builder' =>  function (TeamRepository $repository) use ($game) {
+                    $query = $repository->createQueryBuilder('t')
+                        ->addOrderBy('t.id', 'ASC');
+                    if ($game ? $game->getSeason() : false) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->andWhere('season = ?1')
+                            ->setParameter(1, $game->getSeason()->getId());
+                    }
+                    return $query;
+                }
+            ])
+            ->add('awayTeam',EntityType::class,[
+                'class' => 'Volley\StatBundle\Entity\Team',
+                'query_builder' =>  function (TeamRepository $repository) use ($game) {
+                    $query = $repository->createQueryBuilder('t')
+                        ->addOrderBy('t.id', 'ASC');
+                    if ($game ? $game->getSeason() : false) {
+                        $query
+                            ->leftJoin('t.seasons', 'season')
+                            ->andWhere('season = ?1')
+                            ->setParameter(1, $game->getSeason()->getId());
+                    }
+                    return $query;
+                }
+            ])
+//            ->add('name')
             ->add('duration')
             ->add('homeTeamEmpty')
             ->add('awayTeamEmpty')
-            ->add('score')
+            ->add('score',HiddenType::class,[])
             ->add('scoreSetHome')
             ->add('scoreSetAway')
             ->add('played')
-            ->add('date')
-            ->add('homeTeam')
-            ->add('awayTeam')
-            ->add('tour')
-//            ->add('season')
-            ->add('sets', 'collection', array('type' => new GameSetType(), 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('date', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'YYYY-MM-dd HH:mm:ss',
+                'required' => true])
+            ->add('sets', CollectionType::class, array('entry_type' => GameSetType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
+            ->add('links', CollectionType::class, array('entry_type' => GameLinkType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false, 'label' => false))
         ;
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Volley\StatBundle\Entity\Game'
         ));
+        $resolver->setRequired('game');
     }
 
     /**

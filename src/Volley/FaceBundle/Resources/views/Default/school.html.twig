@@ -1,0 +1,435 @@
+{% extends '::layout.html.twig' %}
+
+{#{% set page = posts.currentPageNumber > 1 ? ' - Сторінка ' ~ posts.currentPageNumber : '' %}#}
+{#{% set pageNumber = posts.currentPageNumber %}#}
+{#{% set title = category.title %}#}
+{#{% set h1 = category.h1 %}#}
+{#{% set meta_keywords = category.keywords %}#}
+{#{% set meta_description = category.description %}#}
+
+{% if app.request.attributes.get('_route') == 'volley_face_search' %}
+    {% set h1 =  'search'|trans() ~ ': ' ~ app.request.query.get('s') %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = 'пошук, новини волейболу' %}
+    {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
+{#{% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}#}
+
+{% block content %}
+
+    <section>
+        <div id="infoContent" style="display:none;">
+            <div id="infoContentContainer">
+                <div class="map-info-close">x</div>
+                <h5>Custom Info Window</h5>
+                <p>For Google Maps.</p>
+                <h5>Just HTML</h5>
+                <p>Your info content window could contain anything.</p>
+            </div>
+        </div>
+        <div id="map" style="width: 100%; height: 400px;"></div>
+    </section>
+
+    <div class="section">
+
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-12">
+
+                    <div class="row">
+                        <div class="col text-center">
+                            {#<h1 class="home-title" style="color: {{ color }}">{{ h1 ~ page|default('') }}</h1>#}
+                        </div>
+                    </div>
+
+                    {#{% if (posts|length > 0) %}#}
+                        {#<div class="row">#}
+                            {#{% for item in posts %}#}
+                                {#<div class="col-lg-6">#}
+                                    {#{% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}#}
+                                {#</div>#}
+                                {#{% if loop.index is even %}#}
+                                    {#<div style="clear: both"></div>#}
+                                {#{% endif %}#}
+                            {#{% endfor %}#}
+
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#<div class="pagination-container">#}
+                                {#{{ knp_pagination_render(posts) }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#{% else %}#}
+                        {#<p> {{ 'not_found'|trans({}) }}</p>#}
+                    {#{% endif %}#}
+
+                </div>
+
+                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+
+    {#<link href="{{ asset('bundles/volleyface/bower_components/CGWin/src/cGWin.css') }}" rel="stylesheet" type='text/css'>#}
+    <link href="{{ asset('bundles/volleyface/css/cGWin.css') }}" rel="stylesheet" type='text/css'>
+{% endblock styles %}
+
+{% block head_scripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/volleyface/js/cGWin.js')}}"></script>
+
+{% endblock head_scripts %}
+
+{% block scripts %}
+    {{ parent() }}
+
+    {#<script src="{{ asset('bundles/volleyface/bower_components/CGWin/src/cGWin.js')}}"></script>#}
+    {##}
+
+    <script>
+
+      function GMaps(opts){
+        this.mapReady = false;
+        this.options = opts;
+        this.appendGMaps(opts.apiKey, opts.sensor);
+      }
+
+      GMaps.prototype.appendGMaps = function(apiKey, sensor){
+        var script = document.createElement('script'),
+          key = (apiKey) ? '&key='+apiKey : '';
+        script.type = 'application/javascript';
+        script.src = 'http://maps.googleapis.com/maps/api/js?v=3'+key+'&callback=gMaps.init';
+        document.getElementsByTagName('head')[0].appendChild(script);
+        console.log(document.getElementsByTagName('head')[0]);
+      };
+
+      GMaps.prototype.init = function(){
+        this.mapReady = true;
+        this.infoWindow = new (GenCustomWindow())();
+        this.markers = [];
+        this.map = new google.maps.Map(this.options.el, {
+          zoom:7,
+          maxZoom:16,
+          center:new google.maps.LatLng({{ 50.4019514 }}, {{ 30.3926091 }}),
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        });
+
+        this.scatterMarkers();
+      };
+
+      /**
+       * Create some markers at random points in NA, and attach an event to each to show our custom info
+       * window when clicked.
+       */
+      GMaps.prototype.scatterMarkers = function(){
+//        var mRng = {lat:[51, 38], lng:[-74, -122]}, // Keep generated lat/lng inside North American landmass
+//          lat,
+//          lng;
+//
+//        for (var i=0, len=this.options.markerCount; i < len; i++)
+//        {
+//          lat = (Math.random() * (mRng.lat[0] - mRng.lat[1]) + mRng.lat[1]);
+//          lng = (Math.random() * (mRng.lng[0] - mRng.lng[1]) + mRng.lng[1]);
+//          this.setMarker(this.map, {lat:lat, lng:lng});
+//        }
+
+        var schools = {{ schools|json_encode|raw }};
+        console.log({{ schools|json_encode|raw }});
+        schools = schools.map(function(school) {
+           var res = this.setMarker(this.map, {lat: school.lat, lng: school.lng});
+          school.marker = res[0];
+          school.infoWindow = res[1];
+
+          return school;
+        }, this);
+
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var school = schools[0];
+        var that = this;
+        var interval = null;
+
+        setTimeout(function() {
+          var interval = setInterval(function() {
+            console.log(school);
+//            school.marker.close();
+            school = schools[getRandomInt(0, schools.length)];
+            school.infoWindow.setContent(document.getElementById('infoContent').innerHTML);
+            school.infoWindow.open(that.map, school.marker);
+
+            setTimeout(function() {
+              console.log(document.getElementById('infoContentContainer'));
+              document.getElementById('infoContentContainer').style.backgroundColor = 'red';
+              document.getElementById('infoContentContainer').addEventListener('mouseover', function () {
+//          interval && clearInterval(interval);
+                alert(1);
+              });
+              document.getElementById('infoContentContainer').addEventListener('mouseout', function () {
+                alert(2);
+              });
+            },200);
+
+//            school.mar.open(map, school.marker);
+//            school.marker.click();
+          }, 5000)
+        }, 2000);
+      };
+
+      GMaps.prototype.setMarker = function(map, pos){
+        var opts = {
+            map:map,
+            position:new google.maps.LatLng(pos.lat, pos.lng),
+            draggable:false,
+            icon:{
+              url:'{{ asset('bundles/volleyface/images/vu-gray.png') }}',
+              size:new google.maps.Size(44, 80),
+              scaledSize:new google.maps.Size(22, 40),
+              anchor:new google.maps.Point(10, 40)
+            }
+          },
+          count = this.markers.push(new google.maps.Marker(opts)) - 1,
+          marker = this.markers[count],
+          infoWindow = this.infoWindow;
+
+        google.maps.event.addListener(marker, 'click', function(){
+          infoWindow.setContent(document.getElementById('infoContent').innerHTML);
+          infoWindow.open(map, marker);
+        });
+
+        return [marker,infoWindow];
+      };
+
+      {#(function(){#}
+        {#document.addEventListener('DOMContentLoaded', function(){#}
+          {#var mapEl = document.getElementById('map');#}
+          {##}
+          {#gMaps = new GMaps({#}
+            {#el:mapEl,#}
+            {#apiKey:"{{ google_api_key }}",#}
+            {#sensor:false,#}
+            {#markerCount:10#}
+          {#});#}
+        {#});#}
+      {#})();#}
+      var gMaps;
+
+    </script>
+
+    <script>
+
+      function initMap() {
+        var interval = null;
+        var currentInfoWindow = null;
+
+        var center = {lat: {{ 50.4019514 }}, lng: {{ 30.3926091 }} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: center
+        });
+
+        var schools = {{ schools|json_encode|raw }};
+        console.log({{ schools|json_encode|raw }});
+        schools = schools.map(function(school) {
+          school.marker = new google.maps.Marker({
+            position: {lat: school.lat, lng: school.lng},
+            map: map
+          });
+          var content = '<div id="iw-container">' +
+            '<div class="iw-title">Porcelain Factory of Vista Alegre</div>' +
+            '<div class="iw-content">' +
+            '<div class="iw-subTitle">History</div>' +
+            '<img src="http://maps.marnoto.com/en/5wayscustomizeinfowindow/images/vistalegre.jpg" alt="Porcelain Factory of Vista Alegre" height="115" width="83">' +
+            '<p>Founded in 1824, the Porcelain Factory of Vista Alegre was the first industrial unit dedicated to porcelain production in Portugal. For the foundation and success of this risky industrial development was crucial the spirit of persistence of its founder, José Ferreira Pinto Basto. Leading figure in Portuguese society of the nineteenth century farm owner, daring dealer, wisely incorporated the liberal ideas of the century, having become "the first example of free enterprise" in Portugal.</p>' +
+            '<div class="iw-subTitle">Contacts</div>' +
+            '<p>VISTA ALEGRE ATLANTIS, SA<br>3830-292 Ílhavo - Portugal<br>'+
+            '<br>Phone. +351 234 320 600<br>e-mail: geral@vaa.pt<br>www: www.myvistaalegre.com</p>'+
+            '</div>' +
+            '<div class="iw-bottom-gradient"></div>' +
+            '</div>';
+          school.infowindow = new google.maps.InfoWindow({
+            content: content
+          });
+
+          google.maps.event.addListener(school.infowindow, 'domready', function() {
+
+            // Reference to the DIV that wraps the bottom of infowindow
+            var iwOuter = $('.gm-style-iw');
+
+            iwOuter.parent().on('mouseover', function () {
+              console.log(1);
+              interval && clearInterval(interval);
+            });
+            iwOuter.parent().on('mouseout', function () {
+              console.log(2);
+              interval && clearInterval(interval);
+              interval = setInterval(function() {
+                console.log(school);
+                school.infowindow.close();
+                school = schools[getRandomInt(0, schools.length)];
+                school.infowindow.open(map, school.marker);
+              }, 5000)
+            });
+
+              /* Since this div is in a position prior to .gm-div style-iw.
+               * We use jQuery and create a iwBackground variable,
+               * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
+               */
+            var iwBackground = iwOuter.prev();
+
+            // Removes background shadow DIV
+            iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+
+            // Removes white background DIV
+            iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+
+            // Moves the infowindow 115px to the right.
+            iwOuter.parent().parent().css({left: '115px'});
+
+            // Moves the shadow of the arrow 76px to the left margin.
+            iwBackground.children(':nth-child(1)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+            // Moves the arrow 76px to the left margin.
+            iwBackground.children(':nth-child(3)').attr('style', function(i,s){ return s + 'left: 76px !important;'});
+
+            // Changes the desired tail shadow color.
+            iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+
+            // Reference to the div that groups the close button elements.
+            var iwCloseBtn = iwOuter.next();
+
+            // Apply the desired effect to the close button
+            iwCloseBtn.css({opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9'});
+
+            // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
+            if($('.iw-content').height() < 140){
+              $('.iw-bottom-gradient').css({display: 'none'});
+            }
+
+            // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
+            iwCloseBtn.mouseout(function(){
+              $(this).css({opacity: '1'});
+            });
+          });
+
+          school.marker.addListener('click', function() {
+            console.log(1);
+            interval && clearInterval(interval);
+            currentInfoWindow && currentInfoWindow.close();
+            school.infowindow.open(map, school.marker);
+            currentInfoWindow = school.infowindow;
+
+          });
+//          school.marker.addListener('mouseout', function() {
+//            school.infowindow.close();
+//          });
+          return school;
+        });
+
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+        var school = schools[0];
+        setTimeout(function() {
+          interval = setInterval(function() {
+            console.log(school);
+            school.infowindow.close();
+            school = schools[getRandomInt(0, schools.length)];
+            school.infowindow.open(map, school.marker);
+            currentInfoWindow= school.infowindow;
+          }, 5000)
+        }, 2000);
+
+
+
+      }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+    </script>
+
+    <style>
+        #map-canvas {
+            margin: 0;
+            padding: 0;
+            height: 400px;
+            max-width: none;
+        }
+        #map-canvas img {
+            max-width: none !important;
+        }
+        .gm-style-iw {
+            width: 350px !important;
+            top: 15px !important;
+            left: 0px !important;
+            background-color: #fff;
+            box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+            border: 1px solid rgba(72, 181, 233, 0.6);
+            border-radius: 2px 2px 10px 10px;
+        }
+        #iw-container {
+            margin-bottom: 10px;
+        }
+        #iw-container .iw-title {
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            padding: 10px;
+            background-color: #48b5e9;
+            color: white;
+            margin: 0;
+            border-radius: 2px 2px 0 0;
+        }
+        #iw-container .iw-content {
+            font-size: 13px;
+            line-height: 18px;
+            font-weight: 400;
+            margin-right: 1px;
+            padding: 15px 5px 20px 15px;
+            max-height: 140px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .iw-content img {
+            float: right;
+            margin: 0 5px 5px 10px;
+        }
+        .iw-subTitle {
+            font-size: 16px;
+            font-weight: 700;
+            padding: 5px 0;
+        }
+        .iw-bottom-gradient {
+            position: absolute;
+            width: 326px;
+            height: 25px;
+            bottom: 10px;
+            right: 18px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+        }
+    </style>
+{% endblock %}

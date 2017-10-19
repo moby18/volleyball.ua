@@ -1,63 +1,141 @@
 {% extends '::layout.html.twig' %}
 
+{% set page = posts.currentPageNumber > 1 ? ' - Сторінка ' ~ posts.currentPageNumber : '' %}
+{% set pageNumber = posts.currentPageNumber %}
+{% set title = category.title %}
+{% set h1 = category.h1 %}
+{% set meta_keywords = category.keywords %}
+{% set meta_description = category.description %}
+
+{% if app.request.attributes.get('_route') == 'volley_face_search' %}
+    {% set h1 =  'search'|trans() ~ ': ' ~ app.request.query.get('s') %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = 'пошук, новини волейболу' %}
+    {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
+{% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}
+
 {% block content %}
 
     <div class="section">
 
         <div class="container">
 
-            <h1 class="text-center">Відео</h1>
-
-            <hr>
-
-            {% for post in posts %}
             <div class="row">
+                <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-            {% if loop.index is odd %}
-                <div class="col-md-7">
-                    <a href="{#{{ path('volley_face_post') }}#}">
-                        <img class="img-responsive" src="{{ post.getWebPath }}">
-                    </a>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="home-title" style="color: {{ color }}">{{ h1 ~ page|default('') }}</h1>
+                        </div>
+                    </div>
+
+                    {% if (posts|length > 0) %}
+                        <div class="row">
+                            {% for item in posts %}
+                                <div class="col-lg-6">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop} %}
+                                </div>
+                                {% if loop.index is even %}
+                                    <div style="clear: both"></div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                        <div class="row">
+                            <div class="pagination-container">
+                                {{ knp_pagination_render(posts) }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <p> {{ 'not_found'|trans({}) }}</p>
+                    {% endif %}
+                    <div class="row">
+                        <p id="google-adsende-banner" style="height: 100px; width: 100%;">
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- AdsBlockForPost -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-9185300483138228"
+                                 data-ad-slot="2365888996"
+                                 data-ad-format="auto"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <h3>{{ post.title }}</h3>
-                    {#<h4>Subheading</h4>#}
-                    <p>
-                    {% autoescape %}
-                        {{ post.content|raw }}
-                    {% endautoescape %}
-                    </p>
-                    {%  if post.text != "" %}
-                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': post.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
+
+                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12" style="padding-top: 15px;">
+                                    {#<div class="section-title">#}
+                                        {#{{ 'advert'|trans({}) }}#}
+                                    {#</div>#}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col.html.twig' %}
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {#<div class="row">#}
+                        {#<div class="col-lg-12">#}
+                            {#<div class="row">#}
+                                {#<div class="col-lg-12">#}
+                                    {#{% include '@VolleyFace/Default/includes/mikasa-vls300.html.twig' %}#}
+                                {#</div>#}
+                                {#<div style="clear: both"></div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    {% if recommendedPosts|length %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    {{ 'recommended-section'|trans({}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for item in recommendedPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'recommended': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if popularPosts|length %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    {{ 'popular-section'|trans({}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for item in popularPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
                     {% endif %}
                 </div>
-            {% else %}
-                <div class="col-md-5">
-                    <h3>{{ post.title }}</h3>
-                    {#<h4>Subheading</h4>#}
-                    <p>
-                    {% autoescape %}
-                        {{ post.content|raw }}
-                    {% endautoescape %}
-                    </p>
-                    {%  if post.text != "" %}
-                        <a class="btn btn-primary" href="{{ path('volley_face_post',{'post_id': post.id}) }}">Детальніше <i class="fa fa-angle-right"></i></a>
-                    {% endif %}
-                </div>
-                <div class="col-md-7">
-                    <a href="{#{{ path('volley_face_post') }}#}">
-                        <img class="img-responsive" src="{{ post.getWebPath }}">
-                    </a>
-                </div>
-            {% endif %}
 
             </div>
-
-            {% if not loop.last %}
-                <hr>
-            {% endif %}
-
-            {% endfor %}
 
         </div>
         <!-- /.container -->

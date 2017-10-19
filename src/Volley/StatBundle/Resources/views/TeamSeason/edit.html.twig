@@ -1,0 +1,28 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Team edit</h1>
+
+    {{ form_start(edit_form) }}
+
+    {{ form_end(edit_form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_team_edit',{'id': entity.team.id}) }}" type="button"
+           class="btn btn-default">Back to the team {{ entity.team.name }}</a>
+    </div>
+
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/select2/dist/css/select2.min.css') }}"
+          type="text/css"/>
+{% endblock %}

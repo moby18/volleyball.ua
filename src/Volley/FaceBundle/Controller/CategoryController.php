@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -23,7 +24,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyFaceBundle:Category')->findAll();
+        $entities = $em->getRepository('VolleyFaceBundle:Category')->findBy([],['lft'=>'ASC']);
 
         return $this->render('VolleyFaceBundle:Category:index.html.twig', array(
             'entities' => $entities,
@@ -42,6 +43,13 @@ class CategoryController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+
+            $repo = $this->getDoctrine()->getEntityManager()->getRepository('VolleyFaceBundle:Category');
+            // verification and recovery of tree
+            $repo->verify();
+            // can return TRUE if tree is valid, or array of errors found on tree
+            $repo->recover();
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
@@ -62,12 +70,12 @@ class CategoryController extends Controller
     */
     private function createCreateForm(Category $entity)
     {
-        $form = $this->createForm(new CategoryType(), $entity, array(
+        $form = $this->createForm(CategoryType::class, $entity, array(
             'action' => $this->generateUrl('category_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -141,12 +149,12 @@ class CategoryController extends Controller
     */
     private function createEditForm(Category $entity)
     {
-        $form = $this->createForm(new CategoryType(), $entity, array(
+        $form = $this->createForm(CategoryType::class, $entity, array(
             'action' => $this->generateUrl('category_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -216,7 +224,7 @@ class CategoryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('category_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

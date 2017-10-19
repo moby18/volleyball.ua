@@ -41,6 +41,16 @@ class Country
      */
     protected $tournaments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Person", mappedBy="country")
+     */
+    protected $persons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Team", mappedBy="country")
+     */
+    protected $teams;
+
     function __construct()
     {
         $this->tournaments = new ArrayCollection();
@@ -135,10 +145,74 @@ class Country
         return $this->tournaments;
     }
 
+    /**
+     * Add persons
+     *
+     * @param \Volley\StatBundle\Entity\Person $persons
+     * @return Country
+     */
+    public function addPerson(\Volley\StatBundle\Entity\Person $persons)
+    {
+        $this->persons[] = $persons;
+
+        return $this;
+    }
+
+    /**
+     * Remove persons
+     *
+     * @param \Volley\StatBundle\Entity\Person $persons
+     */
+    public function removePerson(\Volley\StatBundle\Entity\Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
+
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     * @return Country
+     */
+    public function addTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->teams;
+    }
+
     function __toString()
     {
         return $this->getName();
     }
-
-
 }

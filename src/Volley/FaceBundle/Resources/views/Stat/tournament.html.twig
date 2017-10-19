@@ -1,0 +1,133 @@
+{% extends '::layout.html.twig' %}
+
+{#{% set page_image = app.request.getSchemeAndHttpHost() ~ tournament.getWebPath %}#}
+{% set title = tournament.title ~ ' - ' ~ season.name %}
+{% set h1 = tournament.h1%}
+{% set meta_keywords = tournament.keywords ~ ', ' ~ season.name %}
+{% set meta_description = tournament.description ~ ' - ' ~ season.name %}
+
+{% block content %}
+
+    <div class="section">
+        <div class="container tournament">
+            <div class="row">
+                <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                {#<h1>{{ tournament.country.name }} - {{ tournament.name }} - {{ tournament.sex|trans }} - {{ season.name }}</h1>#}
+                <h1>{{ h1 }} - {{ season.name }}</h1>
+                </div>
+            </div>
+            {% for round in rounds %}
+                <div class="row">
+                    <h4 class="text-center">{{ round.round.name }}</h4>
+                </div>
+                {% if season.tournamentTable %}
+                <div class="row">
+                    <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-striped table-hover table-condensed">
+                        <thead>
+                        <th class="text-center">Місце</th>
+                        <th>Команда</th>
+                        <th class="text-center">Матчі</th>
+                        <th class="text-center hidden-xs">Перемоги</th>
+                        <th class="text-center hidden-xs">Поразки</th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-0</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-1</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">3-2</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">2-3</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">1-3</span></th>
+                        <th class="hidden-xs hidden-sm"><span class="text-nowrap">0-3</span></th>
+                        <th class="text-center hidden-xs">Партії</th>
+                        <th class="text-center hidden-xs">М'ячі</th>
+                        <th class="text-center">Очки</th>
+                        </thead>
+                        {% for row in round.table %}
+                            <tr>
+                                <td class="text-center">{{ loop.index }}</td>
+                                {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
+                                <td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>
+                                <td class="text-center">{{ row.games }}</td>
+                                <td class="text-center hidden-xs">{{ row.win }}</td>
+                                <td class="text-center hidden-xs">{{ row.loss }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score30 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score31 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score32 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score23 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score13 }}</td>
+                                <td class="text-center hidden-xs hidden-sm">{{ row.score03 }}</td>
+                                <td class="text-center hidden-xs">{{ row.win_sets }}/{{ row.loss_sets }}</td>
+                                <td class="text-center hidden-xs">{{ row.win_points }}/{{ row.loss_points }}</td>
+                                <td class="text-center">{{ row.points }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% include 'VolleyFaceBundle:Default/includes:ads_block_tournament_top.html.twig' %}
+
+                <div class="row">
+                    <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    {% for tour in round.round.tours %}
+                        <div class="anchor" id="{{ round.round.ordering~'_'~tour.ordering }}"></div>
+                        <table class="table table-striped table-hover table-condensed">
+                            <thead>
+                            <tr class="tour-head">
+                                <td colspan="11" class="text-center"><strong>{{ tour.name }}</strong></td>
+                            </tr>
+                            {#{% if loop.first %}#}
+                            <tr>
+                                <th class="hidden-xs">#</th>
+                                <th>Дата</th>
+                                <th>Час</th>
+                                <th>Команда А</th>
+                                <th>Команда Б</th>
+                                <th>Результат</th>
+                                <th class="hidden-xs">1 сет</th>
+                                <th class="hidden-xs">2 сет</th>
+                                <th class="hidden-xs">3 сет</th>
+                                <th class="hidden-xs">4 сет</th>
+                                <th class="hidden-xs">5 сет</th>
+                            </tr>
+                            {#{% endif %}#}
+
+                            </thead>
+                            <tfoot></tfoot>
+                            <tbody>
+                            {% for game in tour.games %}
+                                {% set winnerTeamA = (game.scoreSetHome > game.scoreSetAway) %}
+                                {% set winnerTeamB = (game.scoreSetHome < game.scoreSetAway) %}
+                                <tr>
+                                    <td class="hidden-xs">{{ game.number }}</td>
+                                    <td>{% if game.date is not null %} {{ game.date|date("d/m/y") }} {% endif %}</td>
+                                    <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
+                                    <td>{{ winnerTeamA ? "<strong>" : "" }}
+                                        {#<a href="{{ path('volley_face_stat_team',{'team_id':game.homeTeam.id}) }}"> {{ game.homeTeam.name }} </a>{{ winnerTeamA ? "</strong>" : "" }}#}
+                                        {{ game.homeTeam.name }} {{ winnerTeamA ? "</strong>" : "" }}
+                                    </td>
+                                    <td>{{ winnerTeamB ? "<strong>" : "" }}
+                                        {#<a href="{{ path('volley_face_stat_team',{'team_id':game.awayTeam.id}) }}"> {{ game.awayTeam.name }} </a>{{ winnerTeamB ? "</strong>" : "" }}#}
+                                        {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
+                                    </td>
+                                    <td>{{ game.scoreSetHome }} - {{ game.scoreSetAway }}</td>
+                                    {% for set in game.sets %}
+                                        <td class="hidden-xs">{{ set.scoreSetHome }} - {{ set.scoreSetAway }}</td>
+                                    {% endfor %}
+                                    {% set count = (5 - game.sets|length) %}
+                                    {% if count != 0 %}
+                                        {% for set in 1..count %}
+                                            <td class="hidden-xs"></td>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

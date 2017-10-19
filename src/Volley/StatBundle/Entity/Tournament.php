@@ -9,10 +9,13 @@ use Doctrine\Common\Collections\ArrayCollection;
  * Tournament
  *
  * @ORM\Table(name="stat_tournament")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\TournamentRepository")
  */
 class Tournament
 {
+    const WOMAN = 'women';
+    const MAN = 'men';
+
     /**
      * @var integer
      *
@@ -29,12 +32,48 @@ class Tournament
      */
     private $name;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sex", type="text", nullable=true)
+     */
+    private $sex;
+
     /**
      * @var boolean
      *
      * @ORM\Column(name="status", type="boolean", nullable=true)
      */
     private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="h1", type="string", length=255, nullable=true)
+     */
+    private $h1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="keywords", type="string", length=255, nullable=true)
+     */
+    private $keywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="tournaments")
@@ -55,7 +94,7 @@ class Tournament
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -78,7 +117,7 @@ class Tournament
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -101,11 +140,91 @@ class Tournament
     /**
      * Get status
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex()
+    {
+        return $this->sex;
+    }
+
+    /**
+     * @param string $sex
+     */
+    public function setSex($sex)
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getH1()
+    {
+        return $this->h1;
+    }
+
+    /**
+     * @param string $h1
+     */
+    public function setH1($h1)
+    {
+        $this->h1 = $h1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
+
+    /**
+     * @param mixed $keywords
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 
     /**
@@ -124,7 +243,7 @@ class Tournament
     /**
      * Get country
      *
-     * @return \Volley\StatBundle\Entity\Country 
+     * @return \Volley\StatBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -157,7 +276,7 @@ class Tournament
     /**
      * Get seasons
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSeasons()
     {
@@ -166,8 +285,6 @@ class Tournament
 
     function __toString()
     {
-        return $this->getName();
+        return $this->getCountry() . ' - ' . $this->getName() .' - '. $this->getSex();
     }
-
-
 }

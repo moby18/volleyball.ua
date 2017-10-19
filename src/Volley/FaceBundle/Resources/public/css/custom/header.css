@@ -1,0 +1,170 @@
+/* Header */
+.navbar-brand {
+    background-image: url('../bundles/volleyface/images/vu-logo.png');
+    height: 24px !important;
+    width: 251px !important;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 0;
+    box-sizing: border-box;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: left;
+    margin-left: 0 !important;
+    border-right: 0;
+}
+
+.navbar,
+.sticky-wrapper {
+    background-color: #222;
+    border: 0;
+}
+
+.navbar-toggle,
+.btn-toggle {
+    padding: 8px 9px;
+    margin: 12px 15px 12px 15px;
+}
+
+/*Navigatior Bar*/
+#main-navbar-container .nav.navbar-nav > li > a {
+    padding-top: 17.5px;
+    padding-bottom: 17.5px;
+    color: #ffffff;
+}
+
+.navbar-white .sticky-menu.fixed {
+    background-color: #222;
+}
+
+@media (max-width: 767px) {
+    .navbar-white .navbar-nav .open > .dropdown-toggle, .navbar-white .navbar-nav .open > .dropdown-toggle:hover, .navbar-white .navbar-nav .open > .dropdown-toggle:focus {
+        background-color: transparent;
+    }
+}
+
+#main-navbar-container .nav.navbar-nav {
+    /*float: right;*/
+}
+
+@media (min-width: 992px) {
+    #main-navbar-container .navbar-btn {
+        margin-top: 12.5px;
+        margin-bottom: 12.5px;
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+        line-height: 30px;
+    }
+}
+
+.navbar li li a {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.navbar-nav li li a {
+    font-size: 14px;
+    background-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-text {
+    color: #ffffff;
+    font-size: 16px;
+    padding-top: 21px;
+}
+
+.navbar-inverse .navbar-nav li > a {
+    transition: color 0.5s ease;
+}
+
+.navbar-inverse .navbar-nav li > a:hover {
+    color: #428bca !important;
+}
+
+.dropdown-menu.megamenu {
+    background-image: url('../bundles/volleyface/images/menu-bg.png');
+    background-color: transparent;
+    background-repeat: repeat;
+}
+
+.navbar-white .navbar-nav .megamenu-title {
+    border-bottom: 0;
+}
+
+.dropdown-menu.megamenu .megamenu-title {
+    color: #FFC926;
+}
+
+.dropdown-menu.megamenu .megamenu-title {
+    color: #FFC926;
+}
+
+.dropdown-menu.megamenu ul li a {
+    color: #ffffff;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: transparent;
+}
+
+/* Menu for iPad */
+@media (width: 768px) {
+    .navbar-inner .container .navbar-header {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .navbar-inner .container .navbar-collapse.collapse {
+        border-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .navbar-inner .container .navbar-collapse.collapse > ul {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
+
+/* Search */
+#header #header-search-form {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+#header #header-search-form form {
+    position: relative;
+}
+
+#header .search-button .fa.fa-search {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+#header .search-button {
+    background-color: #222;
+}
+
+#header .search-button-mobile {
+    margin: 12px 15px;
+}
+
+#header-search-form .form-control {
+    font-family: 'Open Sans', Verdana, sans-serif;
+}
+
+@media (min-width: 768px) {
+    #header #header-search-form form input.form-control {
+        padding: 12px 0 12px 40px;
+
+    }
+}
+
+@media (width: 768px) {
+    #header .search-button-mobile .fa.fa-search {
+        color: #ffffff;
+        font-size: 18px;
+    }
+    #header .search-button-mobile.navbar-btn.btn-icon {
+        background-color: transparent;
+    }
+}

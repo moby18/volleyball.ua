@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,7 +14,7 @@ use Volley\StatBundle\Form\RoundType;
 /**
  * Round controller.
  *
- * @Route("/round")
+ * @Route("/admin/stat/round")
  */
 class RoundController extends Controller
 {
@@ -25,14 +26,25 @@ class RoundController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Round')->findAll();
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('round_page', 1));
+        $session->set('round_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Round')->createQueryBuilder('r')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
         );
     }
     /**
@@ -53,7 +65,7 @@ class RoundController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('round_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('stat_round_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -71,12 +83,12 @@ class RoundController extends Controller
      */
     private function createCreateForm(Round $entity)
     {
-        $form = $this->createForm(new RoundType(), $entity, array(
-            'action' => $this->generateUrl('round_create'),
+        $form = $this->createForm(RoundType::class, $entity, array(
+            'action' => $this->generateUrl('stat_round_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -141,11 +153,14 @@ class RoundController extends Controller
             throw $this->createNotFoundException('Unable to find Round entity.');
         }
 
+        $bonuses = $em->getRepository('VolleyStatBundle:RoundTeamBonus')->findBy(['round'=>$entity->getId()]);
+
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
+            'bonuses'     => $bonuses,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -160,12 +175,12 @@ class RoundController extends Controller
     */
     private function createEditForm(Round $entity)
     {
-        $form = $this->createForm(new RoundType(), $entity, array(
-            'action' => $this->generateUrl('round_update', array('id' => $entity->getId())),
+        $form = $this->createForm(RoundType::class, $entity, array(
+            'action' => $this->generateUrl('stat_round_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -193,7 +208,7 @@ class RoundController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('round_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('stat_round_edit', array('id' => $id)));
         }
 
         return array(
@@ -238,9 +253,9 @@ class RoundController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('round_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('stat_round_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

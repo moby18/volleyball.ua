@@ -1,0 +1,66 @@
+{% extends '::layout.html.twig' %}
+
+{% set page_image = app.request.getSchemeAndHttpHost() ~ ' ' %}
+{% set title = 'Контакти Волейбол в Україні - volleyball.ua' %}
+{% set h1 = 'Contact Us'|trans %}
+{% set meta_keywords = 'волейбол, волейбол в україні, контакти, зворотній звязов' %}
+{% set meta_description = 'Завжди готові отримати ваше звернення до веб-сайту Волейбол в Україні -  volleyball.ua' %}
+
+
+{% block content %}
+
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.5&appId=868321236586850";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div class="section">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col col-lg-8 col-md-12 col-sm-12">
+
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="home-title">{{ h1 }}</h1>
+                        </div>
+                    </div>
+
+                    <p>
+                        Пишіть нам на електронну адресу, яка наведена нижче.
+                        Спробуємо якомога швидше дати вам відповідь на запитання,
+                        зауваження, критику або звернення з приводу розміщення реклами.
+                        Будемо раді отримати ваші поради або подяки.
+
+                    </p>
+                    <p>
+                        Email: <a href="mailto: volleyball.ua@gmail.com">volleyball.ua@gmail.com</a>
+                    </p>
+
+                    {% include '@VolleyFace/Social/uptolike.html.twig' %}
+
+                    <br/>
+                </div>
+                <div class="col-lg-1 col-md-0 col-sm-0"></div>
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    {#{% include 'VolleyFaceBundle:Default/includes:fb.html.twig' with {} %}#}
+                    {#{% include 'VolleyFaceBundle:Default/includes:vk.html.twig' with {} %}#}
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.section -->
+
+
+
+{% endblock %}

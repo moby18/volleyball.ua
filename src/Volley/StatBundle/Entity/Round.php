@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Round
  *
  * @ORM\Table(name="stat_round")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\RoundRepository")
  */
 class Round
 {
@@ -49,15 +49,31 @@ class Round
     protected $season;
 
     /**
-     * @ORM\OneToMany(targetEntity="Tour", mappedBy="season")
+     * @ORM\OneToMany(targetEntity="Tour", mappedBy="round")
      */
     protected $tours;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
+     */
+    protected $games;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Team", inversedBy="rounds")
+     * @ORM\JoinTable(name="stat_rounds_teams")
+     **/
+    protected $teams;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RoundTeamBonus", mappedBy="round")
+     */
+    protected $bonuses;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +96,7 @@ class Round
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -103,7 +119,7 @@ class Round
     /**
      * Get ordering
      *
-     * @return string 
+     * @return string
      */
     public function getOrdering()
     {
@@ -126,12 +142,13 @@ class Round
     /**
      * Get type
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getType()
     {
         return $this->type;
     }
+
     /**
      * Constructor
      */
@@ -156,7 +173,7 @@ class Round
     /**
      * Get season
      *
-     * @return \Volley\StatBundle\Entity\Season 
+     * @return \Volley\StatBundle\Entity\Season
      */
     public function getSeason()
     {
@@ -189,10 +206,84 @@ class Round
     /**
      * Get tours
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTours()
     {
         return $this->tours;
+    }
+
+    /**
+     * Add games
+     *
+     * @param \Volley\StatBundle\Entity\Game $games
+     * @return Round
+     */
+    public function addGame(\Volley\StatBundle\Entity\Game $games)
+    {
+        $this->games[] = $games;
+
+        return $this;
+    }
+
+    /**
+     * Remove games
+     *
+     * @param \Volley\StatBundle\Entity\Game $games
+     */
+    public function removeGame(\Volley\StatBundle\Entity\Game $games)
+    {
+        $this->games->removeElement($games);
+    }
+
+    /**
+     * Get games
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGames()
+    {
+        return $this->games;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     * @return Round
+     */
+    public function addTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams[] = $teams;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \Volley\StatBundle\Entity\Team $teams
+     */
+    public function removeTeam(\Volley\StatBundle\Entity\Team $teams)
+    {
+        $this->teams->removeElement($teams);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeams()
+    {
+        return $this->teams;
+    }
+
+    function __toString()
+    {
+        $season = $this->getSeason();
+        $tournament = $season->getTournament();
+        $country = $tournament->getCountry();
+        return $country . ' - ' . $tournament->getName() . ' - ' . $tournament->getSex() . ' - ' . $season->getName() . ' - ' . $this->getName();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -64,12 +65,12 @@ class PlayerController extends Controller
     */
     private function createCreateForm(Player $entity)
     {
-        $form = $this->createForm(new PlayerType(), $entity, array(
+        $form = $this->createForm( PlayerType::class, $entity, array(
             'action' => $this->generateUrl('player_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -143,12 +144,12 @@ class PlayerController extends Controller
     */
     private function createEditForm(Player $entity)
     {
-        $form = $this->createForm(new PlayerType(), $entity, array(
+        $form = $this->createForm(PlayerType::class, $entity, array(
             'action' => $this->generateUrl('player_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -218,7 +219,7 @@ class PlayerController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('player_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

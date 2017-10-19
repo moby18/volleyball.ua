@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,7 +14,7 @@ use Volley\StatBundle\Form\CountryType;
 /**
  * Country controller.
  *
- * @Route("/country")
+ * @Route("/admin/stat/country")
  */
 class CountryController extends Controller
 {
@@ -71,12 +72,12 @@ class CountryController extends Controller
      */
     private function createCreateForm(Country $entity)
     {
-        $form = $this->createForm(new CountryType(), $entity, array(
+        $form = $this->createForm(CountryType::class, $entity, array(
             'action' => $this->generateUrl('stat_country_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +161,12 @@ class CountryController extends Controller
     */
     private function createEditForm(Country $entity)
     {
-        $form = $this->createForm(new CountryType(), $entity, array(
+        $form = $this->createForm(CountryType::class, $entity, array(
             'action' => $this->generateUrl('stat_country_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +241,7 @@ class CountryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_country_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

@@ -2,6 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,7 +14,7 @@ use Volley\StatBundle\Form\SeasonType;
 /**
  * Season controller.
  *
- * @Route("/season")
+ * @Route("/admin/stat/season")
  */
 class SeasonController extends Controller
 {
@@ -25,14 +26,25 @@ class SeasonController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Season')->findAll();
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('season_page', 1));
+        $session->set('season_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Season')->createQueryBuilder('s')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
         );
     }
     /**
@@ -71,12 +83,12 @@ class SeasonController extends Controller
      */
     private function createCreateForm(Season $entity)
     {
-        $form = $this->createForm(new SeasonType(), $entity, array(
+        $form = $this->createForm(SeasonType::class, $entity, array(
             'action' => $this->generateUrl('stat_season_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -160,12 +172,12 @@ class SeasonController extends Controller
     */
     private function createEditForm(Season $entity)
     {
-        $form = $this->createForm(new SeasonType(), $entity, array(
+        $form = $this->createForm(SeasonType::class, $entity, array(
             'action' => $this->generateUrl('stat_season_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -240,7 +252,7 @@ class SeasonController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_season_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

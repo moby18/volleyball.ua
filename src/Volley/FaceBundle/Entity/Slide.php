@@ -19,6 +19,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Slide
 {
+    const TYPE_POST = 0;
+    const TYPE_LINK = 1;
+
     /**
      * Hook timestampable behavior
      * updates createdAt, updatedAt fields
@@ -45,6 +48,7 @@ class Slide
      * @var integer
      *
      * @ORM\Column(name="type", type="smallint")
+     * @Assert\Choice({ 0, 1 })
      */
     private $type;
 
@@ -52,6 +56,7 @@ class Slide
      * @var string
      *
      * @ORM\Column(name="link", type="string", length=255)
+     * @Assert\NotBlank(groups={"links"})
      */
     private $link;
 
@@ -87,6 +92,13 @@ class Slide
      * @Assert\File(maxSize="6000000")
      */
     private $file;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     * @Assert\NotNull(groups={"posts"})
+     */
+    private $post;
 
     /**
      * Get file.
@@ -381,5 +393,21 @@ class Slide
     public function setImageName($image_name)
     {
         $this->image_name = $image_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param mixed $post
+     */
+    public function setPost($post)
+    {
+        $this->post = $post;
     }
 }

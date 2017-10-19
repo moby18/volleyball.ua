@@ -3,8 +3,10 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Volley\StatBundle\Entity\Season;
 
 class SeasonType extends AbstractType
 {
@@ -18,22 +20,28 @@ class SeasonType extends AbstractType
             ->add('name')
             ->add('fromYear')
             ->add('toYear')
-            ->add('status')
+            ->add('status', null, [
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => "Enabled", 'data-off' => "Disabled", 'data-onstyle' => 'info']
+            ])
+            ->add('standingSystem',ChoiceType::class, [
+                'choices'  => array(
+                    'Points' => Season::STANDING_SYSTEM_POINTS,
+                    'Wins' => Season::STANDING_SYSTEM_WINS
+                ),
+            ])
+            ->add('tournamentTable', null, [
+                'label' => false,
+                'attr' => ['data-toggle' => 'toggle', 'data-on' => "Show Tables", 'data-off' => "Hide Tables", 'data-onstyle' => 'info']
+            ])
             ->add('tournament')
-            ->add('teams')
-//            ->add('teams', 'entity', array(
-//                'class' => 'Volley\StatBundle\Entity\Team',
-//                'property' => 'name',
-//                'multiple' => true,
-//                'expanded' => false
-//            ))
-        ;
+            ->add('teams');
     }
     
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Volley\StatBundle\Entity\Season'

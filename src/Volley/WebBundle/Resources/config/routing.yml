@@ -7,4 +7,3 @@ volley_web_security:
     resource: "Volley\WebBundle\Controller\SecurityController"
     type: annotation
     prefix:   /
-

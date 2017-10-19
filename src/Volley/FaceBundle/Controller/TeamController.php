@@ -2,6 +2,7 @@
 
 namespace Volley\FaceBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -62,12 +63,12 @@ class TeamController extends Controller
     */
     private function createCreateForm(Team $entity)
     {
-        $form = $this->createForm(new TeamType(), $entity, array(
+        $form = $this->createForm(TeamType::class, $entity, array(
             'action' => $this->generateUrl('team_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -141,12 +142,12 @@ class TeamController extends Controller
     */
     private function createEditForm(Team $entity)
     {
-        $form = $this->createForm(new TeamType(), $entity, array(
+        $form = $this->createForm(TeamType::class, $entity, array(
             'action' => $this->generateUrl('team_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -216,7 +217,7 @@ class TeamController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('team_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

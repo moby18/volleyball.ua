@@ -2,18 +2,23 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Volley\StatBundle\Entity\Game;
+use Volley\StatBundle\Entity\GameSet;
+use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Tournament;
 use Volley\StatBundle\Form\TournamentType;
 
 /**
  * Tournament controller.
  *
- * @Route("/tournament")
+ * @Route("/admin/stat/tournament")
  */
 class TournamentController extends Controller
 {
@@ -25,16 +30,28 @@ class TournamentController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Tournament')->findAll();
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('tournament_page', 1));
+        $session->set('tournament_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Tournament')->createQueryBuilder('t')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
         );
     }
+
     /**
      * Creates a new Tournament entity.
      *
@@ -58,7 +75,7 @@ class TournamentController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -71,12 +88,12 @@ class TournamentController extends Controller
      */
     private function createCreateForm(Tournament $entity)
     {
-        $form = $this->createForm(new TournamentType(), $entity, array(
+        $form = $this->createForm(TournamentType::class, $entity, array(
             'action' => $this->generateUrl('stat_tournament_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -91,11 +108,11 @@ class TournamentController extends Controller
     public function newAction()
     {
         $entity = new Tournament();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -119,7 +136,7 @@ class TournamentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -145,30 +162,31 @@ class TournamentController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Tournament entity.
-    *
-    * @param Tournament $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Tournament entity.
+     *
+     * @param Tournament $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Tournament $entity)
     {
-        $form = $this->createForm(new TournamentType(), $entity, array(
+        $form = $this->createForm(TournamentType::class, $entity, array(
             'action' => $this->generateUrl('stat_tournament_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Tournament entity.
      *
@@ -197,11 +215,12 @@ class TournamentController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Tournament entity.
      *
@@ -240,8 +259,22 @@ class TournamentController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_tournament_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
+            ->getForm();
     }
+
+    /**
+     * * Tournament table
+     *
+     * @Route("/{id}/table", name="stat_tournament_table")
+     * @Method("GET")
+     * @param $seasonId
+     * @param $tournamentId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function tableAction($seasonId = 1, $tournamentId = 1, $roundId = 1)
+    {
+        return $this->render('VolleyStatBundle:Tournament:table.html.twig', $this->get('volley_stat.tournament.manager')->getTournamentData($seasonId, $tournamentId, $roundId));
+    }
+
 }

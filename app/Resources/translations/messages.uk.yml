@@ -1,0 +1,47 @@
+# User
+user:
+  admin:
+    email: Email
+    password: Пароль
+
+# Menu
+News: Новини
+Tournaments: Турніри
+Contact Us: Контакти
+Advertising: Реклама
+
+# Texts
+post-item:
+  post-info:
+    icon-images: Фото всередині
+    icon-videos: Відео всередині
+    icon-vu: volleyball.ua
+    icon-advert: Реклама
+    icon-hits: Переглядів
+    source: Джерело
+
+advert: Реклама
+popular-section: Популярні
+popular-section-in-category: Популярні у категорії
+recommended-section: Рекомендовані
+recommended-section-in-category: Рекомендовані у категорії
+search: Пошук
+not_found: Нічого не знайдено
+
+men: Чоловіки
+women: Жінки
+
+Setter: Пасуючий
+Middle Blocker: Центральний блокуючий
+Opposite: Діагональний
+Outside Hitter: Крайній нападник
+Libero: Ліберо
+
+player: Гравець
+coach: Тренер
+
+#live: зараз
+#soon: скоро
+
+live: live
+soon: soon

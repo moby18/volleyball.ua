@@ -1,0 +1,15 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Round edit</h1>
+
+    {{ form(edit_form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('stat_round_edit', {'id': entity.round.id}) }}" type="button"
+           class="btn btn-default">Back to the list</a>
+    </div>
+    <div class="pull-right">
+        {{ form(delete_form) }}
+    </div>
+{% endblock %}

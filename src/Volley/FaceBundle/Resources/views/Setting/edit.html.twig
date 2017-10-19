@@ -1,0 +1,23 @@
+{% extends '::admin.html.twig' %}
+
+{% block body -%}
+    <h1>Setting edit</h1>
+
+    {{ form(edit_form) }}
+
+    <div class="btn-group" role="group" aria-label="">
+        <a href="{{ path('volley_face_admin_homepage') }}" type="button"
+           class="btn btn-default">Back to admin</a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/category.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/bower_components/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}" type="text/css" />
+{% endblock %}

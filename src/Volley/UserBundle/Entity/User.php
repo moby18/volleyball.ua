@@ -2,7 +2,7 @@
 
 namespace Volley\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,10 +24,21 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="\Volley\FaceBundle\Entity\Post", mappedBy="createdBy")
+     **/
+    private $posts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Volley\FaceBundle\Entity\Post", mappedBy="modifiedBy")
+     **/
+    private $modified_posts;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->posts = new ArrayCollection();
+        $this->modified_posts = new ArrayCollection();
     }
 
     /**
@@ -38,5 +49,13 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

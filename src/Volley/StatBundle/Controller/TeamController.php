@@ -2,6 +2,8 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -13,7 +15,7 @@ use Volley\StatBundle\Form\TeamType;
 /**
  * Team controller.
  *
- * @Route("/team")
+ * @Route("/admin/stat/team")
  */
 class TeamController extends Controller
 {
@@ -25,14 +27,25 @@ class TeamController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('VolleyStatBundle:Team')->findAll();
+        $session = $request->getSession();
+        $page = $request->query->get('page', $session->get('team_page', 1));
+        $session->set('team_page', $page);
+
+        $query = $em->getRepository('VolleyStatBundle:Team')->createQueryBuilder('t')->getQuery();
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $page,
+            20
+        );
 
         return array(
-            'entities' => $entities,
+            'entities' => $pagination,
         );
     }
     /**
@@ -50,6 +63,13 @@ class TeamController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if ($address = $entity->getAddress()) {
+                $coords = self::getCoordinates($address);
+                $entity->setLat($coords['lat']);
+                $entity->setLng($coords['lng']);
+            }
+
             $em->persist($entity);
             $em->flush();
 
@@ -71,12 +91,12 @@ class TeamController extends Controller
      */
     private function createCreateForm(Team $entity)
     {
-        $form = $this->createForm(new TeamType(), $entity, array(
+        $form = $this->createForm(TeamType::class, $entity, array(
             'action' => $this->generateUrl('stat_team_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', SubmitType::class, array('label' => 'Create'));
 
         return $form;
     }
@@ -97,6 +117,24 @@ class TeamController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
+    }
+
+    /**
+     * Get Teams json
+     *
+     * @param Request $request
+
+     * @Route("/json", name="stat_team_json")
+     * @Method("GET")
+     *
+     * @return JsonResponse
+     */
+    public function getTeamsByNameAction(Request $request)
+    {
+        $q = $request->query->get('q',' ');
+        $em = $this->getDoctrine()->getManager();
+        $teams = $em->getRepository('VolleyStatBundle:Team')->findByName($q);
+        return JsonResponse::create($teams);
     }
 
     /**
@@ -135,6 +173,7 @@ class TeamController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Team $entity */
         $entity = $em->getRepository('VolleyStatBundle:Team')->find($id);
 
         if (!$entity) {
@@ -147,7 +186,7 @@ class TeamController extends Controller
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView()
         );
     }
 
@@ -160,12 +199,12 @@ class TeamController extends Controller
     */
     private function createEditForm(Team $entity)
     {
-        $form = $this->createForm(new TeamType(), $entity, array(
+        $form = $this->createForm(TeamType::class, $entity, array(
             'action' => $this->generateUrl('stat_team_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
@@ -191,6 +230,12 @@ class TeamController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            if ($address = $entity->getAddress()) {
+                $coords = self::getCoordinates($address);
+                $entity->setLat($coords['lat']);
+                $entity->setLng($coords['lng']);
+            }
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('stat_team_edit', array('id' => $id)));
@@ -240,8 +285,16 @@ class TeamController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('stat_team_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    private function getCoordinates($address){
+        $address = str_replace(" ", "+", $address);
+        $url = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address);
+        $response = file_get_contents($url);
+        $json = json_decode($response,TRUE);
+        return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];
     }
 }

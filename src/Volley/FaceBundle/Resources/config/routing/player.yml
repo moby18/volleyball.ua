@@ -1,30 +1,30 @@
 player:
-    pattern:  /
+    path:  /
     defaults: { _controller: "VolleyFaceBundle:Player:index" }
 
 player_show:
-    pattern:  /{id}/show
+    path:  /{id}/show
     defaults: { _controller: "VolleyFaceBundle:Player:show" }
 
 player_new:
-    pattern:  /new
+    path:  /new
     defaults: { _controller: "VolleyFaceBundle:Player:new" }
 
 player_create:
-    pattern:  /create
+    path:  /create
     defaults: { _controller: "VolleyFaceBundle:Player:create" }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 player_edit:
-    pattern:  /{id}/edit
+    path:  /{id}/edit
     defaults: { _controller: "VolleyFaceBundle:Player:edit" }
 
 player_update:
-    pattern:  /{id}/update
+    path:  /{id}/update
     defaults: { _controller: "VolleyFaceBundle:Player:update" }
-    requirements: { _method: post|put }
+    requirements: { methods: post|put }
 
 player_delete:
-    pattern:  /{id}/delete
+    path:  /{id}/delete
     defaults: { _controller: "VolleyFaceBundle:Player:delete" }
-    requirements: { _method: post|delete }
+    requirements: { methods: post|delete }
