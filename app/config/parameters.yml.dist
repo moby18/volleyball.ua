@@ -36,3 +36,7 @@ parameters:
     g_secret: ~
     vk_id: ~
     vk_secret: ~
+    instagram_id: ~
+    instagram_secret: ~
+    twitter_id: ~
+    twitter_secret: ~
