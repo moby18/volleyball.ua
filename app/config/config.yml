@@ -222,29 +222,47 @@ oneup_uploader:
             frontend: blueimp # or any uploader you use in the frontend
 
 hwi_oauth:
-    # name of the firewall in which this bundle is active, this setting MUST be set
-    firewall_name: default
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    firewall_names: [default]
     connect:
         confirmation: true
         account_connector: volley_oauth_provider
     resource_owners:
         google:
             type:                google
-            client_id:           %g_id%
-            client_secret:       %g_secret%
+            client_id:           "%g_id%"
+            client_secret:       "%g_secret%"
             scope:               "email profile"
+            options:
+                csrf:            true
         facebook:
             type:                facebook
-            client_id:           %facebook_client_id%
-            client_secret:       %facebook_client_secret%
+            client_id:           "%facebook_client_id%"
+            client_secret:       "%facebook_client_secret%"
             scope:               "email, public_profile"
             infos_url:           "https://graph.facebook.com/me?fields=id,name,location,birthday,email,hometown,picture,relationship_status,gender"
             options:
-                display: popup #dialog is optimized for popup window
+                display:         popup #dialog is optimized for popup window
+                auth_type:       rerequest
+                csrf:            true
         vkontakte:
             type:                vkontakte
-            client_id:           %vk_id%
-            client_secret:       %vk_secret%
+            client_id:           "%vk_id%"
+            client_secret:       "%vk_secret%"
             scope:               "email"
             options:
                 fields:          "email,nickname,photo_50"
+                csrf:            true
+        instagram:
+            type:                instagram
+            client_id:           "%instagram_id%"
+            client_secret:       "%instagram_secret%"
+            options:
+                csrf:            true
+        twitter:
+            type:                twitter
+            client_id:           "%twitter_id%"
+            client_secret:       "%twitter_secret%"
+            options:
+                include_email:   true
+                csrf:            true

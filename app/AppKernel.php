@@ -29,9 +29,9 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Tetranz\Select2EntityBundle\TetranzSelect2EntityBundle(),
-            new Astina\Bundle\SocialLinksBundle\AstinaSocialLinksBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Http\HttplugBundle\HttplugBundle(), // If you require the php-http/httplug-bundle package.
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
