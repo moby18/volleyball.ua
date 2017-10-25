@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass=Volley\WebBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="Volley\WebBundle\Entity\UserRepository")
  */
 class User implements AdvancedUserInterface, EquatableInterface, \Serializable
 {
