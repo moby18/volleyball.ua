@@ -76,7 +76,7 @@ class TourController extends Controller
      */
     public function filterAction(Request $request)
     {
-        if (array_key_exists('clear', $request->request->get('game_filter'))) {
+        if (array_key_exists('clear', $request->request->get('game_filter', []))) {
             $gameFilter = new GameFilter();
             $filterForm = $this->createFilterForm($gameFilter);
         } else {
@@ -125,7 +125,7 @@ class TourController extends Controller
     /**
      * Creates a new Tour entity.
      *
-     * @Route("/", name="stat_tour_create")
+     * @Route("/new", name="stat_tour_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Tour:new.html.twig")
      */
