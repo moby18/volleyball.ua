@@ -137,6 +137,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid(null, true));
+        $this->setRoles([static::ROLE_DEFAULT]);
     }
 
     public function getId() {

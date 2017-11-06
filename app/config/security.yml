@@ -8,13 +8,6 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-#    providers:
-#        in_memory:
-#            memory:
-#                users:
-#                    user:  { password: userpass, roles: [ "ROLE_USER" ] }
-#                    admin: { password: adminpass, roles: [ "ROLE_ADMIN" ] }
-
     providers:
             volley_user_provider:
                 entity:
@@ -39,18 +32,14 @@ security:
                 lifetime: 604800 # 1 week in seconds
                 path:     /
                 name: volleyballua
-                # by default, the feature is enabled by checking a
-                # checkbox in the login form (see below), uncomment the
-                # following line to always enable it.
                 always_remember_me: true
-                #remember_me_parameter: _remember_me
             oauth:
                 resource_owners:
-                    facebook: "/login/check-facebook"
-                    google: "/login/check-google"
-                    vkontakte: "/login/check-vkontakte"
-                    instagram: "/login/check-instagram"
-                    twitter: "/login/check-twitter"
+                    facebook:   "/login/check-facebook"
+                    google:     "/login/check-google"
+                    vkontakte:  "/login/check-vkontakte"
+                    instagram:  "/login/check-instagram"
+                    twitter:    "/login/check-twitter"
                 login_path: /login
                 use_forward: false
                 failure_path: /login
