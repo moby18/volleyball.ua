@@ -35,18 +35,6 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $password;
 
     /**
-     * @var string $plainPassword
-     */
-    protected $plainPassword;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salt", type="string", nullable=true)
-     */
-    protected $salt;
-
-    /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
     private $email;
@@ -253,24 +241,6 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function isEnabled()
     {
         return $this->isActive;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param string $plainPassword
-     * @return User
-     */
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
-        return $this;
     }
 
     /**

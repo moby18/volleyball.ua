@@ -13,6 +13,7 @@ security:
             volley_user_provider:
                 entity:
                     class: VolleyWebBundle:User
+                    property: email
             oath_provider:
                 id: volley_oauth_provider
 

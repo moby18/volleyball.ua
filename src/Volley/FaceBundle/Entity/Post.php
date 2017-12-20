@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Volley\StatBundle\Entity\Person;
-use Volley\StatBundle\Entity\Team;
+use Volley\StatBundle\Entity\Team as StatTeam;
 use Volley\UserBundle\Entity\User;
 
 /**
@@ -1095,10 +1095,10 @@ class Post
     /**
      * Add teams
      *
-     * @param Team $teams
+     * @param StatTeam $teams
      * @return Post
      */
-    public function addTeam(Team $teams)
+    public function addTeam(StatTeam $teams)
     {
         $teams->addPost($this); // synchronously updating inverse side
         $this->teams[] = $teams;
