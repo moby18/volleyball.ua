@@ -34,6 +34,8 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      */
     private $password;
 
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=60, unique=true)
      */
@@ -55,36 +57,42 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      * @ORM\Column(name="fb_token", type="string", nullable=true)
      */
     protected $fb_token;
+
     /**
      * @var string
      *
      * @ORM\Column(name="fb_id", type="string", nullable=true)
      */
     protected $fb_id;
+
     /**
      * @var string
      *
      * @ORM\Column(name="g_token", type="string", nullable=true)
      */
     protected $g_token;
+
     /**
      * @var string
      *
      * @ORM\Column(name="g_id", type="string", nullable=true)
      */
     protected $g_id;
+
     /**
      * @var string
      *
      * @ORM\Column(name="vk_token", type="string", nullable=true)
      */
     protected $vk_token;
+
     /**
      * @var string
      *
      * @ORM\Column(name="vk_id", type="string", nullable=true)
      */
     protected $vk_id;
+
     /**
      * @var string
      *
@@ -179,6 +187,22 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
     }
 
     /**
@@ -487,10 +511,6 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
             return false;
         }
 
-//        if ($this->salt !== $user->getSalt()) {
-//            return false;
-//        }
-
         if ($this->username !== $user->getUsername()) {
             return false;
         }
@@ -504,9 +524,8 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
+            $this->email,
             $this->password,
-            // see section on salt below
-            // $this->salt,
             $this->isActive
         ));
     }
@@ -517,9 +536,8 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         list (
             $this->id,
             $this->username,
+            $this->email,
             $this->password,
-            // see section on salt below
-            // $this->salt
             $this->isActive
             ) = unserialize($serialized);
     }

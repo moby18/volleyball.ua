@@ -2,24 +2,28 @@
 namespace Volley\WebBundle\Security\User;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Volley\WebBundle\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
     /** @var  EntityManager $em */
     protected $em;
 
-    public function __construct(EntityManager $em)
+    /** @var UserPasswordEncoder */
+    protected $encoder;
+
+    public function __construct(EntityManager $em, UserPasswordEncoder $encoder)
     {
         $this->em = $em;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -27,11 +31,9 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
      *
      * @param UserResponseInterface $response
      *
-     * @return UserInterface
+     * @return User
      *
-     * @see UsernameNotFoundException
-     *
-     * @throws UsernameNotFoundException if the user is not found
+     * @throws OptimisticLockException
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
@@ -41,8 +43,9 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
         $user = $em->getRepository('VolleyWebBundle:User')->findOneBy(['email' => $response->getEmail()]);
         if ($user === null) {
             $user = new User();
-            $plainPassword = 'qwerty';
-            $encoded = $encoder->encodePassword($user, $plainPassword);
+//            $plainPassword = "qwerty123456";
+//            $encoded = $this->encoder->encodePassword($user, $plainPassword);
+//            $user->setPassword($encoded);
             $user->setEmail($response->getEmail());
                 if ($type === 'vkontakte') {
                     $user->setFirstName($response->getFirstName())

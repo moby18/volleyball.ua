@@ -16,6 +16,7 @@ services:
             class: Volley\WebBundle\Security\User\VolleyOAuthProvider
             arguments:
                 - "@doctrine.orm.entity_manager"
+                - "@security.password_encoder"
 
     hwi_oauth.user.provider.entity:
         class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
