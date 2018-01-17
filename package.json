@@ -9,6 +9,7 @@
     "bootstrap-toggle": "^2.2.2",
     "components-font-awesome": "^4.6.3",
     "fancybox": "^3.0.0",
+    "font-awesome": "^4.7.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^5.3.0",
     "gulp-clean": "^0.3.2",

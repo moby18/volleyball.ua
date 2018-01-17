@@ -10,7 +10,7 @@ var shell = require('gulp-shell');
 gulp.task('style', function () {
     var source = [
         // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
-        'node_modules/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
         // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
         // 'node_modules/bootstrap/dist/css/bootstrap.css',
@@ -35,7 +35,7 @@ gulp.task('style_admin', function () {
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
         'node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css',
-        'node_modules/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
         'src/Volley/FaceBundle/Resources/public/css/admin/styles.css'
     ];
     gulp.src(source)
@@ -159,7 +159,7 @@ gulp.task('fonts', function () {
     return gulp.src([
         'src/Volley/FaceBundle/Resources/public/fonts/*',
         'node_modules/bootstrap/dist/fonts/*',
-        'node_modules/components-font-awesome/fonts/*'
+        'node_modules/font-awesome/fonts/*'
     ])
         .pipe(gulp.dest('web/fonts/'))
 });
