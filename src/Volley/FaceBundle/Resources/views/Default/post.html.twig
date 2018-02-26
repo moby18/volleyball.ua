@@ -30,12 +30,11 @@
                     <a href="{{ path('volley_face_post',{'category_slug': post.category.slug, 'post_slug': post.slug}) }}">
                         <h1>{{ post.title }}</h1>
                     </a>
-                    <div class="news-info row">
-                        <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                            <span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye"
-                                                                                             aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>
-                        </div>
-                    </div>
+                    {#<div class="news-info row">#}
+                        {#<div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">#}
+                            {#<span title="{{ 'post-item.post-info.icon-hits'|trans({}) }}"><i class="fa fa-eye" aria-hidden="true"></i> &nbsp;{{ post.hits }}</span>#}
+                        {#</div>#}
+                    {#</div>#}
 
                     <figure class="img-caption">
                         <img class="img-responsive" src="{{ post.getWebPath | imagine_filter('post_pic') }}"
