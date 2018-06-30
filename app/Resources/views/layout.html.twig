@@ -10,7 +10,7 @@
 {% set meta_keywords = meta_keywords|default(setting.keywords)|default('волейбол, волейбол в Україні, волейбол в Украине, новини волейболу, новости волейбола, трансляції волейбольних матчів, трансляции волейбольмых матчей, пляжний волейбол, розклад, результати, чемпіонат України, аматорський волейбол, дитячий волейбол') ~ (pageNumber > 1 ?', сторінка ' ~ pageNumber : '') %}
 {% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') ~ page|default('') %}
 <!DOCTYPE html>
-<html lang="en" class="js no-touch csstransitions skrollr skrollr-desktop" style="height: auto;">
+<html lang="en" class="js no-touch csstransitions skrollr skrollr-desktop" xmlns="http://www.w3.org/1999/html">
 <head>
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -83,14 +83,14 @@
 
     <!-- Bootstrap Core CSS -->
     {% block styles %}
-        <link href="{{ asset('css/style.css') }}?v=15" rel="stylesheet" type='text/css'>
+        <link href="{{ asset('css/style.css') }}?v=16" rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
         <link href="{{ asset(' css/style_ie.css') }}" rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
     {% block head_scripts %}
-        {#<script src="{{ asset('js/script_header.js') }}?v=15" type="text/javascript"></script>#}
+        {#<script src="{{ asset('js/script_header.js') }}?v=16" type="text/javascript"></script>#}
         <!-- IE8 support for HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="{{ asset('js/script_ie.js') }}" type="text/javascript" async defer></script>
@@ -120,6 +120,7 @@
 
 <body>
 
+<article>
 {% include('::header.html.twig') %}
 
 {#{% block carousel %}#}
@@ -312,13 +313,13 @@
         </div>
     </div>
 </footer>
-
+</article>
 <!-- /.container -->
 
 {% block scripts %}
-    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=15"></script>
+    <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=16"></script>
 
-    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=15" async defer></script>
+    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=16" async defer></script>
 
     <script>
       jQuery("#birthdayCarousel").carousel({

@@ -920,42 +920,32 @@ footer .bottom-links ul li:hover a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    position: relative;
-    min-height: 100%;
-    display: block;
+    width: 100%;
+    height: 100%;
 }
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 480px;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 480px;
+    height: 100%;
+}
+article {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+article > .section {
+    flex-grow: 1;
+}
+/*article > header,*/
+article > .section,
+article > footer {
+    flex-shrink: 0;
+}
+article > footer{
     background-color: #000000;
     background-image: url('../bundles/volleyface/images/vu-footer-bg.png');
     background-repeat: repeat;
 }
-
-@media (max-width: 767px) {
-    body {
-        margin-bottom: 1255px;
-    }
-    .footer {
-        height: 1255px;
-    }
-}
-@media (width: 768px) {
-    body {
-        margin-bottom: 600px;
-    }
-    .footer {
-        height: 600px;
-    }
-}
-
 .footer .copyright {
     line-height: 39px;
     color: #6E6E81;
