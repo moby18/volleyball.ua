@@ -1058,6 +1058,12 @@ article > footer{
     height: auto;
     margin: 20px 0;
 }
+#advert-banners {
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    padding: 0 20px;
+}
 
 /* Matches Carousel */
 #owl-demo .item {
