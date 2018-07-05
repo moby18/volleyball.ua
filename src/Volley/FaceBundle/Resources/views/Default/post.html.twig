@@ -64,13 +64,13 @@
                         <span class="clearfix"></span>
                     </div>
 
-                    {% include 'VolleyFaceBundle:Default/includes:ads_block_vustore.post.html.twig' %}
                     {% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}
 
                     <div class="post-content">
                         <p>
                             <b>{{ post.content|raw }}</b>
                         </p>
+                        {% include 'VolleyFaceBundle:Default/includes:ads_block_vustore.post.html.twig' %}
                         <p>
                             {% autoescape %}
                                 {{ post.text|raw }}
