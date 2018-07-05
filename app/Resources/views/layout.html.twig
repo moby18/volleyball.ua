@@ -319,7 +319,7 @@
 {% block scripts %}
     <script type="text/javascript" src="{{ asset('js/script_footer.js') }}?v=16"></script>
 
-    <script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=16" async defer></script>
+    {#<script type="text/javascript" src="{{ asset('js/custom/modal_social.js') }}?v=16" async defer></script>#}
 
     <script>
       jQuery("#birthdayCarousel").carousel({
@@ -329,7 +329,7 @@
 {% endblock %}
 
 <!-- Modal social -->
-{% include 'VolleyFaceBundle:Default/includes:modal_social.html.twig' with {} %}
+{#{% include 'VolleyFaceBundle:Default/includes:modal_social.html.twig' with {} %}#}
 
 <!-- Modal advertising -->
 {#{% include 'VolleyFaceBundle:Default/includes:onmediads.html.twig' with {} %}#}
