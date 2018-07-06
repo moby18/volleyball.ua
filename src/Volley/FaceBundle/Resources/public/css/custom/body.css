@@ -1063,9 +1063,11 @@ article > footer{
     height: auto;
     margin: 20px 0;
     padding: 0 20px;
+    background-color: #eeeeee;
 }
 #advert-banners a {
-    padding: 0;
+    border-bottom: 0;
+    background-color: transparent;
 }
 
 /* Matches Carousel */
