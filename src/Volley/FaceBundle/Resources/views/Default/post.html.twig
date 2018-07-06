@@ -70,7 +70,9 @@
                         <p>
                             <b>{{ post.content|raw }}</b>
                         </p>
-                        {% include 'VolleyFaceBundle:Default/includes:ads_block_vustore.post.html.twig' %}
+                        <div class="visible-xs">
+                            {% include 'VolleyFaceBundle:Default/includes:ads_block_vustore.post.html.twig' %}
+                        </div>
                         <p>
                             {% autoescape %}
                                 {{ post.text|raw }}
