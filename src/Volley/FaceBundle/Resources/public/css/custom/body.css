@@ -1064,6 +1064,9 @@ article > footer{
     margin: 20px 0;
     padding: 0 20px;
 }
+#advert-banners a {
+    padding: 0;
+}
 
 /* Matches Carousel */
 #owl-demo .item {
