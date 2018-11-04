@@ -46,6 +46,7 @@ class TeamController extends Controller
 
         return array(
             'entities' => $pagination,
+	        'update_slug_form' => $this->createUpdateSlugForm()->createView()
         );
     }
     /**
@@ -286,8 +287,7 @@ class TeamController extends Controller
             ->setAction($this->generateUrl('stat_team_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, array('label' => 'Delete'))
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     private function getCoordinates($address){
@@ -297,4 +297,40 @@ class TeamController extends Controller
         $json = json_decode($response,TRUE);
         return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];
     }
+
+	/**
+	 * Creates a form to edit a Team entity.
+	 *
+	 * @return \Symfony\Component\Form\Form The form
+	 */
+	private function createUpdateSlugForm()
+	{
+		return $this->createFormBuilder()
+			->setAction($this->generateUrl('stat_team_slug_update', []))
+			->setMethod('PUT')
+			->add('submit', SubmitType::class, array('label' => 'Update Empty Slugs'))
+			->getForm();
+	}
+
+	/**
+	 * Lists all Team entities.
+	 *
+	 * @Route("/", name="stat_team_slug_update")
+	 * @Method("PUT")
+	 */
+	public function updateSlugAction(Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$teams = $em->getRepository('VolleyStatBundle:Team')->findBy(['slug' => null]);
+
+		foreach ($teams as $team) {
+			$team->setSlug('');
+			$em->persist($team);
+		}
+
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('stat_team'));
+	}
 }
