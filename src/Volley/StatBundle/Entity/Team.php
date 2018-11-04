@@ -663,14 +663,14 @@ class Team implements \JsonSerializable
 
     public function getLogoWebPath()
     {
-        return null === $this->image
+        return null === $this->logoImage
             ? null
             : $this->getLogoUploadDir() . '/' . $this->getLogoImage();
     }
 
     public function getHallWebPath()
     {
-        return null === $this->image
+        return null === $this->hallImage
             ? null
             : $this->getHallUploadDir() . '/' . $this->getHallImage();
     }
