@@ -514,6 +514,10 @@ footer .bottom-links ul li:hover a {
     width: 100px;
     height: 100px;
     background-size: contain;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 20px;
 }
 
 .team .team-logo-container .team-name {
@@ -521,7 +525,6 @@ footer .bottom-links ul li:hover a {
     color: #1F1F2E;
     text-transform: uppercase;
     height: 100px;
-    padding-left: 20px;
     text-align: left;
 }
 
@@ -667,7 +670,6 @@ footer .bottom-links ul li:hover a {
 .team .person-container .person-middle-info,
 .team .person-container .person-bottom-info {
     padding-left: 140px;
-    height: 65px;
 }
 
 .person .person-container .person-middle-info,

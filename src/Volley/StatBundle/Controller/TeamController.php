@@ -292,7 +292,7 @@ class TeamController extends Controller
 
     private function getCoordinates($address){
         $address = str_replace(" ", "+", $address);
-        $url = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address);
+        $url = "https://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&key=".$this->getParameter('google_api_key');
         $response = file_get_contents($url);
         $json = json_decode($response,TRUE);
         return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];

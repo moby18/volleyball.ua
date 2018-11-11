@@ -32,10 +32,15 @@ men: Чоловіки
 women: Жінки
 
 Setter: Пасуючий
+setter: Пасуючий
 Middle Blocker: Центральний блокуючий
+middle_blocker: Центральний блокуючий
 Opposite: Діагональний
+opposite: Діагональний
 Outside Hitter: Крайній нападник
+outside_hitter: Крайній нападник
 Libero: Ліберо
+libero: Ліберо
 
 player: Гравець
 coach: Тренер
