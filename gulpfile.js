@@ -165,7 +165,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('assets_install', shell.task([
-    'app/console assets:install'
+    'bin/console assets:install'
 ]));
 
 gulp.task('clean', function () {
