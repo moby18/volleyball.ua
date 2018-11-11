@@ -3,7 +3,7 @@
 {#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
 {% set title =  team.name ~ ' '~ team.city ~ ', ' ~ team.country ~ '' %}
 {% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', ' ~ team.country ~ ', волейбол, склад команди, тренери, титули, турніри, адреса, новини'%}
-{% set meta_description = 'Сторінка волейбольної команди' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
+{% set meta_description = 'Сторінка волейбольної команди ' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
 
 {% block content %}
     <div class="section team-upperline">
@@ -19,9 +19,11 @@
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <div class="team-logo-container">
-                        <div class="team-logo" style="background-image: url({{ team.getLogoWebPath | imagine_filter('team_logo') }}); ">
-                            {% if team.getLogoWebPath %}<img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">{% endif %}
-                        </div>
+                        {% if team.getLogoWebPath %}
+                            <div class="team-logo">
+                                {% if team.getLogoWebPath %}<img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">{% endif %}
+                            </div>
+                        {% endif %}
                         <div class="team-name">
                             <h1>{{ team.name }}</h1>
                             <h2>{{ team.city ~ ' ' ~ team.country }}</h2>
@@ -30,12 +32,14 @@
                 </div>
             </div>
 
+            {% if team.getWebPath %}
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath | imagine_filter('team_roster') }}"
                          alt="Склад команди {{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
                 </div>
             </div>
+            {% endif %}
 
             <div class="row">
                     {% if roster %}
@@ -82,18 +86,18 @@
 
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-4 team-address">
+                    <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12 team-address">
                         <ul>
                             <li><span class="team-name">{{ team.name }}</span></li>
-                            {% if team.site != '' %}<li>{{ team.address }}</li>{% endif %}
-                            {% if team.site != '' %}<li><a href="tel: {{ team.site }}">{{ team.site }}</a></li>{% endif %}
+                            {% if team.address != '' %}<li>{{ team.address }}</li>{% endif %}
+                            {% if team.phone != '' %}<li><a href="tel: {{ team.phone }}">{{ team.phone }}</a></li>{% endif %}
                             {% if team.fax != '' %}<li>{{ team.fax }}</li>{% endif %}
                             {% if team.email != '' %}<li><a href="mailto: {{ team.email }}">{{ team.email }}</a></li>{% endif %}
                             {% if team.site != '' %}<li><a href="{{ team.site }}">{{ team.site }}</a></li>{% endif %}
                             {% if team.hall != '' %}<li>{{ team.hall }}</li>{% endif %}
                         </ul>
                     </div>
-                    <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-8 team-map">
+                    <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-12 team-map">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -109,6 +113,7 @@
 {% endblock %}
 
 {% block scripts %}
+    {{ parent() }}
     <script>
       function initMap() {
         var uluru = {lat: {{ team.lat }}, lng: {{ team.lng }} };

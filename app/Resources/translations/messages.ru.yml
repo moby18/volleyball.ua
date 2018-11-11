@@ -33,10 +33,15 @@ men: Мужчины
 women: Женщины
 
 Setter: Связующий
+setter: Связующий
 Middle Blocker: Центральный блокируюший
+middle_blocker: Центральный блокируюший
 Opposite: Диагональный
+opposite: Диагональный
 Outside Hitter: Доигровщик
+outside_hitter: Доигровщик
 Libero: Либеро
+libero: Либеро
 
 player: Игрок
 coach: Тренер

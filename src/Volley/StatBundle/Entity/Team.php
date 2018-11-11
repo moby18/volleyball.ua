@@ -18,6 +18,13 @@ use Volley\FaceBundle\Entity\Post;
  */
 class Team implements \JsonSerializable
 {
+	public static function SEX() {
+		return [
+			'Men' => 'men',
+			'Woman' => 'woman'
+		];
+	}
+
     /**
      * @var integer
      *
@@ -63,6 +70,11 @@ class Team implements \JsonSerializable
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
+
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	public $sex;
 
     /**
      * @var string
@@ -392,6 +404,22 @@ class Team implements \JsonSerializable
         $this->city = $city;
     }
 
+	/**
+	 * @return mixed
+	 */
+	public function getSex()
+	{
+		return $this->sex;
+	}
+
+	/**
+	 * @param mixed $sex
+	 */
+	public function setSex($sex)
+	{
+		$this->sex = $sex;
+	}
+
     /**
      * @return mixed
      */
@@ -663,14 +691,14 @@ class Team implements \JsonSerializable
 
     public function getLogoWebPath()
     {
-        return null === $this->image
+        return null === $this->logoImage
             ? null
             : $this->getLogoUploadDir() . '/' . $this->getLogoImage();
     }
 
     public function getHallWebPath()
     {
-        return null === $this->image
+        return null === $this->hallImage
             ? null
             : $this->getHallUploadDir() . '/' . $this->getHallImage();
     }

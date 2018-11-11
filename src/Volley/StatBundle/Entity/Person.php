@@ -20,24 +20,30 @@ use Volley\FaceBundle\Entity\Post;
  */
 class Person implements \JsonSerializable
 {
-    const POSITIONS = [
-        'Setter' => 'setter',
-        'Middle Blocker' => 'middle_blocker',
-        'Opposite' => 'opposite',
-        'Outside Hitter' => 'outside_hitter',
-        'Libero' => 'libero'
-    ];
+    public static function POSITIONS() {
+		return [
+			'Setter' => 'setter',
+			'Middle Blocker' => 'middle_blocker',
+			'Opposite' => 'opposite',
+			'Outside Hitter' => 'outside_hitter',
+			'Libero' => 'libero'
+		];
+	}
 
-    const SEX = [
-        'Men' => 'men',
-        'Woman' => 'woman'
-    ];
+	public static function SEX() {
+    	return [
+		    'Men' => 'men',
+		    'Woman' => 'woman'
+	    ];
+	}
 
-    const TYPE = [
-        'Player' => 'player',
-        'Coach' => 'coach',
-        'Staff' => 'staff'
-    ];
+	public static function TYPE() {
+		return [
+			'Player' => 'player',
+			'Coach' => 'coach',
+			'Staff' => 'staff'
+		];
+	}
 
     /**
      * @var integer

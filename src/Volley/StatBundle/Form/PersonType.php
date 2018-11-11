@@ -20,7 +20,7 @@ class PersonType extends AbstractType
     {
         $builder
             ->add('sex', ChoiceType::class, [
-                'choices' => Person::SEX,
+                'choices' => Person::SEX(),
                 'expanded' => true,
                 'multiple' => false,
                 'label' => false
@@ -42,11 +42,12 @@ class PersonType extends AbstractType
                 'label' => 'Photo'
             ])
             ->add('type', ChoiceType::class, [
-                'choices' => Person::TYPE
+                'choices' => Person::TYPE()
             ])
             ->add('title')
             ->add('position', ChoiceType::class, [
-                'choices' => Person::POSITIONS
+                'choices' => array_merge([' - ' => null], Person::POSITIONS()),
+
             ])
             ->add('grade')
             ->add('height')

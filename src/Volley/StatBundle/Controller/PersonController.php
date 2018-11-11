@@ -257,7 +257,7 @@ class PersonController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('Person'));
+        return $this->redirect($this->generateUrl('stat_person'));
     }
 
     /**
