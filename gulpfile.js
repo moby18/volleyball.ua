@@ -6,6 +6,8 @@ var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
 var shell = require('gulp-shell');
+var sass = require('gulp-sass');
+sass.compiler = require('node-sass');
 
 gulp.task('style', function () {
     var source = [
@@ -19,12 +21,14 @@ gulp.task('style', function () {
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
-        'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
+        'src/Volley/FaceBundle/Resources/public/scss/custom/body.scss',
         'node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
     ];
     gulp.src(source)
         // .pipe(sourcemaps.init())
-        .pipe(concat('style.css'))
+        .pipe(concat('style.scss'))
+        .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS({level: {1: {specialComments: 0}}}))
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
@@ -184,7 +188,10 @@ gulp.task('front', [], function() {
 gulp.task('watch', ['clean'], function () {
     gulp.start('default'/*,'assets_install'*/);
 
-    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['style', 'style_admin', 'style_ie']);
+    gulp.watch([
+      'src/Volley/FaceBundle/Resources/public/**/*.css',
+      'src/Volley/FaceBundle/Resources/public/**/*.scss'
+    ], ['style', 'style_admin', 'style_ie']);
     gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['script', 'script_admin', 'script_ie', 'script_install']);
     //gulp.watch('src/Volley/FaceBundle/Resources/public/**/*', ['assets_install']);
 });
