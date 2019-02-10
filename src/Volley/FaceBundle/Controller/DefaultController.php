@@ -189,7 +189,7 @@ class DefaultController extends Controller
         return [
             'slides' => $slides,
             'news' => $posts,
-            'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count')),
+            //'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count')),
             'recommendedPosts' => $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'))
         ];
     }
@@ -359,13 +359,13 @@ class DefaultController extends Controller
             20
         );
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
         $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
             'posts' => $pagination,
-            'popularPosts' => $popularPosts,
+            //'popularPosts' => $popularPosts,
             'recommendedPosts' => $recommendedPosts
         ));
     }
@@ -388,13 +388,13 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post->setHits($post->getHits() + 1);
         $em->flush();
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
         $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
             'post' => $post,
-            'popularPosts' => $popularPosts,
+            //'popularPosts' => $popularPosts,
             'recommendedPosts' => $recommendedPosts
         ));
     }
@@ -425,13 +425,13 @@ class DefaultController extends Controller
         );
         if ($blog)
             $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
-        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
         $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
             'posts' => $pagination,
-            'popularPosts' => $popularPosts,
+            //'popularPosts' => $popularPosts,
             'recommendedPosts' => $recommendedPosts
         ));
     }

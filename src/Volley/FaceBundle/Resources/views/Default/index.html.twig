@@ -242,23 +242,23 @@
                         </div>
                 {% endif %}
 
-                {% if popularPosts|length %}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-title">
-                                    {{ 'popular-section'|trans({}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {% for item in popularPosts %}
-                                <div class="col-lg-12">
-                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
-                                </div>
-                                <div style="clear: both"></div>
-                            {% endfor %}
-                        </div>
-                {% endif %}
+                {#{% if popularPosts|length %}#}
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12">#}
+                                {#<div class="section-title">#}
+                                    {#{{ 'popular-section'|trans({}) }}#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#{% for item in popularPosts %}#}
+                                {#<div class="col-lg-12">#}
+                                    {#{% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}#}
+                                {#</div>#}
+                                {#<div style="clear: both"></div>#}
+                            {#{% endfor %}#}
+                        {#</div>#}
+                {#{% endif %}#}
 
                 </div>
 
