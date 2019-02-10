@@ -99,6 +99,7 @@ gulp.task('script_footer', function () {
         'node_modules/owl.carousel/dist/owl.carousel.min.js',
         'node_modules/jquery.cookie/jquery.cookie.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/game-center.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())

@@ -25,7 +25,11 @@
                     {% for game in tour.games %}
                         {% set winnerTeamA = (game.scoreSetHome > game.scoreSetAway) %}
                         {% set winnerTeamB = (game.scoreSetHome < game.scoreSetAway) %}
-                        <tr>
+                        <tr
+                            {# Game link on all row #}
+                            {% if game.links|length %} class="clickable-row" {% endif %}
+                            {% if game.links|length %} data-href="{{ game.links[0].url }}" {% endif %}
+                        >
                             <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                             <td class="teamA text-right">
                                 {{ winnerTeamA ? "<strong>" : "" }}
@@ -45,7 +49,7 @@
                             <td class="text-right">
                                 {% if game.date|date_modify("-4 hour") <= date('','Europe/Kiev') and date('','Europe/Kiev') < date(game.date) and not game.played %}
                                     {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
-                                    <span class="game-soon">{{ 'soon'|trans }}</span>
+                                        <span class="game-soon">{{ 'soon'|trans }}</span>
                                     {% if game.links|length %} </a> {% endif %}</a>
                                 {% endif %}
                                 {% if date(game.date) <= date('','Europe/Kiev') and date('','Europe/Kiev') <= game.date|date_modify("+2 hour") and not game.played %}
