@@ -277,6 +277,30 @@ class DefaultController extends Controller
         return $this->render('VolleyFaceBundle:Default:advertising.html.twig', []);
     }
 
+	/**
+	 * Broadcast route - hardcoded link to post with tv broadcasting by id
+	 *
+	 * @return string
+	 *
+	 * @Route("/broadcast", name="volley_face_broadcast")
+	 * @Template()
+	 */
+	public function broadcastAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+		$post = $em->getRepository('VolleyFaceBundle:Post')->findOneBy(['id' => $this->getParameter('broadcast_post_id')]);
+		$post->setHits($post->getHits() + 1);
+		$em->flush();
+		$category = $post->getCategory();
+		$recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+
+		return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
+			'category' => $category,
+			'post' => $post,
+			'recommendedPosts' => $recommendedPosts
+		));
+	}
+
     /**
      * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
      * @Method("GET")
