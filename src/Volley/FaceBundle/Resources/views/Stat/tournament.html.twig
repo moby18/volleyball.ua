@@ -21,7 +21,7 @@
                     <h4 class="text-center">{{ round.round.name }}</h4>
                 </div>
                 {% if season.tournamentTable %}
-                <div class="row">
+                <div class="row scrollable-x">
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <table class="table table-striped table-hover table-condensed">
                         <thead>
@@ -44,6 +44,7 @@
                             <tr>
                                 <td class="text-center">{{ loop.index }}</td>
                                 {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
+                                {#<td><a href="{{ path('stat_team_front',{'team_slug':row['team'].slug}) }}"><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></a></td>#}
                                 <td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>
                                 <td class="text-center">{{ row.games }}</td>
                                 <td class="text-center hidden-xs">{{ row.win }}</td>
@@ -66,7 +67,7 @@
 
                 {% include 'VolleyFaceBundle:Default/includes:ads_block_tournament_top.html.twig' %}
 
-                <div class="row">
+                <div class="row scrollable-x">
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     {% for tour in round.round.tours %}
                         <div class="anchor" id="{{ round.round.ordering~'_'~tour.ordering }}"></div>
