@@ -1,0 +1,26 @@
+{% set color = item.category.color ? item.category.color : item.category.parent and item.category.parent.color ? item.category.parent.color : item.category.parent and item.category.parent.parent and item.category.parent.parent.color ? item.category.parent.parent.color : default_category_color %}
+{% set popular = popular is defined ? popular : false %}
+{% set recommended = recommended is defined ? recommended : false %}
+
+<div class="news-tile col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('blog_post') }}" alt="{{ item.title ~ ' ' ~ item.metakey }}" />
+    <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}" title="{{ item.title }}">
+        <div class="news-tile-overlay"></div>
+    </a>
+    <div class="news-tile-category">
+        <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}" title="{{ item.category.name }}" style="background-color: {{ color }};">
+            {{ item.category.name }}
+        </a>
+    </div>
+    <div class="news-tile-date" style="background-color: {{ color }};">
+        {{ item.created|localizeddate('none', 'none', null, null, "d MMMM") }}
+    </div>
+    <div class="news-tile-title">
+        <a href="{{ path('volley_face_post',{'category_slug': item.category.slug, 'post_slug': item.slug}) }}">
+            <h3 style="border-left-color: {{ color }}">{{ item.title }}</h3>
+        </a>
+    </div>
+    {#<a href="{{ path('volley_face_post',{'category_slug': item.category.slug, 'post_slug': item.slug}) }}">#}
+        {#<h3 style="border-left-color: {{ color }}">{{ item.title }}</h3>#}
+    {#</a>#}
+</div>
