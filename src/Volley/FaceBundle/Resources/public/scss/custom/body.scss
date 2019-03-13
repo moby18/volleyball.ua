@@ -622,6 +622,7 @@ footer {
     background-repeat: repeat-x;
     padding: 15px 0;
 }
+
 .team {
     .team-logo-container {
         padding: 30px;
@@ -699,6 +700,7 @@ footer {
     }
 
     .person-container {
+        height: 180px;
         padding: 30px 0;
 
         .person-image {
@@ -719,6 +721,7 @@ footer {
             color: #757584;
             font-family: "Myriad Pro", sans-serif;
             font-size: 16px;
+            padding-left: 140px;
         }
     }
 }
@@ -746,10 +749,6 @@ footer {
         }
         .person-middle-info,
         .person-bottom-info {
-            padding-left: 140px;
-        }
-        .person-middle-info,
-        .person-bottom-info {
             padding-left: 200px;
         }
     }
@@ -765,7 +764,7 @@ footer {
     .team-person-number {
         background-color: #FFBF00;
         float: left;
-        margin: 0 10px;
+        margin: 0 0 10px 10px;
         padding: 11px 0;
         width: 40px;
         height: 40px;
@@ -782,6 +781,7 @@ footer {
         text-transform: uppercase;
         margin: 0;
         float: left;
+        margin-left: 10px;
 
         h1 {
             font-family: "Myriad Pro", sans-serif;

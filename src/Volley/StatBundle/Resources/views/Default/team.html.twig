@@ -44,7 +44,7 @@
             <div class="row">
                     {% if roster %}
                         {% for person in roster.rosterPersons %}
-                                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                     <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
                                         <div class="person-container">
                                             <div class="person-image">
