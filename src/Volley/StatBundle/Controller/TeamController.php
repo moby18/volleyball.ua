@@ -46,7 +46,8 @@ class TeamController extends Controller
 
         return array(
             'entities' => $pagination,
-	        'update_slug_form' => $this->createUpdateSlugForm()->createView()
+	        'update_slug_form' => $this->createUpdateSlugForm()->createView(),
+	        'update_location_form' => $this->createUpdateLocationForm()->createView()
         );
     }
     /**
@@ -65,10 +66,14 @@ class TeamController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            if ($address = $entity->getAddress()) {
+            if ($address = $entity->getHall()) {
                 $coords = self::getCoordinates($address);
                 $entity->setLat($coords['lat']);
                 $entity->setLng($coords['lng']);
+            } elseif ($address = $entity->getAddress()) {
+	            $coords = self::getCoordinates($address);
+	            $entity->setLat($coords['lat']);
+	            $entity->setLng($coords['lng']);
             }
 
             $em->persist($entity);
@@ -235,11 +240,15 @@ class TeamController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            if ($address = $entity->getAddress()) {
-                $coords = self::getCoordinates($address);
-                $entity->setLat($coords['lat']);
-                $entity->setLng($coords['lng']);
-            }
+	        if ($address = $entity->getHall()) {
+		        $coords = self::getCoordinates($address);
+		        $entity->setLat($coords['lat']);
+		        $entity->setLng($coords['lng']);
+	        } elseif ($address = $entity->getAddress()) {
+		        $coords = self::getCoordinates($address);
+		        $entity->setLat($coords['lat']);
+		        $entity->setLng($coords['lng']);
+	        }
 
             $em->flush();
 
@@ -303,7 +312,7 @@ class TeamController extends Controller
     }
 
 	/**
-	 * Creates a form to edit a Team entity.
+	 * Creates a form to update slug for Teams entities.
 	 *
 	 * @return \Symfony\Component\Form\Form The form
 	 */
@@ -317,12 +326,26 @@ class TeamController extends Controller
 	}
 
 	/**
+	 * Creates a form to update location for Teams entities.
+	 *
+	 * @return \Symfony\Component\Form\Form The form
+	 */
+	private function createUpdateLocationForm()
+	{
+		return $this->createFormBuilder()
+			->setAction($this->generateUrl('stat_team_location_update', []))
+			->setMethod('PUT')
+			->add('submit', SubmitType::class, array('label' => 'Update Empty Locations Lat/Lon'))
+			->getForm();
+	}
+
+	/**
 	 * Lists all Team entities.
 	 *
-	 * @Route("/", name="stat_team_slug_update")
+	 * @Route("/update/slugs", name="stat_team_slug_update")
 	 * @Method("PUT")
 	 */
-	public function updateSlugAction(Request $request)
+	public function updateSlugAction()
 	{
 		$em = $this->getDoctrine()->getManager();
 
@@ -330,6 +353,35 @@ class TeamController extends Controller
 
 		foreach ($teams as $team) {
 			$team->setSlug('');
+			$em->persist($team);
+		}
+
+		$em->flush();
+
+		return $this->redirect($this->generateUrl('stat_team'));
+	}
+
+	/**
+	 * Lists all Team entities.
+	 *
+	 * @Route("/update/locations", name="stat_team_location_update")
+	 * @Method("PUT")
+	 */
+	public function updateLocationAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$teams = $em->getRepository('VolleyStatBundle:Team')->findAll();
+		foreach ($teams as $team) {
+			if ($address = $team->getHall()) {
+				$coords = self::getCoordinates($address);
+				$team->setLat($coords['lat']);
+				$team->setLng($coords['lng']);
+			} elseif ($address = $team->getAddress()) {
+				$coords = self::getCoordinates($address);
+				$team->setLat($coords['lat']);
+				$team->setLng($coords['lng']);
+			}
 			$em->persist($team);
 		}
 

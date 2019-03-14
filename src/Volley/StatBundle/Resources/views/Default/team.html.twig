@@ -114,20 +114,22 @@
 
 {% block scripts %}
     {{ parent() }}
-    <script>
-      function initMap() {
-        var uluru = {lat: {{ team.lat }}, lng: {{ team.lng }} };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 17,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
-    </script>
+    {% if team.lat and team.lng %}
+        <script>
+          function initMap() {
+            var location = {lat: {{ team.lat }}, lng: {{ team.lng }} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 17,
+              center: location
+            });
+            var marker = new google.maps.Marker({
+              position: location,
+              map: map
+            });
+          }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+        </script>
+    {% endif %}
 {% endblock %}
