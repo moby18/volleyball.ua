@@ -43,9 +43,12 @@
                         {% for row in round.table %}
                             <tr>
                                 <td class="text-center">{{ loop.index }}</td>
-                                {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
-                                {#<td><a href="{{ path('stat_team_front',{'team_slug':row['team'].slug}) }}"><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></a></td>#}
-                                <td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>
+                                <td>
+                                    <a href="{{ path('stat_team_front',{'team_slug':row['team'].slug}) }}" title="{{ '' ~ row['team'].name ~ ' ' ~ row['team'].city}}">
+                                        <span class="text-nowrap">{{ '' ~ row['team'].name ~ ' ' ~ row['team'].city}}</span>
+                                    </a>
+                                </td>
+                                {#<td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>#}
                                 <td class="text-center">{{ row.games }}</td>
                                 <td class="text-center hidden-xs">{{ row.win }}</td>
                                 <td class="text-center hidden-xs">{{ row.loss }}</td>
@@ -104,11 +107,15 @@
                                     <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                                     <td>{{ winnerTeamA ? "<strong>" : "" }}
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.homeTeam.id}) }}"> {{ game.homeTeam.name }} </a>{{ winnerTeamA ? "</strong>" : "" }}#}
-                                        {{ game.homeTeam.name }} {{ winnerTeamA ? "</strong>" : "" }}
+                                        <a href="{{ path('stat_team_front',{'team_slug':game.homeTeam.slug}) }}" title="{{ '' ~ game.homeTeam.name ~ ' ' ~ game.homeTeam.city}}">
+                                            {{ game.homeTeam.name }} {{ winnerTeamA ? "</strong>" : "" }}
+                                        </a>
                                     </td>
                                     <td>{{ winnerTeamB ? "<strong>" : "" }}
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.awayTeam.id}) }}"> {{ game.awayTeam.name }} </a>{{ winnerTeamB ? "</strong>" : "" }}#}
-                                        {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
+                                        <a href="{{ path('stat_team_front',{'team_slug':game.awayTeam.slug}) }}" title="{{ '' ~ game.awayTeam.name ~ ' ' ~ game.awayTeam.city}}">
+                                            {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
+                                        </a>
                                     </td>
                                     <td>{{ game.scoreSetHome }} - {{ game.scoreSetAway }}</td>
                                     {% for set in game.sets %}
