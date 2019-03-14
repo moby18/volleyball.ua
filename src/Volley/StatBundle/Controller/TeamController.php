@@ -72,7 +72,11 @@ class TeamController extends Controller
             }
 
             $em->persist($entity);
-            $em->flush();
+	        $em->flush();
+
+	        $entity->setSlug('');
+	        $em->persist($entity);
+	        $em->flush();
 
             return $this->redirect($this->generateUrl('stat_team_show', array('id' => $entity->getId())));
         }
