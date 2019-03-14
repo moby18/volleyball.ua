@@ -33,17 +33,17 @@
                             <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                             <td class="teamA text-right">
                                 {{ winnerTeamA ? "<strong>" : "" }}
-                                {#<a href="{{ path('stat_team_front',{'team_slug':game.homeTeam.slug}) }}">#}
+                                <a href="{{ path('stat_team_front',{'team_slug':game.homeTeam.slug}) }}" title="{{ game.homeTeam.name ~ ' ' ~ game.homeTeam.city }}">
                                 {{ game.homeTeam.shortName }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamA ? "</strong>" : "" }}
                             </td>
                             <td class="text-center"><span class="text-nowrap">{{ (game.scoreSetHome is not empty?game.scoreSetHome:'-') ~ ':' ~ (game.scoreSetAway is not empty?game.scoreSetAway:'-') }}</span></td>
                             <td class="teamB text-left">
                                 {{ winnerTeamB ? "<strong>" : "" }}
-                                {#<a href="{{ path('stat_team_front',{'team_slug':game.awayTeam.slug}) }}">#}
+                                <a href="{{ path('stat_team_front',{'team_slug':game.awayTeam.slug}) }}" title="{{ game.awayTeam.name ~ ' ' ~ game.awayTeam.city }}">
                                 {{ game.awayTeam.shortName }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamB ? "</strong>" : "" }}
                             </td>
                             <td class="text-right">

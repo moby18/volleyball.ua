@@ -1210,6 +1210,15 @@ article > footer{
     font-size: 12px;
     background-color: transparent;
     border-top: 1px solid #fff;
+
+    a {
+        color: #646472;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+            border-bottom: 1px dotted #646472;
+        }
+    }
 }
 .game-center .table>tbody>tr>td.teamA {
     text-align: right;
