@@ -38,6 +38,7 @@ twig:
         default_category_color: "#888888"
         fb_app_id: "%fb_app_id%"
         ga_id: "%ga_id%"
+        gtm_id: "%gtm_id%"
         google_api_key: "%google_api_key%"
     form_themes:
         - "bootstrap_3_layout.html.twig"
