@@ -20,6 +20,7 @@ parameters:
     uglifyjs_path: %kernel.root_dir%/../node_modules/.bin/uglifyjs
 
     fb_app_id:          ~
+    fb_pixel_id:        ~
     ga_id:              ~
     gtm_id:             ~
 
