@@ -82,7 +82,7 @@ gulp.task('script_footer', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/bootstrap.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/jquery.hoverIntent.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.nicescroll.min.js',
@@ -96,10 +96,10 @@ gulp.task('script_footer', function () {
         // 'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
-        'node_modules/owl.carousel/dist/owl.carousel.min.js',
-        'node_modules/jquery.cookie/jquery.cookie.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
+        // 'node_modules/jquery.cookie/jquery.cookie.js',
         'src/Volley/FaceBundle/Resources/public/js/custom/game-center.js',
+        // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
