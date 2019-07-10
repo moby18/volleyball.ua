@@ -3,11 +3,13 @@
 {% set recommended = recommended is defined ? recommended : false %}
 
 <div class="news-timeline-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    {#<a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}"#}
-       {#title="{{ item.title }}">#}
-        {#<img class="img-responsive" src="{{ item.getWebPath | imagine_filter('blog_post') }}"#}
-             {#alt="{{ item.title ~ ' ' ~ item.metakey }}">#}
-    {#</a>#}
+    {% if (loop.index == 2 or loop.index == 5)  %}
+    <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}"
+       title="{{ item.title }}">
+        <img class="img-responsive" src="{{ item.getWebPath | imagine_filter('blog_post') }}"
+             alt="{{ item.title ~ ' ' ~ item.metakey }}">
+    </a>
+    {% endif %}
 
     {#<div class="news-info row">#}
         {#<div class="col col-lg-7 col-md-7 col-sm-7 col-xs-7">#}
@@ -43,12 +45,13 @@
     {#</div>#}
 
     <a href="{{ path('volley_face_post',{'category_slug': item.category.slug, 'post_slug': item.slug}) }}">
-        {#<div>#}
-            {#<span class="news-date">#}
-                {#{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }}#}
-            {#</span>#}
-        {#</div>#}
+{#        <div>#}
+{#            <span class="news-date">#}
+{#                {{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }}#}
+{#            </span>#}
+{#        </div>#}
         <div>
+            {% if (loop.index == 2 or loop.index == 5)  %} <strong> {% endif %}
             <h3 style="border-left-color: {{ color }}">
                 {{ item.title }}
                 {% if item.videos %}
@@ -64,6 +67,7 @@
                     <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
                 {% endif %}
             </h3>
+                {% if (loop.index == 2 or loop.index == 5)  %} </strong> {% endif %}
         </div>
     </a>
 </div>
