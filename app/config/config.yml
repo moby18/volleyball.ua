@@ -126,15 +126,15 @@ stfalcon_tinymce:
              menubar: false
              toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
 
-genemu_form:
+#genemu_form:
 #    select2: ~
-    select2:
-      enabled: true
-      configs:
-          placeholder: Select a value
-          width: off
-          allowClear: false
-          minimumInputLength: 0
+#    select2:
+#      enabled: true
+#      configs:
+#          placeholder: Select a value
+#          width: off
+#          allowClear: false
+#          minimumInputLength: 0
 
 stof_doctrine_extensions:
     default_locale: en_US
