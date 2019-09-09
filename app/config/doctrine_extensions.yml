@@ -1,18 +1,6 @@
 # services to handle doctrine extensions
 # import it in config.yml
 services:
-    # KernelRequest listener
-    extension.listener:
-        class: Volley\FaceBundle\Listener\DoctrineExtensionListener
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
-        tags:
-            # translatable sets locale after router processing
-            - { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
-            # loggable hooks user username if one is in security context
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
-
-
     # Doctrine Extension listeners to handle behaviors
     gedmo.listener.tree:
         class: Gedmo\Tree\TreeListener
@@ -21,8 +9,7 @@ services:
         calls:
             - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
-    gedmo.listener.translatable:
-        class: Gedmo\Translatable\TranslatableListener
+    Gedmo\Translatable\TranslatableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
@@ -51,8 +38,13 @@ services:
         calls:
             - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
-    gedmo.listener.loggable:
-        class: Gedmo\Loggable\LoggableListener
+    Gedmo\Loggable\LoggableListener:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    Gedmo\Blameable\BlameableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:

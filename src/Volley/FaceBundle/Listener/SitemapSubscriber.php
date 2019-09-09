@@ -3,30 +3,48 @@
 namespace Volley\FaceBundle\Listener;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-use Presta\SitemapBundle\Service\SitemapListenerInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Volley\FaceBundle\Entity\Post;
 
-class SitemapListener implements SitemapListenerInterface
+class SitemapSubscriber implements EventSubscriberInterface
 {
     private $router;
     private $doctrine;
 
-    public function __construct(RouterInterface $router, Registry $doctrine)
+	/**
+	 * @param UrlGeneratorInterface $router
+	 * @param Registry $doctrine
+	 */
+    public function __construct(UrlGeneratorInterface $router, Registry $doctrine)
     {
         $this->router = $router;
         $this->doctrine = $doctrine;
     }
 
-    public function populateSitemap(SitemapPopulateEvent $event)
+	/**
+	 * @inheritdoc
+	 */
+	public static function getSubscribedEvents()
+	{
+		return [
+			SitemapPopulateEvent::ON_SITEMAP_POPULATE => 'populate',
+		];
+	}
+
+	/**
+	 * @param SitemapPopulateEvent $event
+	 * @throws
+	 */
+	public function populate(SitemapPopulateEvent $event)
     {
+	    $urls = $event->getUrlContainer();
         $section = $event->getSection();
         if (is_null($section) || $section == 'default') {
-            $event->getGenerator()->addUrl(
+            $urls->addUrl(
                 new UrlConcrete(
                     $this->router->generate('volley_face_contacts', [], UrlGeneratorInterface::ABSOLUTE_URL),
                     new \DateTime(),
@@ -35,7 +53,7 @@ class SitemapListener implements SitemapListenerInterface
                 ),
                 'default'
             );
-            $event->getGenerator()->addUrl(
+            $urls->addUrl(
                 new UrlConcrete(
                     $this->router->generate('volley_face_mikasa_vls300', [], UrlGeneratorInterface::ABSOLUTE_URL),
                     new \DateTime(),
@@ -46,7 +64,7 @@ class SitemapListener implements SitemapListenerInterface
             );
             /** @var Post $post */
             $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy([],['updated'=>'DESC']);
-            $event->getGenerator()->addUrl(
+            $urls->addUrl(
                 new UrlConcrete(
                     $this->router->generate('volley_web_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
                     $post->getUpdated(),
@@ -60,7 +78,7 @@ class SitemapListener implements SitemapListenerInterface
                 $url = $this->router->generate('volley_face_blog', ['category_slug'=>$category->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
                 /** @var Post $post */
                 $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneByCategory(['category'=>$category],['updated'=>'DESC']);
-                $event->getGenerator()->addUrl(
+                $urls->addUrl(
                     new UrlConcrete(
                         $url,
                         ($post ? $post->getUpdated() : new \DateTime())
@@ -73,7 +91,7 @@ class SitemapListener implements SitemapListenerInterface
             $posts = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findBy([],['updated'=>'DESC']);
             foreach ($posts as $post) {
                 $url = $this->router->generate('volley_face_post', ['post_slug'=>$post->getSlug(),'category_slug'=>$post->getCategory()->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
-                $event->getGenerator()->addUrl(
+                $urls->addUrl(
                     new UrlConcrete(
                         $url,
                         $post->getModified()

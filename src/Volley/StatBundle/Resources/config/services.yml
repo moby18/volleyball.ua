@@ -3,13 +3,16 @@ services:
         class: Volley\StatBundle\Service\TournamentManager
         arguments:
             - '@doctrine'
+        public: true
 
     volley_stat.game.manager:
         class: Volley\StatBundle\Service\GameManager
         arguments:
             - '@doctrine'
+        public: true
 
     volley_stat.person.manager:
         class: Volley\StatBundle\Service\PersonManager
         arguments:
             - '@doctrine'
+        public: true
