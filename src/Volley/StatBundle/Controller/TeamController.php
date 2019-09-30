@@ -9,7 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Volley\StatBundle\Form\TeamFilterType;
 use Volley\StatBundle\Entity\Team;
+use Volley\StatBundle\Form\Model\TeamFilter;
 use Volley\StatBundle\Form\TeamType;
 
 /**
@@ -24,18 +26,37 @@ class TeamController extends Controller
      * Lists all Team entities.
      *
      * @Route("/", name="stat_team")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      * @Template()
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+	    $session = $request->getSession();
 
-        $session = $request->getSession();
-        $page = $request->query->get('page', $session->get('team_page', 1));
-        $session->set('team_page', $page);
+	    if ($request->request->get('reset', 0)) {
+		    $searchFilter = '';
+		    $page = 1;
+	    } else {
+		    $filterParams = $request->request->get('team_filter', []);
+		    $searchFilter = array_key_exists('search',$filterParams) ? $filterParams['search'] : $session->get('searchFilter', '');
+		    if ($session->get('searchFilter') != $searchFilter)
+			    $page = 1;
+		    else
+			    $page = $request->query->get('page', $session->get('team_page', 1));
+	    }
 
-        $query = $em->getRepository('VolleyStatBundle:Team')->createQueryBuilder('t')->getQuery();
+
+	    $session->set('searchFilter', $searchFilter);
+	    $session->set('team_page', $page);
+
+	    $filter = new TeamFilter($searchFilter);
+	    $filterForm = $this->createForm(TeamFilterType::class, $filter);
+
+        $teams = $em->getRepository('VolleyStatBundle:Team')->createQueryBuilder('t');
+	    if ($searchFilter != "")
+		    $teams->andWhere($teams->expr()->like('t.name', $teams->expr()->literal('%' . $searchFilter . '%')));
+        $query = $teams->getQuery();
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -47,13 +68,14 @@ class TeamController extends Controller
         return array(
             'entities' => $pagination,
 	        'update_slug_form' => $this->createUpdateSlugForm()->createView(),
-	        'update_location_form' => $this->createUpdateLocationForm()->createView()
+	        'update_location_form' => $this->createUpdateLocationForm()->createView(),
+            'filter' => $filterForm->createView(),
         );
     }
     /**
      * Creates a new Team entity.
      *
-     * @Route("/", name="stat_team_create")
+     * @Route("/new", name="stat_team_create")
      * @Method("POST")
      * @Template("VolleyStatBundle:Team:new.html.twig")
      */
