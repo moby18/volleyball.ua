@@ -6,8 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Form\TeamFilterType;
 use Volley\StatBundle\Entity\Team;
@@ -25,8 +24,7 @@ class TeamController extends AbstractController
     /**
      * Lists all Team entities.
      *
-     * @Route("/", name="stat_team")
-     * @Method({"GET", "POST"})
+     * @Route("/", name="stat_team", methods={"GET", "POST"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -75,8 +73,7 @@ class TeamController extends AbstractController
     /**
      * Creates a new Team entity.
      *
-     * @Route("/new", name="stat_team_create")
-     * @Method("POST")
+     * @Route("/new", name="stat_team_create", methods={"POST"})
      * @Template("VolleyStatBundle:Team:new.html.twig")
      */
     public function createAction(Request $request)
@@ -136,8 +133,7 @@ class TeamController extends AbstractController
     /**
      * Displays a form to create a new Team entity.
      *
-     * @Route("/new", name="stat_team_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_team_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -156,8 +152,7 @@ class TeamController extends AbstractController
      *
      * @param Request $request
 
-     * @Route("/json", name="stat_team_json")
-     * @Method("GET")
+     * @Route("/json", name="stat_team_json", methods={"GET"})
      *
      * @return JsonResponse
      */
@@ -172,8 +167,7 @@ class TeamController extends AbstractController
     /**
      * Finds and displays a Team entity.
      *
-     * @Route("/{id}", name="stat_team_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_team_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -197,8 +191,7 @@ class TeamController extends AbstractController
     /**
      * Displays a form to edit an existing Team entity.
      *
-     * @Route("/{id}/edit", name="stat_team_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_team_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -243,8 +236,7 @@ class TeamController extends AbstractController
     /**
      * Edits an existing Team entity.
      *
-     * @Route("/{id}", name="stat_team_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_team_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Team:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -286,8 +278,7 @@ class TeamController extends AbstractController
     /**
      * Deletes a Team entity.
      *
-     * @Route("/{id}", name="stat_team_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_team_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -364,8 +355,7 @@ class TeamController extends AbstractController
 	/**
 	 * Lists all Team entities.
 	 *
-	 * @Route("/update/slugs", name="stat_team_slug_update")
-	 * @Method("PUT")
+	 * @Route("/update/slugs", name="stat_team_slug_update", methods={"PUT"})
 	 */
 	public function updateSlugAction()
 	{
@@ -386,8 +376,7 @@ class TeamController extends AbstractController
 	/**
 	 * Lists all Team entities.
 	 *
-	 * @Route("/update/locations", name="stat_team_location_update")
-	 * @Method("PUT")
+	 * @Route("/update/locations", name="stat_team_location_update", methods={"PUT"})
 	 */
 	public function updateLocationAction()
 	{

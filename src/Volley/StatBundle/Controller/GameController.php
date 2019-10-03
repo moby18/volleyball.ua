@@ -3,12 +3,10 @@
 namespace Volley\StatBundle\Controller;
 
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\Paginator;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
@@ -52,8 +50,7 @@ class GameController extends AbstractController
      * Lists all Game entities.
      * @return array
      *
-     * @Route("/", name="stat_game")
-     * @Method("GET")
+     * @Route("/", name="stat_game", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -74,8 +71,7 @@ class GameController extends AbstractController
      * @param Request $request
      * @return array
      *
-     * @Route("/", name="stat_game_filter")
-     * @Method("POST")
+     * @Route("/", name="stat_game_filter", methods={"POST"})
      * @Template("VolleyStatBundle:Game:index.html.twig")
      */
     public function filterAction(Request $request)
@@ -131,8 +127,7 @@ class GameController extends AbstractController
     /**
      * Creates a new Game entity.
      *
-     * @Route("/new", name="stat_game_create")
-     * @Method("POST")
+     * @Route("/new", name="stat_game_create", methods={"POST"})
      * @Template("VolleyStatBundle:Game:new.html.twig")
      */
     public function createAction(Request $request)
@@ -185,8 +180,7 @@ class GameController extends AbstractController
     /**
      * Displays a form to create a new Game entity.
      *
-     * @Route("/new", name="stat_game_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_game_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -212,8 +206,7 @@ class GameController extends AbstractController
     /**
      * Displays a form to create a new Game entity.
      *
-     * @Route("/dublicate/{id}", name="stat_game_dubl")
-     * @Method("GET")
+     * @Route("/dublicate/{id}", name="stat_game_dubl", methods={"GET"})
      * @ParamConverter("game", class="VolleyStatBundle:Game")
      * @Template()
      */
@@ -233,8 +226,7 @@ class GameController extends AbstractController
     /**
      * Finds and displays a Game entity.
      *
-     * @Route("/{id}", name="stat_game_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_game_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -258,8 +250,7 @@ class GameController extends AbstractController
     /**
      * Displays a form to edit an existing Game entity.
      *
-     * @Route("/{id}/edit", name="stat_game_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_game_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -305,8 +296,7 @@ class GameController extends AbstractController
     /**
      * Edits an existing Game entity.
      *
-     * @Route("/{id}", name="stat_game_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_game_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Game:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -346,8 +336,7 @@ class GameController extends AbstractController
     /**
      * Deletes a Game entity.
      *
-     * @Route("/{id}", name="stat_game_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_game_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -388,8 +377,7 @@ class GameController extends AbstractController
     /**
      * * Game table
      *
-     * @Route("/{id}/table", name="stat_game_table")
-     * @Method("GET")
+     * @Route("/{id}/table", name="stat_game_table", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function tableAction()

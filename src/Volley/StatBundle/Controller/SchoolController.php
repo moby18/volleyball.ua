@@ -5,8 +5,7 @@ namespace Volley\StatBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\School;
 use Volley\StatBundle\Form\SchoolType;
@@ -22,8 +21,7 @@ class SchoolController extends AbstractController
     /**
      * Lists all School entities.
      *
-     * @Route("/", name="stat_school")
-     * @Method("GET")
+     * @Route("/", name="stat_school", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -50,8 +48,7 @@ class SchoolController extends AbstractController
     /**
      * Creates a new School entity.
      *
-     * @Route("/", name="stat_school_create")
-     * @Method("POST")
+     * @Route("/", name="stat_school_create", methods={"POST"})
      * @Template("VolleyStatBundle:School:new.html.twig")
      */
     public function createAction(Request $request)
@@ -103,8 +100,7 @@ class SchoolController extends AbstractController
     /**
      * Displays a form to create a new School entity.
      *
-     * @Route("/new", name="stat_school_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_school_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -121,8 +117,7 @@ class SchoolController extends AbstractController
     /**
      * Finds and displays a School entity.
      *
-     * @Route("/{id}", name="stat_school_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_school_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -146,8 +141,7 @@ class SchoolController extends AbstractController
     /**
      * Displays a form to edit an existing School entity.
      *
-     * @Route("/{id}/edit", name="stat_school_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_school_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -192,8 +186,7 @@ class SchoolController extends AbstractController
     /**
      * Edits an existing School entity.
      *
-     * @Route("/{id}", name="stat_school_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_school_update", methods={"PUT"})
      * @Template("VolleyStatBundle:School:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -231,8 +224,7 @@ class SchoolController extends AbstractController
     /**
      * Deletes a School entity.
      *
-     * @Route("/{id}", name="stat_school_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_school_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

@@ -5,8 +5,7 @@ namespace Volley\StatBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\GameSet;
 use Volley\StatBundle\Form\GameSetType;
@@ -22,8 +21,7 @@ class GameSetController extends AbstractController
     /**
      * Lists all GameSet entities.
      *
-     * @Route("/", name="gameset")
-     * @Method("GET")
+     * @Route("/", name="gameset", methods={"GET"})
      * @Template()
      */
     public function indexAction()
@@ -39,8 +37,7 @@ class GameSetController extends AbstractController
     /**
      * Creates a new GameSet entity.
      *
-     * @Route("/", name="gameset_create")
-     * @Method("POST")
+     * @Route("/", name="gameset_create", methods={"POST"})
      * @Template("VolleyStatBundle:GameSet:new.html.twig")
      */
     public function createAction(Request $request)
@@ -85,8 +82,7 @@ class GameSetController extends AbstractController
     /**
      * Displays a form to create a new GameSet entity.
      *
-     * @Route("/new", name="gameset_new")
-     * @Method("GET")
+     * @Route("/new", name="gameset_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -103,8 +99,7 @@ class GameSetController extends AbstractController
     /**
      * Finds and displays a GameSet entity.
      *
-     * @Route("/{id}", name="gameset_show")
-     * @Method("GET")
+     * @Route("/{id}", name="gameset_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -128,8 +123,7 @@ class GameSetController extends AbstractController
     /**
      * Displays a form to edit an existing GameSet entity.
      *
-     * @Route("/{id}/edit", name="gameset_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="gameset_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -173,8 +167,7 @@ class GameSetController extends AbstractController
     /**
      * Edits an existing GameSet entity.
      *
-     * @Route("/{id}", name="gameset_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="gameset_update", methods={"PUT"})
      * @Template("VolleyStatBundle:GameSet:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -206,8 +199,7 @@ class GameSetController extends AbstractController
     /**
      * Deletes a GameSet entity.
      *
-     * @Route("/{id}", name="gameset_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="gameset_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

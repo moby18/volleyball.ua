@@ -2,14 +2,11 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\SchoolPerson;
 use Volley\StatBundle\Form\SchoolPersonType;
@@ -25,8 +22,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Lists all SchoolPerson entities.
      *
-     * @Route("admin/stat/schoolperson/", name="stat_schoolperson")
-     * @Method("GET")
+     * @Route("admin/stat/schoolperson/", name="stat_schoolperson", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -54,8 +50,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Lists all SchoolPerson entities.
      *
-     * @Route("school/person/list", name="stat_schoolperson_front")
-     * @Method("GET")
+     * @Route("school/person/list", name="stat_schoolperson_front", methods={"GET"})
      * @Template()
      */
     public function indexFrontAction(Request $request)
@@ -84,8 +79,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Creates a new SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson", name="stat_schoolperson_create")
-     * @Method("POST")
+     * @Route("admin/stat/schoolperson", name="stat_schoolperson_create", methods={"POST"})
      * @Template("VolleyStatBundle:SchoolPerson:new.html.twig")
      */
     public function createAction(Request $request)
@@ -111,8 +105,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Creates a new SchoolPerson entity.
      *
-     * @Route("school/person/", name="stat_schoolperson_front_create")
-     * @Method("POST")
+     * @Route("school/person/", name="stat_schoolperson_front_create", methods={"POST"})
      * @Template("VolleyStatBundle:SchoolPerson:new.html.twig")
      */
     public function createFrontAction(Request $request)
@@ -178,8 +171,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Displays a form to create a new SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson/new", name="stat_schoolperson_new")
-     * @Method("GET")
+     * @Route("admin/stat/schoolperson/new", name="stat_schoolperson_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -196,8 +188,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Displays a form to create a new SchoolPerson entity.
      *
-     * @Route("/school/person", name="stat_schoolperson_front_new")
-     * @Method("GET")
+     * @Route("/school/person", name="stat_schoolperson_front_new", methods={"GET"})
      * @Template()
      */
     public function newFrontAction()
@@ -216,8 +207,7 @@ class SchoolPersonController extends AbstractController
      *
      * @param Request $request
      *
-     * @Route("admin/stat/schoolperson/json", name="stat_schoolperson_json")
-     * @Method("GET")
+     * @Route("admin/stat/schoolperson/json", name="stat_schoolperson_json", methods={"GET"})
      *
      * @return JsonResponse
      */
@@ -232,8 +222,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Finds and displays a SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_show")
-     * @Method("GET")
+     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -256,8 +245,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Displays a form to edit an existing SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson/{id}/edit", name="stat_schoolperson_edit")
-     * @Method("GET")
+     * @Route("admin/stat/schoolperson/{id}/edit", name="stat_schoolperson_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -301,8 +289,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Edits an existing SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_update")
-     * @Method("PUT")
+     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_update", methods={"PUT"})
      * @Template("VolleyStatBundle:SchoolPerson:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -334,8 +321,7 @@ class SchoolPersonController extends AbstractController
     /**
      * Deletes a SchoolPerson entity.
      *
-     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_delete")
-     * @Method("DELETE")
+     * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

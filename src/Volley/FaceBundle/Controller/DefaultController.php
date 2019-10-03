@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Volley\FaceBundle\Entity\Category;
@@ -16,7 +16,6 @@ use Volley\FaceBundle\Form\PurchaseType;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends AbstractController
 {
@@ -302,8 +301,7 @@ class DefaultController extends AbstractController
 	}
 
     /**
-     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300")
-     * @Method("GET")
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300", methods={"GET"})
      * @Template()
      */
     public function mikasaVls300Action()
@@ -312,8 +310,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy")
-     * @Method("POST")
+     * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy", methods={"POST"})
      * @Template()
      */
     public function buyMikasaVls300Action(Request $request)
@@ -352,8 +349,7 @@ class DefaultController extends AbstractController
     /**
      * * Deletes a Tournament entity.
      *
-     * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page")
-     * @Method("GET")
+     * @Route("stat/season/{season_id}/tournament/{tournament_id}", name="stat_tournament_page", methods={"GET"})
      * @param int $season_id
      * @param int $tournament_id
      * @return \Symfony\Component\HttpFoundation\Response

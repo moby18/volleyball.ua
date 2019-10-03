@@ -5,8 +5,7 @@ namespace Volley\StatBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Team;
 use Volley\StatBundle\Entity\Roster;
@@ -24,8 +23,7 @@ class RosterController extends AbstractController
     /**
      * Lists all Roster entities.
      *
-     * @Route("/", name="stat_team_roster")
-     * @Method("GET")
+     * @Route("/", name="stat_team_roster", methods={"GET"})
      * @Template()
      */
     public function indexAction()
@@ -43,8 +41,7 @@ class RosterController extends AbstractController
      *
      * @param Request $request
      *
-     * @Route("/", name="stat_team_roster_create")
-     * @Method("POST")
+     * @Route("/", name="stat_team_roster_create", methods={"POST"})
      * @Template("VolleyStatBundle:Roster:new.html.twig")
      *
      * @return array
@@ -94,9 +91,8 @@ class RosterController extends AbstractController
      * @param Team $team
      * @return array
      *
-     * @Route("/new/team/{team_id}", name="stat_team_roster_new")
+     * @Route("/new/team/{team_id}", name="stat_team_roster_new", methods={"GET"})
      * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
-     * @Method("GET")
      * @Template()
      */
     public function newAction(Team $team)
@@ -115,8 +111,7 @@ class RosterController extends AbstractController
     /**
      * Finds and displays a Roster entity.
      *
-     * @Route("/{id}", name="stat_team_roster_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_team_roster_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -140,8 +135,7 @@ class RosterController extends AbstractController
     /**
      * Displays a form to edit an existing Roster entity.
      *
-     * @Route("/{id}/edit", name="stat_team_roster_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_team_roster_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -186,8 +180,7 @@ class RosterController extends AbstractController
     /**
      * Edits an existing Roster entity.
      *
-     * @Route("/{id}", name="stat_team_roster_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_team_roster_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Roster:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -219,8 +212,7 @@ class RosterController extends AbstractController
     /**
      * Deletes a Roster entity.
      *
-     * @Route("/{id}", name="stat_team_roster_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_team_roster_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

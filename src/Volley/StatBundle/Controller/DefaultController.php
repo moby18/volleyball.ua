@@ -3,9 +3,8 @@
 namespace Volley\StatBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Volley\StatBundle\Entity\Game;
@@ -19,9 +18,8 @@ class DefaultController extends AbstractController
      *
      * @param Team $team
      *
-     * @Route("/team/{team_slug}", name="stat_team_front")
+     * @Route("/team/{team_slug}", name="stat_team_front", methods={"GET"})
      * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_slug": "slug"}})
-     * @Method("GET")
      * @Template()
      *
      * @return array
@@ -44,9 +42,8 @@ class DefaultController extends AbstractController
      *
      * @param Person $person
      *
-     * @Route("/person/{person_slug}", name="stat_person_front")
+     * @Route("/person/{person_slug}", name="stat_person_front", methods={"GET"})
      * @ParamConverter("person", class="VolleyStatBundle:Person", options={"mapping": {"person_slug": "slug"}})
-     * @Method("GET")
      * @Template()
      *
      * @return array

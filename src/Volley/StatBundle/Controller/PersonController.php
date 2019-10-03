@@ -2,14 +2,11 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Person;
 use Volley\StatBundle\Form\PersonType;
@@ -25,8 +22,7 @@ class PersonController extends AbstractController
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="stat_person")
-     * @Method("GET")
+     * @Route("/", name="stat_person", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -53,8 +49,7 @@ class PersonController extends AbstractController
     /**
      * Creates a new Person entity.
      *
-     * @Route("/", name="stat_person_create")
-     * @Method("POST")
+     * @Route("/", name="stat_person_create", methods={"POST"})
      * @Template("VolleyStatBundle:Person:new.html.twig")
      */
     public function createAction(Request $request)
@@ -99,8 +94,7 @@ class PersonController extends AbstractController
     /**
      * Displays a form to create a new Person entity.
      *
-     * @Route("/new", name="stat_person_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_person_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -119,8 +113,7 @@ class PersonController extends AbstractController
      *
      * @param Request $request
      *
-     * @Route("/json", name="stat_person_json")
-     * @Method("GET")
+     * @Route("/json", name="stat_person_json", methods={"GET"})
      *
      * @return JsonResponse
      */
@@ -135,8 +128,7 @@ class PersonController extends AbstractController
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{id}", name="stat_person_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_person_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -159,8 +151,7 @@ class PersonController extends AbstractController
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/edit", name="stat_person_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_person_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -204,8 +195,7 @@ class PersonController extends AbstractController
     /**
      * Edits an existing Person entity.
      *
-     * @Route("/{id}", name="stat_person_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_person_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Person:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -237,8 +227,7 @@ class PersonController extends AbstractController
     /**
      * Deletes a Person entity.
      *
-     * @Route("/{id}", name="stat_person_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_person_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -280,8 +269,7 @@ class PersonController extends AbstractController
     /**
      * * Game table
      *
-     * @Route("/birthday", name="stat_person_birthday")
-     * @Method("GET")
+     * @Route("/birthday", name="stat_person_birthday", methods={"GET"})s
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function birthdayAction()

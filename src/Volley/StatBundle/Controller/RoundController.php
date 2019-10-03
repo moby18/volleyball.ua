@@ -5,8 +5,7 @@ namespace Volley\StatBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Round;
 use Volley\StatBundle\Form\RoundType;
@@ -22,8 +21,7 @@ class RoundController extends AbstractController
     /**
      * Lists all Round entities.
      *
-     * @Route("/", name="stat_round")
-     * @Method("GET")
+     * @Route("/", name="stat_round", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -50,8 +48,7 @@ class RoundController extends AbstractController
     /**
      * Creates a new Round entity.
      *
-     * @Route("/", name="stat_round_create")
-     * @Method("POST")
+     * @Route("/", name="stat_round_create", methods={"POST"})
      * @Template("VolleyStatBundle:Round:new.html.twig")
      */
     public function createAction(Request $request)
@@ -96,8 +93,7 @@ class RoundController extends AbstractController
     /**
      * Displays a form to create a new Round entity.
      *
-     * @Route("/new", name="stat_round_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_round_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -114,8 +110,7 @@ class RoundController extends AbstractController
     /**
      * Finds and displays a Round entity.
      *
-     * @Route("/{id}", name="stat_round_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_round_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -139,8 +134,7 @@ class RoundController extends AbstractController
     /**
      * Displays a form to edit an existing Round entity.
      *
-     * @Route("/{id}/edit", name="stat_round_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_round_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -187,8 +181,7 @@ class RoundController extends AbstractController
     /**
      * Edits an existing Round entity.
      *
-     * @Route("/{id}", name="stat_round_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_round_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Round:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -220,8 +213,7 @@ class RoundController extends AbstractController
     /**
      * Deletes a Round entity.
      *
-     * @Route("/{id}", name="stat_round_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_round_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

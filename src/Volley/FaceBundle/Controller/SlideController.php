@@ -5,12 +5,10 @@ namespace Volley\FaceBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\FaceBundle\Entity\Slide;
 use Volley\FaceBundle\Form\SlideType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Slide controller.
@@ -23,8 +21,7 @@ class SlideController extends AbstractController
     /**
      * Lists all Slide entities.
      *
-     * @Route("/", name="slide")
-     * @Method("GET")
+     * @Route("/", name="slide", methods={"GET"})
      * @Template()
      */
     public function indexAction()
@@ -40,8 +37,7 @@ class SlideController extends AbstractController
     /**
      * Creates a new Slide entity.
      *
-     * @Route("/", name="slide_create")
-     * @Method("POST")
+     * @Route("/", name="slide_create", methods={"POST"})
      * @Template("VolleyFaceBundle:Slide:new.html.twig")
      */
     public function createAction(Request $request)
@@ -86,8 +82,7 @@ class SlideController extends AbstractController
     /**
      * Displays a form to create a new Slide entity.
      *
-     * @Route("/new", name="slide_new")
-     * @Method("GET")
+     * @Route("/new", name="slide_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -104,8 +99,7 @@ class SlideController extends AbstractController
     /**
      * Finds and displays a Slide entity.
      *
-     * @Route("/{id}", name="slide_show")
-     * @Method("GET")
+     * @Route("/{id}", name="slide_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -129,8 +123,7 @@ class SlideController extends AbstractController
     /**
      * Displays a form to edit an existing Slide entity.
      *
-     * @Route("/{id}/edit", name="slide_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="slide_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -174,8 +167,7 @@ class SlideController extends AbstractController
     /**
      * Edits an existing Slide entity.
      *
-     * @Route("/{id}", name="slide_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="slide_update", methods={"PUT"})
      * @Template("VolleyFaceBundle:Slide:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -207,8 +199,7 @@ class SlideController extends AbstractController
     /**
      * Deletes a Slide entity.
      *
-     * @Route("/{id}", name="slide_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="slide_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

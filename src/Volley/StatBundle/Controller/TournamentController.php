@@ -6,7 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Entity\GameSet;
@@ -26,8 +26,7 @@ class TournamentController extends AbstractController
     /**
      * Lists all Tournament entities.
      *
-     * @Route("/", name="stat_tournament")
-     * @Method("GET")
+     * @Route("/", name="stat_tournament", methods={"GET"})
      * @Template()
      */
     public function indexAction(Request $request)
@@ -55,8 +54,7 @@ class TournamentController extends AbstractController
     /**
      * Creates a new Tournament entity.
      *
-     * @Route("/", name="stat_tournament_create")
-     * @Method("POST")
+     * @Route("/", name="stat_tournament_create", methods={"POST"})
      * @Template("VolleyStatBundle:Tournament:new.html.twig")
      */
     public function createAction(Request $request)
@@ -101,8 +99,7 @@ class TournamentController extends AbstractController
     /**
      * Displays a form to create a new Tournament entity.
      *
-     * @Route("/new", name="stat_tournament_new")
-     * @Method("GET")
+     * @Route("/new", name="stat_tournament_new", methods={"GET"})
      * @Template()
      */
     public function newAction()
@@ -119,8 +116,7 @@ class TournamentController extends AbstractController
     /**
      * Finds and displays a Tournament entity.
      *
-     * @Route("/{id}", name="stat_tournament_show")
-     * @Method("GET")
+     * @Route("/{id}", name="stat_tournament_show", methods={"GET"})
      * @Template()
      */
     public function showAction($id)
@@ -144,8 +140,7 @@ class TournamentController extends AbstractController
     /**
      * Displays a form to edit an existing Tournament entity.
      *
-     * @Route("/{id}/edit", name="stat_tournament_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="stat_tournament_edit", methods={"GET"})
      * @Template()
      */
     public function editAction($id)
@@ -190,8 +185,7 @@ class TournamentController extends AbstractController
     /**
      * Edits an existing Tournament entity.
      *
-     * @Route("/{id}", name="stat_tournament_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_tournament_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Tournament:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -224,8 +218,7 @@ class TournamentController extends AbstractController
     /**
      * Deletes a Tournament entity.
      *
-     * @Route("/{id}", name="stat_tournament_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_tournament_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -266,8 +259,7 @@ class TournamentController extends AbstractController
     /**
      * * Tournament table
      *
-     * @Route("/{id}/table", name="stat_tournament_table")
-     * @Method("GET")
+     * @Route("/{id}/table", name="stat_tournament_table", methods={"GET"})
      * @param $seasonId
      * @param $tournamentId
      * @return \Symfony\Component\HttpFoundation\Response
