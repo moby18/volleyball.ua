@@ -2,7 +2,7 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -12,7 +12,7 @@ use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Entity\Person;
 use Volley\StatBundle\Entity\Team;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * Finds and displays a Team entity.

@@ -4,7 +4,7 @@ namespace Volley\FaceBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Volley\FaceBundle\Entity\Round;
 use Volley\FaceBundle\Form\RoundType;
@@ -13,7 +13,7 @@ use Volley\FaceBundle\Form\RoundType;
  * Round controller.
  *
  */
-class RoundController extends Controller
+class RoundController extends AbstractController
 {
 
     /**

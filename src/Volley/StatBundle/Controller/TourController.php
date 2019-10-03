@@ -5,7 +5,7 @@ namespace Volley\StatBundle\Controller;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -19,7 +19,7 @@ use Volley\StatBundle\Form\TourType;
  *
  * @Route("/admin/stat/tour")
  */
-class TourController extends Controller
+class TourController extends AbstractController
 {
     /**
      * @param Request $request

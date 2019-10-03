@@ -3,7 +3,7 @@
 namespace Volley\FaceBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +18,7 @@ use Volley\StatBundle\Entity\Game;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/robots.txt", name="volley_face_robots")
@@ -56,8 +56,8 @@ class DefaultController extends Controller
 //        );
 //        if ($blog)
 //            $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
-//        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
-//        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+//        $popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->container->getParameter('popular_post_count'));
+//        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->container->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:school.html.twig', array(
             'schools' => $schools
@@ -189,8 +189,8 @@ class DefaultController extends Controller
         return [
             'slides' => $slides,
             'news' => $posts,
-            //'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count')),
-            'recommendedPosts' => $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'))
+            //'popularPosts' => $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->container->getParameter('popular_post_count')),
+            'recommendedPosts' => $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->container->getParameter('recommended_post_count'))
         ];
     }
 
@@ -288,11 +288,11 @@ class DefaultController extends Controller
 	public function broadcastAction()
 	{
 		$em = $this->getDoctrine()->getManager();
-		$post = $em->getRepository('VolleyFaceBundle:Post')->findOneBy(['id' => $this->getParameter('broadcast_post_id')]);
+		$post = $em->getRepository('VolleyFaceBundle:Post')->findOneBy(['id' => $this->container->getParameter('broadcast_post_id')]);
 		$post->setHits($post->getHits() + 1);
 		$em->flush();
 		$category = $post->getCategory();
-		$recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+		$recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->container->getParameter('recommended_post_count'));
 
 		return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
 			'category' => $category,
@@ -383,8 +383,8 @@ class DefaultController extends Controller
             20
         );
         $category = $em->getRepository('VolleyFaceBundle:Category')->findOneBy(['parent' => null]);
-        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->container->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->container->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,
@@ -412,8 +412,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post->setHits($post->getHits() + 1);
         $em->flush();
-        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->getParameter('popular_post_count'));
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->getParameter('recommended_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($post->getCategory(), $this->container->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($post->getCategory(),$this->container->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:post.html.twig', array(
             'category' => $category,
@@ -449,8 +449,8 @@ class DefaultController extends Controller
         );
         if ($blog)
             $pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
-        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->getParameter('popular_post_count'));
-        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->getParameter('recommended_post_count'));
+        //$popularPosts = $em->getRepository('VolleyFaceBundle:Post')->findPopularByCategory($category, $this->container->getParameter('popular_post_count'));
+        $recommendedPosts = $em->getRepository('VolleyFaceBundle:Post')->findRecommendedByCategory($category, $this->container->getParameter('recommended_post_count'));
 
         return $this->render('VolleyFaceBundle:Default:blog.html.twig', array(
             'category' => $category,

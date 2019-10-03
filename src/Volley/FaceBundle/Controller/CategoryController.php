@@ -4,7 +4,7 @@ namespace Volley\FaceBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Volley\FaceBundle\Entity\Category;
 use Volley\FaceBundle\Form\CategoryType;
@@ -13,7 +13,7 @@ use Volley\FaceBundle\Form\CategoryType;
  * Category controller.
  *
  */
-class CategoryController extends Controller
+class CategoryController extends AbstractController
 {
 
     /**

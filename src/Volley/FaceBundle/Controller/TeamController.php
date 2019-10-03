@@ -4,7 +4,7 @@ namespace Volley\FaceBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Volley\FaceBundle\Entity\Team;
 use Volley\FaceBundle\Form\TeamType;
@@ -13,7 +13,7 @@ use Volley\FaceBundle\Form\TeamType;
  * Team controller.
  *
  */
-class TeamController extends Controller
+class TeamController extends AbstractController
 {
 
     /**

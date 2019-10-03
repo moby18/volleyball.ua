@@ -4,7 +4,7 @@ namespace Volley\StatBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -16,7 +16,7 @@ use Volley\StatBundle\Form\SchoolType;
  *
  * @Route("/admin/stat/school")
  */
-class SchoolController extends Controller
+class SchoolController extends AbstractController
 {
 
     /**
@@ -273,7 +273,7 @@ class SchoolController extends Controller
 
     private function getCoordinates($address){
         $address = str_replace(" ", "+", $address);
-        $url = "https://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&key=".$this->getParameter('google_api_key');
+        $url = "https://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&key=".$this->container->getParameter('google_api_key');
         $response = file_get_contents($url);
         $json = json_decode($response,TRUE);
         return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];
