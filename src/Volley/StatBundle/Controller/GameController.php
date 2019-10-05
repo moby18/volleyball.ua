@@ -208,7 +208,6 @@ class GameController extends AbstractController
      *
      * @Route("/dublicate/{id}", name="stat_game_dubl", methods={"GET"})
      * @ParamConverter("game", class="VolleyStatBundle:Game")
-     * @Template()
      */
     public function dublAction($game)
     {

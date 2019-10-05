@@ -24,7 +24,6 @@ class RosterController extends AbstractController
      * Lists all Roster entities.
      *
      * @Route("/", name="stat_team_roster", methods={"GET"})
-     * @Template()
      */
     public function indexAction()
     {
@@ -112,7 +111,6 @@ class RosterController extends AbstractController
      * Finds and displays a Roster entity.
      *
      * @Route("/{id}", name="stat_team_roster_show", methods={"GET"})
-     * @Template()
      */
     public function showAction($id)
     {

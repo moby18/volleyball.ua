@@ -50,12 +50,12 @@
                                 {% if game.date|date_modify("-4 hour") <= date('','Europe/Kiev') and date('','Europe/Kiev') < date(game.date) and not game.played %}
                                     {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
                                         <span class="game-soon">{{ 'soon'|trans }}</span>
-                                    {% if game.links|length %} </a> {% endif %}</a>
+                                    {% if game.links|length %} </a> {% endif %}
                                 {% endif %}
                                 {% if date(game.date) <= date('','Europe/Kiev') and date('','Europe/Kiev') <= game.date|date_modify("+2 hour") and not game.played %}
                                     {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
                                          <span class="game-live">{{ 'live'|trans }}</span>
-                                    {% if game.links|length %} </a> {% endif %}</a>
+                                    {% if game.links|length %} </a> {% endif %}
                                 {% endif %}
                             </td>
                         </tr>

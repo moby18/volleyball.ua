@@ -24,7 +24,6 @@ class TeamSeasonController extends AbstractController
      * Lists all TeamSeason entities.
      *
      * @Route("/", name="stat_team_season", methods={"GET"})
-     * @Template()
      */
     public function indexAction()
     {
@@ -112,7 +111,6 @@ class TeamSeasonController extends AbstractController
      * Finds and displays a TeamSeason entity.
      *
      * @Route("/{id}", name="stat_team_season_show", methods={"GET"})
-     * @Template()
      */
     public function showAction($id)
     {

@@ -94,7 +94,7 @@
     {% block styles %}
         <link href="{{ asset('css/style.css') }}?v=18" rel="stylesheet" type='text/css'>
         <!--[if lt IE 9]>
-        <link href="{{ asset(' css/style_ie.css') }}" rel="stylesheet" type='text/css'>
+        <link href="{{ asset('css/style_ie.css') }}" rel="stylesheet" type='text/css'>
         <![endif]-->
     {% endblock %}
 
@@ -306,13 +306,12 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
     <div class="footer-below">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-7 col-xs-12 copyright">
-                    <img src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png">
+                    <img alt="volleyball.ua &copy; 2015-2019 - Волейбол в Україні" src="{{ app.request.getSchemeAndHttpHost() }}/bundles/volleyface/images/vu-gray.png">
                     volleyball.ua &copy; 2015-2019 - Волейбол в Україні
                 </div>
                 <div class="col-lg-3 col-md-0 col-sm-0 col-xs-0">

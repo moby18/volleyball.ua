@@ -22,7 +22,6 @@ class RoundTeamBonusController extends AbstractController
      * Lists all RoundTeamBonus entities.
      *
      * @Route("/", name="stat_round_team_bonus", methods={"GET"})
-     * @Template()
      */
     public function indexAction(Request $request)
     {
@@ -111,7 +110,6 @@ class RoundTeamBonusController extends AbstractController
      * Finds and displays a RoundTeamBonus entity.
      *
      * @Route("/{id}", name="stat_round_team_bonus_show", methods={"GET"})
-     * @Template()
      */
     public function showAction($id)
     {

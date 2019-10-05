@@ -189,7 +189,6 @@ class SchoolPersonController extends AbstractController
      * Displays a form to create a new SchoolPerson entity.
      *
      * @Route("/school/person", name="stat_schoolperson_front_new", methods={"GET"})
-     * @Template()
      */
     public function newFrontAction()
     {

@@ -60,19 +60,18 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/games/update")
-     * @Template()
      */
     public function gamesUpdateAction()
     {
         exit;
-        $em = $this->getDoctrine()->getManager();
-        $games = $em->getRepository('VolleyStatBundle:Game')->findAll();
-        /** @var Game $game */
-        foreach ($games as $game) {
-            if ($tour = $game->getTour())
-                $game->setRound($tour->getRound());
-        }
-        $em->flush();
-        return new Response("fsdfsdf");
+//        $em = $this->getDoctrine()->getManager();
+//        $games = $em->getRepository('VolleyStatBundle:Game')->findAll();
+//        /** @var Game $game */
+//        foreach ($games as $game) {
+//            if ($tour = $game->getTour())
+//                $game->setRound($tour->getRound());
+//        }
+//        $em->flush();
+//        return new Response("gamesUpdateAction");
     }
 }
