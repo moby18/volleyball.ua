@@ -23,6 +23,23 @@ class PostRepository extends EntityRepository
             ->getResult();
     }
 
+	public function findByTeam(\Volley\StatBundle\Entity\Team $team, $count = 5, $offset = 0)
+	{
+		return $this->createQueryBuilder('p')
+			->select('p')
+			->innerJoin('p.teams', 'team', 'WITH', 'team.id = :teamId')
+			->setParameter('teamId', $team->getId())
+			->andWhere('p.state > 0')
+			->andWhere('p.published <= :date')
+			->setParameter('date', new \DateTime())
+			->setMaxResults($count)
+			->setFirstResult($offset)
+			->orderBy('p.featured', 'DESC')
+			->addOrderBy('p.published', 'DESC')
+			->getQuery()
+			->getResult();
+	}
+
     public function findByCategoryQuery(Category $category, $count = 5, $offset = 0)
     {
         return $this->createQueryBuilder('p')

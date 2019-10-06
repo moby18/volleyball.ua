@@ -31,9 +31,11 @@ class DefaultController extends AbstractController
         }
         $em = $this->getDoctrine()->getManager();
         $roster = $em->getRepository('VolleyStatBundle:Roster')->findOneBy(['team'=> $team->getId(), 'current' => true]);
+        $posts = $em->getRepository('VolleyFaceBundle:Post')->findByTeam($team, 3, 0);
         return array(
             'team' => $team,
-            'roster' => $roster
+            'roster' => $roster,
+            'teamPosts' => $posts
         );
     }
 
