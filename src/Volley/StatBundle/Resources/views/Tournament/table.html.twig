@@ -16,7 +16,7 @@
                 {% for row in round.table %}
                     <tr>
                         <td>{{ loop.index }}</td>
-                        <td><a href="{{ path('stat_team_front',{'team_slug': row['team'].slug}) }}">{{ row['team'].name }}</a>
+                        <td><a href="{{ path('stat_team_front',{'team_id': row['team'].id}) }}">{{ row['team'].name }}</a>
                         </td>
                         {#<td>{{ row.games }}</td>#}
                         <td class="text-center">{{ row.win ~ '/' ~ row.loss }}</td>

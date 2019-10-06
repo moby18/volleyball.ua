@@ -3,12 +3,14 @@
 namespace Volley\StatBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Game
  *
  * @ORM\Table(name="stat_game")
  * @ORM\Entity(repositoryClass="Volley\StatBundle\Entity\GameRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Game
 {
@@ -127,6 +129,18 @@ class Game
      */
     protected $links;
 
+	/**
+	 * @Gedmo\Timestampable(on="create")
+	 * @Doctrine\ORM\Mapping\Column(type="datetime")
+	 */
+	private $created;
+
+	/**
+	 * @Gedmo\Timestampable(on="update")
+	 * @Doctrine\ORM\Mapping\Column(type="datetime")
+	 */
+	private $updated;
+
     /**
      * Constructor
      */
@@ -139,7 +153,7 @@ class Game
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -162,7 +176,7 @@ class Game
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -185,7 +199,7 @@ class Game
     /**
      * Get number
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumber()
     {
@@ -208,7 +222,7 @@ class Game
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -231,7 +245,7 @@ class Game
     /**
      * Get duration
      *
-     * @return string 
+     * @return string
      */
     public function getDuration()
     {
@@ -254,7 +268,7 @@ class Game
     /**
      * Get homeTeamEmpty
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getHomeTeamEmpty()
     {
@@ -277,7 +291,7 @@ class Game
     /**
      * Get awayTeamEmpty
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAwayTeamEmpty()
     {
@@ -300,7 +314,7 @@ class Game
     /**
      * Get score
      *
-     * @return string 
+     * @return string
      */
     public function getScore()
     {
@@ -323,7 +337,7 @@ class Game
     /**
      * Get scoreSetHome
      *
-     * @return string 
+     * @return string
      */
     public function getScoreSetHome()
     {
@@ -346,7 +360,7 @@ class Game
     /**
      * Get scoreSetAway
      *
-     * @return string 
+     * @return string
      */
     public function getScoreSetAway()
     {
@@ -369,7 +383,7 @@ class Game
     /**
      * Get played
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPlayed()
     {
@@ -392,7 +406,7 @@ class Game
     /**
      * Get homeTeam
      *
-     * @return \Volley\StatBundle\Entity\Team 
+     * @return \Volley\StatBundle\Entity\Team
      */
     public function getHomeTeam()
     {
@@ -415,7 +429,7 @@ class Game
     /**
      * Get awayTeam
      *
-     * @return \Volley\StatBundle\Entity\Team 
+     * @return \Volley\StatBundle\Entity\Team
      */
     public function getAwayTeam()
     {
@@ -440,7 +454,7 @@ class Game
     /**
      * Get tour
      *
-     * @return \Volley\StatBundle\Entity\Tour 
+     * @return \Volley\StatBundle\Entity\Tour
      */
     public function getTour()
     {
@@ -474,7 +488,7 @@ class Game
     /**
      * Get sets
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSets()
     {
@@ -551,4 +565,45 @@ class Game
         $this->id = null;
         $this->sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
+
+	/**
+	 * Set created
+	 *
+	 * @param \DateTime $created
+	 * @return Game
+	 */
+	public function setCreated($created)
+	{
+		$this->created = $created;
+
+		return $this;
+	}
+
+	/**
+	 * Get created
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreated()
+	{
+		return $this->created;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getUpdated()
+	{
+		return $this->updated;
+	}
+
+	/**
+	 * @param mixed $updated
+	 */
+	public function setUpdated($updated)
+	{
+		$this->updated = $updated;
+	}
 }

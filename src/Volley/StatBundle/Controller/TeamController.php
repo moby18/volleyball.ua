@@ -102,6 +102,8 @@ class TeamController extends AbstractController
 	        $em->persist($entity);
 	        $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_team_show', array('id' => $entity->getId())));
         }
 
@@ -266,6 +268,8 @@ class TeamController extends AbstractController
 
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_team_edit', array('id' => $id)));
         }
 
@@ -295,6 +299,8 @@ class TeamController extends AbstractController
 
             $em->remove($entity);
             $em->flush();
+
+	        self::sitemapAction();
         }
 
         return $this->redirect($this->generateUrl('stat_team'));
@@ -361,7 +367,7 @@ class TeamController extends AbstractController
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$teams = $em->getRepository('VolleyStatBundle:Team')->findBy(['slug' => null]);
+		$teams = $em->getRepository('VolleyStatBundle:Team')->findBy([]);
 
 		foreach ($teams as $team) {
 			$team->setSlug('');
@@ -369,6 +375,8 @@ class TeamController extends AbstractController
 		}
 
 		$em->flush();
+
+		self::sitemapAction();
 
 		return $this->redirect($this->generateUrl('stat_team'));
 	}
@@ -399,5 +407,18 @@ class TeamController extends AbstractController
 		$em->flush();
 
 		return $this->redirect($this->generateUrl('stat_team'));
+	}
+
+	/*
+	 * Dispatch event for update sitemap.xml for posts
+    */
+	private function sitemapAction()
+	{
+		$targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+		$dumper = $this->get('presta_sitemap.dumper');
+		$baseUrl = $this->container->getParameter('base_url');
+		$baseUrl = rtrim($baseUrl, '/') . '/';
+		$options = array('gzip' => false, 'section' => 'teams');
+		$dumper->dump($targetDir, $baseUrl, null, $options);
 	}
 }

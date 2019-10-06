@@ -191,6 +191,18 @@ class Person implements \JsonSerializable
      */
     private $file;
 
+	/**
+	 * @Gedmo\Timestampable(on="create")
+	 * @Doctrine\ORM\Mapping\Column(type="datetime")
+	 */
+	private $created;
+
+	/**
+	 * @Gedmo\Timestampable(on="update")
+	 * @Doctrine\ORM\Mapping\Column(type="datetime")
+	 */
+	private $updated;
+
     /**
      * Get file.
      *
@@ -818,4 +830,46 @@ class Person implements \JsonSerializable
             'text' => $this->__toString()
         ];
     }
+
+
+
+
+	/**
+	 * Set created
+	 *
+	 * @param \DateTime $created
+	 * @return Person
+	 */
+	public function setCreated($created)
+	{
+		$this->created = $created;
+
+		return $this;
+	}
+
+	/**
+	 * Get created
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreated()
+	{
+		return $this->created;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getUpdated()
+	{
+		return $this->updated;
+	}
+
+	/**
+	 * @param mixed $updated
+	 */
+	public function setUpdated($updated)
+	{
+		$this->updated = $updated;
+	}
 }

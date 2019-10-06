@@ -148,6 +148,8 @@ class GameController extends AbstractController
             $em->persist($entity);
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_game_show', array('id' => $entity->getId())));
         }
 
@@ -322,6 +324,8 @@ class GameController extends AbstractController
             }
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_game', array('id' => $id)));
         }
 
@@ -352,6 +356,8 @@ class GameController extends AbstractController
 
             $em->remove($entity);
             $em->flush();
+
+	        self::sitemapAction();
         }
 
         return $this->redirect($this->generateUrl('stat_game'));
@@ -383,4 +389,17 @@ class GameController extends AbstractController
     {
         return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getLatestGames());
     }
+
+	/*
+    * Dispatch event for update sitemap.xml for posts
+    */
+	private function sitemapAction()
+	{
+		$targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+		$dumper = $this->get('presta_sitemap.dumper');
+		$baseUrl = $this->container->getParameter('base_url');
+		$baseUrl = rtrim($baseUrl, '/') . '/';
+		$options = array('gzip' => false, 'section' => 'tournaments');
+		$dumper->dump($targetDir, $baseUrl, null, $options);
+	}
 }

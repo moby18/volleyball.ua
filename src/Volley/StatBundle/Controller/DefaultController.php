@@ -18,8 +18,8 @@ class DefaultController extends AbstractController
      *
      * @param Team $team
      *
-     * @Route("/team/{team_slug}", name="stat_team_front", methods={"GET"})
-     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_slug": "slug"}})
+     * @Route("/team/{team_id}", name="stat_team_front", methods={"GET"})
+     * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
      * @Template()
      *
      * @return array

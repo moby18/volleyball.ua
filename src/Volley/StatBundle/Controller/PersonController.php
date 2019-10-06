@@ -44,6 +44,7 @@ class PersonController extends AbstractController
 
         return $this->render('VolleyStatBundle:Person:index.html.twig', array(
             'entities' => $pagination,
+            'update_slug_form' => $this->createUpdateSlugForm()->createView(),
         ));
     }
     /**
@@ -62,6 +63,12 @@ class PersonController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+	        $entity->setSlug('');
+	        $em->persist($entity);
+	        $em->flush();
+
+            self::sitemapAction();
 
             return $this->redirect($this->generateUrl('stat_person_show', array('id' => $entity->getId())));
         }
@@ -215,6 +222,8 @@ class PersonController extends AbstractController
         if ($editForm->isValid()) {
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_person_edit', array('id' => $id)));
         }
 
@@ -244,6 +253,8 @@ class PersonController extends AbstractController
 
             $em->remove($entity);
             $em->flush();
+
+	        self::sitemapAction();
         }
 
         return $this->redirect($this->generateUrl('stat_person'));
@@ -276,4 +287,54 @@ class PersonController extends AbstractController
     {
         return $this->render('VolleyStatBundle:Person:birthday.html.twig', $this->get('volley_stat.person.manager')->getBirthdayPersons());
     }
+
+	/**
+	 * Creates a form to update slug for Teams entities.
+	 *
+	 * @return \Symfony\Component\Form\Form The form
+	 */
+	private function createUpdateSlugForm()
+	{
+		return $this->createFormBuilder()
+			->setAction($this->generateUrl('stat_person_slug_update', []))
+			->setMethod('PUT')
+			->add('submit', SubmitType::class, array('label' => 'Update Empty Slugs'))
+			->getForm();
+	}
+
+	/**
+	 * Lists all Team entities.
+	 *
+	 * @Route("/update/slugs", name="stat_person_slug_update", methods={"PUT"})
+	 */
+	public function updateSlugAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$persons = $em->getRepository('VolleyStatBundle:Person')->findBy([]);
+
+		foreach ($persons as $person) {
+			$person->setSlug('');
+			$em->persist($person);
+		}
+
+		$em->flush();
+
+		self::sitemapAction();
+
+		return $this->redirect($this->generateUrl('stat_person'));
+	}
+
+	/*
+	 * Dispatch event for update sitemap.xml for posts
+	 */
+	private function sitemapAction()
+	{
+		$targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+		$dumper = $this->get('presta_sitemap.dumper');
+		$baseUrl = $this->container->getParameter('base_url');
+		$baseUrl = rtrim($baseUrl, '/') . '/';
+		$options = array('gzip' => false, 'section' => 'persons');
+		$dumper->dump($targetDir, $baseUrl, null, $options);
+	}
 }
