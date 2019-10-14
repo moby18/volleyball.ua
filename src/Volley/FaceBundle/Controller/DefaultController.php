@@ -165,7 +165,7 @@ class DefaultController extends AbstractController
      * @return array
      * @Route("/page/{page}", defaults={"home" = 0}, requirements={"page": "\d+"}, name="volley_web_homepage_pages")
      * @Route("/", defaults={"page" = 1, "home" = 1}, name="volley_web_homepage")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:index.html.twig")
      */
     public function indexAction($page, $home, Request $request)
     {
