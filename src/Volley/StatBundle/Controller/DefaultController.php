@@ -62,7 +62,7 @@ class DefaultController extends AbstractController
 		$pagination = $paginator->paginate(
 			$em->getRepository('VolleyFaceBundle:Post')->findByTeamQuery($team),
 			$page,
-			2
+			20
 		);
 		if ($blog)
 			$pagination->setTemplate('VolleyFaceBundle:Default/pagination:pagination-home.html.twig');
