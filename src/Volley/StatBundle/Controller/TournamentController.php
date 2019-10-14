@@ -27,7 +27,7 @@ class TournamentController extends AbstractController
      * Lists all Tournament entities.
      *
      * @Route("/", name="stat_tournament", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tournament:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -100,7 +100,7 @@ class TournamentController extends AbstractController
      * Displays a form to create a new Tournament entity.
      *
      * @Route("/new", name="stat_tournament_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tournament:new.html.twig")
      */
     public function newAction()
     {
@@ -117,7 +117,7 @@ class TournamentController extends AbstractController
      * Finds and displays a Tournament entity.
      *
      * @Route("/{id}", name="stat_tournament_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tournament:show.html.twig")
      */
     public function showAction($id)
     {
@@ -141,7 +141,7 @@ class TournamentController extends AbstractController
      * Displays a form to edit an existing Tournament entity.
      *
      * @Route("/{id}/edit", name="stat_tournament_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tournament:edit.html.twig")
      */
     public function editAction($id)
     {

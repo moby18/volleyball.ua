@@ -40,7 +40,7 @@ class DefaultController extends AbstractController
      *
      * @Route("/school/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_school_pages")
      * @Route("/school", defaults={"page" = 1}, name="volley_face_school")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:school.html.twig")
      */
     public function schoolAction($page, Request $request)
     {
@@ -67,7 +67,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/tournamentTable", name="volley_face_tournament_table")
-     * @Template()
+     * @Template("@VolleyFace/Default/tournamentTable.html.twig")
      */
     public function tournamentTableAction()
     {
@@ -195,7 +195,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/season/{season_id}/tournament/{tournament_id}", name="volley_face_tournament")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:tournament.html.twig")
      */
     public function tournamentAction($season_id, $tournament_id)
     {
@@ -221,7 +221,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/team/{team_id}", name="volley_face_team")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:team.html.twig")
      */
 //    public function teamAction($team_id)
 //    {
@@ -243,7 +243,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/player/{player_id}", name="volley_face_player")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:player.html.twig")
      */
     public function playerAction($player_id)
     {
@@ -260,7 +260,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/contacts", name="volley_face_contacts")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:contacts.html.twig")
      */
     public function contactsAction()
     {
@@ -269,7 +269,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/advertising", name="volley_face_advertising")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:advertising.html.twig")
      */
     public function advertisingAction()
     {
@@ -282,7 +282,7 @@ class DefaultController extends AbstractController
 	 * @return string
 	 *
 	 * @Route("/broadcast", name="volley_face_broadcast")
-	 * @Template()
+	 * @Template("VolleyFaceBundle:Default:post.html.twig")
 	 */
 	public function broadcastAction()
 	{
@@ -302,7 +302,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300", methods={"GET"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:mikasa-vls-300.html.twig")
      */
     public function mikasaVls300Action()
     {
@@ -311,7 +311,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/mikasa-vls300", name="volley_face_mikasa_vls300_buy", methods={"POST"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:mikasa-vls-300.html.twig")
      */
     public function buyMikasaVls300Action(Request $request)
     {
@@ -367,7 +367,7 @@ class DefaultController extends AbstractController
      * @return string
      *
      * @Route("/search", name="volley_face_search")
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:blog.html.twig")
      */
     public function searchAction(Request $request)
     {
@@ -401,7 +401,7 @@ class DefaultController extends AbstractController
      * @Route("/{category_slug}/{post_slug}", name="volley_face_post")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
      * @ParamConverter("post", class="VolleyFaceBundle:Post", options={"mapping": {"post_slug": "slug"}, "repository_method" = "findWithOptions", "map_method_signature" = true})
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:post.html.twig")
      */
     public function postAction(Category $category, Post $post)
     {
@@ -432,7 +432,7 @@ class DefaultController extends AbstractController
      * @Route("/{category_slug}/page/{page}", defaults={"blog" = 0}, requirements={"page": "\d+"}, name="volley_face_blog_pages")
      * @Route("/{category_slug}/", defaults={"page" = 1, "blog" = 1}, name="volley_face_blog")
      * @ParamConverter("category", class="VolleyFaceBundle:Category", options={"mapping": {"category_slug": "slug"}})
-     * @Template()
+     * @Template("VolleyFaceBundle:Default:blog.html.twig")
      */
     public function blogAction(Category $category, $page, $blog, Request $request)
     {

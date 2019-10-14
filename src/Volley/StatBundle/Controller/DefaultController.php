@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
      *
      * @Route("/team/{team_id}", name="stat_team_front", methods={"GET"})
      * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
-     * @Template()
+     * @Template("VolleyStatBundle:Default:team.html.twig")
      *
      * @return array
      */
@@ -87,7 +87,7 @@ class DefaultController extends AbstractController
      *
      * @Route("/person/{person_slug}", name="stat_person_front", methods={"GET"})
      * @ParamConverter("person", class="VolleyStatBundle:Person", options={"mapping": {"person_slug": "slug"}})
-     * @Template()
+     * @Template("VolleyStatBundle:Default:person.html.twig")
      *
      * @return array
      */

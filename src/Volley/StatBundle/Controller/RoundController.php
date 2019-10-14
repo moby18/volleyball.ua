@@ -22,7 +22,7 @@ class RoundController extends AbstractController
      * Lists all Round entities.
      *
      * @Route("/", name="stat_round", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Round:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -94,7 +94,7 @@ class RoundController extends AbstractController
      * Displays a form to create a new Round entity.
      *
      * @Route("/new", name="stat_round_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Round:new.html.twig")
      */
     public function newAction()
     {
@@ -111,7 +111,7 @@ class RoundController extends AbstractController
      * Finds and displays a Round entity.
      *
      * @Route("/{id}", name="stat_round_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Round:show.html.twig")
      */
     public function showAction($id)
     {
@@ -135,7 +135,7 @@ class RoundController extends AbstractController
      * Displays a form to edit an existing Round entity.
      *
      * @Route("/{id}/edit", name="stat_round_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Round:edit.html.twig")
      */
     public function editAction($id)
     {

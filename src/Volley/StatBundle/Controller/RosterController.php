@@ -92,7 +92,7 @@ class RosterController extends AbstractController
      *
      * @Route("/new/team/{team_id}", name="stat_team_roster_new", methods={"GET"})
      * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
-     * @Template()
+     * @Template("VolleyStatBundle:Roster:new.html.twig")
      */
     public function newAction(Team $team)
     {
@@ -134,7 +134,7 @@ class RosterController extends AbstractController
      * Displays a form to edit an existing Roster entity.
      *
      * @Route("/{id}/edit", name="stat_team_roster_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Roster:edit.html.twig")
      */
     public function editAction($id)
     {

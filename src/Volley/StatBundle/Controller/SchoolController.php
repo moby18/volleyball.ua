@@ -22,7 +22,7 @@ class SchoolController extends AbstractController
      * Lists all School entities.
      *
      * @Route("/", name="stat_school", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:School:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -101,7 +101,7 @@ class SchoolController extends AbstractController
      * Displays a form to create a new School entity.
      *
      * @Route("/new", name="stat_school_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:School:new.html.twig")
      */
     public function newAction()
     {
@@ -118,7 +118,7 @@ class SchoolController extends AbstractController
      * Finds and displays a School entity.
      *
      * @Route("/{id}", name="stat_school_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:School:show.html.twig")
      */
     public function showAction($id)
     {
@@ -142,7 +142,7 @@ class SchoolController extends AbstractController
      * Displays a form to edit an existing School entity.
      *
      * @Route("/{id}/edit", name="stat_school_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:School:edit.html.twig")
      */
     public function editAction($id)
     {

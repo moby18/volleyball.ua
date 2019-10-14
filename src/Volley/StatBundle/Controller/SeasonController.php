@@ -22,7 +22,7 @@ class SeasonController extends AbstractController
      * Lists all Season entities.
      *
      * @Route("/", name="stat_season", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Season:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -94,7 +94,7 @@ class SeasonController extends AbstractController
      * Displays a form to create a new Season entity.
      *
      * @Route("/new", name="stat_season_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Season:new.html.twig")
      */
     public function newAction()
     {
@@ -111,7 +111,7 @@ class SeasonController extends AbstractController
      * Finds and displays a Season entity.
      *
      * @Route("/{id}", name="stat_season_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Season:show.html.twig")
      */
     public function showAction($id)
     {
@@ -135,7 +135,7 @@ class SeasonController extends AbstractController
      * Displays a form to edit an existing Season entity.
      *
      * @Route("/{id}/edit", name="stat_season_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Season:edit.html.twig")
      */
     public function editAction($id)
     {

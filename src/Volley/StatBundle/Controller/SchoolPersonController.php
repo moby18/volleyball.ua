@@ -23,7 +23,7 @@ class SchoolPersonController extends AbstractController
      * Lists all SchoolPerson entities.
      *
      * @Route("admin/stat/schoolperson/", name="stat_schoolperson", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:SchoolPerson:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -51,7 +51,7 @@ class SchoolPersonController extends AbstractController
      * Lists all SchoolPerson entities.
      *
      * @Route("school/person/list", name="stat_schoolperson_front", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:SchoolPerson:indexFront.html.twig")
      */
     public function indexFrontAction(Request $request)
     {
@@ -172,7 +172,7 @@ class SchoolPersonController extends AbstractController
      * Displays a form to create a new SchoolPerson entity.
      *
      * @Route("admin/stat/schoolperson/new", name="stat_schoolperson_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:SchoolPerson:new.html.twig")
      */
     public function newAction()
     {
@@ -222,7 +222,7 @@ class SchoolPersonController extends AbstractController
      * Finds and displays a SchoolPerson entity.
      *
      * @Route("admin/stat/schoolperson/{id}", name="stat_schoolperson_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:SchoolPerson:show.html.twig")
      */
     public function showAction($id)
     {
@@ -245,7 +245,7 @@ class SchoolPersonController extends AbstractController
      * Displays a form to edit an existing SchoolPerson entity.
      *
      * @Route("admin/stat/schoolperson/{id}/edit", name="stat_schoolperson_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:SchoolPerson:edit.html.twig")
      */
     public function editAction($id)
     {

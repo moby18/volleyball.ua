@@ -23,7 +23,7 @@ class PersonController extends AbstractController
      * Lists all Person entities.
      *
      * @Route("/", name="stat_person", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -102,7 +102,7 @@ class PersonController extends AbstractController
      * Displays a form to create a new Person entity.
      *
      * @Route("/new", name="stat_person_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Person:new.html.twig")
      */
     public function newAction()
     {
@@ -136,7 +136,7 @@ class PersonController extends AbstractController
      * Finds and displays a Person entity.
      *
      * @Route("/{id}", name="stat_person_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Person:show.html.twig")
      */
     public function showAction($id)
     {
@@ -159,7 +159,7 @@ class PersonController extends AbstractController
      * Displays a form to edit an existing Person entity.
      *
      * @Route("/{id}/edit", name="stat_person_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Person:edit.html.twig")
      */
     public function editAction($id)
     {

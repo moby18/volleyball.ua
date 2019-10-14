@@ -22,7 +22,7 @@ class SlideController extends AbstractController
      * Lists all Slide entities.
      *
      * @Route("/", name="slide", methods={"GET"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Slide:index.html.twig")
      */
     public function indexAction()
     {
@@ -83,7 +83,7 @@ class SlideController extends AbstractController
      * Displays a form to create a new Slide entity.
      *
      * @Route("/new", name="slide_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Slide:new.html.twig")
      */
     public function newAction()
     {
@@ -100,7 +100,7 @@ class SlideController extends AbstractController
      * Finds and displays a Slide entity.
      *
      * @Route("/{id}", name="slide_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Slide:show.html.twig")
      */
     public function showAction($id)
     {
@@ -124,7 +124,7 @@ class SlideController extends AbstractController
      * Displays a form to edit an existing Slide entity.
      *
      * @Route("/{id}/edit", name="slide_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyFaceBundle:Slide:edit.html.twig")
      */
     public function editAction($id)
     {

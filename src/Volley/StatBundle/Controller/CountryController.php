@@ -22,7 +22,7 @@ class CountryController extends AbstractController
      * Lists all Country entities.
      *
      * @Route("/", name="stat_country", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Country:index.html.twig")
      */
     public function indexAction()
     {
@@ -83,7 +83,7 @@ class CountryController extends AbstractController
      * Displays a form to create a new Country entity.
      *
      * @Route("/new", name="stat_country_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Country:new.html.twig")
      */
     public function newAction()
     {
@@ -100,7 +100,7 @@ class CountryController extends AbstractController
      * Finds and displays a Country entity.
      *
      * @Route("/{id}", name="stat_country_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Country:show.html.twig")
      */
     public function showAction($id)
     {
@@ -124,7 +124,7 @@ class CountryController extends AbstractController
      * Displays a form to edit an existing Country entity.
      *
      * @Route("/{id}/edit", name="stat_country_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Country:edit.html.twig")
      */
     public function editAction($id)
     {

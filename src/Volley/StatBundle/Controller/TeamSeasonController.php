@@ -92,7 +92,7 @@ class TeamSeasonController extends AbstractController
      *
      * @Route("/new/team/{team_id}", name="stat_team_season_new", methods={"GET"})
      * @ParamConverter("team", class="VolleyStatBundle:Team", options={"mapping": {"team_id": "id"}})
-     * @Template()
+     * @Template("VolleyStatBundle:TeamSeason:new.html.twig")
      */
     public function newAction(Team $team)
     {
@@ -134,7 +134,7 @@ class TeamSeasonController extends AbstractController
      * Displays a form to edit an existing TeamSeason entity.
      *
      * @Route("/{id}/edit", name="stat_team_season_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:TeamSeason:edit.html.twig")
      */
     public function editAction($id)
     {

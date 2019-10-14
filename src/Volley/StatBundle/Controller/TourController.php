@@ -48,7 +48,7 @@ class TourController extends AbstractController
      * Lists all Tour entities.
      *
      * @Route("/", name="stat_tour", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tour:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -168,7 +168,7 @@ class TourController extends AbstractController
      * Displays a form to create a new Tour entity.
      *
      * @Route("/new", name="stat_tour_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tour:new.html.twig")
      */
     public function newAction()
     {
@@ -185,7 +185,7 @@ class TourController extends AbstractController
      * Finds and displays a Tour entity.
      *
      * @Route("/{id}", name="stat_tour_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tour:show.html.twig")
      */
     public function showAction($id)
     {
@@ -209,7 +209,7 @@ class TourController extends AbstractController
      * Displays a form to edit an existing Tour entity.
      *
      * @Route("/{id}/edit", name="stat_tour_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Tour:edit.html.twig")
      */
     public function editAction($id)
     {

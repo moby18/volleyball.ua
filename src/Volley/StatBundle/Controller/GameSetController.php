@@ -22,7 +22,7 @@ class GameSetController extends AbstractController
      * Lists all GameSet entities.
      *
      * @Route("/", name="gameset", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:GameSet:index.html.twig")
      */
     public function indexAction()
     {
@@ -83,7 +83,7 @@ class GameSetController extends AbstractController
      * Displays a form to create a new GameSet entity.
      *
      * @Route("/new", name="gameset_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:GameSet:new.html.twig")
      */
     public function newAction()
     {
@@ -100,7 +100,7 @@ class GameSetController extends AbstractController
      * Finds and displays a GameSet entity.
      *
      * @Route("/{id}", name="gameset_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:GameSet:show.html.twig")
      */
     public function showAction($id)
     {
@@ -124,7 +124,7 @@ class GameSetController extends AbstractController
      * Displays a form to edit an existing GameSet entity.
      *
      * @Route("/{id}/edit", name="gameset_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:GameSet:edit.html.twig")
      */
     public function editAction($id)
     {

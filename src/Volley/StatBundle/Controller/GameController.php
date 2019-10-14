@@ -51,7 +51,7 @@ class GameController extends AbstractController
      * @return array
      *
      * @Route("/", name="stat_game", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Game:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -183,7 +183,7 @@ class GameController extends AbstractController
      * Displays a form to create a new Game entity.
      *
      * @Route("/new", name="stat_game_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Game:new.html.twig")
      */
     public function newAction()
     {
@@ -228,7 +228,7 @@ class GameController extends AbstractController
      * Finds and displays a Game entity.
      *
      * @Route("/{id}", name="stat_game_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Game:show.html.twig")
      */
     public function showAction($id)
     {
@@ -252,7 +252,7 @@ class GameController extends AbstractController
      * Displays a form to edit an existing Game entity.
      *
      * @Route("/{id}/edit", name="stat_game_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Game:edit.html.twig")
      */
     public function editAction($id)
     {

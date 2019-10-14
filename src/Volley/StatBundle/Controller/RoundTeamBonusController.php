@@ -93,7 +93,7 @@ class RoundTeamBonusController extends AbstractController
      * Displays a form to create a new RoundTeamBonus entity.
      *
      * @Route("/new", name="stat_round_team_bonus_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:RoundTeamBonus:new.html.twig")
      */
     public function newAction()
     {
@@ -133,7 +133,7 @@ class RoundTeamBonusController extends AbstractController
      * Displays a form to edit an existing RoundTeamBonus entity.
      *
      * @Route("/{id}/edit", name="stat_round_team_bonus_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:RoundTeamBonus:edit.html.twig")
      */
     public function editAction($id)
     {

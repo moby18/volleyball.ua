@@ -25,7 +25,7 @@ class TeamController extends AbstractController
      * Lists all Team entities.
      *
      * @Route("/", name="stat_team", methods={"GET", "POST"})
-     * @Template()
+     * @Template("VolleyStatBundle:Team:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -136,7 +136,7 @@ class TeamController extends AbstractController
      * Displays a form to create a new Team entity.
      *
      * @Route("/new", name="stat_team_new", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Team:new.html.twig")
      */
     public function newAction()
     {
@@ -170,7 +170,7 @@ class TeamController extends AbstractController
      * Finds and displays a Team entity.
      *
      * @Route("/{id}", name="stat_team_show", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Team:show.html.twig")
      */
     public function showAction($id)
     {
@@ -194,7 +194,7 @@ class TeamController extends AbstractController
      * Displays a form to edit an existing Team entity.
      *
      * @Route("/{id}/edit", name="stat_team_edit", methods={"GET"})
-     * @Template()
+     * @Template("VolleyStatBundle:Team:edit.html.twig")
      */
     public function editAction($id)
     {
