@@ -1,6 +1,6 @@
 {% extends '::layout.html.twig' %}
 
-{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{% set page_image = app.request.getSchemeAndHttpHost() ~ team.getWebPath|imagine_filter('team_roster') %}
 {% set title =  team.name ~ ' '~ team.city ~ ', ' ~ team.country ~ '' %}
 {% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', ' ~ team.country ~ ', волейбол, склад команди, тренери, титули, турніри, адреса, новини'%}
 {% set meta_description = 'Сторінка волейбольної команди ' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
