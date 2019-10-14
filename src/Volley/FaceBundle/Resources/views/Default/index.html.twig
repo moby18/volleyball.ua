@@ -3,6 +3,13 @@
 {% set page = news.currentPageNumber > 1 ? ' - Сторінка ' ~ news.currentPageNumber : '' %}
 {% set pageNumber = news.currentPageNumber %}
 
+{% set canonical_options = {
+    'items': news,
+    'route': 'volley_web_homepage',
+    'route_pages': 'volley_web_homepage_pages',
+    'route_params': {},
+} %}
+
 {% block carousel %}
 
     <div class="section section-main">

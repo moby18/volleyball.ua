@@ -21,6 +21,27 @@
     text-transform: uppercase;
 }
 
+/* Section Button (bottom) */
+.section-button {
+    background-color: #191928;
+    color: #ffffff;
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    font-family: 'Open Sans',Verdana,sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: #20A3CF;
+        color: #ffffff;
+    }
+}
+
 /* News Timeline */
 .news-timeline-item {
     position: relative;

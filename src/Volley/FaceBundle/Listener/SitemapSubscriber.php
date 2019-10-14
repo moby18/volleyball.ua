@@ -128,6 +128,14 @@ class SitemapSubscriber implements EventSubscriberInterface
 				    ),
 				    'teams'
 			    );
+			    $url = $this->router->generate('stat_team_front_blog', ['team_id'=>$team->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+			    $urls->addUrl(
+				    new UrlConcrete(
+					    $url,
+					    ($team ? $team->getUpdated() : new \DateTime())
+				    ),
+				    'teams'
+			    );
 		    }
 	    }
 	    if (is_null($section) || $section == 'tournaments') {

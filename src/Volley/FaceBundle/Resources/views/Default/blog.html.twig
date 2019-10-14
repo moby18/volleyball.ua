@@ -14,6 +14,29 @@
     {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
 {% endif %}
 
+{% if team is defined %}
+    {% set h1 =  'Новини команди ' ~ team.name ~ ' (' ~ team.city ~ ')'  %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', новини команди, новини волейболу' %}
+    {% set meta_description = 'Новини команди ' ~ team.name ~ ' (' ~ team.city ~ ')' ~ ' на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
+{% set canonical_options = {
+    'items':posts,
+    'route': 'volley_face_blog',
+    'route_pages': 'volley_face_blog_pages',
+    'route_params': {'category_slug': category.slug},
+} %}
+
+{% if team is defined %}
+    {% set canonical_options = {
+        'items':posts,
+        'route': 'stat_team_front_blog',
+        'route_pages': 'stat_team_front_blog_pages',
+        'route_params': {'team_id': team.id},
+    } %}
+{% endif %}
+
 {% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}
 
 {% block content %}

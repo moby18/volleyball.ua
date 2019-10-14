@@ -19,11 +19,17 @@ class PostRepository extends EntityRepository
 
     public function findByCategory(Category $category, $count = 5, $offset = 0)
     {
-        return $this->findByCategoryQuery($category, $count = 5, $offset = 0)
+        return $this->findByCategoryQuery($category, $count, $offset)
             ->getResult();
     }
 
 	public function findByTeam(\Volley\StatBundle\Entity\Team $team, $count = 5, $offset = 0)
+	{
+		return $this->findByTeamQuery($team, $count, $offset)
+			->getResult();
+	}
+
+	public function findByTeamQuery(\Volley\StatBundle\Entity\Team $team, $count = 5, $offset = 0)
 	{
 		return $this->createQueryBuilder('p')
 			->select('p')
@@ -36,8 +42,7 @@ class PostRepository extends EntityRepository
 			->setFirstResult($offset)
 			->orderBy('p.featured', 'DESC')
 			->addOrderBy('p.published', 'DESC')
-			->getQuery()
-			->getResult();
+			->getQuery();
 	}
 
     public function findByCategoryQuery(Category $category, $count = 5, $offset = 0)

@@ -132,6 +132,9 @@
                                 <div style="clear: both"></div>
                             {% endfor %}
                         </div>
+                        <div class="row">
+                            {% include 'VolleyFaceBundle:Default/includes:button.html.twig' with {'route': path('stat_team_front_blog',{'team_id': team.id})} %}
+                        </div>
                     {% endif %}
 
                 </div>

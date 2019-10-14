@@ -9,6 +9,33 @@
 {% set type = type|default('website') %}
 {% set meta_keywords = meta_keywords|default(setting.keywords)|default('волейбол, волейбол в Україні, волейбол в Украине, новини волейболу, новости волейбола, трансляції волейбольних матчів, трансляции волейбольмых матчей, пляжний волейбол, розклад, результати, чемпіонат України, аматорський волейбол, дитячий волейбол') ~ (pageNumber > 1 ?', сторінка ' ~ pageNumber : '') %}
 {% set meta_description = meta_description|default(setting.description)|default('Новини волейболу в Україні і у світі, розклад, результати та трансляції волейбольних матчів, ексклюзивні інтерв\'ю, все найцікавіше на сайті volleyball.ua') ~ page|default('') %}
+
+{% if canonical_options is defined %}
+    {% set items = canonical_options.items %}
+    {% set route = canonical_options.route %}
+    {% set route_pages = canonical_options.route_pages %}
+    {% set route_params = canonical_options.route_params %}
+
+    {% set pageNumber = items.currentPageNumber %}
+    {% set pageTotal = items.pageCount %}
+
+    {% set _route = app.request.attributes.get('_route') %}
+    {% set _route_params = app.request.attributes.get('_route_params')|default({}) %}
+    {% set canonical = url(_route, _route_params) %}
+
+    {% if pageNumber < pageTotal %}
+        {% set next = url(route_pages, route_params|merge({'page': pageNumber + 1})) %}
+    {% endif %}
+    {% if pageNumber > 2 %}
+        {% set prev = url(route_pages, route_params|merge({'page': pageNumber - 1})) %}
+    {% endif %}
+    {% if pageNumber == 2 %}
+        {% set prev = url(route, route_params|merge({'page': pageNumber - 1})) %}
+    {% endif %}
+{% endif %}
+
+{% set canonical = canonical|default(full_url) %}
+
 <!DOCTYPE html>
 <html lang="en" class="js no-touch csstransitions skrollr skrollr-desktop" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -89,6 +116,14 @@
     {% endblock %}
 
     <title>{{ title }}</title>
+
+    <link rel="canonical" href="{{canonical}}" />
+    {% if prev is defined %}
+        <link rel="prev" href="{{prev}}" />
+    {% endif %}
+    {% if next is defined %}
+        <link rel="next" href="{{next}}" />
+    {% endif %}
 
     <!-- Bootstrap Core CSS -->
     {% block styles %}
