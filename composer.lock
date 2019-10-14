@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ab617359783a26e9f6da9c6a1d438a1",
+    "content-hash": "0e5ee8af2a44033ef7c619129b4b5cec",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -3534,16 +3534,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "f1edae020d4109fcad3bd57810180a460aa4f20f"
+                "reference": "931fecb0887b6d580b2dd5425833bee06d97ed24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/f1edae020d4109fcad3bd57810180a460aa4f20f",
-                "reference": "f1edae020d4109fcad3bd57810180a460aa4f20f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/931fecb0887b6d580b2dd5425833bee06d97ed24",
+                "reference": "931fecb0887b6d580b2dd5425833bee06d97ed24",
                 "shasum": ""
             },
             "require": {
@@ -3673,8 +3673,7 @@
                     "Symfony\\Component\\": "src/Symfony/Component/"
                 },
                 "classmap": [
-                    "src/Symfony/Component/Intl/Resources/stubs",
-                    "src/Symfony/Bridge/ProxyManager/Legacy/ProxiedMethodReturnExpression.php"
+                    "src/Symfony/Component/Intl/Resources/stubs"
                 ],
                 "exclude-from-classmap": [
                     "**/Tests/"
@@ -3699,7 +3698,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2019-08-26T16:48:03+00:00"
+            "time": "2019-10-07T15:14:38+00:00"
         },
         {
             "name": "tetranz/select2entity-bundle",
