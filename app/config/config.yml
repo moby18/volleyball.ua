@@ -165,6 +165,12 @@ liip_imagine:
     resolvers:
        default:
           web_path: ~
+
+    loaders:
+        default:
+            filesystem:
+               data_root: "%kernel.project_dir%/web/"
+
     filter_sets:
         cache: ~
         main_pic:
