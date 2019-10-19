@@ -2,14 +2,11 @@
 
 namespace Volley\StatBundle\Controller;
 
-use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Person;
 use Volley\StatBundle\Form\PersonType;
@@ -19,15 +16,14 @@ use Volley\StatBundle\Form\PersonType;
  *
  * @Route("/admin/stat/person")
  */
-class PersonController extends Controller
+class PersonController extends AbstractController
 {
 
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="stat_person")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_person", methods={"GET"})
+     * @Template("VolleyStatBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -48,13 +44,13 @@ class PersonController extends Controller
 
         return $this->render('VolleyStatBundle:Person:index.html.twig', array(
             'entities' => $pagination,
+            'update_slug_form' => $this->createUpdateSlugForm()->createView(),
         ));
     }
     /**
      * Creates a new Person entity.
      *
-     * @Route("/", name="stat_person_create")
-     * @Method("POST")
+     * @Route("/", name="stat_person_create", methods={"POST"})
      * @Template("VolleyStatBundle:Person:new.html.twig")
      */
     public function createAction(Request $request)
@@ -67,6 +63,12 @@ class PersonController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+	        $entity->setSlug('');
+	        $em->persist($entity);
+	        $em->flush();
+
+            self::sitemapAction();
 
             return $this->redirect($this->generateUrl('stat_person_show', array('id' => $entity->getId())));
         }
@@ -99,9 +101,8 @@ class PersonController extends Controller
     /**
      * Displays a form to create a new Person entity.
      *
-     * @Route("/new", name="stat_person_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_person_new", methods={"GET"})
+     * @Template("VolleyStatBundle:Person:new.html.twig")
      */
     public function newAction()
     {
@@ -119,8 +120,7 @@ class PersonController extends Controller
      *
      * @param Request $request
      *
-     * @Route("/json", name="stat_person_json")
-     * @Method("GET")
+     * @Route("/json", name="stat_person_json", methods={"GET"})
      *
      * @return JsonResponse
      */
@@ -135,9 +135,8 @@ class PersonController extends Controller
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{id}", name="stat_person_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_person_show", methods={"GET"})
+     * @Template("VolleyStatBundle:Person:show.html.twig")
      */
     public function showAction($id)
     {
@@ -159,9 +158,8 @@ class PersonController extends Controller
     /**
      * Displays a form to edit an existing Person entity.
      *
-     * @Route("/{id}/edit", name="stat_person_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_person_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:Person:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -204,8 +202,7 @@ class PersonController extends Controller
     /**
      * Edits an existing Person entity.
      *
-     * @Route("/{id}", name="stat_person_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_person_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Person:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -225,6 +222,8 @@ class PersonController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_person_edit', array('id' => $id)));
         }
 
@@ -237,8 +236,7 @@ class PersonController extends Controller
     /**
      * Deletes a Person entity.
      *
-     * @Route("/{id}", name="stat_person_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_person_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -255,9 +253,11 @@ class PersonController extends Controller
 
             $em->remove($entity);
             $em->flush();
+
+	        self::sitemapAction();
         }
 
-        return $this->redirect($this->generateUrl('Person'));
+        return $this->redirect($this->generateUrl('stat_person'));
     }
 
     /**
@@ -280,12 +280,61 @@ class PersonController extends Controller
     /**
      * * Game table
      *
-     * @Route("/birthday", name="stat_person_birthday")
-     * @Method("GET")
+     * @Route("/birthday", name="stat_person_birthday", methods={"GET"})s
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function birthdayAction()
     {
         return $this->render('VolleyStatBundle:Person:birthday.html.twig', $this->get('volley_stat.person.manager')->getBirthdayPersons());
     }
+
+	/**
+	 * Creates a form to update slug for Teams entities.
+	 *
+	 * @return \Symfony\Component\Form\Form The form
+	 */
+	private function createUpdateSlugForm()
+	{
+		return $this->createFormBuilder()
+			->setAction($this->generateUrl('stat_person_slug_update', []))
+			->setMethod('PUT')
+			->add('submit', SubmitType::class, array('label' => 'Update Empty Slugs'))
+			->getForm();
+	}
+
+	/**
+	 * Lists all Team entities.
+	 *
+	 * @Route("/update/slugs", name="stat_person_slug_update", methods={"PUT"})
+	 */
+	public function updateSlugAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+
+		$persons = $em->getRepository('VolleyStatBundle:Person')->findBy([]);
+
+		foreach ($persons as $person) {
+			$person->setSlug('');
+			$em->persist($person);
+		}
+
+		$em->flush();
+
+		self::sitemapAction();
+
+		return $this->redirect($this->generateUrl('stat_person'));
+	}
+
+	/*
+	 * Dispatch event for update sitemap.xml for posts
+	 */
+	private function sitemapAction()
+	{
+		$targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+		$dumper = $this->get('presta_sitemap.dumper');
+		$baseUrl = $this->container->getParameter('base_url');
+		$baseUrl = rtrim($baseUrl, '/') . '/';
+		$options = array('gzip' => false, 'section' => 'persons');
+		$dumper->dump($targetDir, $baseUrl, null, $options);
+	}
 }

@@ -25,6 +25,10 @@ class RoundType extends AbstractType
                 ->add('name')
                 ->add('ordering')
                 ->add('type')
+	            ->add('tournamentTable', null, [
+		            'label' => false,
+		            'attr' => ['data-toggle' => 'toggle', 'data-on' => "Show Table", 'data-off' => "Hide Table", 'data-onstyle' => 'info']
+	            ])
                 ->add('season')
                 ->add('teams', EntityType::class, [
                     'class' => 'Volley\StatBundle\Entity\Team',

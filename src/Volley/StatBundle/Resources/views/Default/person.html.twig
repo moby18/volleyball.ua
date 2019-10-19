@@ -1,6 +1,6 @@
 {% extends '::layout.html.twig' %}
 
-{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{% set page_image = person.webPath|imagine_filter('player_image') %}
 {% set title =  person.firstName ~ (person.middleName is not empty ? ' ' ~ person.middleName : '') ~ ' ' ~ person.lastName %}
 {% set meta_keywords = title ~ ', волейбол, профайл, дата народження, зріст, вага, команда' %}
 {% set meta_description = person.type|trans ~ ' ' ~ title ~ ' на Волейбол в Україні - volleyball.ua' %}

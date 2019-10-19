@@ -15,7 +15,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-
 /web/uploads/
 /web/assetic
 /web/js/
@@ -23,6 +22,14 @@
 /web/fonts
 /web/media
 /web/images
+/public/bundles/
+/public/uploads/
+/public/assetic
+/public/js/
+/public/css/
+/public/fonts
+/public/media
+/public/images
 
 .idea
 .DS_Store
@@ -39,3 +46,4 @@ node_modules
 # bower dir
 /src/Volley/FaceBundle/Resources/public/bower_components
 /web/sitemap*.xml
+/public/sitemap*.xml

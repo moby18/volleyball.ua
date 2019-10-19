@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Volley\FaceBundle\Entity\Post;
 use Volley\FaceBundle\Form\FilterType;
@@ -21,7 +21,7 @@ use Volley\FaceBundle\Form\PostType;
  * Post controller.
  *
  */
-class PostController extends Controller
+class PostController extends AbstractController
 {
 
     /**
@@ -315,7 +315,7 @@ class PostController extends Controller
 
         $targetDir = rtrim(__DIR__ . '/../../../../web', '/');
         $dumper = $this->get('presta_sitemap.dumper');
-        $baseUrl = $this->getParameter('base_url');
+        $baseUrl = $this->container->getParameter('base_url');
         $baseUrl = rtrim($baseUrl, '/') . '/';
         $options = array('gzip' => false, 'section' => 'posts');
         $dumper->dump($targetDir, $baseUrl, null, $options);

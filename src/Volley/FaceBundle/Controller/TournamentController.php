@@ -4,7 +4,7 @@ namespace Volley\FaceBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Volley\FaceBundle\Entity\Tournament;
 use Volley\FaceBundle\Form\TournamentType;
@@ -15,7 +15,7 @@ use Volley\StatBundle\Entity\Season;
  * Tournament controller.
  *
  */
-class TournamentController extends Controller
+class TournamentController extends AbstractController
 {
 
     /**

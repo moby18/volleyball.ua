@@ -3,12 +3,10 @@
 namespace Volley\StatBundle\Controller;
 
 use Knp\Component\Pager\Pagination\PaginationInterface;
-use Knp\Component\Pager\Paginator;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Game;
 use Volley\StatBundle\Form\GameType;
@@ -22,7 +20,7 @@ use Volley\StatBundle\Form\GameFilterType;
  *
  * @Route("/admin/stat/game")
  */
-class GameController extends Controller
+class GameController extends AbstractController
 {
     /**
      * @param Request $request
@@ -52,9 +50,8 @@ class GameController extends Controller
      * Lists all Game entities.
      * @return array
      *
-     * @Route("/", name="stat_game")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_game", methods={"GET"})
+     * @Template("VolleyStatBundle:Game:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -74,8 +71,7 @@ class GameController extends Controller
      * @param Request $request
      * @return array
      *
-     * @Route("/", name="stat_game_filter")
-     * @Method("POST")
+     * @Route("/", name="stat_game_filter", methods={"POST"})
      * @Template("VolleyStatBundle:Game:index.html.twig")
      */
     public function filterAction(Request $request)
@@ -131,8 +127,7 @@ class GameController extends Controller
     /**
      * Creates a new Game entity.
      *
-     * @Route("/new", name="stat_game_create")
-     * @Method("POST")
+     * @Route("/new", name="stat_game_create", methods={"POST"})
      * @Template("VolleyStatBundle:Game:new.html.twig")
      */
     public function createAction(Request $request)
@@ -152,6 +147,8 @@ class GameController extends Controller
             }
             $em->persist($entity);
             $em->flush();
+
+	        self::sitemapAction();
 
             return $this->redirect($this->generateUrl('stat_game_show', array('id' => $entity->getId())));
         }
@@ -185,9 +182,8 @@ class GameController extends Controller
     /**
      * Displays a form to create a new Game entity.
      *
-     * @Route("/new", name="stat_game_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_game_new", methods={"GET"})
+     * @Template("VolleyStatBundle:Game:new.html.twig")
      */
     public function newAction()
     {
@@ -212,10 +208,8 @@ class GameController extends Controller
     /**
      * Displays a form to create a new Game entity.
      *
-     * @Route("/dublicate/{id}", name="stat_game_dubl")
-     * @Method("GET")
+     * @Route("/dublicate/{id}", name="stat_game_dubl", methods={"GET"})
      * @ParamConverter("game", class="VolleyStatBundle:Game")
-     * @Template()
      */
     public function dublAction($game)
     {
@@ -233,9 +227,8 @@ class GameController extends Controller
     /**
      * Finds and displays a Game entity.
      *
-     * @Route("/{id}", name="stat_game_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_game_show", methods={"GET"})
+     * @Template("VolleyStatBundle:Game:show.html.twig")
      */
     public function showAction($id)
     {
@@ -258,9 +251,8 @@ class GameController extends Controller
     /**
      * Displays a form to edit an existing Game entity.
      *
-     * @Route("/{id}/edit", name="stat_game_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_game_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:Game:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -305,8 +297,7 @@ class GameController extends Controller
     /**
      * Edits an existing Game entity.
      *
-     * @Route("/{id}", name="stat_game_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_game_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Game:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -333,6 +324,8 @@ class GameController extends Controller
             }
             $em->flush();
 
+	        self::sitemapAction();
+
             return $this->redirect($this->generateUrl('stat_game', array('id' => $id)));
         }
 
@@ -346,8 +339,7 @@ class GameController extends Controller
     /**
      * Deletes a Game entity.
      *
-     * @Route("/{id}", name="stat_game_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_game_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -364,6 +356,8 @@ class GameController extends Controller
 
             $em->remove($entity);
             $em->flush();
+
+	        self::sitemapAction();
         }
 
         return $this->redirect($this->generateUrl('stat_game'));
@@ -388,12 +382,24 @@ class GameController extends Controller
     /**
      * * Game table
      *
-     * @Route("/{id}/table", name="stat_game_table")
-     * @Method("GET")
+     * @Route("/{id}/table", name="stat_game_table", methods={"GET"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function tableAction()
     {
         return $this->render('VolleyStatBundle:Game:table.html.twig', $this->get('volley_stat.game.manager')->getLatestGames());
     }
+
+	/*
+    * Dispatch event for update sitemap.xml for posts
+    */
+	private function sitemapAction()
+	{
+		$targetDir = rtrim(__DIR__ . '/../../../../web', '/');
+		$dumper = $this->get('presta_sitemap.dumper');
+		$baseUrl = $this->container->getParameter('base_url');
+		$baseUrl = rtrim($baseUrl, '/') . '/';
+		$options = array('gzip' => false, 'section' => 'tournaments');
+		$dumper->dump($targetDir, $baseUrl, null, $options);
+	}
 }

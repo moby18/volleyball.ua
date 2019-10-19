@@ -4,9 +4,8 @@ namespace Volley\StatBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Country;
 use Volley\StatBundle\Form\CountryType;
@@ -16,15 +15,14 @@ use Volley\StatBundle\Form\CountryType;
  *
  * @Route("/admin/stat/country")
  */
-class CountryController extends Controller
+class CountryController extends AbstractController
 {
 
     /**
      * Lists all Country entities.
      *
-     * @Route("/", name="stat_country")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_country", methods={"GET"})
+     * @Template("VolleyStatBundle:Country:index.html.twig")
      */
     public function indexAction()
     {
@@ -39,8 +37,7 @@ class CountryController extends Controller
     /**
      * Creates a new Country entity.
      *
-     * @Route("/", name="stat_country_create")
-     * @Method("POST")
+     * @Route("/", name="stat_country_create", methods={"POST"})
      * @Template("VolleyStatBundle:Country:new.html.twig")
      */
     public function createAction(Request $request)
@@ -85,9 +82,8 @@ class CountryController extends Controller
     /**
      * Displays a form to create a new Country entity.
      *
-     * @Route("/new", name="stat_country_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_country_new", methods={"GET"})
+     * @Template("VolleyStatBundle:Country:new.html.twig")
      */
     public function newAction()
     {
@@ -103,9 +99,8 @@ class CountryController extends Controller
     /**
      * Finds and displays a Country entity.
      *
-     * @Route("/{id}", name="stat_country_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_country_show", methods={"GET"})
+     * @Template("VolleyStatBundle:Country:show.html.twig")
      */
     public function showAction($id)
     {
@@ -128,9 +123,8 @@ class CountryController extends Controller
     /**
      * Displays a form to edit an existing Country entity.
      *
-     * @Route("/{id}/edit", name="stat_country_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_country_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:Country:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -173,8 +167,7 @@ class CountryController extends Controller
     /**
      * Edits an existing Country entity.
      *
-     * @Route("/{id}", name="stat_country_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_country_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Country:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -206,8 +199,7 @@ class CountryController extends Controller
     /**
      * Deletes a Country entity.
      *
-     * @Route("/{id}", name="stat_country_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_country_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

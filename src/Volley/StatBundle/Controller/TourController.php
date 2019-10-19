@@ -5,9 +5,8 @@ namespace Volley\StatBundle\Controller;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Tour;
 use Volley\StatBundle\Form\GameFilterType;
@@ -19,7 +18,7 @@ use Volley\StatBundle\Form\TourType;
  *
  * @Route("/admin/stat/tour")
  */
-class TourController extends Controller
+class TourController extends AbstractController
 {
     /**
      * @param Request $request
@@ -48,9 +47,8 @@ class TourController extends Controller
     /**
      * Lists all Tour entities.
      *
-     * @Route("/", name="stat_tour")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_tour", methods={"GET"})
+     * @Template("VolleyStatBundle:Tour:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -70,8 +68,7 @@ class TourController extends Controller
      * @param Request $request
      * @return array
      *
-     * @Route("/", name="stat_tour_filter")
-     * @Method("POST")
+     * @Route("/", name="stat_tour_filter", methods={"POST"})
      * @Template("VolleyStatBundle:Tour:index.html.twig")
      */
     public function filterAction(Request $request)
@@ -125,8 +122,7 @@ class TourController extends Controller
     /**
      * Creates a new Tour entity.
      *
-     * @Route("/new", name="stat_tour_create")
-     * @Method("POST")
+     * @Route("/new", name="stat_tour_create", methods={"POST"})
      * @Template("VolleyStatBundle:Tour:new.html.twig")
      */
     public function createAction(Request $request)
@@ -171,9 +167,8 @@ class TourController extends Controller
     /**
      * Displays a form to create a new Tour entity.
      *
-     * @Route("/new", name="stat_tour_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_tour_new", methods={"GET"})
+     * @Template("VolleyStatBundle:Tour:new.html.twig")
      */
     public function newAction()
     {
@@ -189,9 +184,8 @@ class TourController extends Controller
     /**
      * Finds and displays a Tour entity.
      *
-     * @Route("/{id}", name="stat_tour_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_tour_show", methods={"GET"})
+     * @Template("VolleyStatBundle:Tour:show.html.twig")
      */
     public function showAction($id)
     {
@@ -214,9 +208,8 @@ class TourController extends Controller
     /**
      * Displays a form to edit an existing Tour entity.
      *
-     * @Route("/{id}/edit", name="stat_tour_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_tour_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:Tour:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -259,8 +252,7 @@ class TourController extends Controller
     /**
      * Edits an existing Tour entity.
      *
-     * @Route("/{id}", name="stat_tour_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_tour_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Tour:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -292,8 +284,7 @@ class TourController extends Controller
     /**
      * Deletes a Tour entity.
      *
-     * @Route("/{id}", name="stat_tour_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_tour_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

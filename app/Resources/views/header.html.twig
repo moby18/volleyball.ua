@@ -54,6 +54,7 @@
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'world-cup'}) }}">Чемпіонат Світу</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'european-championship'}) }}">Чемпіонат Європи</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'club-world-championship'}) }}">Клубний Чемпіонат Світу</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'international-universiade'}) }}">Всесвiтня Унiверсiaда</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
@@ -62,12 +63,18 @@
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'russia'}) }}">Росія</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'poland'}) }}">Польша</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'italy'}) }}">Італія</a></li>
-                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Турція</a></li>
+                                                <li><a href="{{ path("volley_face_blog",{'category_slug': 'turkey'}) }}">Туреччина</a></li>
                                                 <li><a href="{{ path("volley_face_blog",{'category_slug': 'france'}) }}">Франція</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
                                             <a href="{{ path("volley_face_blog",{'category_slug': 'beach-volleyball'}) }}" class="megamenu-title">Пляжний волейбол</a>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'kanal-kostiantina-riabukhi'}) }}" class="megamenu-title">Канал Костянтина Рябухи</a>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <a href="{{ path("volley_face_blog",{'category_slug': 'volieibol-na-snighu'}) }}" class="megamenu-title">Волейбол на снігу</a>
                                         </div>
                                         <div class="col-sm-3">
                                             <a href="{{ path("volley_face_blog",{'category_slug': 'amateur-volleyball'}) }}" class="megamenu-title">Аматорський волейбол</a>
@@ -88,6 +95,8 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Суперліга. Чоловіки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 45, 'tournament_id': 1}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 31, 'tournament_id': 1}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 21, 'tournament_id': 1}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 3, 'tournament_id': 1}) }}">Сезон 2016-2017</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 1, 'tournament_id': 1}) }}">Сезон 2015-2016</a></li>
@@ -96,6 +105,8 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Суперліга. Жінки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 39, 'tournament_id': 2}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 32, 'tournament_id': 2}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 22, 'tournament_id': 2}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 4, 'tournament_id': 2}) }}">Сезон 2016-2017</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 2, 'tournament_id': 2}) }}">Сезон 2015-2016</a></li>
@@ -104,6 +115,8 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Вища ліга. Чоловіки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 43, 'tournament_id': 3}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 37, 'tournament_id': 3}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 23, 'tournament_id': 3}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 5, 'tournament_id': 3}) }}">Сезон 2016-2017</a></li>
                                             </ul>
@@ -111,6 +124,8 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Вища ліга. Жінки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 44, 'tournament_id': 4}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 38, 'tournament_id': 4}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 24, 'tournament_id': 4}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 6, 'tournament_id': 4}) }}">Сезон 2016-2017</a></li>
                                             </ul>
@@ -121,6 +136,8 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Кубок. Чоловіки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 40, 'tournament_id': 11}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 35, 'tournament_id': 11}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 25, 'tournament_id': 11}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 13, 'tournament_id': 11}) }}">Сезон 2016-2017</a></li>
                                             </ul>
@@ -128,20 +145,34 @@
                                         <div class="col-sm-3">
                                             <a href="#" class="megamenu-title">Україна. Кубок. Жінки</a>
                                             <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 42, 'tournament_id': 11}) }}">Сезон 2019-2020</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 36, 'tournament_id': 12}) }}">Сезон 2018-2019</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 26, 'tournament_id': 12}) }}">Сезон 2017-2018</a></li>
                                                 <li><a href="{{ path('stat_tournament_page', {'season_id': 14, 'tournament_id': 12}) }}">Сезон 2016-2017</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-sm-3">
+                                            <a href="#" class="megamenu-title">Україна. Суперкубок. Чоловіки</a>
+                                            <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 33, 'tournament_id': 21}) }}">Суперкубок 2018</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 29, 'tournament_id': 21}) }}">Суперкубок 2017</a></li>
+                                            </ul>
                                         </div>
                                         <div class="col-sm-3">
+                                            <a href="#" class="megamenu-title">Україна. Суперкубок. Жінки</a>
+                                            <ul>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 34, 'tournament_id': 22}) }}">Суперкубок 2018</a></li>
+                                                <li><a href="{{ path('stat_tournament_page', {'season_id': 30, 'tournament_id': 22}) }}">Суперкубок 2017</a></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        <li class=""><a href="{{ path("volley_face_broadcast") }}">{% trans %}Broadcast{% endtrans %}</a></li>
                         <li class=""><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
                         <li class=""><a href="{{ path("volley_face_advertising") }}">{% trans %}Advertising{% endtrans %}</a></li>
+                        <li class=""><a href="//www.store.volleyball.ua" target="_blank" title="{% trans %}VUStore{% endtrans %} Store.volleyball.ua">{% trans %}VUStore{% endtrans %}</a></li>
                     </ul>
 
                     <button type="button" class="navbar-btn btn-icon btn-circle navbar-right last  hidden-sm hidden-xs search-button" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>

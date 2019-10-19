@@ -20,7 +20,6 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
@@ -37,7 +36,9 @@ twig:
     globals:
         default_category_color: "#888888"
         fb_app_id: "%fb_app_id%"
+        fb_pixel_id: "%fb_pixel_id%"
         ga_id: "%ga_id%"
+        gtm_id: "%gtm_id%"
         google_api_key: "%google_api_key%"
     form_themes:
         - "bootstrap_3_layout.html.twig"
@@ -62,6 +63,23 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+        mappings:
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                # make sure vendor library location is correct
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+            loggable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+            tree:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Tree\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -124,15 +142,15 @@ stfalcon_tinymce:
              menubar: false
              toolbar1: "bold,italic,underline,undo,redo,link,unlink,removeformat,cleanup,code,preview"
 
-genemu_form:
+#genemu_form:
 #    select2: ~
-    select2:
-      enabled: true
-      configs:
-          placeholder: Select a value
-          width: off
-          allowClear: false
-          minimumInputLength: 0
+#    select2:
+#      enabled: true
+#      configs:
+#          placeholder: Select a value
+#          width: off
+#          allowClear: false
+#          minimumInputLength: 0
 
 stof_doctrine_extensions:
     default_locale: en_US
@@ -145,8 +163,16 @@ stof_doctrine_extensions:
 
 liip_imagine:
     resolvers:
-       default:
-          web_path: ~
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/web"
+                cache_prefix: "media/cache"
+
+    loaders:
+        default:
+            filesystem:
+               data_root: "%kernel.project_dir%/web/"
+
     filter_sets:
         cache: ~
         main_pic:

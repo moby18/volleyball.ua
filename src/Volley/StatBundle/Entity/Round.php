@@ -42,6 +42,13 @@ class Round
      */
     private $type;
 
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="tournamentTable", type="boolean", nullable=true)
+	 */
+	private $tournamentTable;
+
     /**
      * @ORM\ManyToOne(targetEntity="Season", inversedBy="rounds")
      * @ORM\JoinColumn(name="seasonId", referencedColumnName="id")
@@ -149,12 +156,29 @@ class Round
         return $this->type;
     }
 
+	/**
+	 * @return boolean
+	 */
+	public function getTournamentTable()
+	{
+		return $this->tournamentTable;
+	}
+
+	/**
+	 * @param boolean $tournamentTable
+	 */
+	public function setTournamentTable($tournamentTable)
+	{
+		$this->tournamentTable = $tournamentTable;
+	}
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->tours = new \Doctrine\Common\Collections\ArrayCollection();
+	    $this->tournamentTable = true;
     }
 
     /**

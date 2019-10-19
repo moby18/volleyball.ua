@@ -15114,6 +15114,15 @@ Onepage Homepages --------------------*/
 	color:#fff !important;
 }
 
+.social-icon.icon-telegram:hover {
+	color: #58aee7;
+}
+
+.social-icons-bg-hover .social-icon.icon-telegram:hover  {
+	color:#fff;
+	background-color: #58aee7;
+}
+
 .social-icon.icon-facebook:hover {
 	color:#3b5998;
 }

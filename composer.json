@@ -20,51 +20,43 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "beberlei/DoctrineExtensions": "^1.0",
+        "beberlei/doctrineextensions": "^1.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^2.2",
-        "doctrine/doctrine-migrations-bundle": "^1.0",
-        "doctrine/migrations": "^1.0",
-        "doctrine/orm": "^2.5",
-        "friendsofsymfony/user-bundle": "~2.0",
+        "doctrine/doctrine-migrations-bundle": "^2.0",
+        "doctrine/migrations": "^2.0",
+        "doctrine/orm": "^2.6.4",
+        "friendsofsymfony/user-bundle": "~2.1.2",
         "gedmo/doctrine-extensions": "~2.3.9",
-        "genemu/form-bundle": "^3.0@dev",
         "hwi/oauth-bundle": "^0.5.3",
-        "incenteev/composer-parameter-handler": "^2.0",
+        "incenteev/composer-parameter-handler": "^2.1.3",
         "knplabs/knp-menu": "^2.0",
-        "knplabs/knp-menu-bundle": "^2.0",
+        "knplabs/knp-menu-bundle": "^2.3",
         "knplabs/knp-paginator-bundle": "^2.4",
-        "liip/imagine-bundle": "~1.2",
-        "mopa/bootstrap-bundle": "^3.0",
-        "oneup/uploader-bundle": "^1.3",
-        "php-http/guzzle6-adapter": "^1.1",
+        "liip/imagine-bundle": "^2.2",
+        "mopa/bootstrap-bundle": "^3.3",
+        "oneup/uploader-bundle": "^2.1.4",
+        "php-http/guzzle6-adapter": "^2.0.1",
         "php-http/httplug-bundle": "^1.7",
-        "presta/sitemap-bundle": "^1.4",
-        "sensio/distribution-bundle": "^5.0.19",
-        "sensio/framework-extra-bundle": "^3.0.2",
-        "sensio/generator-bundle": "^3.0",
+        "presta/sitemap-bundle": "^1.7",
+        "sensio/framework-extra-bundle": "^5.4",
         "stfalcon/tinymce-bundle": "2.0",
-        "stof/doctrine-extensions-bundle": "~1.1",
+        "stof/doctrine-extensions-bundle": "~1.3",
         "symfony/monolog-bundle": "^3.1.0",
         "symfony/polyfill-apcu": "^1.0",
-        "symfony/swiftmailer-bundle": "^2.3.10",
-        "symfony/symfony": "3.3.*",
-        "tetranz/select2entity-bundle": "^2.8",
+        "symfony/swiftmailer-bundle": "^3.2.8",
+        "symfony/symfony": "^4.3",
+        "symfony/templating": "^4.3",
+        "tetranz/select2entity-bundle": "^2.10",
         "twig/extensions": "^1.5",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^4.3"
     },
     "scripts": {
         "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-install-cmd": [
             "@symfony-scripts"
@@ -77,6 +69,10 @@
         "sort-packages": true
     },
     "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "4.4.*"
+        },
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
@@ -87,5 +83,13 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": null
+    },
+    "replace": {
+        "paragonie/random_compat": "2.*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
     }
 }

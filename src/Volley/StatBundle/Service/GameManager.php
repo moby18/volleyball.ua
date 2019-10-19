@@ -168,12 +168,14 @@ class GameManager
         foreach ($games as $game) {
             /** @var Round $round */
             $tour = $game->getTour();
-            if (!array_key_exists($tour->getId(), $tours)) {
-                $tours[$tour->getId()] = [];
-                $tours[$tour->getId()]['tour'] = $tour;
-                $tours[$tour->getId()]['games'] = [];
+            if ($tour) {
+	            if (!array_key_exists($tour->getId(), $tours)) {
+		            $tours[$tour->getId()] = [];
+		            $tours[$tour->getId()]['tour'] = $tour;
+		            $tours[$tour->getId()]['games'] = [];
+	            }
+	            $tours[$tour->getId()]['games'][] = $game;
             }
-            $tours[$tour->getId()]['games'][] = $game;
         }
 
         return $tours;

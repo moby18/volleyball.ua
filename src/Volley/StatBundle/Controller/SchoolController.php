@@ -4,9 +4,8 @@ namespace Volley\StatBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\School;
 use Volley\StatBundle\Form\SchoolType;
@@ -16,15 +15,14 @@ use Volley\StatBundle\Form\SchoolType;
  *
  * @Route("/admin/stat/school")
  */
-class SchoolController extends Controller
+class SchoolController extends AbstractController
 {
 
     /**
      * Lists all School entities.
      *
-     * @Route("/", name="stat_school")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_school", methods={"GET"})
+     * @Template("VolleyStatBundle:School:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -50,8 +48,7 @@ class SchoolController extends Controller
     /**
      * Creates a new School entity.
      *
-     * @Route("/", name="stat_school_create")
-     * @Method("POST")
+     * @Route("/", name="stat_school_create", methods={"POST"})
      * @Template("VolleyStatBundle:School:new.html.twig")
      */
     public function createAction(Request $request)
@@ -103,9 +100,8 @@ class SchoolController extends Controller
     /**
      * Displays a form to create a new School entity.
      *
-     * @Route("/new", name="stat_school_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_school_new", methods={"GET"})
+     * @Template("VolleyStatBundle:School:new.html.twig")
      */
     public function newAction()
     {
@@ -121,9 +117,8 @@ class SchoolController extends Controller
     /**
      * Finds and displays a School entity.
      *
-     * @Route("/{id}", name="stat_school_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_school_show", methods={"GET"})
+     * @Template("VolleyStatBundle:School:show.html.twig")
      */
     public function showAction($id)
     {
@@ -146,9 +141,8 @@ class SchoolController extends Controller
     /**
      * Displays a form to edit an existing School entity.
      *
-     * @Route("/{id}/edit", name="stat_school_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_school_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:School:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -192,8 +186,7 @@ class SchoolController extends Controller
     /**
      * Edits an existing School entity.
      *
-     * @Route("/{id}", name="stat_school_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_school_update", methods={"PUT"})
      * @Template("VolleyStatBundle:School:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -231,8 +224,7 @@ class SchoolController extends Controller
     /**
      * Deletes a School entity.
      *
-     * @Route("/{id}", name="stat_school_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_school_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {
@@ -273,7 +265,7 @@ class SchoolController extends Controller
 
     private function getCoordinates($address){
         $address = str_replace(" ", "+", $address);
-        $url = "http://maps.google.com/maps/api/geocode/json?address=".urlencode($address);
+        $url = "https://maps.google.com/maps/api/geocode/json?address=".urlencode($address)."&key=".$this->container->getParameter('google_api_key');
         $response = file_get_contents($url);
         $json = json_decode($response,TRUE);
         return ['lat' => $json['results'][0]['geometry']['location']['lat'], 'lng' => $json['results'][0]['geometry']['location']['lng']];

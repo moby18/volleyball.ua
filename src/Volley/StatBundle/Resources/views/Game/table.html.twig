@@ -25,33 +25,37 @@
                     {% for game in tour.games %}
                         {% set winnerTeamA = (game.scoreSetHome > game.scoreSetAway) %}
                         {% set winnerTeamB = (game.scoreSetHome < game.scoreSetAway) %}
-                        <tr>
+                        <tr
+                            {# Game link on all row #}
+                            {% if game.links|length %} class="clickable-row" {% endif %}
+                            {% if game.links|length %} data-href="{{ game.links[0].url }}" {% endif %}
+                        >
                             <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                             <td class="teamA text-right">
                                 {{ winnerTeamA ? "<strong>" : "" }}
-                                {#<a href="{{ path('stat_team_front',{'team_slug':game.homeTeam.slug}) }}">#}
+                                <a href="{{ path('stat_team_front',{'team_id':game.homeTeam.id}) }}" title="{{ game.homeTeam.name ~ ' ' ~ game.homeTeam.city }}">
                                 {{ game.homeTeam.shortName }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamA ? "</strong>" : "" }}
                             </td>
                             <td class="text-center"><span class="text-nowrap">{{ (game.scoreSetHome is not empty?game.scoreSetHome:'-') ~ ':' ~ (game.scoreSetAway is not empty?game.scoreSetAway:'-') }}</span></td>
                             <td class="teamB text-left">
                                 {{ winnerTeamB ? "<strong>" : "" }}
-                                {#<a href="{{ path('stat_team_front',{'team_slug':game.awayTeam.slug}) }}">#}
+                                <a href="{{ path('stat_team_front',{'team_id':game.awayTeam.id}) }}" title="{{ game.awayTeam.name ~ ' ' ~ game.awayTeam.city }}">
                                 {{ game.awayTeam.shortName }}
-                                {#</a>#}
+                                </a>
                                 {{ winnerTeamB ? "</strong>" : "" }}
                             </td>
                             <td class="text-right">
                                 {% if game.date|date_modify("-4 hour") <= date('','Europe/Kiev') and date('','Europe/Kiev') < date(game.date) and not game.played %}
                                     {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
-                                    <span class="game-soon">{{ 'soon'|trans }}</span>
-                                    {% if game.links|length %} </a> {% endif %}</a>
+                                        <span class="game-soon">{{ 'soon'|trans }}</span>
+                                    {% if game.links|length %} </a> {% endif %}
                                 {% endif %}
                                 {% if date(game.date) <= date('','Europe/Kiev') and date('','Europe/Kiev') <= game.date|date_modify("+2 hour") and not game.played %}
                                     {% if game.links|length %} <a href="{{ game.links[0].url }}"> {% endif %}
                                          <span class="game-live">{{ 'live'|trans }}</span>
-                                    {% if game.links|length %} </a> {% endif %}</a>
+                                    {% if game.links|length %} </a> {% endif %}
                                 {% endif %}
                             </td>
                         </tr>

@@ -14,6 +14,29 @@
     {% set meta_description = 'Пошук серед новин волейболу на веб-сайті Волейбол в Україні - volleyball.ua' %}
 {% endif %}
 
+{% if team is defined %}
+    {% set h1 =  'Новини команди ' ~ team.name ~ ' (' ~ team.city ~ ')'  %}
+    {% set title = h1 ~ ' на Волейбол в Україні - volleyball.ua' %}
+    {% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', новини команди, новини волейболу' %}
+    {% set meta_description = 'Новини команди ' ~ team.name ~ ' (' ~ team.city ~ ')' ~ ' на веб-сайті Волейбол в Україні - volleyball.ua' %}
+{% endif %}
+
+{% set canonical_options = {
+    'items':posts,
+    'route': 'volley_face_blog',
+    'route_pages': 'volley_face_blog_pages',
+    'route_params': {'category_slug': category.slug},
+} %}
+
+{% if team is defined %}
+    {% set canonical_options = {
+        'items':posts,
+        'route': 'stat_team_front_blog',
+        'route_pages': 'stat_team_front_blog_pages',
+        'route_params': {'team_id': team.id},
+    } %}
+{% endif %}
+
 {% set color = category.color ? category.color : category.parent and category.parent.color ? category.parent.color : category.parent and category.parent.parent and category.parent.parent.color ? category.parent.parent.color : default_category_color %}
 
 {% block content %}
@@ -87,6 +110,24 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12" style="">
+                                    <div class="section-title">
+                                        {{ 'advert'|trans({}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col_store.html.twig' %}
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     {#<div class="row">#}
                         {#<div class="col-lg-12">#}
                             {#<div class="row">#}
@@ -116,23 +157,23 @@
                         </div>
                     {% endif %}
 
-                    {% if popularPosts|length %}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section-title">
-                                    {{ 'popular-section'|trans({}) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            {% for item in popularPosts %}
-                                <div class="col-lg-12">
-                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}
-                                </div>
-                                <div style="clear: both"></div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                    {#{% if popularPosts|length %}#}
+                        {#<div class="row">#}
+                            {#<div class="col-lg-12">#}
+                                {#<div class="section-title">#}
+                                    {#{{ 'popular-section'|trans({}) }}#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<div class="row">#}
+                            {#{% for item in popularPosts %}#}
+                                {#<div class="col-lg-12">#}
+                                    {#{% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'popular': true} %}#}
+                                {#</div>#}
+                                {#<div style="clear: both"></div>#}
+                            {#{% endfor %}#}
+                        {#</div>#}
+                    {#{% endif %}#}
                 </div>
 
             </div>

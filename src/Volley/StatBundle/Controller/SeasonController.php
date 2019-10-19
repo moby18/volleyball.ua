@@ -4,9 +4,8 @@ namespace Volley\StatBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Season;
 use Volley\StatBundle\Form\SeasonType;
@@ -16,15 +15,14 @@ use Volley\StatBundle\Form\SeasonType;
  *
  * @Route("/admin/stat/season")
  */
-class SeasonController extends Controller
+class SeasonController extends AbstractController
 {
 
     /**
      * Lists all Season entities.
      *
-     * @Route("/", name="stat_season")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_season", methods={"GET"})
+     * @Template("VolleyStatBundle:Season:index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -50,8 +48,7 @@ class SeasonController extends Controller
     /**
      * Creates a new Season entity.
      *
-     * @Route("/", name="stat_season_create")
-     * @Method("POST")
+     * @Route("/", name="stat_season_create", methods={"POST"})
      * @Template("VolleyStatBundle:Season:new.html.twig")
      */
     public function createAction(Request $request)
@@ -96,9 +93,8 @@ class SeasonController extends Controller
     /**
      * Displays a form to create a new Season entity.
      *
-     * @Route("/new", name="stat_season_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_season_new", methods={"GET"})
+     * @Template("VolleyStatBundle:Season:new.html.twig")
      */
     public function newAction()
     {
@@ -114,9 +110,8 @@ class SeasonController extends Controller
     /**
      * Finds and displays a Season entity.
      *
-     * @Route("/{id}", name="stat_season_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_season_show", methods={"GET"})
+     * @Template("VolleyStatBundle:Season:show.html.twig")
      */
     public function showAction($id)
     {
@@ -139,9 +134,8 @@ class SeasonController extends Controller
     /**
      * Displays a form to edit an existing Season entity.
      *
-     * @Route("/{id}/edit", name="stat_season_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_season_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:Season:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -184,8 +178,7 @@ class SeasonController extends Controller
     /**
      * Edits an existing Season entity.
      *
-     * @Route("/{id}", name="stat_season_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_season_update", methods={"PUT"})
      * @Template("VolleyStatBundle:Season:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -217,8 +210,7 @@ class SeasonController extends Controller
     /**
      * Deletes a Season entity.
      *
-     * @Route("/{id}", name="stat_season_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_season_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

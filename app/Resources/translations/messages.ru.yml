@@ -7,8 +7,10 @@ user:
 # Menu
 News: Новости
 Tournaments: Турниры
+Broadcast: Трансляции
 Contact Us: Контакты
 Advertising: Реклама
+VUStore: Интернет-магазин
 
 # Texts
 post-item:
@@ -25,17 +27,24 @@ popular-section: Популярные
 popular-section-in-category: Популярные в категории
 recommended-section: Рекоммендованные
 recommended-section-in-category: Рекоммендованные в категории
+team-section: Новости команды
 search: Поиск
 not_found: Ничего не найдено
+more: Больше новостей
 
 men: Мужчины
 women: Женщины
 
 Setter: Связующий
+setter: Связующий
 Middle Blocker: Центральный блокируюший
+middle_blocker: Центральный блокируюший
 Opposite: Диагональный
+opposite: Диагональный
 Outside Hitter: Доигровщик
+outside_hitter: Доигровщик
 Libero: Либеро
+libero: Либеро
 
 player: Игрок
 coach: Тренер

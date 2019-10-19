@@ -20,8 +20,8 @@
                 <div class="row">
                     <h4 class="text-center">{{ round.round.name }}</h4>
                 </div>
-                {% if season.tournamentTable %}
-                <div class="row">
+                {% if (season.tournamentTable and round.round.tournamentTable) %}
+                <div class="row scrollable-x">
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <table class="table table-striped table-hover table-condensed">
                         <thead>
@@ -43,8 +43,12 @@
                         {% for row in round.table %}
                             <tr>
                                 <td class="text-center">{{ loop.index }}</td>
-                                {#<td><a href="{{ path('volley_face_stat_team',{'team_id':row['team'].id}) }}">{{ row['team'].name }}</a></td>#}
-                                <td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>
+                                <td>
+                                    <a href="{{ path('stat_team_front',{'team_id':row['team'].id}) }}" title="{{ '' ~ row['team'].name ~ ' ' ~ row['team'].city}}">
+                                        <span class="text-nowrap">{{ '' ~ row['team'].name ~ ' ' ~ row['team'].city}}</span>
+                                    </a>
+                                </td>
+                                {#<td><span class="text-nowrap">{{ '' ~ row['team'].name ~ '  ' ~ row['team'].city}}</span></td>#}
                                 <td class="text-center">{{ row.games }}</td>
                                 <td class="text-center hidden-xs">{{ row.win }}</td>
                                 <td class="text-center hidden-xs">{{ row.loss }}</td>
@@ -66,7 +70,7 @@
 
                 {% include 'VolleyFaceBundle:Default/includes:ads_block_tournament_top.html.twig' %}
 
-                <div class="row">
+                <div class="row scrollable-x">
                     <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     {% for tour in round.round.tours %}
                         <div class="anchor" id="{{ round.round.ordering~'_'~tour.ordering }}"></div>
@@ -103,11 +107,15 @@
                                     <td>{% if game.date is not null %} {{ game.date|date("H:i") }} {% endif %}</td>
                                     <td>{{ winnerTeamA ? "<strong>" : "" }}
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.homeTeam.id}) }}"> {{ game.homeTeam.name }} </a>{{ winnerTeamA ? "</strong>" : "" }}#}
-                                        {{ game.homeTeam.name }} {{ winnerTeamA ? "</strong>" : "" }}
+                                        <a href="{{ path('stat_team_front',{'team_id':game.homeTeam.id}) }}" title="{{ '' ~ game.homeTeam.name ~ ' ' ~ game.homeTeam.city}}">
+                                            {{ game.homeTeam.name }} {{ winnerTeamA ? "</strong>" : "" }}
+                                        </a>
                                     </td>
                                     <td>{{ winnerTeamB ? "<strong>" : "" }}
                                         {#<a href="{{ path('volley_face_stat_team',{'team_id':game.awayTeam.id}) }}"> {{ game.awayTeam.name }} </a>{{ winnerTeamB ? "</strong>" : "" }}#}
-                                        {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
+                                        <a href="{{ path('stat_team_front',{'team_id':game.awayTeam.id}) }}" title="{{ '' ~ game.awayTeam.name ~ ' ' ~ game.awayTeam.city}}">
+                                            {{ game.awayTeam.name }} {{ winnerTeamB ? "</strong>" : "" }}
+                                        </a>
                                     </td>
                                     <td>{{ game.scoreSetHome }} - {{ game.scoreSetAway }}</td>
                                     {% for set in game.sets %}

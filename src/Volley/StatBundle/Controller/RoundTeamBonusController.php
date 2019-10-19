@@ -4,9 +4,8 @@ namespace Volley\StatBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\RoundTeamBonus;
 use Volley\StatBundle\Form\RoundTeamBonusType;
@@ -16,15 +15,13 @@ use Volley\StatBundle\Form\RoundTeamBonusType;
  *
  * @Route("/admin/stat/roundTeamBonus")
  */
-class RoundTeamBonusController extends Controller
+class RoundTeamBonusController extends AbstractController
 {
 
     /**
      * Lists all RoundTeamBonus entities.
      *
-     * @Route("/", name="stat_round_team_bonus")
-     * @Method("GET")
-     * @Template()
+     * @Route("/", name="stat_round_team_bonus", methods={"GET"})
      */
     public function indexAction(Request $request)
     {
@@ -50,8 +47,7 @@ class RoundTeamBonusController extends Controller
     /**
      * Creates a new RoundTeamBonus entity.
      *
-     * @Route("/", name="stat_round_team_bonus_create")
-     * @Method("POST")
+     * @Route("/", name="stat_round_team_bonus_create", methods={"POST"})
      * @Template("VolleyStatBundle:RoundTeamBonus:new.html.twig")
      */
     public function createAction(Request $request)
@@ -96,9 +92,8 @@ class RoundTeamBonusController extends Controller
     /**
      * Displays a form to create a new RoundTeamBonus entity.
      *
-     * @Route("/new", name="stat_round_team_bonus_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/new", name="stat_round_team_bonus_new", methods={"GET"})
+     * @Template("VolleyStatBundle:RoundTeamBonus:new.html.twig")
      */
     public function newAction()
     {
@@ -114,9 +109,7 @@ class RoundTeamBonusController extends Controller
     /**
      * Finds and displays a RoundTeamBonus entity.
      *
-     * @Route("/{id}", name="stat_round_team_bonus_show")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}", name="stat_round_team_bonus_show", methods={"GET"})
      */
     public function showAction($id)
     {
@@ -139,9 +132,8 @@ class RoundTeamBonusController extends Controller
     /**
      * Displays a form to edit an existing RoundTeamBonus entity.
      *
-     * @Route("/{id}/edit", name="stat_round_team_bonus_edit")
-     * @Method("GET")
-     * @Template()
+     * @Route("/{id}/edit", name="stat_round_team_bonus_edit", methods={"GET"})
+     * @Template("VolleyStatBundle:RoundTeamBonus:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -184,8 +176,7 @@ class RoundTeamBonusController extends Controller
     /**
      * Edits an existing RoundTeamBonus entity.
      *
-     * @Route("/{id}", name="stat_round_team_bonus_update")
-     * @Method("PUT")
+     * @Route("/{id}", name="stat_round_team_bonus_update", methods={"PUT"})
      * @Template("VolleyStatBundle:RoundTeamBonus:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -217,8 +208,7 @@ class RoundTeamBonusController extends Controller
     /**
      * Deletes a RoundTeamBonus entity.
      *
-     * @Route("/{id}", name="stat_round_team_bonus_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", name="stat_round_team_bonus_delete", methods={"DELETE"})
      */
     public function deleteAction(Request $request, $id)
     {

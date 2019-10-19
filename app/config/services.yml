@@ -1,5 +1,5 @@
 parameters:
-    volley.sitemap.listener.class: Volley\FaceBundle\Listener\SitemapListener
+    volley.sitemap.listener.class: Volley\FaceBundle\Listener\SitemapSubscriber
 
 services:
     twig.extension.intl:
@@ -8,9 +8,17 @@ services:
               - { name: twig.extension }
 
     my.sitemap.listener:
-            class: "%volley.sitemap.listener.class%"
-            arguments: ["@router", "@doctrine"]
-            tags: [{name: "presta.sitemap.listener"}]
+      class: "%volley.sitemap.listener.class%"
+      arguments:
+        - "@router"
+        - "@doctrine"
+      tags:
+        - { name: "kernel.event_subscriber", priority: 100 }
+
+    assets.packages:
+      class: Symfony\Component\Asset\Packages
+      arguments: ['@assets._default_package']
+      public: true
 
     volley_oauth_provider:
             class: Volley\WebBundle\Security\User\VolleyOAuthProvider

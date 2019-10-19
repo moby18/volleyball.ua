@@ -3,10 +3,12 @@
 namespace Volley\StatBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Volley\StatBundle\Entity\Team;
 
 class TeamType extends AbstractType
 {
@@ -17,6 +19,12 @@ class TeamType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+	        ->add('sex', ChoiceType::class, [
+		        'choices' => Team::SEX(),
+		        'expanded' => true,
+		        'multiple' => false,
+		        'label' => false
+	        ])
             ->add('name')
             ->add('slug')
             ->add('shortName')

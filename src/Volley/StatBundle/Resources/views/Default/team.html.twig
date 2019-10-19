@@ -1,9 +1,9 @@
 {% extends '::layout.html.twig' %}
 
-{#{% set page_image = app.request.getSchemeAndHttpHost() ~ post.getWebPath %}#}
+{% set page_image = team.getWebPath|imagine_filter('team_roster') %}
 {% set title =  team.name ~ ' '~ team.city ~ ', ' ~ team.country ~ '' %}
 {% set meta_keywords = team.name ~ ', ' ~ team.city ~ ', ' ~ team.country ~ ', волейбол, склад команди, тренери, титули, турніри, адреса, новини'%}
-{% set meta_description = 'Сторінка волейбольної команди' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
+{% set meta_description = 'Сторінка волейбольної команди ' ~ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' ~ ' на Волейболу в Україні - volleyball.ua' %}
 
 {% block content %}
     <div class="section team-upperline">
@@ -19,9 +19,11 @@
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <div class="team-logo-container">
-                        <div class="team-logo" style="background-image: url({{ team.getLogoWebPath | imagine_filter('team_logo') }}); ">
-                            {% if team.getLogoWebPath %}<img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">{% endif %}
-                        </div>
+                        {% if team.getLogoWebPath %}
+                            <div class="team-logo">
+                                {% if team.getLogoWebPath %}<img src="{{ team.getLogoWebPath | imagine_filter('team_logo') }}" alt="{{ title }}">{% endif %}
+                            </div>
+                        {% endif %}
                         <div class="team-name">
                             <h1>{{ team.name }}</h1>
                             <h2>{{ team.city ~ ' ' ~ team.country }}</h2>
@@ -30,17 +32,20 @@
                 </div>
             </div>
 
+            {% if team.getWebPath %}
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <img class="photo" style="width: 100%; float: left" src="{{ team.getWebPath | imagine_filter('team_roster') }}"
                          alt="Склад команди {{ team.name ~ ' ('~ team.city ~ ', ' ~ team.country ~ ')' }}">
                 </div>
             </div>
+            {% endif %}
 
             <div class="row">
+                <div class="col col-lg-8 col-md-8 col-sm-6 col-xs-12">
                     {% if roster %}
                         {% for person in roster.rosterPersons %}
-                                <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                     <a href="{{ path('stat_person_front',{'person_slug': person.person.slug}) }}">
                                         <div class="person-container">
                                             <div class="person-image">
@@ -72,6 +77,67 @@
                                 </div>
                         {% endfor %}
                     {% endif %}
+                </div>
+
+                <div class="col col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="row visible-lg visible-md visible-sm" >
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {#<div class="section-title">#}
+                                    {#{{ 'advert'|trans({}) }}#}
+                                    {#</div>#}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col.html.twig' %}
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row visible-lg visible-md visible-sm">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="section-title">
+                                        {{ 'advert'|trans({}) }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col_store.html.twig' %}
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if teamPosts|length %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-title">
+                                    {{ 'team-section'|trans({}) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for item in teamPosts %}
+                                <div class="col-lg-12">
+                                    {% include 'VolleyFaceBundle:Default/includes:post.html.twig' with {'loop': loop, 'recommended': true} %}
+                                </div>
+                                <div style="clear: both"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            {% include 'VolleyFaceBundle:Default/includes:button.html.twig' with {'route': path('stat_team_front_blog',{'team_id': team.id})} %}
+                        </div>
+                    {% endif %}
+
+                </div>
             </div>
 
             <div class="row">
@@ -82,18 +148,18 @@
 
             <div class="row">
                 <div class="col col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-4 team-address">
+                    <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-12 team-address">
                         <ul>
                             <li><span class="team-name">{{ team.name }}</span></li>
-                            {% if team.site != '' %}<li>{{ team.address }}</li>{% endif %}
-                            {% if team.site != '' %}<li><a href="tel: {{ team.site }}">{{ team.site }}</a></li>{% endif %}
+                            {% if team.address != '' %}<li>{{ team.address }}</li>{% endif %}
+                            {% if team.phone != '' %}<li><a href="tel: {{ team.phone }}">{{ team.phone }}</a></li>{% endif %}
                             {% if team.fax != '' %}<li>{{ team.fax }}</li>{% endif %}
                             {% if team.email != '' %}<li><a href="mailto: {{ team.email }}">{{ team.email }}</a></li>{% endif %}
                             {% if team.site != '' %}<li><a href="{{ team.site }}">{{ team.site }}</a></li>{% endif %}
                             {% if team.hall != '' %}<li>{{ team.hall }}</li>{% endif %}
                         </ul>
                     </div>
-                    <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-8 team-map">
+                    <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-12 team-map">
                         <div id="map"></div>
                     </div>
                 </div>
@@ -109,20 +175,23 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-      function initMap() {
-        var uluru = {lat: {{ team.lat }}, lng: {{ team.lng }} };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 17,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
-    </script>
+    {{ parent() }}
+    {% if team.lat and team.lng %}
+        <script>
+          function initMap() {
+            var location = {lat: {{ team.lat }}, lng: {{ team.lng }} };
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 17,
+              center: location
+            });
+            var marker = new google.maps.Marker({
+              position: location,
+              map: map
+            });
+          }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap">
+        </script>
+    {% endif %}
 {% endblock %}

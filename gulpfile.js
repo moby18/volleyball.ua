@@ -6,11 +6,13 @@ var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var clean = require('gulp-clean');
 var shell = require('gulp-shell');
+var sass = require('gulp-sass');
+sass.compiler = require('node-sass');
 
 gulp.task('style', function () {
     var source = [
         // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
-        'node_modules/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
         // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
         // 'node_modules/bootstrap/dist/css/bootstrap.css',
@@ -19,12 +21,14 @@ gulp.task('style', function () {
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
-        'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
+        'src/Volley/FaceBundle/Resources/public/scss/custom/body.scss',
         'node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
     ];
     gulp.src(source)
         // .pipe(sourcemaps.init())
-        .pipe(concat('style.css'))
+        .pipe(concat('style.scss'))
+        .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS({level: {1: {specialComments: 0}}}))
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
@@ -35,7 +39,7 @@ gulp.task('style_admin', function () {
         'node_modules/bootstrap/dist/css/bootstrap.css',
         'src/Volley/FaceBundle/Resources/public/css/dashboard.css',
         'node_modules/bootstrap-toggle/css/bootstrap-toggle.min.css',
-        'node_modules/components-font-awesome/css/font-awesome.min.css',
+        'node_modules/font-awesome/css/font-awesome.min.css',
         'src/Volley/FaceBundle/Resources/public/css/admin/styles.css'
     ];
     gulp.src(source)
@@ -78,7 +82,7 @@ gulp.task('script_footer', function () {
     var source = [
         'src/Volley/FaceBundle/Resources/public/js/boss/modernizr.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/jquery.min.js',
-        'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/boss/smoothscroll.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/bootstrap.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/jquery.hoverIntent.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/jquery.nicescroll.min.js',
@@ -92,9 +96,10 @@ gulp.task('script_footer', function () {
         // 'src/Volley/FaceBundle/Resources/public/js/boss/wow.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/boss/skrollr.min.js',
         'src/Volley/FaceBundle/Resources/public/js/boss/main.js',
-        'node_modules/owl.carousel/dist/owl.carousel.min.js',
-        'node_modules/jquery.cookie/jquery.cookie.js',
-        'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
+        // 'node_modules/jquery.cookie/jquery.cookie.js',
+        'src/Volley/FaceBundle/Resources/public/js/custom/game-center.js',
+        // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
+        // 'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -159,13 +164,13 @@ gulp.task('fonts', function () {
     return gulp.src([
         'src/Volley/FaceBundle/Resources/public/fonts/*',
         'node_modules/bootstrap/dist/fonts/*',
-        'node_modules/components-font-awesome/fonts/*'
+        'node_modules/font-awesome/fonts/*'
     ])
         .pipe(gulp.dest('web/fonts/'))
 });
 
 gulp.task('assets_install', shell.task([
-    'app/console assets:install'
+    'bin/console assets:install'
 ]));
 
 gulp.task('clean', function () {
@@ -184,7 +189,10 @@ gulp.task('front', [], function() {
 gulp.task('watch', ['clean'], function () {
     gulp.start('default'/*,'assets_install'*/);
 
-    gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.css', ['style', 'style_admin', 'style_ie']);
+    gulp.watch([
+      'src/Volley/FaceBundle/Resources/public/**/*.css',
+      'src/Volley/FaceBundle/Resources/public/**/*.scss'
+    ], ['style', 'style_admin', 'style_ie']);
     gulp.watch('src/Volley/FaceBundle/Resources/public/**/*.js', ['script', 'script_admin', 'script_ie', 'script_install']);
     //gulp.watch('src/Volley/FaceBundle/Resources/public/**/*', ['assets_install']);
 });

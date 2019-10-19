@@ -16,14 +16,17 @@ parameters:
 
     base_url:          "http://www.volleyball.ua/"
 
-    uglifycss_path: %kernel.root_dir%/../node_modules/.bin/uglifycss
-    uglifyjs_path: %kernel.root_dir%/../node_modules/.bin/uglifyjs
+    uglifycss_path: '%kernel.root_dir%/../node_modules/.bin/uglifycss'
+    uglifyjs_path:  '%kernel.root_dir%/../node_modules/.bin/uglifyjs'
 
     fb_app_id:          ~
+    fb_pixel_id:        ~
     ga_id:              ~
+    gtm_id:             ~
 
     popular_post_count: 5
     recommended_post_count: 5
+    broadcast_post_id: ~
 
     google_api_key: ~
 

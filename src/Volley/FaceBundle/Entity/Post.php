@@ -1109,9 +1109,9 @@ class Post
     /**
      * Remove teams
      *
-     * @param \Volley\StatBundle\Entity\Team $teams
+     * @param \Volley\StatBundle\Entity\StatTeam $teams
      */
-    public function removeTeam(Team $teams)
+    public function removeTeam(StatTeam $teams)
     {
         $this->teams->removeElement($teams);
     }
