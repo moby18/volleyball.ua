@@ -2,12 +2,15 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Round;
+use Volley\StatBundle\Form\Model\RoundFilter;
+use Volley\StatBundle\Form\RoundFilterType;
 use Volley\StatBundle\Form\RoundType;
 
 /**
@@ -21,28 +24,50 @@ class RoundController extends AbstractController
     /**
      * Lists all Round entities.
      *
-     * @Route("/", name="stat_round", methods={"GET"})
+     * @Route("/", name="stat_round", methods={"GET", "POST"})
      * @Template("VolleyStatBundle:Round:index.html.twig")
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $session = $request->getSession();
-        $page = $request->query->get('page', $session->get('round_page', 1));
-        $session->set('round_page', $page);
 
-        $query = $em->getRepository('VolleyStatBundle:Round')->createQueryBuilder('r')->getQuery();
+	    if ($request->request->get('reset', 0)) {
+		    $searchFilter = '';
+		    $page = 1;
+	    } else {
+		    $filterParams = $request->request->get('round_filter', []);
+		    $searchFilter = array_key_exists('search',$filterParams) ? $filterParams['search'] : $session->get('searchFilter', '');
+		    if ($session->get('searchFilter') != $searchFilter)
+			    $page = 1;
+		    else
+			    $page = $request->query->get('page', $session->get('round_page', 1));
+	    }
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $page,
-            20
-        );
+	    $session->set('searchFilter', $searchFilter);
+	    $session->set('round_page', $page);
+
+	    $filter = new RoundFilter($searchFilter);
+	    $filterForm = $this->createForm(RoundFilterType::class, $filter);
+
+	    $rounds = $em->getRepository('VolleyStatBundle:Round')->createQueryBuilder('r');
+	    if ($searchFilter != "") {
+		    $rounds->join('r.season', 's', Join::LEFT_JOIN);
+		    $rounds->orWhere($rounds->expr()->like('r.name', $rounds->expr()->literal('%' . $searchFilter . '%')));
+		    $rounds->orWhere($rounds->expr()->like('s.name', $rounds->expr()->literal('%' . $searchFilter . '%')));
+	    }
+	    $query = $rounds->getQuery();
+
+	    $paginator = $this->get('knp_paginator');
+	    $pagination = $paginator->paginate(
+		    $query,
+		    $page,
+		    20
+	    );
 
         return array(
             'entities' => $pagination,
+            'filter' => $filterForm->createView(),
         );
     }
     /**

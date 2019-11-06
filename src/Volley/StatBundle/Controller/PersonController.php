@@ -9,7 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Person;
+use Volley\StatBundle\Form\Model\PersonFilter;
 use Volley\StatBundle\Form\PersonType;
+use Volley\StatBundle\Form\PersonFilterType;
 
 /**
  * Person controller.
@@ -22,29 +24,51 @@ class PersonController extends AbstractController
     /**
      * Lists all Person entities.
      *
-     * @Route("/", name="stat_person", methods={"GET"})
+     * @Route("/", name="stat_person", methods={"GET", "POST"})
      * @Template("VolleyStatBundle:Person:index.html.twig")
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $session = $request->getSession();
-        $page = $request->query->get('page', $session->get('person_page', 1));
-        $session->set('person_page', $page);
 
-        $query = $em->getRepository('VolleyStatBundle:Person')->createQueryBuilder('p')->getQuery();
+	    if ($request->request->get('reset', 0)) {
+		    $searchFilter = '';
+		    $page = 1;
+	    } else {
+		    $filterParams = $request->request->get('person_filter', []);
+		    $searchFilter = array_key_exists('search',$filterParams) ? $filterParams['search'] : $session->get('searchFilter', '');
+		    if ($session->get('searchFilter') != $searchFilter)
+			    $page = 1;
+		    else
+			    $page = $request->query->get('page', $session->get('person_page', 1));
+	    }
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $page,
-            20
-        );
+	    $session->set('searchFilter', $searchFilter);
+	    $session->set('person_page', $page);
+
+	    $filter = new PersonFilter($searchFilter);
+	    $filterForm = $this->createForm(PersonFilterType::class, $filter);
+
+	    $persons = $em->getRepository('VolleyStatBundle:Person')->createQueryBuilder('p');
+	    if ($searchFilter != "") {
+		    $persons->orWhere($persons->expr()->like('p.firstName', $persons->expr()->literal('%' . $searchFilter . '%')));
+		    $persons->orWhere($persons->expr()->like('p.middleName', $persons->expr()->literal('%' . $searchFilter . '%')));
+		    $persons->orWhere($persons->expr()->like('p.lastName', $persons->expr()->literal('%' . $searchFilter . '%')));
+	    }
+	    $query = $persons->getQuery();
+
+	    $paginator = $this->get('knp_paginator');
+	    $pagination = $paginator->paginate(
+		    $query,
+		    $page,
+		    20
+	    );
 
         return $this->render('VolleyStatBundle:Person:index.html.twig', array(
             'entities' => $pagination,
             'update_slug_form' => $this->createUpdateSlugForm()->createView(),
+            'filter' => $filterForm->createView(),
         ));
     }
     /**

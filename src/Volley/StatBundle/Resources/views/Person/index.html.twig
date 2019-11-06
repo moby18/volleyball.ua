@@ -3,6 +3,24 @@
 {% block body -%}
     <h1>Player list</h1>
 
+    <div class="row">
+        <div class="col col-lg-12">
+            <form name="volley_facebundle_filter" method="post" action="" class="form-inline">
+                <div class="form-group">
+                    <label for="volley_facebundle_filter_search">Search:</label>
+                    {{ form_widget(filter.search, {'attr': {'placeholder': ''}}) }}
+                </div>
+                <button class="btn btn-primary" name="apply" type="submit" id="module_submit" iconclass="fa fa-filter"
+                        value="1"><i class="fa fa-filter"></i> Filter
+                </button>
+                <button class="btn btn-danger" name="reset" type="submit" id="module_submit" iconclass="fa fa-filter"
+                        value="1"><i class="fa fa-filter"></i> Reset
+                </button>
+                {{ form_rest(filter) }}
+            </form>
+        </div>
+    </div>
+
     <div class="pull-right">
         <a type="button"
            class="btn btn-success" href="{{ path('stat_person_new') }}">
