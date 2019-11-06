@@ -13,33 +13,18 @@ hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix:   /connect
 
-#hwi_oauth_login:
-#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-#    prefix:   /login
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
 
-#facebook_check:
-#    pattern: /login/check-facebook
 facebook_login:
-#    pattern: /connect/facebook
     path: /login/check-facebook
 
-#google_check:
-#    pattern: /login/check-google
 google_login:
-#    pattern: /connect/google
     path: /login/check-google
-
-#vkontakte_check:
-#    pattern: /login/check-vkontakte
-vkontakte_login:
-#    pattern: /connect/vkontakte
-    path: /login/check-vkontakte
 
 instagram_login:
     path: /login/check-instagram
-
-twitter_login:
-    path: /login/check-twitter
 
 logout:
     path: /logout
@@ -80,29 +65,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-volley_face:
-    resource: "@VolleyFaceBundle/Resources/config/routing.yml"
-    prefix:   /
-
-#fos_user_security:
-#    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-#
-#fos_user_security:
-#    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-#
-#fos_user_profile:
-#    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-#    prefix: /profile
-#
-#fos_user_register:
-#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-#    prefix: /register
-#
-#fos_user_resetting:
-#    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-#    prefix: /resetting
-#
-#fos_user_change_password:
-#    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-#    prefix: /profile

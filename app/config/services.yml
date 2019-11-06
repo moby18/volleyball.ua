@@ -20,14 +20,14 @@ services:
       arguments: ['@assets._default_package']
       public: true
 
-    volley_oauth_provider:
-            class: Volley\WebBundle\Security\User\VolleyOAuthProvider
-            arguments:
-                - "@doctrine.orm.entity_manager"
-                - "@security.password_encoder"
-
     hwi_oauth.user.provider.entity:
-        class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+      class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+
+    volley_oauth_provider:
+      class: Volley\WebBundle\Security\User\VolleyOAuthProvider
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@security.password_encoder"
 
 #    volley_oauth_provider:
 #        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider
