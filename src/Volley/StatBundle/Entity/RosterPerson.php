@@ -27,7 +27,7 @@ class RosterPerson
     /**
      * @var integer
      *
-     * @ORM\Column(name="number", type="integer", nullable=false)
+     * @ORM\Column(name="number", type="integer", nullable=true)
      */
     private $number;
 
