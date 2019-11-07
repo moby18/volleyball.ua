@@ -74,7 +74,7 @@ class PersonController extends AbstractController
     /**
      * Creates a new Person entity.
      *
-     * @Route("/", name="stat_person_create", methods={"POST"})
+     * @Route("/create", name="stat_person_create", methods={"POST"})
      * @Template("VolleyStatBundle:Person:new.html.twig")
      */
     public function createAction(Request $request)

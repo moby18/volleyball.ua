@@ -73,7 +73,7 @@ class RoundController extends AbstractController
     /**
      * Creates a new Round entity.
      *
-     * @Route("/", name="stat_round_create", methods={"POST"})
+     * @Route("/create", name="stat_round_create", methods={"POST"})
      * @Template("VolleyStatBundle:Round:new.html.twig")
      */
     public function createAction(Request $request)

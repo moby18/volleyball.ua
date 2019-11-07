@@ -73,7 +73,7 @@ class SeasonController extends AbstractController
     /**
      * Creates a new Season entity.
      *
-     * @Route("/", name="stat_season_create", methods={"POST"})
+     * @Route("/create", name="stat_season_create", methods={"POST"})
      * @Template("VolleyStatBundle:Season:new.html.twig")
      */
     public function createAction(Request $request)
