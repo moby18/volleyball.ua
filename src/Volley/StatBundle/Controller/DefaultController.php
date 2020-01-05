@@ -32,7 +32,8 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('Unable to find team.');
         }
         $em = $this->getDoctrine()->getManager();
-        $roster = $em->getRepository('VolleyStatBundle:Roster')->findOneBy(['team'=> $team->getId(), 'current' => true]);
+	    $rosters = $em->getRepository('VolleyStatBundle:Roster')->findBy(['team'=> $team->getId(), 'current' => true], ['id' => 'DESC'], 1);
+	    if (count($rosters)) $roster = $rosters[0];
         $posts = $em->getRepository('VolleyFaceBundle:Post')->findByTeam($team, 3, 0);
         return array(
             'team' => $team,

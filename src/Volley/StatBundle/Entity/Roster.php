@@ -27,7 +27,7 @@ class Roster
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
@@ -156,7 +156,7 @@ class Roster
 
     function __toString()
     {
-        return $this->getName();
+        return $this->getName() . ' - ID:' . $this->getId();
     }
 
 

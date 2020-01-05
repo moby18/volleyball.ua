@@ -2,12 +2,15 @@
 
 namespace Volley\StatBundle\Controller;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Volley\StatBundle\Entity\Season;
+use Volley\StatBundle\Form\Model\SeasonFilter;
+use Volley\StatBundle\Form\SeasonFilterType;
 use Volley\StatBundle\Form\SeasonType;
 
 /**
@@ -21,34 +24,56 @@ class SeasonController extends AbstractController
     /**
      * Lists all Season entities.
      *
-     * @Route("/", name="stat_season", methods={"GET"})
+     * @Route("/", name="stat_season", methods={"GET", "POST"})
      * @Template("VolleyStatBundle:Season:index.html.twig")
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $session = $request->getSession();
-        $page = $request->query->get('page', $session->get('season_page', 1));
-        $session->set('season_page', $page);
 
-        $query = $em->getRepository('VolleyStatBundle:Season')->createQueryBuilder('s')->getQuery();
+	    if ($request->request->get('reset', 0)) {
+		    $searchFilter = '';
+		    $page = 1;
+	    } else {
+		    $filterParams = $request->request->get('season_filter', []);
+		    $searchFilter = array_key_exists('search',$filterParams) ? $filterParams['search'] : $session->get('searchFilter', '');
+		    if ($session->get('searchFilter') != $searchFilter)
+			    $page = 1;
+		    else
+			    $page = $request->query->get('page', $session->get('season_page', 1));
+	    }
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $page,
-            20
-        );
+	    $session->set('searchFilter', $searchFilter);
+	    $session->set('season_page', $page);
+
+	    $filter = new SeasonFilter($searchFilter);
+	    $filterForm = $this->createForm(SeasonFilterType::class, $filter);
+
+	    $seasons = $em->getRepository('VolleyStatBundle:Season')->createQueryBuilder('r');
+	    if ($searchFilter != "") {
+		    $seasons->join('r.tournament', 't', Join::LEFT_JOIN);
+		    $seasons->orWhere($seasons->expr()->like('r.name', $seasons->expr()->literal('%' . $searchFilter . '%')));
+	        $seasons->orWhere($seasons->expr()->like('t.name', $seasons->expr()->literal('%' . $searchFilter . '%')));
+	    }
+	    $query = $seasons->getQuery();
+
+	    $paginator = $this->get('knp_paginator');
+	    $pagination = $paginator->paginate(
+		    $query,
+		    $page,
+		    20
+	    );
 
         return array(
             'entities' => $pagination,
+            'filter' => $filterForm->createView(),
         );
     }
     /**
      * Creates a new Season entity.
      *
-     * @Route("/", name="stat_season_create", methods={"POST"})
+     * @Route("/create", name="stat_season_create", methods={"POST"})
      * @Template("VolleyStatBundle:Season:new.html.twig")
      */
     public function createAction(Request $request)
