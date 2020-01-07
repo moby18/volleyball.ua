@@ -12,15 +12,16 @@
         <div class="navbar-inner sticky-menu">
             <div class="container">
                 <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('volley_web_homepage') }}" title="Волейбол в Україні - volleyball.ua"></a>
 
                     <button type="button" class="navbar-toggle btn-circle pull-right" data-toggle="collapse" data-target="#main-navbar-container" aria-expanded="true">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="{{ path('volley_web_homepage') }}" title="Волейбол в Україні - volleyball.ua"></a>
-
                     <button type="button" class="navbar-btn btn-icon btn-circle pull-right last visible-sm visible-xs search-button-mobile" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>
+
+                    <button type="button" class="navbar-btn btn-icon pull-right visible-sm visible-xs login-button-mobile" data-fancybox data-src="#hidden-content">{% trans %}Login{% endtrans %}</button>
 
                 </div>
 
@@ -170,12 +171,17 @@
                             </div>
                         </li>
                         <li class=""><a href="{{ path("volley_face_broadcast") }}">{% trans %}Broadcast{% endtrans %}</a></li>
-                        <li class=""><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>
-                        <li class=""><a href="{{ path("volley_face_advertising") }}">{% trans %}Advertising{% endtrans %}</a></li>
+{#                        <li class=""><a href="{{ path("volley_face_contacts") }}">{% trans %}Contact Us{% endtrans %}</a></li>#}
+{#                        <li class=""><a href="{{ path("volley_face_advertising") }}">{% trans %}Advertising{% endtrans %}</a></li>#}
                         <li class=""><a href="//www.store.volleyball.ua" target="_blank" title="{% trans %}VUStore{% endtrans %} Store.volleyball.ua">{% trans %}VUStore{% endtrans %}</a></li>
                     </ul>
 
-                    <button type="button" class="navbar-btn btn-icon btn-circle navbar-right last  hidden-sm hidden-xs search-button" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>
+                    <div class="navbar-right last hidden-sm hidden-xs">
+                        <ul class="nav navbar-nav">
+                            <li class="pull-right"><a data-fancybox data-src="#hidden-content" href="javascript:;" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</a></li>
+                        </ul>
+                        <button type="button" class="navbar-btn btn-icon btn-circle search-button" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>
+                    </div>
 
                 </div>
             </div>

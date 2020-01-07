@@ -7,9 +7,18 @@ var babel = require('gulp-babel');
 var clean = require('gulp-clean');
 var shell = require('gulp-shell');
 var sass = require('gulp-sass');
+var merge2 = require('merge2');
 sass.compiler = require('node-sass');
 
 gulp.task('style', function () {
+    var source_scss = [
+        'src/Volley/FaceBundle/Resources/public/scss/custom/header.scss',
+        'src/Volley/FaceBundle/Resources/public/scss/custom/body.scss',
+    ];
+    var scssStream = gulp.src(source_scss)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('style_sass.scss'));
+
     var source = [
         // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
         'node_modules/font-awesome/css/font-awesome.min.css',
@@ -20,15 +29,17 @@ gulp.task('style', function () {
         'src/Volley/FaceBundle/Resources/public/css/boss/style.css',
         'src/Volley/FaceBundle/Resources/public/css/boss/green.css',
         'src/Volley/FaceBundle/Resources/public/css/custom/global.css',
-        'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
+        // 'src/Volley/FaceBundle/Resources/public/css/custom/header.css',
         // 'src/Volley/FaceBundle/Resources/public/css/custom/body.css',
-        'src/Volley/FaceBundle/Resources/public/scss/custom/body.scss',
         'node_modules/owl.carousel/dist/assets/owl.carousel.min.css',
+        'src/Volley/FaceBundle/Resources/public/bower_components/fancybox/dist/jquery.fancybox.css',
     ];
-    gulp.src(source)
+    var cssStream = gulp.src(source)
+        .pipe(concat('style_css.css'));
+
+    merge2(cssStream, scssStream)
         // .pipe(sourcemaps.init())
-        .pipe(concat('style.scss'))
-        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('style.css'))
         .pipe(minifyCSS({level: {1: {specialComments: 0}}}))
         // .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('web/css/'));
@@ -100,6 +111,7 @@ gulp.task('script_footer', function () {
         'src/Volley/FaceBundle/Resources/public/js/custom/game-center.js',
         // 'node_modules/owl.carousel/dist/owl.carousel.min.js',
         // 'src/Volley/FaceBundle/Resources/public/js/custom/matches.js',
+        'src/Volley/FaceBundle/Resources/public/bower_components/fancybox/dist/jquery.fancybox.min.js',
     ];
     gulp.src(source)
         //.pipe(sourcemaps.init())
@@ -174,7 +186,7 @@ gulp.task('assets_install', shell.task([
 ]));
 
 gulp.task('clean', function () {
-    return gulp.src(['web/css/*', 'web/js/*', 'web/images/*', 'web/fonts/*'/*, 'web/bundles/*'*/])
+    return gulp.src(['web/css/*', 'web/js/*', 'web/images/*', 'web/fonts/*'])
         .pipe(clean());
 });
 
