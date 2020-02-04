@@ -1,8 +1,3 @@
-volley_web_homepage:
-    resource: "Volley\WebBundle\Controller\DefaultController"
-    type: annotation
-    prefix:   /
-
 volley_web_security:
     resource: "Volley\WebBundle\Controller\SecurityController"
     type: annotation

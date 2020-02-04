@@ -8,6 +8,7 @@
         body {
             background: #eee !important;
         }
+
         .form-signin {
             max-width: 380px;
             padding: 15px 35px 45px;
@@ -15,24 +16,29 @@
             background-color: #fff;
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
+
         .form-signin-heading,
         .checkbox {
             margin-bottom: 30px;
         }
+
         .checkbox {
             font-weight: normal;
         }
+
         .form-control {
             position: relative;
             font-size: 16px;
             height: auto;
             padding: 10px;
         }
+
         input[type="text"] {
             margin-bottom: -1px;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
+
         input[type="password"] {
             margin-bottom: 20px;
             border-top-left-radius: 0;
@@ -42,78 +48,20 @@
 {% endblock %}
 
 {% block body %}
-    {#<div id="fb-root"></div>#}
-    {#<script>#}
-        {#window.fbAsyncInit = function() {#}
-            {#// init the FB JS SDK#}
-            {#FB.init({#}
-                {#appId      : '12345678910',                        // App ID from the app dashboard#}
-                {#channelUrl : '//volleyball.ua/',      // Channel file for x-domain comms#}
-                {#status     : true,                                 // Check Facebook Login status#}
-                {#xfbml      : true                                  // Look for social plugins on the page#}
-            {#});#}
-        {#};#}
-
-        {#// Load the SDK asynchronously#}
-        {#(function(d, s, id){#}
-            {#var js, fjs = d.getElementsByTagName(s)[0];#}
-            {#if (d.getElementById(id)) {return;}#}
-            {#js = d.createElement(s); js.id = id;#}
-            {#js.src = "//connect.facebook.net/en_US/all.js";#}
-            {#fjs.parentNode.insertBefore(js, fjs);#}
-        {#}(document, 'script', 'facebook-jssdk'));#}
-
-        {#function fb_login() {#}
-            {#FB.getLoginStatus(function(response) {#}
-                {#if (response.status === 'connected') {#}
-                    {#// connected#}
-                    {#alert('Already connected, redirect to login page to create token.');#}
-                    {#document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";#}
-                {#} else {#}
-                    {#// not_authorized#}
-                    {#FB.login(function(response) {#}
-                        {#if (response.authResponse) {#}
-                            {#document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";#}
-                        {#} else {#}
-                            {#alert('Cancelled.');#}
-                        {#}#}
-                    {#}, {scope: 'email'});#}
-                {#}#}
-            {#});#}
-        {#}#}
-    {#</script>#}
-
-
-    {#<a href="{{ path('_demo_secured_hello_admin', { 'name': name }) }}">Hello resource secured for <strong>admin</strong> only.</a>#}
-
-    {#<p>#}
-        {#<a href="#" onclick="fb_login();">Facebook Connect Button (Dialog)</a>#}
-    {#</p>#}
 
     {# Bonus: Show all available login link in HWIOAuthBundle #}
-    {#{% render(controller('HWIOAuthBundle:Connect:connect')) %}#}
-
-    {#<a href="{{ path('facebook_login') }}">Login via Facebook</a> <br>#}
-    {#<a href="{{ path('google_login') }}">Login via Google</a> <br>#}
+    {#{{  render(controller('HWIOAuthBundle:Connect:connect')) }}#}
 
     <div class="container">
 
         {% if error is defined and error %}
-            <span>{{ error }}</span>
+            {#            <div class="alert alert-danger" role="alert">#}
+            {#                {{ error|trans({}, 'FOSUserBundle') }}#}
+            {#            </div>#}
+            <div class="alert alert-danger" role="alert">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
         {% endif %}
-        {% for owner in hwi_oauth_resource_owners() %}
-            <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br />
-        {% endfor %}
-
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        {#{% if error %}#}
-            {#<div class="alert alert-danger" role="alert">#}
-                {#{{ error|trans({}, 'FOSUserBundle') }}#}
-            {#</div>#}
-        {#{% endif %}#}
 
         <form class="form-signin" action="{{ path('login_check') }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -127,7 +75,7 @@
             <label for="inputPassword"
                    class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
             <input type="password" id="password" name="_password" class="form-control"
-                   placeholder="{{ 'user.admin.email'|trans({}) }}" required="true">
+                   placeholder="{{ 'user.admin.password'|trans({}) }}" required="true">
 
             <div class="checkbox">
                 <label>
@@ -138,6 +86,10 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit"
                     type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+
+            {% for owner in hwi_oauth_resource_owners() %}
+                <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br/>
+            {% endfor %}
         </form>
     </div>
 

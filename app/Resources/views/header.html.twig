@@ -21,7 +21,13 @@
 
                     <button type="button" class="navbar-btn btn-icon btn-circle pull-right last visible-sm visible-xs search-button-mobile" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>
 
-                    <button type="button" class="navbar-btn btn-icon pull-right visible-sm visible-xs login-button-mobile" data-fancybox data-src="#hidden-content">{% trans %}Login{% endtrans %}</button>
+                    {% if is_granted('ROLE_USER') %}
+                        <button type="button" class="navbar-btn btn-icon pull-right visible-sm visible-xs login-button-mobile" onclick="window.location.href = '{{ path('logout') }}';">{% trans %}Logout{% endtrans %}</button>
+                        <span class="pull-right visible-sm visible-xs login-button-mobile">{{ app.user.username }}</span>
+                    {% else %}
+{#                        <button type="button" class="navbar-btn btn-icon pull-right visible-sm visible-xs login-button-mobile" data-fancybox data-src="#hidden-content">{% trans %}Login{% endtrans %}</button>#}
+                        <button type="button" class="navbar-btn btn-icon pull-right visible-sm visible-xs login-button-mobile" onclick="window.location.href = '{{ path('login_route') }}';">{% trans %}Login{% endtrans %}</button>
+                    {% endif %}
 
                 </div>
 
@@ -178,7 +184,12 @@
 
                     <div class="navbar-right last hidden-sm hidden-xs">
                         <ul class="nav navbar-nav">
-                            <li class="pull-right"><a data-fancybox data-src="#hidden-content" href="javascript:;" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</a></li>
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="pull-right"><a href="{{ path('logout') }}" title="{% trans %}Logout{% endtrans %}">{{ app.user.username }}: {% trans %}Logout{% endtrans %}</a></li>
+                            {% else %}
+{#                                <li class="pull-right"><a data-fancybox data-src="#hidden-content" href="javascript:;" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</a></li>#}
+                                <li class="pull-right"><a href="{{ path('login_route') }}" title="{% trans %}Login{% endtrans %}">{% trans %}Login{% endtrans %}</a></li>
+                            {% endif %}
                         </ul>
                         <button type="button" class="navbar-btn btn-icon btn-circle search-button" data-toggle="collapse" data-target="#header-search-form"><i class="fa fa-search"></i></button>
                     </div>
