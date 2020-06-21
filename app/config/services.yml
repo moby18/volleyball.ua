@@ -1,33 +1,43 @@
+#imports:
+#  - { resource: '@VolleyWebBundle/Resources/config/services.yml' }
+
 parameters:
-    volley.sitemap.listener.class: Volley\FaceBundle\Listener\SitemapSubscriber
+  volley.sitemap.listener.class: Volley\FaceBundle\Listener\SitemapSubscriber
 
 services:
-    twig.extension.intl:
-          class: Twig_Extensions_Extension_Intl
-          tags:
-              - { name: twig.extension }
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }
 
-    my.sitemap.listener:
-      class: "%volley.sitemap.listener.class%"
-      arguments:
-        - "@router"
-        - "@doctrine"
-      tags:
-        - { name: "kernel.event_subscriber", priority: 100 }
+  my.sitemap.listener:
+    class: "%volley.sitemap.listener.class%"
+    arguments:
+      - "@router"
+      - "@doctrine"
+    tags:
+      - { name: "kernel.event_subscriber", priority: 100 }
 
-    assets.packages:
-      class: Symfony\Component\Asset\Packages
-      arguments: ['@assets._default_package']
-      public: true
+  assets.packages:
+    class: Symfony\Component\Asset\Packages
+    arguments: ['@assets._default_package']
+    public: true
 
-    hwi_oauth.user.provider.entity:
-      class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+  hwi_oauth.user.provider.entity:
+    class: HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
 
-    volley_oauth_provider:
-      class: Volley\WebBundle\Security\User\VolleyOAuthProvider
-      arguments:
-          - "@doctrine.orm.entity_manager"
-          - "@security.password_encoder"
+  volley_oauth_provider:
+    class: Volley\WebBundle\Security\User\VolleyOAuthProvider
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@security.password_encoder"
+
+  volley_user_manager:
+    class: Volley\WebBundle\Service\UserManager
+    arguments: ["@security.user_password_encoder.generic"]
+    public: true
+    tags:
+      - { name: volley_user_manager }
 
 #    volley_oauth_provider:
 #        class: HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider

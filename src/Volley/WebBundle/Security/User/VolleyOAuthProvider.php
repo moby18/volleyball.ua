@@ -43,9 +43,11 @@ class VolleyOAuthProvider implements UserProviderInterface, OAuthAwareUserProvid
         $user = $em->getRepository('VolleyWebBundle:User')->findOneBy(['email' => $response->getEmail()]);
         if ($user === null) {
             $user = new User();
+
 //            $plainPassword = "qwerty123456";
 //            $encoded = $this->encoder->encodePassword($user, $plainPassword);
 //            $user->setPassword($encoded);
+
             $user->setEmail($response->getEmail());
                 if ($type === 'vkontakte') {
                     $user->setFirstName($response->getFirstName())

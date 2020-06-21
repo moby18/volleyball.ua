@@ -2,7 +2,7 @@ security:
 
     encoders:
             Volley\WebBundle\Entity\User:
-                algorithm: bcrypt
+                algorithm: auto
 
     role_hierarchy:
         ROLE_USER:        [ROLE_USER]

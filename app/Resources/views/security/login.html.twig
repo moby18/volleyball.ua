@@ -55,9 +55,6 @@
     <div class="container">
 
         {% if error is defined and error %}
-            {#            <div class="alert alert-danger" role="alert">#}
-            {#                {{ error|trans({}, 'FOSUserBundle') }}#}
-            {#            </div>#}
             <div class="alert alert-danger" role="alert">
                 {{ error.messageKey|trans(error.messageData, 'security') }}
             </div>
@@ -66,14 +63,14 @@
         <form class="form-signin" action="{{ path('login_check') }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <h2 class="form-signin-heading">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</h2>
-            <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+            <h2 class="form-signin-heading">{{ 'layout.login'|trans({}) }}</h2>
+            <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans({}) }}</label>
             <input type="text" id="username" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}"
                    required="true"
                    autofocus="" name="_username">
-            <br>
+            <br/>
             <label for="inputPassword"
-                   class="sr-only">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                   class="sr-only">{{ 'security.login.password'|trans({}) }}</label>
             <input type="password" id="password" name="_password" class="form-control"
                    placeholder="{{ 'user.admin.password'|trans({}) }}" required="true">
 
@@ -81,11 +78,15 @@
                 <label>
                     <input type="checkbox"
                            value="on" id="remember_me"
-                           name="_remember_me"> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                           name="_remember_me"> {{ 'security.login.remember_me'|trans({}) }}
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit"
-                    type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                    type="submit">{{ 'security.login.submit'|trans({}) }}</button>
+            <br/>
+            <a href="{{ path('register_route') }}">{{ 'layout.register'|trans({}) }}</a>
+
+            <br/><br/>
 
             {% for owner in hwi_oauth_resource_owners() %}
                 <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br/>

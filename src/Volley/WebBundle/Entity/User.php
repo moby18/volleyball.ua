@@ -2,6 +2,7 @@
 
 namespace Volley\WebBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -25,19 +26,25 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="string", length=180, nullable=true)
      */
     private $username;
 
+	/**
+	 * @ORM\Column(type="string", nullable=true)
+	 */
+	private $salt;
+
     /**
-     * @ORM\Column(type="string", length=64, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
     private $plainPassword;
+    private $confirmPassword;
 
     /**
-     * @ORM\Column(type="string", length=60, unique=true)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
@@ -50,6 +57,11 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
+
+	/**
+	 * @ORM\Column(type="string", length=60, nullable=true)
+	 */
+	private $phone;
 
     /**
      * @var string
@@ -100,10 +112,21 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      */
     protected $type;
 
+	/**
+	 * @ORM\Column(name="enabled", type="boolean")
+	 */
+	private $enabled;
+
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $isActive;
+    private $active;
+
+	/**
+	/**
+	 * @ORM\Column(type="json_array")
+	 */
+	private $roles = array();
 
     /**
      * @ORM\Column(name="last_login", type="datetime", nullable=true)
@@ -113,7 +136,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     /**
      * Random string sent to the user email address in order to verify it
      *
-     * @ORM\Column(name="confirmation_token", type="string", length=64, nullable=true)
+     * @ORM\Column(name="confirmation_token", type="string", length=180, nullable=true)
      */
     private $confirmationToken;
 
@@ -122,18 +145,24 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
      */
     private $passwordRequestedAt;
 
-    /**
-    /**
-     * @ORM\Column(type="json_array")
-     */
-    private $roles = array();
+	/**
+	 * @ORM\OneToMany(targetEntity="\Volley\FaceBundle\Entity\Post", mappedBy="createdBy")
+	 **/
+	private $posts;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\Volley\FaceBundle\Entity\Post", mappedBy="modifiedBy")
+	 **/
+	private $modified_posts;
 
     public function __construct()
     {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
+        $this->active = true;
+        $this->enabled = true;
+        $this->salt = md5(uniqid(null, true));
         $this->setRoles([static::ROLE_DEFAULT]);
+	    $this->posts = new ArrayCollection();
+	    $this->modified_posts = new ArrayCollection();
     }
 
     public function getId() {
@@ -205,6 +234,22 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         $this->plainPassword = $plainPassword;
     }
 
+	/**
+	 * @return mixed
+	 */
+	public function getConfirmPassword()
+	{
+		return $this->confirmPassword;
+	}
+
+	/**
+	 * @param mixed $confirmPassword
+	 */
+	public function setConfirmPassword($confirmPassword)
+	{
+		$this->plainPassword = $confirmPassword;
+	}
+
     /**
      * Returns the roles or permissions granted to the user for security.
      */
@@ -243,6 +288,14 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return in_array(strtoupper($role), $this->getRoles(), true);
     }
 
+	/**
+	 * @return mixed
+	 */
+	public function getPosts()
+	{
+		return $this->posts;
+	}
+
     public function eraseCredentials()
     {
     }
@@ -260,11 +313,6 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     public function isCredentialsNonExpired()
     {
         return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isActive;
     }
 
     /**
@@ -302,6 +350,24 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         $this->lastName = $lastName;
         return $this;
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getPhone()
+	{
+		return $this->phone;
+	}
+
+	/**
+	 * @param mixed $phone
+	 * @return User
+	 */
+	public function setPhone($phone)
+	{
+		$this->phone = $phone;
+		return $this;
+	}
 
     /**
      * @return string
@@ -429,21 +495,39 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function isActive()
+	{
+		return $this->active;
+	}
+
+	/**
+	 * @param mixed $active
+	 * @return User
+	 */
+	public function setActive($active)
+	{
+		$this->active = $active;
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function isEnabled()
+	{
+		return $this->enabled;
+	}
 
     /**
-     * @param mixed $isActive
+     * @param mixed $enabled
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setEnabled($enabled)
     {
-        $this->isActive = $isActive;
+        $this->enabled = $enabled;
         return $this;
     }
 
@@ -526,7 +610,8 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
             $this->username,
             $this->email,
             $this->password,
-            $this->isActive
+            $this->active,
+            $this->enabled
         ));
     }
 
@@ -538,7 +623,8 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
             $this->username,
             $this->email,
             $this->password,
-            $this->isActive
+            $this->active,
+            $this->enabled
             ) = unserialize($serialized);
     }
 }
