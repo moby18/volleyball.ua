@@ -6,4 +6,5 @@ User-agent: *
 Disallow: /admin/
 Disallow: /app_dev.php
 Disallow: /page/
+Disallow: /*?*
 Host: volleyball.ua
