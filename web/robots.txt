@@ -7,5 +7,5 @@ Disallow: /admin/
 Disallow: /app_dev.php
 Disallow: /page/
 Disallow: /*page*
-Disallow: /*?*
+Disallow: /?*
 Host: volleyball.ua
