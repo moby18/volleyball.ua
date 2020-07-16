@@ -10,4 +10,7 @@ Disallow: /?f=*
 Disallow: /?page_type=*
 Disallow: /?id=*
 Disallow: /?page__type=*
+Disallow: /?start=*
+Disallow: /?option=*
+Disallow: /?cntr=*
 Host: volleyball.ua
