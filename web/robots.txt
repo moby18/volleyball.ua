@@ -16,5 +16,5 @@ Disallow: /?cntr=*
 Disallow: /?format=*
 Disallow: /?catid=*
 Disallow: /?mode=*
-Disallow: /?page%252520_type=*
+Disallow: /?searchword=*
 Host: volleyball.ua

@@ -4,7 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 // prevent bot to access to old urls
 //$regex_arr  = ["/catid=/", "/format=/", "/cntr=/", "/option=/", "/start=/", "/page__type=/", "/id=/", "/page_type=/", "/f=/", "/emulatemode=/"];
-$regex_arr  = ["/page%252520_type=/"];
+$regex_arr  = ["/searchword=/"];
 if ($_SERVER['QUERY_STRING']) {
 	foreach ($regex_arr as $regex) {
 		if(preg_match($regex, $_SERVER['QUERY_STRING'], $match)) {
