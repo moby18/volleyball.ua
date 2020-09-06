@@ -29,7 +29,9 @@ class PersonType extends AbstractType
             ->add('middleName')
             ->add('lastName')
             ->add('slug')
-            ->add('country')
+            ->add('country', null, [
+                'label' => 'Country of citizenship'
+            ])
             ->add('birthDate', DateType::class, array(
                     'years' => range(1950, 2016),
                     'format' => 'dd-MMM-yyyy'

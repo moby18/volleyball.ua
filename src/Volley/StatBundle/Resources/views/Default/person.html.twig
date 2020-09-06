@@ -38,10 +38,12 @@
                                 <div><strong>{{ person.position|trans }}</strong></div>
                                 <br/>
                                 <div>Громадянство: {{ person.country }}</div>
-                                <div>Національність: {{ person.nationality }}</div>
+{#                                <div>Національність: {{ person.nationality }}</div>#}
                                 <div>Дата народження: {{ person.birthDate|date('d.m.Y') }}</div>
                                 <div>Зріст: {{ person.height ? person.height : '-' }} см</div>
-                                <div>Вага: {{ person.weight ? person.weight : '-' }} кг</div>
+                                {% if person.weight %}
+                                    <div>Вага: {{ person.weight ? person.weight : '-' }} кг</div>
+                                {% endif %}
                                 <div>Висота удару: {{ person.spike ? person.spike : '-' }} см</div>
                                 <div>Висота блоку: {{ person.block ? person.block : '-' }} см</div>
                             </div>
