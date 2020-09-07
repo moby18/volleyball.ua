@@ -33,7 +33,7 @@ class PersonType extends AbstractType
                 'label' => 'Country of citizenship'
             ])
             ->add('birthDate', DateType::class, array(
-                    'years' => range(1950, 2016),
+                    'years' => range(1940, 2016),
                     'format' => 'dd-MMM-yyyy'
                 )
             )

@@ -295,7 +295,7 @@
         mask: false,
         validateOnBlur: true,
         allowBlank: true,
-        yearStart: 1950,
+        yearStart: 1940,
         yearEnd: 2050,
         style: '',
         id: '',

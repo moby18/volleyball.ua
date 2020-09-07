@@ -20,7 +20,7 @@ class PlayerType extends AbstractType
             ->add('middleName')
             ->add('lastName')
             ->add('birthDate',DateType::class, array(
-                'years' => range(1950,2014))
+                'years' => range(1940,2014))
             )
             ->add('height')
             ->add('weight')
