@@ -172,6 +172,8 @@ class SecurityController extends Controller
 	 */
 	public function createAction(Request $request)
 	{
+        $userManager = $this->get('volley_user_manager');
+
 		$entity = new User();
 		$form   = $this->createCreateForm($entity);
 		$form->handleRequest($request);
@@ -180,14 +182,38 @@ class SecurityController extends Controller
 		{
 			$em = $this->getDoctrine()->getManager();
 
+            $entity->setEnabled(false);
+            $entity->setActive(false);
+
+            $entity->setConfirmationToken($userManager->generateToken());
+
 			$entity = $this->container->get('volley_user_manager')->encodePassword($entity);
 //			$entity = $this->get('volley_user_manager')->encodePassword($entity);
 //			$entity = $userManager->encodePassword($entity);
 			$entity->setUsername($entity->getFirstName() . ' ' . $entity->getLastName());
 
-
 			$em->persist($entity);
 			$em->flush();
+
+            // TODO
+            $message = new \Swift_Message();
+            $message
+                ->setSubject('Confirm link')
+                ->setFrom('volleyball.ua@gmail.com')
+                ->setTo($entity->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'VolleyFaceBundle:Email:order.html.twig',
+                        [
+                            'name' => '1',
+                            'phone' => '2',
+                            'email' => '3',
+                            'comments' => '4',
+                        ]
+                    ),
+                    'text/html'
+                );
+            $this->get('mailer')->send($message);
 
 			return $this->redirect($this->generateUrl('login_route'));
 		}

@@ -1,53 +1,6 @@
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ asset('css/style_admin.css') }}" type="text/css"/>
-
-    <style type="text/css">
-        body {
-            background: #eee !important;
-        }
-
-        .form-signin {
-            max-width: 380px;
-            padding: 15px 35px 45px;
-            margin: 0 auto;
-            background-color: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .form-signin-heading,
-        .checkbox {
-            margin-bottom: 30px;
-        }
-
-        .checkbox {
-            font-weight: normal;
-        }
-
-        .form-control {
-            position: relative;
-            font-size: 16px;
-            height: auto;
-            padding: 10px;
-        }
-
-        input[type="text"] {
-            margin-bottom: -1px;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        input[type="password"] {
-            margin-bottom: 20px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
-{% endblock %}
-
-{% block body %}
+{% block content %}
 
     {# Bonus: Show all available login link in HWIOAuthBundle #}
     {#{{  render(controller('HWIOAuthBundle:Connect:connect')) }}#}
@@ -60,38 +13,50 @@
             </div>
         {% endif %}
 
-        <form class="form-signin" action="{{ path('login_check') }}" method="post">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div  class="user-form">
+            <form action="{{ path('login_check') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <h2 class="form-signin-heading">{{ 'layout.login'|trans({}) }}</h2>
-            <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans({}) }}</label>
-            <input type="text" id="username" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}"
-                   required="true"
-                   autofocus="" name="_username">
-            <br/>
-            <label for="inputPassword"
-                   class="sr-only">{{ 'security.login.password'|trans({}) }}</label>
-            <input type="password" id="password" name="_password" class="form-control"
-                   placeholder="{{ 'user.admin.password'|trans({}) }}" required="true">
+                <h2 class="user-form-heading">{{ 'layout.login'|trans({}) }}</h2>
+{#                <label for="inputEmail" class="sr-only">{{ 'security.login.username'|trans({}) }}</label>#}
+                <input type="text" id="username" class="form-control" placeholder="{{ 'user.admin.email'|trans({}) }}" required="true" autofocus="" name="_username">
+                <br/>
+{#                <label for="inputPassword" class="sr-only">{{ 'security.login.password'|trans({}) }}</label>#}
+                <input type="password" id="password" name="_password" class="form-control" placeholder="{{ 'user.admin.password'|trans({}) }}" required="true">
 
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"
-                           value="on" id="remember_me"
-                           name="_remember_me"> {{ 'security.login.remember_me'|trans({}) }}
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit"
-                    type="submit">{{ 'security.login.submit'|trans({}) }}</button>
-            <br/>
-            <a href="{{ path('register_route') }}">{{ 'layout.register'|trans({}) }}</a>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               value="on" id="remember_me"
+                               name="_remember_me"> {{ 'security.login.remember_me'|trans({}) }}
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit"
+                        type="submit">{{ 'security.login.submit'|trans({}) }}</button>
+                <br/>
+                <a href="{{ path('register_route') }}">{{ 'layout.register'|trans({}) }}</a>
 
-            <br/><br/>
+                <br/><br/>
 
-            {% for owner in hwi_oauth_resource_owners() %}
-                <a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br/>
-            {% endfor %}
-        </form>
+                <div class="social-login-wrapper">
+                    <p>{{ 'security.login_with_socials'|trans({}) }}</p>
+
+                    {% for owner in hwi_oauth_resource_owners() %}
+                        {% if owner == 'facebook' %}
+                            <a class="social-login-item {{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        {% elseif owner == 'google' %}
+                            <a class="social-login-item {{ owner }}" href="{{ hwi_oauth_login_url(owner) }}">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        {% else %}
+                            {#<a class="social-login-item" href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a> <br/>#}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

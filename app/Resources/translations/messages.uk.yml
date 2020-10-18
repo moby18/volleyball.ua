@@ -75,6 +75,14 @@ security:
     password: Пароль
     remember_me: 'Запам''ятати мене'
     submit: Увійти
+  login_with_socials: або увійдіть за допомогою соцмереж
+  register:
+    email: Email
+    firstName: Ім'я
+    lastName: Прізвище
+    plainPassword: Пароль
+    confirmPassword: Повторіть пароль
+    submit: Зареєструватися
 profile:
   show:
     username: 'Ім''я користувача'

@@ -6,6 +6,59 @@
 
 /* Slider */
 
+/* User Form */
+.user-form {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: #fff;
+
+    .social-login-wrapper {
+        text-align: center;
+
+        .social-login-item {
+            color: #ffffff;
+            display: inline-block;
+            width: 60px;
+            margin: 5px;
+            height: 60px;
+            font-size: 28px;
+            line-height: 60px;
+            text-align: center;
+
+            &.facebook {
+                background-color: #4c68ad;
+            }
+
+            &.google {
+                background-color: #db4935;
+            }
+        }
+    }
+}
+
+.user-form-heading,
+.checkbox {
+    margin-bottom: 30px;
+}
+
+.checkbox {
+    font-weight: normal;
+}
+
+.form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    margin: 0;
+}
+
+input {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
 /* Section */
 .section-title {
     background-color: #20A3CF;
