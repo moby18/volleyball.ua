@@ -9,7 +9,7 @@
     </a>
     <div class="news-info row">
         <div class="col col-lg-7 col-md-7 col-sm-7 col-xs-7">
-            <span class="news-date">{{ item.updated|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
+            <span class="news-date">{{ item.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
             <a href="{{ path('volley_face_blog',{'category_slug': item.category.slug}) }}"
                title="{{ item.category.name }}"
                style="color: {{ color }}">{{ item.category.name }}</a></span>
