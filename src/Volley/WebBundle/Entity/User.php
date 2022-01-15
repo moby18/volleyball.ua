@@ -66,7 +66,7 @@ class User implements AdvancedUserInterface, EquatableInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(name="fb_token", type="string", nullable=true)
+     * @ORM\Column(name="fb_token", type="text", nullable=true)
      */
     protected $fb_token;
 
