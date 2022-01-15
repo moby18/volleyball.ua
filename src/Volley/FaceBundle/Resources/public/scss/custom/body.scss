@@ -1068,6 +1068,9 @@ article {
 }
 article > .section {
     flex-grow: 1;
+    & > .container {
+        background-color: #ffffff;
+    }
 }
 /*article > header,*/
 article > .section,

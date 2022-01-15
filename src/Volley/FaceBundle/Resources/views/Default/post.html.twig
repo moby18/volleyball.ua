@@ -43,7 +43,7 @@
 
                     <div class="news-info row">
                         <div class="col col-lg-9 col-md-9 col-sm-9 col-xs-9">
-            <span class="news-date">{{ post.created|localizeddate('none', 'none', null, null, "cccc, d MMMM") }} <br/>
+            <span class="news-date">{{ post.modified|localizeddate('none', 'none', null, null, "cccc, d MMMM YYYY") }} <br/>
             <a href="{{ path('volley_face_blog',{'category_slug': post.category.slug}) }}"
                title="{{ post.category.name }}"
                style="color: {{ color }}">{{ post.category.name }}</a></span>
@@ -65,6 +65,16 @@
                     </div>
 
                     {% include 'VolleyFaceBundle:Default/includes:ads_block_bottom_main.html.twig' %}
+
+                    <div class="row visible-xs">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    {% include 'VolleyFaceBundle:Default/includes:1xbet_mobile.html.twig' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="post-content">
                         <p>
@@ -227,6 +237,16 @@
                                 {% include 'VolleyFaceBundle:Default/includes:ads_block_right_col.html.twig' %}
                             </div>
                             <div style="clear: both"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row visible-lg visible-md visible-sm">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                {% include 'VolleyFaceBundle:Default/includes:1xbet_desktop.html.twig' %}
+                            </div>
                         </div>
                     </div>
                 </div>
