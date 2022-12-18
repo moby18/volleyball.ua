@@ -17,24 +17,16 @@
         </div>
         <div class="col col-lg-5 col-md-5 col-sm-5 col-xs-5">
             {% if item.videos %}
-                <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
-                    <div class="icon-videos" title="{{ 'post-item.post-info.icon-videos'|trans({}) }}"></div>
-                </a>
+                <div class="icon-videos" title="{{ 'post-item.post-info.icon-videos'|trans({}) }}"></div>
             {% endif %}
             {% if item.images %}
-                <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
-                    <div class="icon-images" title="{{ 'post-item.post-info.icon-images'|trans({}) }}"></div>
-                </a>
+                <div class="icon-images" title="{{ 'post-item.post-info.icon-images'|trans({}) }}"></div>
             {% endif %}
             {% if item.vu %}
-                <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
-                    <div class="icon-vu" title="{{ 'post-item.post-info.icon-vu'|trans({}) }}"></div>
-                </a>
+                <div class="icon-vu" title="{{ 'post-item.post-info.icon-vu'|trans({}) }}"></div>
             {% endif %}
             {% if item.advert %}
-                <a href="{{ path('volley_face_post',{'category_slug': item.category.slug,'post_slug': item.slug}) }}">
-                    <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
-                </a>
+                <div class="icon-advert" title="{{ 'post-item.post-info.icon-advert'|trans({}) }}">{{ 'post-item.post-info.icon-advert'|trans({}) }}</div>
             {% endif %}
         </div>
         <span class="clearfix"></span>
