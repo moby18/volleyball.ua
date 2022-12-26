@@ -306,6 +306,7 @@ class DefaultController extends AbstractController
      */
     public function mikasaVls300Action()
     {
+        return $this->redirect('https://www.store.volleyball.ua/myachi');
         return $this->render('VolleyFaceBundle:Default:mikasa-vls-300.html.twig', ['submit'=>false]);
     }
 
@@ -315,6 +316,7 @@ class DefaultController extends AbstractController
      */
     public function buyMikasaVls300Action(Request $request)
     {
+        return $this->redirect('https://www.store.volleyball.ua/myachi');
         $entity = new Purchase();
         $form = $this->createForm(PurchaseType::class, $entity, array());
         $form->add('submit', SubmitType::class, []);
