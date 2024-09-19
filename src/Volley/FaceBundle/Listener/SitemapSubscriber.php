@@ -47,7 +47,7 @@ class SitemapSubscriber implements EventSubscriberInterface
         if (is_null($section) || $section == 'default') {
 	        // Home page
 	        /** @var Post $post */
-	        $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy([],['updated'=>'DESC']);
+	        $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy(['state'=>1],['updated'=>'DESC']);
 	        $urls->addUrl(
 		        new UrlConcrete(
 			        $this->router->generate('volley_web_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
@@ -92,7 +92,7 @@ class SitemapSubscriber implements EventSubscriberInterface
             foreach ($categories as $category) {
                 $url = $this->router->generate('volley_face_blog', ['category_slug'=>$category->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
                 /** @var Post $post */
-                $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy(['category'=>$category],['updated'=>'DESC']);
+                $post = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findOneBy(['state'=>1, 'category'=>$category],['updated'=>'DESC']);
                 $urls->addUrl(
                     new UrlConcrete(
                         $url,
@@ -159,7 +159,7 @@ class SitemapSubscriber implements EventSubscriberInterface
 	    }
         if (is_null($section) || $section == 'posts') {
         	// Posts
-            $posts = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findBy([],['updated'=>'DESC']);
+            $posts = $this->doctrine->getRepository('VolleyFaceBundle:Post')->findBy(['state'=>1],['updated'=>'DESC']);
             foreach ($posts as $post) {
                 $url = $this->router->generate('volley_face_post', ['post_slug'=>$post->getSlug(),'category_slug'=>$post->getCategory()->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
                 $urls->addUrl(
