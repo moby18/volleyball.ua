@@ -6,13 +6,15 @@ const uglify = require('gulp-uglify')
 const uglify_es = require('gulp-uglify-es').default
 const babel = require('gulp-babel')
 const cleanFolder = require('gulp-clean')
-const sass = require('gulp-sass')
-sass.compiler = require('node-sass')
+// Replace deprecated node-sass with Dart Sass
+// gulp-sass v5+ accepts the compiler as an argument
+const sass = require('gulp-sass')(require('sass'))
 const exec = require('child_process').exec
 
 function style () {
   const source = [
     // 'src/Volley/FaceBundle/Resources/public/owl-carousel2/components-font-awesome/css/font-awesome.min.css',
+    'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
     'node_modules/font-awesome/css/font-awesome.min.css',
     // 'src/Volley/FaceBundle/Resources/public/css/boss/animate.css',
     'src/Volley/FaceBundle/Resources/public/css/boss/bootstrap.min.css',
@@ -167,6 +169,13 @@ function fonts () {
   .pipe(dest('web/fonts/'))
 }
 
+function webfonts () {
+  return src([
+    'node_modules/@fortawesome/fontawesome-free/webfonts/*'
+  ])
+  .pipe(dest('web/webfonts/'))
+}
+
 function assets_install (cb) {
   exec('bin/console assets:install web')
   cb()
@@ -187,6 +196,7 @@ exports.script_admin = script_admin
 exports.script_install = script_install
 exports.script_ie = script_ie
 exports.fonts = fonts
+exports.webfonts = webfonts
 exports.assets_install = assets_install
 exports.front = parallel(fonts, style, exports.script, script_install)
 exports.clean = clean
@@ -194,6 +204,7 @@ exports.default = series(
   clean,
   parallel(
     fonts,
+    webfonts,
     style,
     style_admin,
     style_ie,
