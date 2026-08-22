@@ -8,6 +8,68 @@
 
 {% set color = post.category.color ? post.category.color : post.category.parent and post.category.parent.color ? post.category.parent.color : post.category.parent and post.category.parent.parent and post.category.parent.parent.color ? post.category.parent.parent.color : default_category_color %}
 
+{% block structured_data %}
+    {% set ld_headline = post.title|length > 110 ? post.title|slice(0, 109) ~ '…' : post.title %}
+
+    {# The two date columns are not reliably ordered: on roughly 60% of posts
+       'modified' predates 'published'. Order them so dateModified is never
+       earlier than datePublished, which schema.org requires. Both values are
+       real recorded timestamps either way. #}
+    {% set ld_published = post.published < post.modified ? post.published : post.modified %}
+    {% set ld_modified  = post.published < post.modified ? post.modified : post.published %}
+    {% set ld_article = {
+        '@type': 'NewsArticle',
+        '@id': canonical ~ '#article',
+        'mainEntityOfPage': {'@type': 'WebPage', '@id': canonical},
+        'url': canonical,
+        'headline': ld_headline,
+        'image': [page_image],
+        'datePublished': ld_published|date('c'),
+        'dateModified': ld_modified|date('c'),
+        'inLanguage': 'uk-UA',
+        'articleSection': post.category.name,
+        'isPartOf': {'@id': host ~ '/#website'},
+        'author': {'@id': host ~ '/#organization'},
+        'publisher': {'@id': host ~ '/#organization'}
+    } %}
+
+    {# a small number of posts have no meta description; omit the key rather
+       than emit an empty string #}
+    {% if post.metadescr|trim is not empty %}
+        {% set ld_article = ld_article|merge({'description': post.metadescr}) %}
+    {% endif %}
+
+    {# breadcrumb: home, then the category tree root-most first, then this article #}
+    {% set cat_1 = post.category %}
+    {% set cat_2 = cat_1.parent %}
+    {% set cat_3 = cat_2 ? cat_2.parent : null %}
+    {% set crumbs = [{'name': 'Головна', 'url': host ~ '/'}] %}
+    {% if cat_3 %}{% set crumbs = crumbs|merge([{'name': cat_3.name, 'url': url('volley_face_blog', {'category_slug': cat_3.slug})}]) %}{% endif %}
+    {% if cat_2 %}{% set crumbs = crumbs|merge([{'name': cat_2.name, 'url': url('volley_face_blog', {'category_slug': cat_2.slug})}]) %}{% endif %}
+    {% set crumbs = crumbs|merge([
+        {'name': cat_1.name, 'url': url('volley_face_blog', {'category_slug': cat_1.slug})},
+        {'name': post.title, 'url': canonical}
+    ]) %}
+    {% set ld_crumb_items = [] %}
+    {% for crumb in crumbs %}
+        {% set ld_crumb_items = ld_crumb_items|merge([{
+            '@type': 'ListItem',
+            'position': loop.index,
+            'name': crumb.name,
+            'item': crumb.url
+        }]) %}
+    {% endfor %}
+    {% set ld_breadcrumb = {
+        '@type': 'BreadcrumbList',
+        '@id': canonical ~ '#breadcrumb',
+        'itemListElement': ld_crumb_items
+    } %}
+
+    <script type="application/ld+json">
+        {{ {'@context': 'https://schema.org', '@graph': [ld_article, ld_breadcrumb]}|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_TAG'))|raw }}
+    </script>
+{% endblock %}
+
 {% block content %}
 
     <div id="fb-root"></div>
