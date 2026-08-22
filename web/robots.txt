@@ -1,5 +1,4 @@
-# www.robotstxt.org/
-# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+# https://www.robotstxt.org/
 
 User-agent: *
 
@@ -16,5 +15,7 @@ Disallow: /?cntr=*
 Disallow: /?format=*
 Disallow: /?catid=*
 Disallow: /?mode=*
+Disallow: /?page%252520_type=*
 Disallow: /?searchword=*
-Host: volleyball.ua
+
+Sitemap: https://www.volleyball.ua/sitemap.xml
