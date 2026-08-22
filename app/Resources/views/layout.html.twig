@@ -143,6 +143,47 @@
         <link rel="next" href="{{next}}" />
     {% endif %}
 
+    {# structured data: sitewide identity, emitted as one linked graph #}
+    {% set ld_site_name = setting.siteName|default('Волейбол в Україні - volleyball.ua') %}
+    {% set ld_organization = {
+        '@type': 'Organization',
+        '@id': host ~ '/#organization',
+        'name': ld_site_name,
+        'url': host ~ '/',
+        'logo': {
+            '@type': 'ImageObject',
+            'url': host ~ asset('bundles/volleyface/images/vu-logo.png')
+        },
+        'sameAs': [
+            'https://www.facebook.com/volleyballua',
+            'https://twitter.com/volleyballua',
+            'https://instagram.com/volleyball.ua',
+            'https://www.t.me/volleyballua'
+        ]
+    } %}
+    {% set ld_website = {
+        '@type': 'WebSite',
+        '@id': host ~ '/#website',
+        'url': host ~ '/',
+        'name': ld_site_name,
+        'inLanguage': 'uk-UA',
+        'publisher': {'@id': host ~ '/#organization'},
+        'potentialAction': {
+            '@type': 'SearchAction',
+            'target': {
+                '@type': 'EntryPoint',
+                'urlTemplate': host ~ path('volley_face_search') ~ '?s={search_term_string}'
+            },
+            'query-input': 'required name=search_term_string'
+        }
+    } %}
+    <script type="application/ld+json">
+        {{ {'@context': 'https://schema.org', '@graph': [ld_organization, ld_website]}|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_TAG'))|raw }}
+    </script>
+
+    {# page-specific structured data, filled in by child templates #}
+    {% block structured_data %}{% endblock %}
+
     <!-- Bootstrap Core CSS -->
     {% block styles %}
         <link href="{{ asset('css/style.css') }}?v=19" rel="stylesheet" type='text/css'>
