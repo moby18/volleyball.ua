@@ -44,10 +44,16 @@
     function loadChart(period) {
         fetch(chartUrl + '?period=' + encodeURIComponent(period))
             .then(function (response) {
+                if (!response.ok) {
+                    throw new Error('Unexpected response status: ' + response.status);
+                }
                 return response.json();
             })
             .then(function (data) {
                 renderChart(data.series);
+            })
+            .catch(function () {
+                container.textContent = 'Failed to load chart data.';
             });
     }
 
