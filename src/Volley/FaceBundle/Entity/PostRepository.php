@@ -179,11 +179,15 @@ class PostRepository extends EntityRepository
     public function countGroupedByPeriod($sqlDateFormat, \DateTime $from, \DateTime $to)
     {
         $connection = $this->getEntityManager()->getConnection();
+        $tableName = $connection->quoteIdentifier($this->getClassMetadata()->getTableName());
 
-        $sql = 'SELECT DATE_FORMAT(created, :format) AS bucket, COUNT(id) AS cnt
-                FROM `Post`
-                WHERE created BETWEEN :from AND :to
-                GROUP BY bucket';
+        $sql = sprintf(
+            'SELECT DATE_FORMAT(created, :format) AS bucket, COUNT(id) AS cnt
+             FROM %s
+             WHERE created BETWEEN :from AND :to
+             GROUP BY bucket',
+            $tableName
+        );
 
         $statement = $connection->prepare($sql);
         $statement->bindValue('format', $sqlDateFormat);
