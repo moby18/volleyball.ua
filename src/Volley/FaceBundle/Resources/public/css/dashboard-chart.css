@@ -1,0 +1,31 @@
+.chart-filters {
+    margin-bottom: 15px;
+}
+
+.chart-filters .btn.active {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
+#post-frequency-chart {
+    max-width: 900px;
+}
+
+.post-frequency-chart-svg {
+    width: 100%;
+    height: auto;
+}
+
+.post-frequency-bar rect {
+    fill: #337ab7;
+}
+
+.post-frequency-bar rect:hover {
+    fill: #23527c;
+}
+
+.post-frequency-bar-label {
+    font-size: 9px;
+    fill: #666;
+}
