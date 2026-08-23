@@ -168,4 +168,32 @@ class PostFrequencyCalculatorTest extends TestCase
         $this->assertSame('%Y-%m', $this->calculator->getSqlDateFormat(PostFrequencyCalculator::PERIOD_MONTH));
         $this->assertSame('%Y', $this->calculator->getSqlDateFormat(PostFrequencyCalculator::PERIOD_YEAR));
     }
+
+    public function testGetSqlDateFormatThrowsOnInvalidPeriod()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $this->calculator->getSqlDateFormat('bogus');
+    }
+
+    public function testGetBucketKeysThrowsOnInvalidPeriod()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $this->calculator->getBucketKeys('bogus', $this->now);
+    }
+
+    public function testGetWindowStartThrowsOnInvalidPeriod()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $this->calculator->getWindowStart('bogus', $this->now);
+    }
+
+    public function testBuildSeriesThrowsOnInvalidPeriod()
+    {
+        $this->expectException('\InvalidArgumentException');
+
+        $this->calculator->buildSeries('bogus', array(), $this->now);
+    }
 }

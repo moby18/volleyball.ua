@@ -2,6 +2,12 @@
 
 namespace Volley\FaceBundle\Service;
 
+/**
+ * Precondition for formatLabel()/buildSeries(): bucket keys must originate from
+ * getBucketKeys() for that same $period (or from a PostRepository query built with
+ * the matching getSqlDateFormat() pattern). Malformed keys are not validated here
+ * and will error - callers are expected to only ever pass keys from a trusted source.
+ */
 class PostFrequencyCalculator
 {
     const PERIOD_DAY = 'day';
@@ -42,6 +48,8 @@ class PostFrequencyCalculator
 
     public function getSqlDateFormat($period)
     {
+        $this->assertValidPeriod($period);
+
         return self::$sqlDateFormats[$period];
     }
 
@@ -52,6 +60,8 @@ class PostFrequencyCalculator
      */
     public function getBucketKeys($period, \DateTime $now)
     {
+        $this->assertValidPeriod($period);
+
         $count = self::$bucketCounts[$period];
         $keys = array();
 
@@ -84,7 +94,10 @@ class PostFrequencyCalculator
 
     /**
      * @param array $countsByBucket Map of bucket key => raw count, as returned by
-     *                               PostRepository::countGroupedByPeriod().
+     *                               PostRepository::countGroupedByPeriod(). Keys must
+     *                               come from getBucketKeys() for the same $period (or
+     *                               a query built with the matching getSqlDateFormat());
+     *                               malformed keys are not validated and will error.
      *
      * @return array[] Ordered list of ['label' => string, 'count' => int]
      */
@@ -102,8 +115,13 @@ class PostFrequencyCalculator
         return $series;
     }
 
+    /**
+     * @return \DateTime Midnight at the start of the oldest bucket for the given period.
+     */
     public function getWindowStart($period, \DateTime $now)
     {
+        $this->assertValidPeriod($period);
+
         $date = $this->shiftDate($period, $now, -(self::$bucketCounts[$period] - 1));
 
         switch ($period) {
@@ -117,12 +135,25 @@ class PostFrequencyCalculator
         return $date;
     }
 
+    /**
+     * @return \DateTime The last second of $now's day.
+     */
     public function getWindowEnd(\DateTime $now)
     {
         $date = clone $now;
         $date->setTime(23, 59, 59);
 
         return $date;
+    }
+
+    /**
+     * @throws \InvalidArgumentException if $period is not one of the PERIOD_* constants.
+     */
+    private function assertValidPeriod($period)
+    {
+        if (!$this->isValidPeriod($period)) {
+            throw new \InvalidArgumentException('Invalid period: ' . $period);
+        }
     }
 
     private function shiftDate($period, \DateTime $now, $offset)
