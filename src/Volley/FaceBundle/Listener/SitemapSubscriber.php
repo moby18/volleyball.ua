@@ -144,7 +144,7 @@ class SitemapSubscriber implements EventSubscriberInterface
 		    foreach ($tournaments as $tournament) {
 			    $seasons = $this->doctrine->getRepository('VolleyStatBundle:Season')->findBy(['tournament' => $tournament]);
 			    foreach ($seasons as $season) {
-				    $url = $this->router->generate('volley_face_tournament', ['season_id'=>$season->getId(),'tournament_id'=>$tournament->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
+				    $url = $this->router->generate('stat_tournament_page', ['season_id'=>$season->getId(),'tournament_id'=>$tournament->getId()], UrlGeneratorInterface::ABSOLUTE_URL);
 				    /** @var Game $game */
 				    $game = $this->doctrine->getRepository('VolleyStatBundle:Game')->findOneBy(['season'=>$season],['updated'=>'DESC']);
 				    $urls->addUrl(
