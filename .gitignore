@@ -47,3 +47,4 @@ node_modules
 /src/Volley/FaceBundle/Resources/public/bower_components
 /web/sitemap*.xml
 /public/sitemap*.xml
+.phpunit.result.cache
