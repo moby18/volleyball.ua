@@ -29,6 +29,38 @@ class AuthRoutesTest extends KernelTestCase
     );
 
     /**
+     * Identifiers of the FOSUserBundle controllers that must never be routed
+     * to. A `_controller` default naming any of these re-exposes the feature
+     * no matter what path or route name it hides behind.
+     *
+     * Listed in all three notations this project's collection can carry, since
+     * the form depends on how the route was declared:
+     *   - `service:method`   - FOSUserBundle's own XML routing uses this;
+     *   - `Class::method`    - annotation-driven routes, and Symfony's
+     *                          preferred form;
+     *   - `Bundle:Ctrl:act`  - the legacy notation, still accepted in 4.3.
+     *
+     * `fos_user.security.controller` / SecurityController is deliberately
+     * absent: it is LIVE and backs /login, /login_check and /logout.
+     */
+    private const DISABLED_CONTROLLER_IDS = array(
+        'fos_user.registration.controller',
+        'fos_user.resetting.controller',
+        'fos_user.profile.controller',
+        'fos_user.change_password.controller',
+
+        'FOS\UserBundle\Controller\RegistrationController',
+        'FOS\UserBundle\Controller\ResettingController',
+        'FOS\UserBundle\Controller\ProfileController',
+        'FOS\UserBundle\Controller\ChangePasswordController',
+
+        'FOSUserBundle:Registration',
+        'FOSUserBundle:Resetting',
+        'FOSUserBundle:Profile',
+        'FOSUserBundle:ChangePassword',
+    );
+
+    /**
      * Every FOSUserBundle route that lets a visitor create or recover an
      * account, or manage their own profile.
      */
@@ -106,6 +138,62 @@ class AuthRoutesTest extends KernelTestCase
             $offenders,
             'No route may be exposed under a disabled auth prefix, whatever it is named: '
             .'these paths are meant to 404. Found: '.implode(', ', $offenders)
+        );
+    }
+
+    /**
+     * The path sweep above closes the obvious re-exposure, but only for URLs
+     * under the three disabled prefixes. A route at a path nobody thought to
+     * reserve - `path: /join` - still reaches the registration controller,
+     * because the controller, its form types and its handler are all still
+     * live services in the container.
+     *
+     * So sweep by destination as well as by URL: whatever a route is called
+     * and wherever it sits, it may not point at a disabled FOSUserBundle
+     * controller. Between the two sweeps, re-enabling public sign-up cannot be
+     * done without this test going red.
+     */
+    public function testNoRoutePointsAtADisabledFosUserController()
+    {
+        $collection = $this->router->getRouteCollection();
+
+        // Sanity: the live login route really does carry a string _controller
+        // naming the security controller. This proves the sweep below is
+        // reading values in a form it knows how to match, rather than passing
+        // vacuously - and pins the fact that fos_user.security is excluded
+        // from DISABLED_CONTROLLER_IDS on purpose.
+        $login = $collection->get('fos_user_security_login');
+        $this->assertNotNull($login, 'Route "fos_user_security_login" is missing.');
+        $this->assertStringContainsString(
+            'fos_user.security.controller',
+            $login->getDefault('_controller'),
+            'The login route no longer points at the live security controller.'
+        );
+
+        $offenders = array();
+
+        foreach ($collection as $name => $route) {
+            $controller = $route->getDefault('_controller');
+
+            // Not every route has a _controller, and a route declared in PHP
+            // could carry a closure rather than a string.
+            if (!is_string($controller)) {
+                continue;
+            }
+
+            foreach (self::DISABLED_CONTROLLER_IDS as $disabled) {
+                if (false !== strpos($controller, $disabled)) {
+                    $offenders[] = sprintf('%s (%s -> %s)', $name, $route->getPath(), $controller);
+                }
+            }
+        }
+
+        $this->assertSame(
+            array(),
+            $offenders,
+            'No route may point at a disabled FOSUserBundle controller, whatever its path '
+            .'or name: the services are still in the container, so a single route revives '
+            .'the feature. Found: '.implode(', ', $offenders)
         );
     }
 
