@@ -44,15 +44,18 @@ bin/console assets:install web
 ```
 
 PHPUnit 8.5 is bootstrapped by `symfony/phpunit-bridge` into
-`vendor/bin/.phpunit/`. Bootstrap it on a fresh checkout with:
+`vendor/bin/.phpunit/`. Run `simple-phpunit` **exactly once**, on a fresh
+checkout, to download it:
 
 ```bash
 ./vendor/bin/simple-phpunit --version || (cd vendor/bin/.phpunit/phpunit-8.5-0 && composer update --no-dev)
 ```
 
-After that, **invoke the binary directly** as shown above — re-running
-`simple-phpunit` rewrites that directory's `composer.json` and then fails
-against its own stale lock file.
+`simple-phpunit` is expected to fail its own final `composer install` step
+against a stale lock file; the `composer update --no-dev` fallback finishes the
+install. From then on **always invoke the downloaded binary directly**, as in
+the command above — re-running `simple-phpunit` rewrites that directory's
+`composer.json` and breaks the working install.
 
 Run a single file by path. Do not run the whole suite:
 `tests/Volley/VolleyBundle/Controller/DefaultControllerTest.php` fails on a

@@ -8,14 +8,26 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * Locks in the authentication surface of the site.
  *
  * There is no public sign-up: registration, password resetting and the user
- * profile are intentionally disabled, and accounts are created by hand in the
- * database. Login itself is unchanged and stays at /login.
+ * profile are intentionally disabled, and accounts are created from the console
+ * with `bin/console fos:user:create`. Login itself is unchanged and stays at
+ * /login.
  *
  * These are router-level assertions on purpose - they need only a booted
  * kernel, no database and no symfony/browser-kit (neither is available here).
  */
 class AuthRoutesTest extends KernelTestCase
 {
+    /**
+     * URL prefixes that must stay unreachable. Nothing at all may be routed
+     * under them - not the FOSUserBundle controllers, not a replacement of
+     * our own.
+     */
+    private const DISABLED_PATH_PREFIXES = array(
+        '/register',
+        '/resetting',
+        '/profile',
+    );
+
     /**
      * Every FOSUserBundle route that lets a visitor create or recover an
      * account, or manage their own profile.
@@ -59,6 +71,42 @@ class AuthRoutesTest extends KernelTestCase
                 sprintf('Route "%s" must not be registered: public self-service auth is disabled.', $name)
             );
         }
+    }
+
+    /**
+     * The check above is keyed to route *names*, which is precise but not
+     * sufficient on its own. Disabling the routes did not remove
+     * FOSUserBundle: its registration controller, form types, handler and
+     * listeners are all still registered in the container. Re-exposing public
+     * sign-up therefore takes a single route definition under any name at all,
+     * e.g.
+     *
+     *     volley_user_signup:
+     *         path: /register
+     *         defaults: { _controller: 'fos_user.registration.controller:registerAction' }
+     *
+     * which a name-based check cannot see. So sweep the whole RouteCollection
+     * by path instead: whatever it is called and whatever controller it points
+     * at, nothing may answer under a disabled auth prefix.
+     */
+    public function testNoRouteIsExposedUnderADisabledAuthPrefix()
+    {
+        $offenders = array();
+
+        foreach ($this->router->getRouteCollection() as $name => $route) {
+            foreach (self::DISABLED_PATH_PREFIXES as $prefix) {
+                if (0 === strpos($route->getPath(), $prefix)) {
+                    $offenders[] = sprintf('%s (%s)', $name, $route->getPath());
+                }
+            }
+        }
+
+        $this->assertSame(
+            array(),
+            $offenders,
+            'No route may be exposed under a disabled auth prefix, whatever it is named: '
+            .'these paths are meant to 404. Found: '.implode(', ', $offenders)
+        );
     }
 
     public function testLoginRoutesAreUnchanged()
