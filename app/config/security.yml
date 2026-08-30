@@ -58,7 +58,10 @@ security:
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
          - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # Commented out together with the matching route imports in
+        # app/config/routing.yml - these paths no longer exist. If those
+        # imports are ever uncommented, uncomment these two rules with them.
+        #- { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin/(player|season|tournament|team|round|team), roles: ROLE_SUPER_ADMIN }
          - { path: ^/admin/, role: ROLE_ADMIN }
