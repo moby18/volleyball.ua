@@ -166,4 +166,40 @@ class PostRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * Returns post counts grouped by a DATE_FORMAT() bucket, keyed by the formatted bucket string.
+     *
+     * @param string    $sqlDateFormat MySQL DATE_FORMAT() pattern, e.g. '%Y-%m-%d'
+     * @param \DateTime $from
+     * @param \DateTime $to
+     *
+     * @return array Map of bucket string => integer count
+     */
+    public function countGroupedByPeriod($sqlDateFormat, \DateTime $from, \DateTime $to)
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $tableName = $connection->quoteIdentifier($this->getClassMetadata()->getTableName());
+
+        $sql = sprintf(
+            'SELECT DATE_FORMAT(created, :format) AS bucket, COUNT(id) AS cnt
+             FROM %s
+             WHERE created BETWEEN :from AND :to
+             GROUP BY bucket',
+            $tableName
+        );
+
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('format', $sqlDateFormat);
+        $statement->bindValue('from', $from->format('Y-m-d H:i:s'));
+        $statement->bindValue('to', $to->format('Y-m-d H:i:s'));
+        $statement->execute();
+
+        $counts = array();
+        foreach ($statement->fetchAll(\PDO::FETCH_ASSOC) as $row) {
+            $counts[$row['bucket']] = (int) $row['cnt'];
+        }
+
+        return $counts;
+    }
 }

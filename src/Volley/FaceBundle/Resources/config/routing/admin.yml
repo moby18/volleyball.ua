@@ -1,3 +1,7 @@
 volley_face_admin_homepage:
     path:  /
     defaults: { _controller: VolleyFaceBundle:Admin:index }
+
+volley_face_admin_chart_data:
+    path:  /posts-chart-data
+    defaults: { _controller: VolleyFaceBundle:Admin:chartData }

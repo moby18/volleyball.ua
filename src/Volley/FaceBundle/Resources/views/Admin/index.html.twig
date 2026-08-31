@@ -1,3 +1,26 @@
 {% extends '::admin.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
+
+{% block styles %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/volleyface/css/dashboard-chart.css') }}" type="text/css"/>
+{% endblock %}
+
+{% block body %}
+    <h1 class="page-header">Posts per period</h1>
+
+    <div class="chart-filters" data-chart-filters>
+        <button type="button" class="btn btn-default active" data-period="day">Day</button>
+        <button type="button" class="btn btn-default" data-period="week">Week</button>
+        <button type="button" class="btn btn-default" data-period="month">Month</button>
+        <button type="button" class="btn btn-default" data-period="year">Year</button>
+    </div>
+
+    <div id="post-frequency-chart" data-chart-url="{{ path('volley_face_admin_chart_data') }}"></div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/volleyface/js/custom/dashboard-chart.js') }}"></script>
+{% endblock %}
